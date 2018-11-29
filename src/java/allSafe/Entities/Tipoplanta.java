@@ -1,0 +1,98 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package allSafe.Entities;
+
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+
+/**
+ *
+ * @author Ruben
+ */
+@Entity
+@Table(name = "tipoplanta", catalog = "bdallsafe2", schema = "")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Tipoplanta.findAll", query = "SELECT t FROM Tipoplanta t")
+    , @NamedQuery(name = "Tipoplanta.findByIdTipoPlanta", query = "SELECT t FROM Tipoplanta t WHERE t.idTipoPlanta = :idTipoPlanta")
+    , @NamedQuery(name = "Tipoplanta.findByDescripcionTipoPlanta", query = "SELECT t FROM Tipoplanta t WHERE t.descripcionTipoPlanta = :descripcionTipoPlanta")})
+public class Tipoplanta implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "idTipoPlanta", nullable = false)
+    private Integer idTipoPlanta;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "descripcionTipoPlanta", nullable = false, length = 45)
+    private String descripcionTipoPlanta;
+
+    public Tipoplanta() {
+    }
+
+    public Tipoplanta(Integer idTipoPlanta) {
+        this.idTipoPlanta = idTipoPlanta;
+    }
+
+    public Tipoplanta(Integer idTipoPlanta, String descripcionTipoPlanta) {
+        this.idTipoPlanta = idTipoPlanta;
+        this.descripcionTipoPlanta = descripcionTipoPlanta;
+    }
+
+    public Integer getIdTipoPlanta() {
+        return idTipoPlanta;
+    }
+
+    public void setIdTipoPlanta(Integer idTipoPlanta) {
+        this.idTipoPlanta = idTipoPlanta;
+    }
+
+    public String getDescripcionTipoPlanta() {
+        return descripcionTipoPlanta;
+    }
+
+    public void setDescripcionTipoPlanta(String descripcionTipoPlanta) {
+        this.descripcionTipoPlanta = descripcionTipoPlanta;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idTipoPlanta != null ? idTipoPlanta.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Tipoplanta)) {
+            return false;
+        }
+        Tipoplanta other = (Tipoplanta) object;
+        if ((this.idTipoPlanta == null && other.idTipoPlanta != null) || (this.idTipoPlanta != null && !this.idTipoPlanta.equals(other.idTipoPlanta))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "allSafe.Entities.Tipoplanta[ idTipoPlanta=" + idTipoPlanta + " ]";
+    }
+    
+}
