@@ -21,7 +21,7 @@
     <body >
         <c:choose>
             <c:when test="${usuarioConectado!=null}">
-                <jsp:include page="Menu.jsp" flush="true"/>
+                <jsp:include page="/common/Menu.jsp" flush="true"/>
                 <div class="container theme-showcase" >
                     <div class="jumbotron">
                         <h1 class="text-center">Equipo AllSafe</h1>                
@@ -125,6 +125,3 @@
     
        
 </html>
-
-
-

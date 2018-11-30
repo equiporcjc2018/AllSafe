@@ -33,7 +33,7 @@ public class UsuarioDAOSessionBean {
 
         try {
             objUsuario = this.em.createNamedQuery("Usuarioallsafe.validaUsuario", Usuarioallsafe.class)
-                    .setParameter("idUsuarioAllSafe", login)
+                    .setParameter("loginUsuarioAllSafe", login)
                     .setParameter("passUsuarioAllSafe", password)
                     .getSingleResult();
         } catch (NoResultException ex) {
