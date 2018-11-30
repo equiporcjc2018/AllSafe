@@ -14,7 +14,7 @@
 
         <jsp:useBean id="pais" class="allSafe.Entities.Pais" scope="page"></jsp:useBean>
         <jsp:useBean id="ciudad" class="allSafe.Entities.Ciudad" scope="page"></jsp:useBean>
-<jsp:useBean id="empresa" class="allSafe.Entities.Empresa" scope="page"></jsp:useBean>--%>
+        <jsp:useBean id="empresa" class="allSafe.Entities.Empresa" scope="page"></jsp:useBean>--%>
 
             <h1>Registro de nuevo proyecto</h1>
             <fieldset>
