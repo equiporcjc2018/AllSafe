@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,10 +25,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Ruben
+ * @author hachi
  */
 @Entity
-@Table(name = "ciudad", catalog = "bdallsafe2", schema = "")
+@Table(name = "ciudad")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Ciudad.findAll", query = "SELECT c FROM Ciudad c")
@@ -36,14 +38,14 @@ public class Ciudad implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "idCiudad", nullable = false)
+    @Column(name = "idCiudad")
     private Integer idCiudad;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
-    @Column(name = "nombreCiudad", nullable = false, length = 200)
+    @Column(name = "nombreCiudad")
     private String nombreCiudad;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudadidCiudad")
     private List<Proyecto> proyectoList;

@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,14 +23,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Ruben
+ * @author hachi
  */
 @Entity
-@Table(name = "usuarioallsafe", catalog = "bdallsafe2", schema = "")
+@Table(name = "usuarioallsafe")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuarioallsafe.validaUsuario", query = "SELECT u FROM Usuarioallsafe u WHERE u.loginUsuarioAllSafe = :loginUsuarioAllSafe AND u.passUsuarioAllSafe = :passUsuarioAllSafe")
-    ,@NamedQuery(name = "Usuarioallsafe.findAll", query = "SELECT u FROM Usuarioallsafe u")
+    , @NamedQuery(name = "Usuarioallsafe.findAll", query = "SELECT u FROM Usuarioallsafe u")
     , @NamedQuery(name = "Usuarioallsafe.findByIdUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.idUsuarioAllSafe = :idUsuarioAllSafe")
     , @NamedQuery(name = "Usuarioallsafe.findByLoginUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.loginUsuarioAllSafe = :loginUsuarioAllSafe")
     , @NamedQuery(name = "Usuarioallsafe.findByPassUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.passUsuarioAllSafe = :passUsuarioAllSafe")})
@@ -36,24 +38,24 @@ public class Usuarioallsafe implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "idUsuarioAllSafe", nullable = false)
+    @Column(name = "idUsuarioAllSafe")
     private Integer idUsuarioAllSafe;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "loginUsuarioAllSafe", nullable = false, length = 45)
+    @Column(name = "loginUsuarioAllSafe")
     private String loginUsuarioAllSafe;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "passUsuarioAllSafe", nullable = false, length = 45)
+    @Column(name = "passUsuarioAllSafe")
     private String passUsuarioAllSafe;
-    @JoinColumn(name = "PerfilAllSafe_idPerfilAllSafe", referencedColumnName = "idPerfilAllSafe", nullable = false)
+    @JoinColumn(name = "PerfilAllSafe_idPerfilAllSafe", referencedColumnName = "idPerfilAllSafe")
     @ManyToOne(optional = false)
     private Perfilallsafe perfilAllSafeidPerfilAllSafe;
-    @JoinColumn(name = "Persona_idPersona", referencedColumnName = "idPersona", nullable = false)
+    @JoinColumn(name = "Persona_idPersona", referencedColumnName = "idPersona")
     @ManyToOne(optional = false)
     private Persona personaidPersona;
 

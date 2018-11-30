@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,10 +27,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Ruben
+ * @author hachi
  */
 @Entity
-@Table(name = "epp", catalog = "bdallsafe2", schema = "")
+@Table(name = "epp")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Epp.findAll", query = "SELECT e FROM Epp e")
@@ -39,21 +41,21 @@ public class Epp implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "idEPP", nullable = false)
+    @Column(name = "idEPP")
     private Integer idEPP;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
-    @Column(name = "nombreEPPcol", nullable = false, length = 100)
+    @Column(name = "nombreEPPcol")
     private String nombreEPPcol;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "descripcionEPP", nullable = false, length = 255)
+    @Column(name = "descripcionEPP")
     private String descripcionEPP;
-    @JoinColumn(name = "TipoEPP_idTipoEPP", referencedColumnName = "idTipoEPP", nullable = false)
+    @JoinColumn(name = "TipoEPP_idTipoEPP", referencedColumnName = "idTipoEPP")
     @ManyToOne(optional = false)
     private Tipoepp tipoEPPidTipoEPP;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ePPidEPP")

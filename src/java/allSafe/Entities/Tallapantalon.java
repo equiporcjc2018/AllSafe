@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -22,10 +24,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Ruben
+ * @author hachi
  */
 @Entity
-@Table(name = "tallapantalon", catalog = "bdallsafe2", schema = "")
+@Table(name = "tallapantalon")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Tallapantalon.findAll", query = "SELECT t FROM Tallapantalon t")
@@ -36,17 +38,17 @@ public class Tallapantalon implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "idTallaPantalon", nullable = false)
+    @Column(name = "idTallaPantalon")
     private Integer idTallaPantalon;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "numeroTallaPantalon", nullable = false)
+    @Column(name = "numeroTallaPantalon")
     private int numeroTallaPantalon;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "letraTallaPantalon", nullable = false)
+    @Column(name = "letraTallaPantalon")
     private Character letraTallaPantalon;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tallaPantalonidTallaPantalon")
     private List<Persona> personaList;

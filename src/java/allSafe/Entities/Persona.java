@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,10 +27,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Ruben
+ * @author hachi
  */
 @Entity
-@Table(name = "persona", catalog = "bdallsafe2", schema = "")
+@Table(name = "persona")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
@@ -45,63 +47,63 @@ public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "idPersona", nullable = false)
+    @Column(name = "idPersona")
     private Integer idPersona;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "rutPasaportePersona", nullable = false, length = 45)
+    @Column(name = "rutPasaportePersona")
     private String rutPasaportePersona;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
-    @Column(name = "nombresPersona", nullable = false, length = 100)
+    @Column(name = "nombresPersona")
     private String nombresPersona;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "apePatPersona", nullable = false, length = 45)
+    @Column(name = "apePatPersona")
     private String apePatPersona;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "apeMatPersona", nullable = false, length = 45)
+    @Column(name = "apeMatPersona")
     private String apeMatPersona;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "fechaNacPersona", nullable = false, length = 10)
+    @Column(name = "fechaNacPersona")
     private String fechaNacPersona;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nacionalidadPersona", nullable = false, length = 45)
+    @Column(name = "nacionalidadPersona")
     private String nacionalidadPersona;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "tipoPlanta", nullable = false, length = 45)
+    @Column(name = "tipoPlanta")
     private String tipoPlanta;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
-    @Column(name = "correoPersona", nullable = false, length = 100)
+    @Column(name = "correoPersona")
     private String correoPersona;
-    @JoinColumn(name = "Cargo_idCargo", referencedColumnName = "idCargo", nullable = false)
+    @JoinColumn(name = "Cargo_idCargo", referencedColumnName = "idCargo")
     @ManyToOne(optional = false)
     private Cargo cargoidCargo;
-    @JoinColumn(name = "TallaOberol_idTallaOberol", referencedColumnName = "idTallaOberol", nullable = false)
+    @JoinColumn(name = "TallaOberol_idTallaOberol", referencedColumnName = "idTallaOberol")
     @ManyToOne(optional = false)
     private Tallaoberol tallaOberolidTallaOberol;
-    @JoinColumn(name = "TallaPantalon_idTallaPantalon", referencedColumnName = "idTallaPantalon", nullable = false)
+    @JoinColumn(name = "TallaPantalon_idTallaPantalon", referencedColumnName = "idTallaPantalon")
     @ManyToOne(optional = false)
     private Tallapantalon tallaPantalonidTallaPantalon;
-    @JoinColumn(name = "tallaPoleraCamisa_idtallaPoleraCamisa", referencedColumnName = "idTallaPoleraCamisa", nullable = false)
+    @JoinColumn(name = "tallaPoleraCamisa_idtallaPoleraCamisa", referencedColumnName = "idTallaPoleraCamisa")
     @ManyToOne(optional = false)
     private Tallapoleracamisa tallaPoleraCamisaidtallaPoleraCamisa;
-    @JoinColumn(name = "tallaZApato_idtallaZApato", referencedColumnName = "idTallaZapato", nullable = false)
+    @JoinColumn(name = "tallaZApato_idtallaZApato", referencedColumnName = "idTallaZapato")
     @ManyToOne(optional = false)
     private Tallazapato tallaZApatoidtallaZApato;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personaidPersona")

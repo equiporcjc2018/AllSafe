@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,10 +23,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Ruben
+ * @author hachi
  */
 @Entity
-@Table(name = "menuallsafe", catalog = "bdallsafe2", schema = "")
+@Table(name = "menuallsafe")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Menuallsafe.findAll", query = "SELECT m FROM Menuallsafe m")
@@ -36,25 +38,25 @@ public class Menuallsafe implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "idMenuAllsafe", nullable = false)
+    @Column(name = "idMenuAllsafe")
     private Integer idMenuAllsafe;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
-    @Column(name = "nombreMenuAllsafe", nullable = false, length = 100)
+    @Column(name = "nombreMenuAllsafe")
     private String nombreMenuAllsafe;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "padreMenuAllsafe", nullable = false)
+    @Column(name = "padreMenuAllsafe")
     private int padreMenuAllsafe;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "destinoMenuAllsafe", nullable = false, length = 255)
+    @Column(name = "destinoMenuAllsafe")
     private String destinoMenuAllsafe;
-    @JoinColumn(name = "PerfilAllSafe_idPerfilAllSafe", referencedColumnName = "idPerfilAllSafe", nullable = false)
+    @JoinColumn(name = "PerfilAllSafe_idPerfilAllSafe", referencedColumnName = "idPerfilAllSafe")
     @ManyToOne(optional = false)
     private Perfilallsafe perfilAllSafeidPerfilAllSafe;
 

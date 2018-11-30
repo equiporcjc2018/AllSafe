@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,10 +27,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Ruben
+ * @author hachi
  */
 @Entity
-@Table(name = "proyecto", catalog = "bdallsafe2", schema = "")
+@Table(name = "proyecto")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Proyecto.findAll", query = "SELECT p FROM Proyecto p")
@@ -41,39 +43,39 @@ public class Proyecto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "idProyecto", nullable = false)
+    @Column(name = "idProyecto")
     private Integer idProyecto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
-    @Column(name = "nombreProyecto", nullable = false, length = 200)
+    @Column(name = "nombreProyecto")
     private String nombreProyecto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "ubicacionProyecto", nullable = false, length = 255)
+    @Column(name = "ubicacionProyecto")
     private String ubicacionProyecto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "fechaInicioProyecto", nullable = false, length = 45)
+    @Column(name = "fechaInicioProyecto")
     private String fechaInicioProyecto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "fechaTerminoProyecto", nullable = false, length = 45)
+    @Column(name = "fechaTerminoProyecto")
     private String fechaTerminoProyecto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyectoidProyecto")
     private List<Eppterreno> eppterrenoList;
-    @JoinColumn(name = "Ciudad_idCiudad", referencedColumnName = "idCiudad", nullable = false)
+    @JoinColumn(name = "Ciudad_idCiudad", referencedColumnName = "idCiudad")
     @ManyToOne(optional = false)
     private Ciudad ciudadidCiudad;
-    @JoinColumn(name = "Empresa_idEmpresa", referencedColumnName = "idEmpresa", nullable = false)
+    @JoinColumn(name = "Empresa_idEmpresa", referencedColumnName = "idEmpresa")
     @ManyToOne(optional = false)
     private Empresa empresaidEmpresa;
-    @JoinColumn(name = "Pais_idPais", referencedColumnName = "idPais", nullable = false)
+    @JoinColumn(name = "Pais_idPais", referencedColumnName = "idPais")
     @ManyToOne(optional = false)
     private Pais paisidPais;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyectoidProyecto")
@@ -211,7 +213,5 @@ public class Proyecto implements Serializable {
     public String toString() {
         return "allSafe.Entities.Proyecto[ idProyecto=" + idProyecto + " ]";
     }
-
-   
     
 }

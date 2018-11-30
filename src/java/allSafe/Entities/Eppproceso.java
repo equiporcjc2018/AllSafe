@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,10 +23,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Ruben
+ * @author hachi
  */
 @Entity
-@Table(name = "eppproceso", catalog = "bdallsafe2", schema = "")
+@Table(name = "eppproceso")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Eppproceso.findAll", query = "SELECT e FROM Eppproceso e")
@@ -41,56 +43,56 @@ public class Eppproceso implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "idEppProceso", nullable = false)
+    @Column(name = "idEppProceso")
     private Integer idEppProceso;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "fechaCreacionEppProceso", nullable = false, length = 45)
+    @Column(name = "fechaCreacionEppProceso")
     private String fechaCreacionEppProceso;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "tallaEppProceso", nullable = false, length = 45)
+    @Column(name = "tallaEppProceso")
     private String tallaEppProceso;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "unidadEppProceso", nullable = false)
+    @Column(name = "unidadEppProceso")
     private int unidadEppProceso;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "cantidadEppProceso", nullable = false, length = 45)
+    @Column(name = "cantidadEppProceso")
     private String cantidadEppProceso;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "precioUnitarioEppProceso", nullable = false)
+    @Column(name = "precioUnitarioEppProceso")
     private int precioUnitarioEppProceso;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "destinoDevolucionEppProceso", nullable = false, length = 45)
+    @Column(name = "destinoDevolucionEppProceso")
     private String destinoDevolucionEppProceso;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "motivoEppProceso", nullable = false, length = 255)
+    @Column(name = "motivoEppProceso")
     private String motivoEppProceso;
     @Size(max = 45)
-    @Column(name = "usuarioEppProceso", length = 45)
+    @Column(name = "usuarioEppProceso")
     private String usuarioEppProceso;
-    @JoinColumn(name = "EPP_idEPP", referencedColumnName = "idEPP", nullable = false)
+    @JoinColumn(name = "EPP_idEPP", referencedColumnName = "idEPP")
     @ManyToOne(optional = false)
     private Epp ePPidEPP;
-    @JoinColumn(name = "EstadosProyecto_idEstadosProyecto", referencedColumnName = "idEstadosProyecto", nullable = false)
+    @JoinColumn(name = "EstadosProyecto_idEstadosProyecto", referencedColumnName = "idEstadosProyecto")
     @ManyToOne(optional = false)
     private Estadosproyecto estadosProyectoidEstadosProyecto;
-    @JoinColumn(name = "Persona_idPersona", referencedColumnName = "idPersona", nullable = false)
+    @JoinColumn(name = "Persona_idPersona", referencedColumnName = "idPersona")
     @ManyToOne(optional = false)
     private Persona personaidPersona;
-    @JoinColumn(name = "Proyecto_idProyecto", referencedColumnName = "idProyecto", nullable = false)
+    @JoinColumn(name = "Proyecto_idProyecto", referencedColumnName = "idProyecto")
     @ManyToOne(optional = false)
     private Proyecto proyectoidProyecto;
 
