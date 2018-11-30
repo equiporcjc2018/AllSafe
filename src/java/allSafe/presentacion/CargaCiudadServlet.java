@@ -5,8 +5,8 @@
  */
 package allSafe.presentacion;
 
-import allSafe.Entities.Pais;
-import allSafe.persistencia.PaisDAOSessionBean;
+import allSafe.Entities.Ciudad;
+import allSafe.persistencia.CiudadDAOSessionBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -22,29 +22,29 @@ import javax.servlet.http.HttpSession;
  *
  * @author JuanCarlos
  */
-@WebServlet(name = "CargaPaisServlet", urlPatterns = {"/cargaPaisServlet","/cargaPais"})
-public class CargaPaisServlet extends HttpServlet {
+@WebServlet(name = "CargaCiudadServlet", urlPatterns = {"/cargaCiudadServlet","/cargaCiudad"})
+public class CargaCiudadServlet extends HttpServlet {
 
-   @EJB
-   private PaisDAOSessionBean paisDAOSessionBean;
- 
+    @EJB
+    private CiudadDAOSessionBean ciudadDAOSessionBean;
 
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         HttpSession sesion = request.getSession();
-        List<Pais> listaPais=this.paisDAOSessionBean.getAllPais();
-        sesion.setAttribute("listaPais", listaPais);
+        List<Ciudad> listaCiudad=this.ciudadDAOSessionBean.getAllCiudad();
+        sesion.setAttribute("listaCiudad", listaCiudad);
         response.sendRedirect("AgregarProyecto.jsp");
-       
+        
     }
 
-    
+   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+       
     }
 
    

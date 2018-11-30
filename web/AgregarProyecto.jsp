@@ -8,18 +8,18 @@
         <title>Registro proyecto</title>
     </head>
     <body>
-        <%--<jsp:include page="./cargaPais" flush="true"></jsp:include>
+        <jsp:include page="./cargaPais" flush="true"></jsp:include>
         <jsp:include page="./cargaCiudad" flush="true"></jsp:include>
         <jsp:include page="./cargaEmpresa" flush="true"></jsp:include> 
 
         <jsp:useBean id="pais" class="allSafe.Entities.Pais" scope="page"></jsp:useBean>
         <jsp:useBean id="ciudad" class="allSafe.Entities.Ciudad" scope="page"></jsp:useBean>
-        <jsp:useBean id="empresa" class="allSafe.Entities.Empresa" scope="page"></jsp:useBean>--%>
+        <jsp:useBean id="empresa" class="allSafe.Entities.Empresa" scope="page"></jsp:useBean>
 
             <h1>Registro de nuevo proyecto</h1>
             <fieldset>
 
-                <form name="frmRegistroProyectos" method="post" action="./registroProyectos">
+                <form name="frmRegistroProyectos" method="post" action="./cargaProyectos">
                     <p>Nombre proyecto <input type="text" name="txtNombreProyecto"></p>
                     <p>Ubicación <input type="text" name="txtUbicacion"></p>
                     <p>Fecha inicio<input type="date" name="txtFechaInicio"></p>
