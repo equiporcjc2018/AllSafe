@@ -19,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -48,8 +49,9 @@ public class Tallapantalon implements Serializable {
     private int numeroTallaPantalon;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 3)
     @Column(name = "letraTallaPantalon")
-    private Character letraTallaPantalon;
+    private String letraTallaPantalon;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tallaPantalonidTallaPantalon")
     private List<Persona> personaList;
 
@@ -60,7 +62,7 @@ public class Tallapantalon implements Serializable {
         this.idTallaPantalon = idTallaPantalon;
     }
 
-    public Tallapantalon(Integer idTallaPantalon, int numeroTallaPantalon, Character letraTallaPantalon) {
+    public Tallapantalon(Integer idTallaPantalon, int numeroTallaPantalon, String letraTallaPantalon) {
         this.idTallaPantalon = idTallaPantalon;
         this.numeroTallaPantalon = numeroTallaPantalon;
         this.letraTallaPantalon = letraTallaPantalon;
@@ -82,11 +84,11 @@ public class Tallapantalon implements Serializable {
         this.numeroTallaPantalon = numeroTallaPantalon;
     }
 
-    public Character getLetraTallaPantalon() {
+    public String getLetraTallaPantalon() {
         return letraTallaPantalon;
     }
 
-    public void setLetraTallaPantalon(Character letraTallaPantalon) {
+    public void setLetraTallaPantalon(String letraTallaPantalon) {
         this.letraTallaPantalon = letraTallaPantalon;
     }
 

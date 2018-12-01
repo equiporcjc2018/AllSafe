@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package allSafe.persistencia;
+package allSafe.presentacion;
 
 import allSafe.Entities.Ciudad;
 import allSafe.Entities.Empresa;
 import allSafe.Entities.Pais;
 import allSafe.Entities.Proyecto;
+import allSafe.persistencia.CiudadDAOSessionBean;
+import allSafe.persistencia.EmpresaDAOSessionBean;
+import allSafe.persistencia.PaisDAOSessionBean;
+import allSafe.persistencia.ProyectoDAOSessionBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;

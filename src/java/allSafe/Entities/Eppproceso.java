@@ -89,9 +89,9 @@ public class Eppproceso implements Serializable {
     @JoinColumn(name = "EstadosProyecto_idEstadosProyecto", referencedColumnName = "idEstadosProyecto")
     @ManyToOne(optional = false)
     private Estadosproyecto estadosProyectoidEstadosProyecto;
-    @JoinColumn(name = "Persona_idPersona", referencedColumnName = "idPersona")
+    @JoinColumn(name = "Persona_rutPasaportePersona", referencedColumnName = "rutPasaportePersona")
     @ManyToOne(optional = false)
-    private Persona personaidPersona;
+    private Persona personarutPasaportePersona;
     @JoinColumn(name = "Proyecto_idProyecto", referencedColumnName = "idProyecto")
     @ManyToOne(optional = false)
     private Proyecto proyectoidProyecto;
@@ -202,12 +202,12 @@ public class Eppproceso implements Serializable {
         this.estadosProyectoidEstadosProyecto = estadosProyectoidEstadosProyecto;
     }
 
-    public Persona getPersonaidPersona() {
-        return personaidPersona;
+    public Persona getPersonarutPasaportePersona() {
+        return personarutPasaportePersona;
     }
 
-    public void setPersonaidPersona(Persona personaidPersona) {
-        this.personaidPersona = personaidPersona;
+    public void setPersonarutPasaportePersona(Persona personarutPasaportePersona) {
+        this.personarutPasaportePersona = personarutPasaportePersona;
     }
 
     public Proyecto getProyectoidProyecto() {

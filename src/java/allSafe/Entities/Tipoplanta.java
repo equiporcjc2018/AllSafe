@@ -6,7 +6,9 @@
 package allSafe.Entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +16,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -43,6 +47,8 @@ public class Tipoplanta implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "descripcionTipoPlanta")
     private String descripcionTipoPlanta;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoPlantaidTipoPlanta")
+    private List<Persona> personaList;
 
     public Tipoplanta() {
     }
@@ -70,6 +76,15 @@ public class Tipoplanta implements Serializable {
 
     public void setDescripcionTipoPlanta(String descripcionTipoPlanta) {
         this.descripcionTipoPlanta = descripcionTipoPlanta;
+    }
+
+    @XmlTransient
+    public List<Persona> getPersonaList() {
+        return personaList;
+    }
+
+    public void setPersonaList(List<Persona> personaList) {
+        this.personaList = personaList;
     }
 
     @Override

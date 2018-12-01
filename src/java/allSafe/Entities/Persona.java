@@ -11,8 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,23 +32,17 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
-    , @NamedQuery(name = "Persona.findByIdPersona", query = "SELECT p FROM Persona p WHERE p.idPersona = :idPersona")
     , @NamedQuery(name = "Persona.findByRutPasaportePersona", query = "SELECT p FROM Persona p WHERE p.rutPasaportePersona = :rutPasaportePersona")
     , @NamedQuery(name = "Persona.findByNombresPersona", query = "SELECT p FROM Persona p WHERE p.nombresPersona = :nombresPersona")
     , @NamedQuery(name = "Persona.findByApePatPersona", query = "SELECT p FROM Persona p WHERE p.apePatPersona = :apePatPersona")
     , @NamedQuery(name = "Persona.findByApeMatPersona", query = "SELECT p FROM Persona p WHERE p.apeMatPersona = :apeMatPersona")
     , @NamedQuery(name = "Persona.findByFechaNacPersona", query = "SELECT p FROM Persona p WHERE p.fechaNacPersona = :fechaNacPersona")
     , @NamedQuery(name = "Persona.findByNacionalidadPersona", query = "SELECT p FROM Persona p WHERE p.nacionalidadPersona = :nacionalidadPersona")
-    , @NamedQuery(name = "Persona.findByTipoPlanta", query = "SELECT p FROM Persona p WHERE p.tipoPlanta = :tipoPlanta")
     , @NamedQuery(name = "Persona.findByCorreoPersona", query = "SELECT p FROM Persona p WHERE p.correoPersona = :correoPersona")})
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "idPersona")
-    private Integer idPersona;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -83,11 +75,6 @@ public class Persona implements Serializable {
     private String nacionalidadPersona;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "tipoPlanta")
-    private String tipoPlanta;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "correoPersona")
     private String correoPersona;
@@ -100,44 +87,37 @@ public class Persona implements Serializable {
     @JoinColumn(name = "TallaPantalon_idTallaPantalon", referencedColumnName = "idTallaPantalon")
     @ManyToOne(optional = false)
     private Tallapantalon tallaPantalonidTallaPantalon;
+    @JoinColumn(name = "TipoPlanta_idTipoPlanta", referencedColumnName = "idTipoPlanta")
+    @ManyToOne(optional = false)
+    private Tipoplanta tipoPlantaidTipoPlanta;
     @JoinColumn(name = "tallaPoleraCamisa_idtallaPoleraCamisa", referencedColumnName = "idTallaPoleraCamisa")
     @ManyToOne(optional = false)
     private Tallapoleracamisa tallaPoleraCamisaidtallaPoleraCamisa;
     @JoinColumn(name = "tallaZApato_idtallaZApato", referencedColumnName = "idTallaZapato")
     @ManyToOne(optional = false)
     private Tallazapato tallaZApatoidtallaZApato;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personaidPersona")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personarutPasaportePersona")
     private List<Eppterreno> eppterrenoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personaidPersona")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personarutPasaportePersona")
     private List<Usuarioallsafe> usuarioallsafeList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personaidPersona")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personarutPasaportePersona")
     private List<Eppproceso> eppprocesoList;
 
     public Persona() {
     }
 
-    public Persona(Integer idPersona) {
-        this.idPersona = idPersona;
+    public Persona(String rutPasaportePersona) {
+        this.rutPasaportePersona = rutPasaportePersona;
     }
 
-    public Persona(Integer idPersona, String rutPasaportePersona, String nombresPersona, String apePatPersona, String apeMatPersona, String fechaNacPersona, String nacionalidadPersona, String tipoPlanta, String correoPersona) {
-        this.idPersona = idPersona;
+    public Persona(String rutPasaportePersona, String nombresPersona, String apePatPersona, String apeMatPersona, String fechaNacPersona, String nacionalidadPersona, String correoPersona) {
         this.rutPasaportePersona = rutPasaportePersona;
         this.nombresPersona = nombresPersona;
         this.apePatPersona = apePatPersona;
         this.apeMatPersona = apeMatPersona;
         this.fechaNacPersona = fechaNacPersona;
         this.nacionalidadPersona = nacionalidadPersona;
-        this.tipoPlanta = tipoPlanta;
         this.correoPersona = correoPersona;
-    }
-
-    public Integer getIdPersona() {
-        return idPersona;
-    }
-
-    public void setIdPersona(Integer idPersona) {
-        this.idPersona = idPersona;
     }
 
     public String getRutPasaportePersona() {
@@ -188,14 +168,6 @@ public class Persona implements Serializable {
         this.nacionalidadPersona = nacionalidadPersona;
     }
 
-    public String getTipoPlanta() {
-        return tipoPlanta;
-    }
-
-    public void setTipoPlanta(String tipoPlanta) {
-        this.tipoPlanta = tipoPlanta;
-    }
-
     public String getCorreoPersona() {
         return correoPersona;
     }
@@ -226,6 +198,14 @@ public class Persona implements Serializable {
 
     public void setTallaPantalonidTallaPantalon(Tallapantalon tallaPantalonidTallaPantalon) {
         this.tallaPantalonidTallaPantalon = tallaPantalonidTallaPantalon;
+    }
+
+    public Tipoplanta getTipoPlantaidTipoPlanta() {
+        return tipoPlantaidTipoPlanta;
+    }
+
+    public void setTipoPlantaidTipoPlanta(Tipoplanta tipoPlantaidTipoPlanta) {
+        this.tipoPlantaidTipoPlanta = tipoPlantaidTipoPlanta;
     }
 
     public Tallapoleracamisa getTallaPoleraCamisaidtallaPoleraCamisa() {
@@ -274,7 +254,7 @@ public class Persona implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idPersona != null ? idPersona.hashCode() : 0);
+        hash += (rutPasaportePersona != null ? rutPasaportePersona.hashCode() : 0);
         return hash;
     }
 
@@ -285,7 +265,7 @@ public class Persona implements Serializable {
             return false;
         }
         Persona other = (Persona) object;
-        if ((this.idPersona == null && other.idPersona != null) || (this.idPersona != null && !this.idPersona.equals(other.idPersona))) {
+        if ((this.rutPasaportePersona == null && other.rutPasaportePersona != null) || (this.rutPasaportePersona != null && !this.rutPasaportePersona.equals(other.rutPasaportePersona))) {
             return false;
         }
         return true;
@@ -293,7 +273,7 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "allSafe.Entities.Persona[ idPersona=" + idPersona + " ]";
+        return "allSafe.Entities.Persona[ rutPasaportePersona=" + rutPasaportePersona + " ]";
     }
     
 }

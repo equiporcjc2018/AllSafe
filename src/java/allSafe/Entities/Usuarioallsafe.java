@@ -30,10 +30,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuarioallsafe.validaUsuario", query = "SELECT u FROM Usuarioallsafe u WHERE u.loginUsuarioAllSafe = :loginUsuarioAllSafe AND u.passUsuarioAllSafe = :passUsuarioAllSafe")
-    , @NamedQuery(name = "Usuarioallsafe.findAll", query = "SELECT u FROM Usuarioallsafe u")
-    , @NamedQuery(name = "Usuarioallsafe.findByIdUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.idUsuarioAllSafe = :idUsuarioAllSafe")
-    , @NamedQuery(name = "Usuarioallsafe.findByLoginUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.loginUsuarioAllSafe = :loginUsuarioAllSafe")
-    , @NamedQuery(name = "Usuarioallsafe.findByPassUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.passUsuarioAllSafe = :passUsuarioAllSafe")})
+    ,@NamedQuery(name = "Usuarioallsafe.findAll", query = "SELECT u FROM Usuarioallsafe u")    
+    ,@NamedQuery(name = "Usuarioallsafe.findByIdUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.idUsuarioAllSafe = :idUsuarioAllSafe")
+    ,@NamedQuery(name = "Usuarioallsafe.findByLoginUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.loginUsuarioAllSafe = :loginUsuarioAllSafe")
+    ,@NamedQuery(name = "Usuarioallsafe.findByPassUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.passUsuarioAllSafe = :passUsuarioAllSafe")})
 public class Usuarioallsafe implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,9 +55,9 @@ public class Usuarioallsafe implements Serializable {
     @JoinColumn(name = "PerfilAllSafe_idPerfilAllSafe", referencedColumnName = "idPerfilAllSafe")
     @ManyToOne(optional = false)
     private Perfilallsafe perfilAllSafeidPerfilAllSafe;
-    @JoinColumn(name = "Persona_idPersona", referencedColumnName = "idPersona")
+    @JoinColumn(name = "Persona_rutPasaportePersona", referencedColumnName = "rutPasaportePersona")
     @ManyToOne(optional = false)
-    private Persona personaidPersona;
+    private Persona personarutPasaportePersona;
 
     public Usuarioallsafe() {
     }
@@ -104,12 +104,12 @@ public class Usuarioallsafe implements Serializable {
         this.perfilAllSafeidPerfilAllSafe = perfilAllSafeidPerfilAllSafe;
     }
 
-    public Persona getPersonaidPersona() {
-        return personaidPersona;
+    public Persona getPersonarutPasaportePersona() {
+        return personarutPasaportePersona;
     }
 
-    public void setPersonaidPersona(Persona personaidPersona) {
-        this.personaidPersona = personaidPersona;
+    public void setPersonarutPasaportePersona(Persona personarutPasaportePersona) {
+        this.personarutPasaportePersona = personarutPasaportePersona;
     }
 
     @Override

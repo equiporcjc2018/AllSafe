@@ -85,9 +85,9 @@ public class Eppterreno implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "tipoEntregaEppTerreno")
     private String tipoEntregaEppTerreno;
-    @JoinColumn(name = "Persona_idPersona", referencedColumnName = "idPersona")
+    @JoinColumn(name = "Persona_rutPasaportePersona", referencedColumnName = "rutPasaportePersona")
     @ManyToOne(optional = false)
-    private Persona personaidPersona;
+    private Persona personarutPasaportePersona;
     @JoinColumn(name = "EPP_idEPP", referencedColumnName = "idEPP")
     @ManyToOne(optional = false)
     private Epp ePPidEPP;
@@ -186,12 +186,12 @@ public class Eppterreno implements Serializable {
         this.tipoEntregaEppTerreno = tipoEntregaEppTerreno;
     }
 
-    public Persona getPersonaidPersona() {
-        return personaidPersona;
+    public Persona getPersonarutPasaportePersona() {
+        return personarutPasaportePersona;
     }
 
-    public void setPersonaidPersona(Persona personaidPersona) {
-        this.personaidPersona = personaidPersona;
+    public void setPersonarutPasaportePersona(Persona personarutPasaportePersona) {
+        this.personarutPasaportePersona = personarutPasaportePersona;
     }
 
     public Epp getEPPidEPP() {

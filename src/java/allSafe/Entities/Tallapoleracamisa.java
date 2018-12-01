@@ -19,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -48,8 +49,9 @@ public class Tallapoleracamisa implements Serializable {
     private int numeroPoleraCamisa;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 3)
     @Column(name = "letraPoleraCamisa")
-    private Character letraPoleraCamisa;
+    private String letraPoleraCamisa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tallaPoleraCamisaidtallaPoleraCamisa")
     private List<Persona> personaList;
 
@@ -60,7 +62,7 @@ public class Tallapoleracamisa implements Serializable {
         this.idTallaPoleraCamisa = idTallaPoleraCamisa;
     }
 
-    public Tallapoleracamisa(Integer idTallaPoleraCamisa, int numeroPoleraCamisa, Character letraPoleraCamisa) {
+    public Tallapoleracamisa(Integer idTallaPoleraCamisa, int numeroPoleraCamisa, String letraPoleraCamisa) {
         this.idTallaPoleraCamisa = idTallaPoleraCamisa;
         this.numeroPoleraCamisa = numeroPoleraCamisa;
         this.letraPoleraCamisa = letraPoleraCamisa;
@@ -82,11 +84,11 @@ public class Tallapoleracamisa implements Serializable {
         this.numeroPoleraCamisa = numeroPoleraCamisa;
     }
 
-    public Character getLetraPoleraCamisa() {
+    public String getLetraPoleraCamisa() {
         return letraPoleraCamisa;
     }
 
-    public void setLetraPoleraCamisa(Character letraPoleraCamisa) {
+    public void setLetraPoleraCamisa(String letraPoleraCamisa) {
         this.letraPoleraCamisa = letraPoleraCamisa;
     }
 
