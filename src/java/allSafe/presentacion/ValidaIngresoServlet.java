@@ -8,12 +8,8 @@ package allSafe.presentacion;
 import allSafe.Entities.Usuarioallsafe;
 import allSafe.persistencia.UsuarioDAOSessionBean;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,33 +27,37 @@ import javax.servlet.http.HttpSession;
 public class ValidaIngresoServlet extends HttpServlet {
 @EJB
 UsuarioDAOSessionBean objUsuarioDAOSessionBean;
-
- 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
     }
-
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion= request.getSession();
         String login=request.getParameter("txtLogin");
-        //String pass=request.getParameter("txtPass");-- para obtener clave
-        String pass=generateMD5Signature(request.getParameter("txtPass"));
+        String pass=generateMD5Signature(request.getParameter("txtPass"));              
+        Usuarioallsafe objUsuario;
+                
         
-        
-        Usuarioallsafe objUsuario=this.objUsuarioDAOSessionBean.validaUsuario(login, pass);
-        if(objUsuario!=null){
-            sesion.setAttribute("usuarioConectado", objUsuario);
-            response.sendRedirect("Home.jsp");
-        }else{
-            sesion.setAttribute("error", "El Usuario no Existe");
-            response.sendRedirect("Login.jsp");
+        try {
+            objUsuario = this.objUsuarioDAOSessionBean.validaUsuario(login, pass);
+               
+            if(objUsuario!=null){
+              sesion.setAttribute("usuarioConectado", objUsuario);
+              response.sendRedirect("Home.jsp");
+            }else{
+              sesion.setAttribute("error", "El Usuario no Existe");
+              response.sendRedirect("Login.jsp");
+            }
+        } catch (IOException e) {
+               System.err.println("Error al obtener usuario, se redirecciona a login"+e);
+              sesion.setAttribute("error", "El Usuario no Existe");
+              response.sendRedirect("Login.jsp");
         }
+        
+
     }
     
     //Se agrega metodos para encriptar MD5

@@ -20,10 +20,9 @@
 
 <body>
     <c:choose>
+      
         <c:when test="${usuarioConectado!=null}">
-            <jsp:include page="/common/Menu.jsp" flush="true"/>    
-    
-    
+            <jsp:include page="/common/Menu.jsp" flush="true"/>        
     <!-- ============================================================== -->
     <!-- main wrapper -->
     <!-- ============================================================== -->
@@ -34,7 +33,7 @@
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
                 <a class="navbar-brand" href="index.html">
-                    AllSafe
+                    AllSafe 
                 <i class="fa fa-user-secret" aria-hidden="true"></i>
 
                 </a>
@@ -67,7 +66,7 @@
                                             <a href="#" class="list-group-item list-group-item-action">
                                                 <div class="notification-info">
                                                     <div class="notification-list-user-img"><img src="assets/images/avatar-3.jpg" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">John Abraham </span>is now following you
+                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">${usuarioConectado.personarutPasaportePersona.nombresPersona}</span>is now following you
                                                         <div class="notification-date">2 days ago</div>
                                                     </div>
                                                 </div>
@@ -132,7 +131,10 @@
                             <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name">John Abraham </h5>
+                                    <h5 class="mb-0 text-white nav-user-name">
+                                        ${usuarioConectado.personarutPasaportePersona.nombresPersona} 
+                                        ${usuarioConectado.personarutPasaportePersona.apePatPersona}
+                                    </h5>
                                     <span class="status"></span><span class="ml-2">Available</span>
                                 </div>
                                 <!--<a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>-->
