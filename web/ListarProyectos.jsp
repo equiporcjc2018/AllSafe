@@ -12,7 +12,10 @@
     <body>
         <jsp:include page="./cargaProyectos" flush="true"/>
         <jsp:useBean id="proyecto" class="allSafe.Entities.Proyecto" scope="page"/>
-        <jsp:include page="header.jsp" flush="true"></jsp:include>
+        <jsp:useBean id="pais" class="allSafe.Entities.Pais" scope="page"></jsp:useBean>
+        <jsp:useBean id="ciudad" class="allSafe.Entities.Ciudad" scope="page"></jsp:useBean>
+        <jsp:useBean id="empresa" class="allSafe.Entities.Empresa" scope="page"></jsp:useBean>
+       
 
             <h3>Proyectos</h3>
 
@@ -35,7 +38,6 @@
                             <tr>
                                 <td><c:out value="${proyecto.nombreProyecto}"/></td>
                                 <td><c:out value="${proyecto.paisidPais.pais}"/></td>
-                                <td><c:out value="${proyecto.ciudadidCiudad.nombreCiudad}"/></td>
                                 <td><c:out value="${proyecto.ciudadidCiudad.nombreCiudad}"/></td>
                                 <td><c:out value="${proyecto.empresaidEmpresa.idEmpresa}"/></td>
                                 <td><c:out value="${proyecto.fechaInicioProyecto}"/></td>

@@ -11,6 +11,7 @@
         <jsp:include page="./cargaPais" flush="true"></jsp:include>
         <jsp:include page="./cargaCiudad" flush="true"></jsp:include>
         <jsp:include page="./cargaEmpresa" flush="true"></jsp:include> 
+       
 
         <jsp:useBean id="pais" class="allSafe.Entities.Pais" scope="page"></jsp:useBean>
         <jsp:useBean id="ciudad" class="allSafe.Entities.Ciudad" scope="page"></jsp:useBean>
@@ -58,8 +59,9 @@
         <c:if test="${sessionScope.msg!=null}">
             <c:out value="${msg}"></c:out>
             <c:remove var="msg"></c:remove>
-        </c:if>    
+        </c:if>   
+            
     </body>
     
-    <jsp:include page="ListarProyectos.jsp" flush="true"></jsp:include>
+   
 </html>

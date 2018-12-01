@@ -30,12 +30,12 @@ public class CargaProyectoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
-         HttpSession sesion = request.getSession();
+        HttpSession sesion = request.getSession();
         
         List<Proyecto> listadoProyectos=this.proyectoDAOSessionBean.getAllProyecto();
        
         sesion.setAttribute("listadoProyectos", listadoProyectos);
-        response.sendRedirect("listadoProyectos.jsp");
+        response.sendRedirect("ListarProyectos.jsp");
     }
 
    
