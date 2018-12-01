@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="en">
- 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -21,7 +21,7 @@
 <body>
     <c:choose>
       
-        <c:when test="${usuarioConectado!=null}">
+        <c:when test="${usuarioConectado!=null && usuarioConectado!=''}">
             <jsp:include page="/common/Menu.jsp" flush="true"/>        
     <!-- ============================================================== -->
     <!-- main wrapper -->
@@ -33,11 +33,12 @@
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
                 <a class="navbar-brand" href="index.html">
-                    AllSafe 
-                <i class="fa fa-user-secret" aria-hidden="true"></i>
-
+                    AllSafe <i class="fa fa-user-secret" aria-hidden="true"></i>
                 </a>
-                
+                <h5>
+                    Bienvenido ${usuarioConectado.personarutPasaportePersona.nombresPersona} 
+                                        ${usuarioConectado.personarutPasaportePersona.apePatPersona}
+                </h5>                
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

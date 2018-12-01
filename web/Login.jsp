@@ -17,6 +17,11 @@
         <script src="js/bootstrap.min.js"></script>
     </head>
     <body>
+        
+        <%
+            session.invalidate();
+        %>
+        
         <div class="container">            
             <form name="frmIngreso" class="form-signin" method="POST" action="./validaIngresobj" >
                 <h2 class="form-signin-heading text-center">Ingreso al Sistema AllSafe RCV</h2>
