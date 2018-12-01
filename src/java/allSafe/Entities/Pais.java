@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,10 +25,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Ruben
+ * @author hachi
  */
 @Entity
-@Table(name = "pais", catalog = "bdallsafe2", schema = "")
+@Table(name = "pais")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pais.findAll", query = "SELECT p FROM Pais p")
@@ -37,19 +39,19 @@ public class Pais implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "idPais", nullable = false)
+    @Column(name = "idPais")
     private Integer idPais;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
-    @Column(name = "pais", nullable = false, length = 100)
+    @Column(name = "pais")
     private String pais;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
-    @Column(name = "nacionalidadPais", nullable = false, length = 100)
+    @Column(name = "nacionalidadPais")
     private String nacionalidadPais;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paisidPais")
     private List<Proyecto> proyectoList;

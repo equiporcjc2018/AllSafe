@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,10 +25,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Ruben
+ * @author hachi
  */
 @Entity
-@Table(name = "estadosproyecto", catalog = "bdallsafe2", schema = "")
+@Table(name = "estadosproyecto")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Estadosproyecto.findAll", query = "SELECT e FROM Estadosproyecto e")
@@ -36,14 +38,14 @@ public class Estadosproyecto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "idEstadosProyecto", nullable = false)
+    @Column(name = "idEstadosProyecto")
     private Integer idEstadosProyecto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "descripcionEstadosProyecto", nullable = false, length = 10)
+    @Column(name = "descripcionEstadosProyecto")
     private String descripcionEstadosProyecto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadosProyectoidEstadosProyecto")
     private List<Eppproceso> eppprocesoList;

@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -19,10 +21,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Ruben
+ * @author hachi
  */
 @Entity
-@Table(name = "tipoplanta", catalog = "bdallsafe2", schema = "")
+@Table(name = "tipoplanta")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Tipoplanta.findAll", query = "SELECT t FROM Tipoplanta t")
@@ -32,14 +34,14 @@ public class Tipoplanta implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "idTipoPlanta", nullable = false)
+    @Column(name = "idTipoPlanta")
     private Integer idTipoPlanta;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "descripcionTipoPlanta", nullable = false, length = 45)
+    @Column(name = "descripcionTipoPlanta")
     private String descripcionTipoPlanta;
 
     public Tipoplanta() {

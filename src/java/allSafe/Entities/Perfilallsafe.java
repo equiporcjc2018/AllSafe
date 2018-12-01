@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,10 +25,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Ruben
+ * @author hachi
  */
 @Entity
-@Table(name = "perfilallsafe", catalog = "bdallsafe2", schema = "")
+@Table(name = "perfilallsafe")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Perfilallsafe.findAll", query = "SELECT p FROM Perfilallsafe p")
@@ -36,14 +38,14 @@ public class Perfilallsafe implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "idPerfilAllSafe", nullable = false)
+    @Column(name = "idPerfilAllSafe")
     private Integer idPerfilAllSafe;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
-    @Column(name = "nombrePerfilAllSafe", nullable = false, length = 100)
+    @Column(name = "nombrePerfilAllSafe")
     private String nombrePerfilAllSafe;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilAllSafeidPerfilAllSafe")
     private List<Usuarioallsafe> usuarioallsafeList;

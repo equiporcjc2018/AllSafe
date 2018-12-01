@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,10 +25,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Ruben
+ * @author hachi
  */
 @Entity
-@Table(name = "empresa", catalog = "bdallsafe2", schema = "")
+@Table(name = "empresa")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Empresa.findAll", query = "SELECT e FROM Empresa e")
@@ -41,38 +43,38 @@ public class Empresa implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "idEmpresa", nullable = false)
+    @Column(name = "idEmpresa")
     private Integer idEmpresa;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "rutEmpresa", nullable = false, length = 10)
+    @Column(name = "rutEmpresa")
     private String rutEmpresa;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "razonSocialEmpresa", nullable = false, length = 255)
+    @Column(name = "razonSocialEmpresa")
     private String razonSocialEmpresa;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "direccionEmpresa", nullable = false, length = 255)
+    @Column(name = "direccionEmpresa")
     private String direccionEmpresa;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "sitioWebEmpresa", nullable = false, length = 255)
+    @Column(name = "sitioWebEmpresa")
     private String sitioWebEmpresa;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "telefonoEmpresa", nullable = false)
+    @Column(name = "telefonoEmpresa")
     private int telefonoEmpresa;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "giroEmpresa", nullable = false, length = 255)
+    @Column(name = "giroEmpresa")
     private String giroEmpresa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresaidEmpresa")
     private List<Proyecto> proyectoList;

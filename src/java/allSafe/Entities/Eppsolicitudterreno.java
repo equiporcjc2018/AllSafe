@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,10 +23,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Ruben
+ * @author hachi
  */
 @Entity
-@Table(name = "eppsolicitudterreno", catalog = "bdallsafe2", schema = "")
+@Table(name = "eppsolicitudterreno")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Eppsolicitudterreno.findAll", query = "SELECT e FROM Eppsolicitudterreno e")
@@ -38,38 +40,38 @@ public class Eppsolicitudterreno implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "idEppSolicitudTerreno", nullable = false)
+    @Column(name = "idEppSolicitudTerreno")
     private Integer idEppSolicitudTerreno;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "fechaEppSolicitudTerreno", nullable = false, length = 45)
+    @Column(name = "fechaEppSolicitudTerreno")
     private String fechaEppSolicitudTerreno;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "idUsuario", nullable = false, length = 45)
+    @Column(name = "idUsuario")
     private String idUsuario;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "estadoEppSolicitudTerreno", nullable = false, length = 45)
+    @Column(name = "estadoEppSolicitudTerreno")
     private String estadoEppSolicitudTerreno;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "cantidadEppSolicitudTerreno", nullable = false)
+    @Column(name = "cantidadEppSolicitudTerreno")
     private int cantidadEppSolicitudTerreno;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "obervacionEppSolicitudTerreno", nullable = false, length = 255)
+    @Column(name = "obervacionEppSolicitudTerreno")
     private String obervacionEppSolicitudTerreno;
-    @JoinColumn(name = "EPP_idEPP", referencedColumnName = "idEPP", nullable = false)
+    @JoinColumn(name = "EPP_idEPP", referencedColumnName = "idEPP")
     @ManyToOne(optional = false)
     private Epp ePPidEPP;
-    @JoinColumn(name = "Proyecto_idProyecto", referencedColumnName = "idProyecto", nullable = false)
+    @JoinColumn(name = "Proyecto_idProyecto", referencedColumnName = "idProyecto")
     @ManyToOne(optional = false)
     private Proyecto proyectoidProyecto;
 
