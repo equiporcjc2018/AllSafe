@@ -52,7 +52,7 @@ UsuarioDAOSessionBean objUsuarioDAOSessionBean;
               response.sendRedirect("Login.jsp");
             }
         } catch (IOException e) {
-               System.err.println("Error al obtener usuario, se redirecciona a login"+e);
+              System.err.println("Error al obtener usuario, se redirecciona a login"+e);
               sesion.setAttribute("error", "El Usuario no Existe");
               response.sendRedirect("Login.jsp");
         }

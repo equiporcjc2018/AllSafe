@@ -17,11 +17,7 @@
         <script src="js/bootstrap.min.js"></script>
     </head>
     <body>
-        
-        <%
-            session.invalidate();
-        %>
-        
+     
         <div class="container">            
             <form name="frmIngreso" class="form-signin" method="POST" action="./validaIngresobj" >
                 <h2 class="form-signin-heading text-center">Ingreso al Sistema AllSafe RCV</h2>
@@ -32,11 +28,9 @@
 
                 <label for="txtPass" class="sr-only">Password</label>
                 <input type="password" id="txtPass" name="txtPass"  class="form-control" placeholder="Password" required>
-
-                <!--<button class="btn btn-lg btn-info btn-block" type="submit">Ingreso</button>-->
+                
                 <button class="btn btn-success" type="submit">Ingresar</button>
-                <button class="btn btn-info" type="button" onclick="window.location.href='RegistraNuevoUsuario.jsp'">Registrarse</button>                
-
+                <!--<button class="btn btn-info" type="button" onclick="window.location.href='RegistraNuevoUsuario.jsp'">Registrarse</button>-->                
             </form>
             
             <c:if test="${error!=null}">
@@ -44,6 +38,11 @@
                     <c:out value="${error}"/>
                     <c:remove var="error"/>
                 </div>
+                
+                    <%
+                        session.invalidate();
+                    %>
+        
             </c:if>            
             <c:if test="${exito!=null}">
                 <div class="alert alert-success" role="alert">
