@@ -60,4 +60,6 @@
             <c:remove var="msg"></c:remove>
         </c:if>    
     </body>
+    
+    <jsp:include page="ListarProyectos.jsp" flush="true"></jsp:include>
 </html>
