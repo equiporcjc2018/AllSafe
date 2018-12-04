@@ -75,9 +75,6 @@ public class Proyecto implements Serializable {
     @JoinColumn(name = "Empresa_idEmpresa", referencedColumnName = "idEmpresa")
     @ManyToOne(optional = false)
     private Empresa empresaidEmpresa;
-    @JoinColumn(name = "Pais_idPais", referencedColumnName = "idPais")
-    @ManyToOne(optional = false)
-    private Pais paisidPais;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyectoidProyecto")
     private List<Eppsolicitudterreno> eppsolicitudterrenoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyectoidProyecto")
@@ -161,14 +158,6 @@ public class Proyecto implements Serializable {
 
     public void setEmpresaidEmpresa(Empresa empresaidEmpresa) {
         this.empresaidEmpresa = empresaidEmpresa;
-    }
-
-    public Pais getPaisidPais() {
-        return paisidPais;
-    }
-
-    public void setPaisidPais(Pais paisidPais) {
-        this.paisidPais = paisidPais;
     }
 
     @XmlTransient

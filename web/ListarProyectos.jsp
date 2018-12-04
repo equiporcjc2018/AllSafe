@@ -10,7 +10,7 @@
         <title>Despliegue proyecto</title>
     </head>
     <body>
-        <jsp:include page="./cargaProyectos" flush="true"/>
+        <jsp:include page="./cargaProyectoServlet" flush="true"/>
         <jsp:useBean id="proyecto" class="allSafe.Entities.Proyecto" scope="page"/>
         <jsp:useBean id="pais" class="allSafe.Entities.Pais" scope="page"></jsp:useBean>
         <jsp:useBean id="ciudad" class="allSafe.Entities.Ciudad" scope="page"></jsp:useBean>
@@ -37,7 +37,7 @@
                         <c:forEach items="${sessionScope.listadoProyectos}" var="proyecto">
                             <tr>
                                 <td><c:out value="${proyecto.nombreProyecto}"/></td>
-                                <td><c:out value="${proyecto.paisidPais.pais}"/></td>
+                                <td><c:out value="${proyecto.ciudadidCiudad.nombreCiudad}"/></td>
                                 <td><c:out value="${proyecto.ciudadidCiudad.nombreCiudad}"/></td>
                                 <td><c:out value="${proyecto.empresaidEmpresa.idEmpresa}"/></td>
                                 <td><c:out value="${proyecto.fechaInicioProyecto}"/></td>

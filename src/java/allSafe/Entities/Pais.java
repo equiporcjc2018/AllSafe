@@ -54,7 +54,7 @@ public class Pais implements Serializable {
     @Column(name = "nacionalidadPais")
     private String nacionalidadPais;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paisidPais")
-    private List<Proyecto> proyectoList;
+    private List<Ciudad> ciudadList;
 
     public Pais() {
     }
@@ -94,12 +94,12 @@ public class Pais implements Serializable {
     }
 
     @XmlTransient
-    public List<Proyecto> getProyectoList() {
-        return proyectoList;
+    public List<Ciudad> getCiudadList() {
+        return ciudadList;
     }
 
-    public void setProyectoList(List<Proyecto> proyectoList) {
-        this.proyectoList = proyectoList;
+    public void setCiudadList(List<Ciudad> ciudadList) {
+        this.ciudadList = ciudadList;
     }
 
     @Override

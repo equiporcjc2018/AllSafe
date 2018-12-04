@@ -49,7 +49,7 @@ public class Empresa implements Serializable {
     private Integer idEmpresa;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
+    @Size(min = 1, max = 15)
     @Column(name = "rutEmpresa")
     private String rutEmpresa;
     @Basic(optional = false)

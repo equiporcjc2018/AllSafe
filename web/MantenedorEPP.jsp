@@ -25,8 +25,8 @@
                     <p><c:forEach items="${listadoTipoEpps}" var="tipoEpp">
                         <input type="radio" name="RDBtipoEPP" value="${tipoEpp.idTipoEPP}" <td><c:out value="${tipoEpp.descripcionTipoEPP.toString()}"/>
                     </c:forEach></p>
-                    <p>Nombre: <input type="text" name="txtnombre"></p>
-                    <p>Descripcion: <input type="text" name="txtDescripcion"></p>
+                    <p>Nombre: <input type="text" name="txtnombre" required></p>
+                    <p>Descripcion: <input type="text" name="txtDescripcion" required></p>
 
 
                 <input type="submit" name="btnGuardar" value="Registrar">

@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -49,6 +51,9 @@ public class Ciudad implements Serializable {
     private String nombreCiudad;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudadidCiudad")
     private List<Proyecto> proyectoList;
+    @JoinColumn(name = "Pais_idPais", referencedColumnName = "idPais")
+    @ManyToOne(optional = false)
+    private Pais paisidPais;
 
     public Ciudad() {
     }
@@ -85,6 +90,14 @@ public class Ciudad implements Serializable {
 
     public void setProyectoList(List<Proyecto> proyectoList) {
         this.proyectoList = proyectoList;
+    }
+
+    public Pais getPaisidPais() {
+        return paisidPais;
+    }
+
+    public void setPaisidPais(Pais paisidPais) {
+        this.paisidPais = paisidPais;
     }
 
     @Override

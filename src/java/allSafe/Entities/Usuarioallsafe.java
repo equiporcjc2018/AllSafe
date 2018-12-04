@@ -30,10 +30,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuarioallsafe.validaUsuario", query = "SELECT u FROM Usuarioallsafe u WHERE u.loginUsuarioAllSafe = :loginUsuarioAllSafe AND u.passUsuarioAllSafe = :passUsuarioAllSafe")
-    ,@NamedQuery(name = "Usuarioallsafe.findAll", query = "SELECT u FROM Usuarioallsafe u")    
-    ,@NamedQuery(name = "Usuarioallsafe.findByIdUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.idUsuarioAllSafe = :idUsuarioAllSafe")
-    ,@NamedQuery(name = "Usuarioallsafe.findByLoginUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.loginUsuarioAllSafe = :loginUsuarioAllSafe")
-    ,@NamedQuery(name = "Usuarioallsafe.findByPassUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.passUsuarioAllSafe = :passUsuarioAllSafe")})
+    ,@NamedQuery(name = "Usuarioallsafe.findAll", query = "SELECT u FROM Usuarioallsafe u")
+    , @NamedQuery(name = "Usuarioallsafe.findByIdUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.idUsuarioAllSafe = :idUsuarioAllSafe")
+    , @NamedQuery(name = "Usuarioallsafe.findByLoginUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.loginUsuarioAllSafe = :loginUsuarioAllSafe")
+    , @NamedQuery(name = "Usuarioallsafe.findByPassUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.passUsuarioAllSafe = :passUsuarioAllSafe")})
 public class Usuarioallsafe implements Serializable {
 
     private static final long serialVersionUID = 1L;
