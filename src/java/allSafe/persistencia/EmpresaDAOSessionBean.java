@@ -9,6 +9,8 @@ import allSafe.Entities.Empresa;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -35,10 +37,18 @@ public class EmpresaDAOSessionBean {
     
     
             
-   public List<Empresa> getEmpresaXID(int idEmpresa) {
-        return em.createNamedQuery("Pais.findByIdEmpresa", Empresa.class)
-                .setParameter("idEmpresa", idEmpresa)
-                .getResultList();
+    public Empresa buscaEmpresaXID(int id){
+        Empresa infoTallaEmpresaEntidad = null;
+        try {
+            infoTallaEmpresaEntidad =em.createNamedQuery("Empresa.findByIdEmpresa",Empresa.class)
+                    .setParameter("idEmpresa", id)
+                    .getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }catch(NonUniqueResultException ex){
+            throw  ex;
+        }
+        return infoTallaEmpresaEntidad;
     }
     
 }

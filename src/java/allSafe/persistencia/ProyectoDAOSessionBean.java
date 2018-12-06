@@ -6,6 +6,7 @@
 package allSafe.persistencia;
 
 import allSafe.Entities.Proyecto;
+import allSafe.dto.ProyectoCiudadEmpresaDTO;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,9 +26,16 @@ public class ProyectoDAOSessionBean {
                 .getResultList();
     }
     
-    public void guardarProyecto (Proyecto proyecto) throws ControllerException
+    public void guardarProyecto (ProyectoCiudadEmpresaDTO pceDTO) throws ControllerException
     {
-        em.persist(proyecto);
+        Proyecto objProyecto = new Proyecto();
+        objProyecto.setNombreProyecto(pceDTO.getObjProyecto().getNombreProyecto());
+        objProyecto.setUbicacionProyecto(pceDTO.getObjProyecto().getUbicacionProyecto());
+        objProyecto.setFechaInicioProyecto(pceDTO.getObjProyecto().getFechaInicioProyecto());
+        objProyecto.setFechaTerminoProyecto(pceDTO.getObjProyecto().getFechaTerminoProyecto());
+        objProyecto.setCiudadidCiudad(pceDTO.getObjCiudad());
+        objProyecto.setEmpresaidEmpresa(pceDTO.getObjEmpresa());
+        em.persist(objProyecto);
     }
     
     public Proyecto buscaProyectoXID(int id){

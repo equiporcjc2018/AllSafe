@@ -26,7 +26,7 @@
             <h1>Registro de nuevo proyecto</h1>
             <fieldset>
 
-                <form class="form-group" name="frmRegistroProyectos" method="post" action="./cargaProyectos">
+                <form class="form-group" name="frmRegistroProyectos" method="post" action="./agregarProyecto">
                     <p>Nombre proyecto <input class="form-control" type="text" name="txtNombreProyecto" required></p>
                     <p>Ubicación <input class="form-control" type="text" name="txtUbicacion" required></p>
                     <p>Fecha inicio<input class="form-control" type="date" name="txtFechaInicio" required></p>

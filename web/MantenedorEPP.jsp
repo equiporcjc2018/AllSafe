@@ -106,15 +106,31 @@
 
                                 <form name="frmRegistroEPP" method="post" action="./registroEppServlet">
                                     
-                                    <p>Tipo EPP</p>
-                                    <p><c:forEach items="${listadoTipoEpps}" var="tipoEpp">
-                                        <input type="checkbox" onclick="pulsar(this)" name="RDBtipoEPP" value="${tipoEpp.idTipoEPP}" <td><c:out value="${tipoEpp.descripcionTipoEPP.toString()}"/>
-                                        </c:forEach></p>
-                                        <p>Nombre: <input type="text" name="txtnombre" required></p>
-                                        <p>Descripcion: <input type="text" name="txtDescripcion" required></p>
+                                    <h3>Tipo EPP</h3>
+                                    <c:forEach items="${listadoTipoEpps}" var="tipoEpp">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="RDBtipoEPP" id="RDBtipoEPP" value="${tipoEpp.idTipoEPP}" checked>
+                                            <label class="form-check-label" for="RDBtipoEPP">
+                                                ${tipoEpp.descripcionTipoEPP.toString()}
+                                            </label>
+                                        </div>
+         
+                                        </c:forEach>
+                                    <hr>
+                                    <div class="form-group form-inline">
+                                            <label for="txtnombre" class="col-form-label">Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                            <input id="txtnombre" name="txtnombre" type="text" class="form-control required">
+
+                                        </div>
+                                    <div class="form-group form-inline">
+                                            <label for="txtDescripcion" class="col-form-label">Descripcion:&nbsp;&nbsp;&nbsp;</label>
+                                            <input id="txtDescripcion" name="txtDescripcion" type="text" class="form-control" required>
+
+                                        </div>
+                                        
 
 
-                                        <input type="submit" name="btnGuardar" value="Registrar">
+                                    <input type="submit" class="btn btn-success btn-space" name="btnGuardar" value="Registrar">
                                 </form>
                          
 </div>

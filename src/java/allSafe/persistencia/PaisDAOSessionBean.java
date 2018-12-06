@@ -9,6 +9,8 @@ import allSafe.Entities.Pais;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -36,6 +38,20 @@ public class PaisDAOSessionBean {
         return em.createNamedQuery("Pais.findByIdPais", Pais.class)
                 .setParameter("idPais", idPais)
                 .getResultList();
+    }
+    
+    public Pais buscaPaisXID(int id){
+        Pais infoTallaPaisEntidad = null;
+        try {
+            infoTallaPaisEntidad =em.createNamedQuery("Pais.findByIdPais",Pais.class)
+                    .setParameter("idPais", id)
+                    .getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }catch(NonUniqueResultException ex){
+            throw  ex;
+        }
+        return infoTallaPaisEntidad;
     }
     
 }

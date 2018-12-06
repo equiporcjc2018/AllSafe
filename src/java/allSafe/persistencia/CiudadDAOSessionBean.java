@@ -9,6 +9,8 @@ import allSafe.Entities.Ciudad;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -32,11 +34,21 @@ public class CiudadDAOSessionBean {
         em.persist(ciudad);
     }
     
-     public List<Ciudad> getCiudadXID(int idCiudad) {
-        return em.createNamedQuery("Pais.findByIdCiudad", Ciudad.class)
-                .setParameter("idCiudad", idCiudad)
-                .getResultList();
+     public Ciudad buscaCiudadXID(int id){
+        Ciudad infoTallaCiudadEntidad = null;
+        try {
+            infoTallaCiudadEntidad =em.createNamedQuery("Ciudad.findByIdCiudad",Ciudad.class)
+                    .setParameter("idCiudad", id)
+                    .getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }catch(NonUniqueResultException ex){
+            throw  ex;
+        }
+        return infoTallaCiudadEntidad;
     }
+     
+    
     
     
 }

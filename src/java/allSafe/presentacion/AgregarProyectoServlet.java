@@ -4,26 +4,22 @@
  * and open the template in the editor.
  */
 package allSafe.presentacion;
-
 import allSafe.Entities.Ciudad;
 import allSafe.Entities.Empresa;
-import allSafe.Entities.Pais;
 import allSafe.Entities.Proyecto;
+import allSafe.dto.ProyectoCiudadEmpresaDTO;
 import allSafe.persistencia.CiudadDAOSessionBean;
 import allSafe.persistencia.EmpresaDAOSessionBean;
 import allSafe.persistencia.PaisDAOSessionBean;
 import allSafe.persistencia.ProyectoDAOSessionBean;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,17 +28,14 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "AgregarProyectoServlet", urlPatterns = {"/agregarProyectoServlet", "/agregarProyecto"})
 public class AgregarProyectoServlet extends HttpServlet {
 
-@EJB
-    private ProyectoDAOSessionBean proyectoDAOSessionBean;
-	
-	@EJB
-    private PaisDAOSessionBean paisDAOSessionBean;
-	
-	@EJB
-    private EmpresaDAOSessionBean empresaDAOSessionBean;
-        
-        @EJB
-    private CiudadDAOSessionBean ciudadDAOSessionBean;
+    @EJB
+    PaisDAOSessionBean objPaisDAOSessionBean;
+    @EJB
+    CiudadDAOSessionBean objCiudadDAOSessionBean;
+    @EJB
+    EmpresaDAOSessionBean objEmpresaDAOSessionBean;
+    @EJB
+    ProyectoDAOSessionBean objProyectoDAOSessionBean;
     
    
     @Override
@@ -56,49 +49,39 @@ public class AgregarProyectoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd");
-        String nombre = request.getParameter("txtNombreProyecto");
-        String ubicacion = request.getParameter("txtUbicacion");
-        
-        String fechaInicio = null;
+        HttpSession sesion = request.getSession();
+        ProyectoCiudadEmpresaDTO objPCEDTO = new ProyectoCiudadEmpresaDTO();
+        Proyecto objProyecto = new Proyecto();
+        Ciudad objCiudad = new Ciudad();
+        Empresa objEmpresa = new Empresa();
         try {
-            fechaInicio = request.getParameter("txtFechaInicio");
+            String nombre = request.getParameter("txtNombreProyecto");
+            String ubicacion = request.getParameter("txtUbicacion");
+            String fechaIn = request.getParameter("txtFechaInicio");
+            String fechaTer= request.getParameter("txtFechaTermino");
+            String ciudad= request.getParameter("ddlCiudad");
+            String empresa= request.getParameter("ddlEmpresa");
+            if (!(nombre == null || ubicacion == null ||fechaIn == null ||fechaTer == null ||ciudad == null ||empresa == null )) {
+                objProyecto.setNombreProyecto(nombre);
+                objProyecto.setUbicacionProyecto(ubicacion);
+                objProyecto.setFechaInicioProyecto(fechaIn);
+                objProyecto.setFechaTerminoProyecto(fechaTer);
+                objCiudad = objCiudadDAOSessionBean.buscaCiudadXID(Integer.parseInt(ciudad));
+                objEmpresa = objEmpresaDAOSessionBean.buscaEmpresaXID(Integer.parseInt(empresa));
+                objPCEDTO.setObjProyecto(objProyecto);
+                objPCEDTO.setObjCiudad(objCiudad);
+                objPCEDTO.setObjEmpresa(objEmpresa);
+                objProyectoDAOSessionBean.guardarProyecto(objPCEDTO);
+                sesion.setAttribute("Exito", "Proyecto Agregado Correctamente");
+                response.sendRedirect("MantenedorProyectos.jsp");
+                
+            }else{
+                sesion.setAttribute("error1", "debe llenar todos los campos");
+                response.sendRedirect("MantenedorProyectos.jsp");
+            }
         } catch (Exception e) {
-            System.out.println("problemas con la transformacion de la fecha");
-        }
-        
-		
-	String fechaTermino = null;
-        try {
-            fechaTermino = request.getParameter("txtFechaTermino");
-        } catch (Exception e) {
-            System.out.println("problemas con la transformacion de la fecha");
-        }
-		
-        int idPais = Integer.parseInt(request.getParameter("ddlPais"));
-        List<Pais> pais = this.paisDAOSessionBean.getPaisXID(idPais);
-		
-	int idEmpresa = Integer.parseInt(request.getParameter("ddlEmpresa"));
-        List<Empresa> empresa = this.empresaDAOSessionBean.getEmpresaXID(idEmpresa);
-		
-	int idCiudad = Integer.parseInt(request.getParameter("ddlCiudad"));
-        List<Ciudad> ciudad = this.ciudadDAOSessionBean.getCiudadXID(idCiudad);
-        
-        Proyecto proyecto = new Proyecto();
-        proyecto.setNombreProyecto(nombre);
-        proyecto.setUbicacionProyecto(ubicacion);
-        proyecto.setFechaInicioProyecto(fechaInicio);
-        proyecto.setFechaTerminoProyecto(fechaTermino);
-        proyecto.setIdProyecto(idPais);
-        //proyecto.setCiudadidCiudad(idCiudad);
-        //proyecto.setEmpresa_idEmpresa(idEmpresa);
-        try {
-            this.proyectoDAOSessionBean.guardarProyecto(proyecto);
-            request.getSession().setAttribute("msg", "informacion correctamente Guardada");
-            response.sendRedirect("agregarProyecto.jsp");
-        } catch (Exception e) {
-            request.getSession().setAttribute("msg", "no se pudo guardar la info.. error al guardar");
-            response.sendRedirect("agregarProyecto.jsp");
+            sesion.setAttribute("error", "error en el proceso de Registro");
+            response.sendRedirect("MantenedorProyectos.jsp");
         }
    
         
