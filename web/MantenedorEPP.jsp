@@ -23,6 +23,15 @@
                 $('#proyecto').DataTable();
             });
         </script> 
+        <script>
+            function pulsar(obj) { 
+    if (!obj.checked) return 
+    elem=document.getElementsByName(obj.name); 
+    for(i=0;i<elem.length;i++)  
+        elem[i].checked=false; 
+    obj.checked=true; 
+} 
+        </script>
     </head>
 
     <body>
@@ -81,7 +90,7 @@
                 <div class="container-fluid dashboard-content">
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <h3 class="text-center">Content goes here!</h3>
+                            <h1 class="text-center">Epps</h1>
 
 
 
@@ -89,13 +98,17 @@
                             <jsp:include page="./listarTipoEppsServlet" flush="true"/>
                             <jsp:useBean id="epp" class="allSafe.Entities.Epp" scope="page"/>
                             <jsp:useBean id="tipoEpp" class="allSafe.Entities.Tipoepp" scope="page"/>
-                            <h1>Mantenedor EPP</h1>
-                            <fieldset><legend>Agregar EPP</legend>
+                            <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
+                                <div class="card">
+                                    <h5 class="card-header">Agregar EPP</h5>
+                                    <div class="card-body">
+                            
 
                                 <form name="frmRegistroEPP" method="post" action="./registroEppServlet">
+                                    
                                     <p>Tipo EPP</p>
                                     <p><c:forEach items="${listadoTipoEpps}" var="tipoEpp">
-                                        <input type="radio" name="RDBtipoEPP" value="${tipoEpp.idTipoEPP}" <td><c:out value="${tipoEpp.descripcionTipoEPP.toString()}"/>
+                                        <input type="checkbox" onclick="pulsar(this)" name="RDBtipoEPP" value="${tipoEpp.idTipoEPP}" <td><c:out value="${tipoEpp.descripcionTipoEPP.toString()}"/>
                                         </c:forEach></p>
                                         <p>Nombre: <input type="text" name="txtnombre" required></p>
                                         <p>Descripcion: <input type="text" name="txtDescripcion" required></p>
@@ -103,8 +116,10 @@
 
                                         <input type="submit" name="btnGuardar" value="Registrar">
                                 </form>
-                            </fieldset>
-
+                         
+</div>
+                                </div>
+                            </div>
                             
 
                             <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
