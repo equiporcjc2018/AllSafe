@@ -10,6 +10,8 @@ import allSafe.dto.PersonaCargoTipoPlantaOberolPantalonPoleraZapatoDTO;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -44,5 +46,19 @@ public class PersonaSessionBean {
         objPersona.setTallaPoleraCamisaidtallaPoleraCamisa(pctpoppzDTO.getObjTallapoleracamisa());
         objPersona.setTallaZApatoidtallaZApato(pctpoppzDTO.getObjTallazapato());
         em.persist(objPersona);
+    }
+    
+    public Persona buscaPersonaXRut(String rut){
+        Persona infoPersonaEntidad = null;
+        try {
+            infoPersonaEntidad =em.createNamedQuery("Persona.findByRutPasaportePersona",Persona.class)
+                    .setParameter("rutPasaportePersona", rut)
+                    .getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }catch(NonUniqueResultException ex){
+            throw  ex;
+        }
+        return infoPersonaEntidad;
     }
 }

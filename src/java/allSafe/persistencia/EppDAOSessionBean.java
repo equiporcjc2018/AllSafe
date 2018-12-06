@@ -10,6 +10,8 @@ import allSafe.dto.EppTipoEppDTO;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -36,4 +38,17 @@ public class EppDAOSessionBean {
         em.persist(objEpp);
     }
     
+    public Epp buscaEppXID(int id){
+        Epp infoEppEntidad = null;
+        try {
+            infoEppEntidad =em.createNamedQuery("Epp.findByIdEPP",Epp.class)
+                    .setParameter("idEPP", id)
+                    .getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }catch(NonUniqueResultException ex){
+            throw  ex;
+        }
+        return infoEppEntidad;
+    }
 }

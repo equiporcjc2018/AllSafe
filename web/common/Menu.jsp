@@ -15,11 +15,11 @@
                                 <i class="fa fa-fw fa-user-circle"></i>Dashboard</a>       
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/AllSafe/MantenedorEPP.jsp" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>EPP</a>
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>EPP</a>
                         <div id="submenu-2" class="collapse submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Ingresar <span class="badge badge-secondary">Ingresar</span></a>
+                                    <a class="nav-link" href="/AllSafe/MantenedorEPP.jsp">Ingresar <span class="badge badge-secondary">Ingresar</span></a>
                                 </li>    
                             </ul>
                         </div>
@@ -29,7 +29,7 @@
                         <div id="submenu-3" class="collapse submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Ingresar <span class="badge badge-secondary">Ingresar</span></a>
+                                    <a class="nav-link" href="/AllSafe/MantenedorTrabajadores.jsp">Ingresar <span class="badge badge-secondary">Ingresar</span></a>
                                 </li>    
                             </ul>
                         </div>

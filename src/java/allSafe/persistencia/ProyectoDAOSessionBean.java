@@ -9,6 +9,8 @@ import allSafe.Entities.Proyecto;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 
 @Stateless
@@ -28,5 +30,18 @@ public class ProyectoDAOSessionBean {
         em.persist(proyecto);
     }
     
+    public Proyecto buscaProyectoXID(int id){
+        Proyecto infoProyectoEntidad = null;
+        try {
+            infoProyectoEntidad =em.createNamedQuery("Proyecto.findByIdProyecto",Proyecto.class)
+                    .setParameter("idProyecto", id)
+                    .getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }catch(NonUniqueResultException ex){
+            throw  ex;
+        }
+        return infoProyectoEntidad;
+    }
     
 }
