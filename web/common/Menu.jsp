@@ -15,7 +15,7 @@
                                 <i class="fa fa-fw fa-user-circle"></i>Dashboard</a>       
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>EPP</a>
+                        <a class="nav-link" href="/AllSafe/MantenedorEPP.jsp" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>EPP</a>
                         <div id="submenu-2" class="collapse submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
@@ -25,7 +25,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fa fa-fw fa-rocket"></i>Trabajadores</a>
+                        <a class="nav-link" href="/AllSafe/MantenedorTrabajadores.jsp" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fa fa-fw fa-rocket"></i>Trabajadores</a>
                         <div id="submenu-3" class="collapse submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
@@ -35,11 +35,11 @@
                         </div>
                     </li>   
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fa fa-fw fa-rocket"></i>Proyectos</a>
+                        <a class="nav-link" href="/AllSafe/ListarProyectos.jsp" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fa fa-fw fa-rocket"></i>Proyectos</a>
                         <div id="submenu-4" class="collapse submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Ingresar <span class="badge badge-secondary">Ingresar</span></a>
+                                    <a class="nav-link" href="/AllSafe/AgregarProyecto.jsp">Ingresar <span class="badge badge-secondary">Ingresar</span></a>
                                 </li>    
                             </ul>
                         </div>
