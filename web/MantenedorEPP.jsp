@@ -13,7 +13,7 @@
         <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
         <link rel="stylesheet" href="assets/libs/css/style.css">
         <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-        
+
         <link href="datatables/media/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
         <script src="datatables/media/js/jquery.js" type="text/javascript"></script>
         <script src="datatables/media/js/jquery.dataTables.js" type="text/javascript"></script>
@@ -24,13 +24,14 @@
             });
         </script> 
         <script>
-            function pulsar(obj) { 
-    if (!obj.checked) return 
-    elem=document.getElementsByName(obj.name); 
-    for(i=0;i<elem.length;i++)  
-        elem[i].checked=false; 
-    obj.checked=true; 
-} 
+            function pulsar(obj) {
+                if (!obj.checked)
+                    return
+                elem = document.getElementsByName(obj.name);
+                for (i = 0; i < elem.length; i++)
+                    elem[i].checked = false;
+                obj.checked = true;
+            }
         </script>
     </head>
 
@@ -99,50 +100,54 @@
                             <jsp:useBean id="epp" class="allSafe.Entities.Epp" scope="page"/>
                             <jsp:useBean id="tipoEpp" class="allSafe.Entities.Tipoepp" scope="page"/>
                             <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
+                                <h3 class="section-title">Gestion Epps</h3>
+                                        <p>Aqui puedes Registrar, editar, y dar de baja Epps</p>
                                 <div class="card">
-                                    <h5 class="card-header">Agregar EPP</h5>
+                                    <h3 class="card-header">Agregar EPP</h3>
                                     <div class="card-body">
-                            
-
-                                <form name="frmRegistroEPP" method="post" action="./registroEppServlet">
-                                    
-                                    <h3>Tipo EPP</h3>
-                                    <c:forEach items="${listadoTipoEpps}" var="tipoEpp">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="RDBtipoEPP" id="RDBtipoEPP" value="${tipoEpp.idTipoEPP}" checked>
-                                            <label class="form-check-label" for="RDBtipoEPP">
-                                                ${tipoEpp.descripcionTipoEPP.toString()}
-                                            </label>
-                                        </div>
-         
-                                        </c:forEach>
-                                    <hr>
-                                    <div class="form-group form-inline">
-                                            <label for="txtnombre" class="col-form-label">Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                            <input id="txtnombre" name="txtnombre" type="text" class="form-control required">
-
-                                        </div>
-                                    <div class="form-group form-inline">
-                                            <label for="txtDescripcion" class="col-form-label">Descripcion:&nbsp;&nbsp;&nbsp;</label>
-                                            <input id="txtDescripcion" name="txtDescripcion" type="text" class="form-control" required>
-
-                                        </div>
-                                        
 
 
-                                    <input type="submit" class="btn btn-success btn-space" name="btnGuardar" value="Registrar">
-                                </form>
-                         
-</div>
+                                        <form name="frmRegistroEPP" method="post" action="./registroEppServlet">
+
+                                            <h5>Tipo EPP</h5>
+                                            <c:forEach items="${listadoTipoEpps}" var="tipoEpp">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="RDBtipoEPP" id="RDBtipoEPP" value="${tipoEpp.idTipoEPP}" checked>
+                                                    <label class="form-check-label" for="RDBtipoEPP">
+                                                        ${tipoEpp.descripcionTipoEPP.toString()}
+                                                    </label>
+                                                </div>
+
+                                            </c:forEach>
+                                            <hr>
+                                            <div class="form-row ">
+                                                <div class="form-group col-md-6">
+                                                    <label for="txtnombre" class="col-form-label">Nombre</label>
+                                                    <input id="txtnombre" name="txtnombre" type="text" class="form-control required">
+
+                                                </div>
+                                                <div class="form-group col-md-6 ">
+                                                    <label for="txtDescripcion" class="col-form-label">Descripcion</label>
+                                                    <input id="txtDescripcion" name="txtDescripcion" type="text" class="form-control" required>
+
+                                                </div>
+                                            </div>
+
+
+                                            <input type="submit" class="btn btn-success btn-space" name="btnGuardar" value="Registrar">
+                                        </form>
+
+                                    </div>
                                 </div>
                             </div>
-                            
+
 
                             <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
                                 <div class="card">
-                                    <h5 class="card-header">Listado EPPS</h5>
+                                    <h3 class="card-header">Listado EPPS</h3>
                                     <div class="card-body">
-                                        <c:choose>
+                                        <div class="table-responsive">
+                                            <c:choose>
                                             <c:when test="${sessionScope.listadoEpps!=null}">
                                                 <table class="table table-striped" id="proyecto">
                                                     <thead>
@@ -186,6 +191,7 @@
                                                 No existen resultados
                                             </c:otherwise>
                                         </c:choose>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

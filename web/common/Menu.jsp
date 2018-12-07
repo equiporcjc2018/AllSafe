@@ -35,11 +35,11 @@
                         </div>
                     </li>   
                     <li class="nav-item">
-                        <a class="nav-link" href="/AllSafe/ListarProyectos.jsp" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fa fa-fw fa-rocket"></i>Proyectos</a>
+                        <a class="nav-link" href="/AllSafe/MantenedorProyectos.jsp" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fa fa-fw fa-rocket"></i>Proyectos</a>
                         <div id="submenu-4" class="collapse submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/AllSafe/AgregarProyecto.jsp">Ingresar <span class="badge badge-secondary">Ingresar</span></a>
+                                    <a class="nav-link" href="/AllSafe/MantenedorProyectos.jsp">Ingresar <span class="badge badge-secondary">Ingresar</span></a>
                                 </li>    
                             </ul>
                         </div>

@@ -9,8 +9,25 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Proyectos</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>AllSafe - Proyectos</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+        <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/libs/css/style.css">
+        <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+
+        <link href="datatables/media/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+        <script src="datatables/media/js/jquery.js" type="text/javascript"></script>
+        <script src="datatables/media/js/jquery.dataTables.js" type="text/javascript"></script>
+        <script>
+            $(document).ready(function ()
+            {
+                $('#proyecto').DataTable();
+            });
+        </script> 
     </head>
     <body>
         <jsp:include page="./cargaPais" flush="true"></jsp:include>
@@ -21,103 +38,219 @@
         <jsp:useBean id="pais" class="allSafe.Entities.Pais" scope="page"></jsp:useBean>
         <jsp:useBean id="ciudad" class="allSafe.Entities.Ciudad" scope="page"></jsp:useBean>
         <jsp:useBean id="empresa" class="allSafe.Entities.Empresa" scope="page"></jsp:useBean>
-            <h1>Mantenedor Proyectos</h1>
+            <!-- ============================================================== -->
+            <!-- main wrapper -->
+            <!-- ============================================================== -->
+            <div class="dashboard-main-wrapper">
+                <!-- ============================================================== -->
+                <!-- navbar -->
+                <!-- ============================================================== -->
+                <div class="dashboard-header">
+                    <nav class="navbar navbar-expand-lg bg-white fixed-top">
+                        <a class="navbar-brand" href="index.html">
+                            AllSafe <i class="fa fa-user-secret" aria-hidden="true"></i>
+                        </a>
+                        <h5>
+                            Bienvenido ${usuarioConectado.personarutPasaportePersona.nombresPersona} 
+                        ${usuarioConectado.personarutPasaportePersona.apePatPersona}
+                    </h5>                
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto navbar-right-top">                        
+                            <li class="nav-item dropdown nav-user">
+                                <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png" alt="" class="user-avatar-md rounded-circle"></a>
+                                <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+                                    <div class="nav-user-info">
+                                        <h5 class="mb-0 text-white nav-user-name">
+                                            ${usuarioConectado.personarutPasaportePersona.nombresPersona} 
+                                            ${usuarioConectado.personarutPasaportePersona.apePatPersona}
+                                        </h5>
+                                        <span class="status"></span><span class="ml-2">Available</span>
+                                    </div>                                                                
+                                    <a class="dropdown-item" href="/AllSafe/Login.jsp" ><i class="fas fa-power-off mr-2"></i>Logout</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>      
+            </div>
+            <!-- ============================================================== -->
+            <!-- end navbar -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- left sidebar -->
+            <!-- ============================================================== -->
+            <jsp:include page="/common/Menu.jsp" flush="true"/>
+            <!-- ============================================================== -->
+            <!-- end left sidebar -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- wrapper  -->
+            <!-- ============================================================== -->
 
-            <h1>Registro de nuevo proyecto</h1>
-            <fieldset>
+            <div class="dashboard-wrapper">
+                <div class="container-fluid dashboard-content">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <h1 class="text-center">Proyectos</h1>
 
-                <form class="form-group" name="frmRegistroProyectos" method="post" action="./agregarProyecto">
-                    <p>Nombre proyecto <input class="form-control" type="text" name="txtNombreProyecto" required></p>
-                    <p>Ubicación <input class="form-control" type="text" name="txtUbicacion" required></p>
-                    <p>Fecha inicio<input class="form-control" type="date" name="txtFechaInicio" required></p>
-                    <p>Fecha término<input class="form-control" type="date" name="txtFechaTermino" required></p>
-
-                    <p>País 
-                        <select name="ddlPais" >
-                            <option value="0">--Seleccione--</option>
-                        <c:forEach items="${sessionScope.listaPais}" var="pais">
-                            <option value="<c:out value="${pais.idPais}"></c:out>"><c:out value="${pais.pais}"></c:out></option>
-                        </c:forEach>
-                    </select>
-                </p>
-
-                <p>Ciudad 
-                    <select name="ddlCiudad">
-                        <option value="0">--Seleccione--</option>
-                        <c:forEach items="${sessionScope.listaCiudad}" var="ciudad">
-                            <option value="<c:out value="${ciudad.idCiudad}"></c:out>"><c:out value="${ciudad.nombreCiudad}"></c:out></option>
-                        </c:forEach>
-                    </select>
-                </p>
-
-                <p>Empresa 
-                    <select name="ddlEmpresa">
-                        <option value="0">--Seleccione--</option>
-                        <c:forEach items="${sessionScope.listaEmpresa}" var="empresa">
-                            <option value="<c:out value="${empresa.idEmpresa}"></c:out>"><c:out value="${empresa.razonSocialEmpresa}"></c:out></option>
-                        </c:forEach>
-                    </select>
-                </p>
-
-                <input class="btn btn-primary" type="submit" name="btnGuardar" value="Registrar">
-            </form>
-        </fieldset>
-        <c:if test="${sessionScope.msg!=null}">
-            <c:out value="${msg}"></c:out>
-            <c:remove var="msg"></c:remove>
-        </c:if>   
-            
-            <h3>Listado Proyectos</h3>
-
-            <div>
-            <c:choose>
-                <c:when test="${sessionScope.listadoProyectos!=null}">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nombre proyecto</th>
-                                <th>País</th>
-                                <th>Ciudad</th>
-                                <th>Rut Empresa</th>
-                                <th>Razon Social Empresa</th>
-                                <th>Fecha inicio</th>
-                                <th>Fecha término</th>
-                            </tr> 
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Nombre proyecto</th>
-                                <th>País</th>
-                                <th>Ciudad</th>
-                                <th>Rut Empresa</th>
-                                <th>Razon Social Empresa</th>
-                                <th>Fecha inicio</th>
-                                <th>Fecha término</th>
-                            </tr> 
-                        </tfoot>
-                        <tbody>
-                            <c:forEach items="${sessionScope.listadoProyectos}" var="proyecto">
-                                <tr>
-                                    <td><c:out value="${proyecto.nombreProyecto}"/></td>
-                                    <td><c:out value="${proyecto.ciudadidCiudad.paisidPais.pais}"/></td>
-                                    <td><c:out value="${proyecto.ciudadidCiudad.nombreCiudad}"/></td>
-                                    <td><c:out value="${proyecto.empresaidEmpresa.rutEmpresa}"/></td>
-                                    <td><c:out value="${proyecto.empresaidEmpresa.razonSocialEmpresa}"/></td>
-                                    <td><c:out value="${proyecto.fechaInicioProyecto}"/></td>
-                                    <td><c:out value="${proyecto.fechaTerminoProyecto}"/></td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </c:when>
+                            <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
+                                <h3 class="section-title">Gestion Proyectos</h3>
+                                        <p>Aqui puedes Registrar, editar, y dar de baja Proyectos</p>
+                                <div class="card">
+                                    <h3 class="card-header">Registro de Proyectos</h3>
+                                    <div class="card-body">
 
 
-                <c:otherwise>
-                    No existen resultados
-                </c:otherwise>
-            </c:choose>
+                                            <form  name="frmRegistroProyectos" method="post" action="./agregarProyecto">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="txtNombreProyecto" class="col-form-label">Nombre proyecto</label>
+                                                        <input id="txtNombreProyecto" name="txtNombreProyecto" type="text" class="form-control">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="txtUbicacion" class="col-form-label">Ubicación</label>
+                                                        <input id="txtUbicacion" name="txtUbicacion" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="txtFechaInicio" class="col-form-label">Fecha inicio</label>
+                                                        <input id="txtFechaInicio" name="txtFechaInicio" type="date" class="form-control">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="txtFechaTermino" class="col-form-label">Fecha término</label>
+                                                        <input id="txtFechaTermino" name="txtFechaTermino" type="date" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-4">
+                                                    <label for="ddlPais-select">País</label>
+                                                    <select required class="form-control" id="ddlPais" name="ddlPais">
+                                                        <option value="">---Seleccione---</option>
+                                                        <c:forEach items="${sessionScope.listaPais}" var="pais">
+                                                            <option value="<c:out value="${pais.idPais}"></c:out>"><c:out value="${pais.pais}"></c:out></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div> 
+                                                <div class="form-group col-md-4 ">
+                                                    <label for="ddlCiudad-select">Ciudad</label>
+                                                    <select required class="form-control" id="ddlCiudad" name="ddlCiudad">
+                                                        <option value="">---Seleccione---</option>
+                                                        <c:forEach items="${sessionScope.listaCiudad}" var="ciudad">
+                                                            <option value="<c:out value="${ciudad.idCiudad}"></c:out>"><c:out value="${ciudad.nombreCiudad}"></c:out></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div> 
+                                                <div class="form-group col-md-4 ">
+                                                    <label for="ddlEmpresa-select">Empresa</label>
+                                                    <select required class="form-control" id="ddlEmpresa" name="ddlEmpresa">
+                                                        <option value="">---Seleccione---</option>
+                                                        <c:forEach items="${sessionScope.listaEmpresa}" var="empresa">
+                                                            <option value="<c:out value="${empresa.idEmpresa}"></c:out>"><c:out value="${empresa.razonSocialEmpresa}"></c:out></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div> 
+                                                </div>
+                                                
+                                               
+                                                <input class="btn btn-success btn-space" type="submit" name="btnGuardar" value="Registrar">
+                                            </form>
+                                        <c:if test="${sessionScope.msg!=null}">
+                                            <c:out value="${msg}"></c:out>
+                                            <c:remove var="msg"></c:remove>
+                                        </c:if>   
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
+                                <div class="card">
+                                    <h3 class="card-header">Listado Proyectos</h3>
+                                    <div class="card-body">
+
+                                        <div class="table-responsive">
+                                            <c:choose>
+                                                <c:when test="${sessionScope.listadoProyectos!=null}">
+                                                    <table class="table table-striped" id="proyecto">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Nombre proyecto</th>
+                                                                <th>País</th>
+                                                                <th>Ciudad</th>
+                                                                <th>Rut Empresa</th>
+                                                                <th>Razon Social Empresa</th>
+                                                                <th>Fecha inicio</th>
+                                                                <th>Fecha término</th>
+                                                                <th>Editar</th>
+                                                                <th>Eliminar</th>
+                                                            </tr> 
+                                                        </thead>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th>Nombre proyecto</th>
+                                                                <th>País</th>
+                                                                <th>Ciudad</th>
+                                                                <th>Rut Empresa</th>
+                                                                <th>Razon Social Empresa</th>
+                                                                <th>Fecha inicio</th>
+                                                                <th>Fecha término</th>
+                                                                <th>Editar</th>
+                                                                <th>Eliminar</th>
+                                                            </tr> 
+                                                        </tfoot>
+                                                        <tbody>
+                                                            <c:forEach items="${sessionScope.listadoProyectos}" var="proyecto">
+                                                                <tr>
+                                                                    <td><c:out value="${proyecto.nombreProyecto}"/></td>
+                                                                    <td><c:out value="${proyecto.ciudadidCiudad.paisidPais.pais}"/></td>
+                                                                    <td><c:out value="${proyecto.ciudadidCiudad.nombreCiudad}"/></td>
+                                                                    <td><c:out value="${proyecto.empresaidEmpresa.rutEmpresa}"/></td>
+                                                                    <td><c:out value="${proyecto.empresaidEmpresa.razonSocialEmpresa}"/></td>
+                                                                    <td><c:out value="${proyecto.fechaInicioProyecto}"/></td>
+                                                                    <td><c:out value="${proyecto.fechaTerminoProyecto}"/></td>
+                                                                    <td><input type="button" class="btn btn-primary btn-space" name="btnEditar" value="Editar"/></td>
+                                                                    <td><input type="button" class="btn btn-secondary btn-space" name="btnEliminar" value="Eliminar"/></td>
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </tbody>
+                                                    </table>
+                                                </c:when>
+
+
+                                                <c:otherwise>
+                                                    No existen resultados
+                                                </c:otherwise>
+                                            </c:choose>
+                                                    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- footer -->
+                <!-- ============================================================== -->
+                <jsp:include page="Footer.jsp" flush="true"/> 
+                <!-- ============================================================== -->
+                <!-- end footer -->
+                <!-- ============================================================== -->
+            </div>
         </div>
-
-        <jsp:include page="Footer.jsp" flush="true"/> 
+        <!-- ============================================================== -->
+        <!-- end main wrapper -->
+        <!-- ============================================================== -->
+        <!-- Optional JavaScript -->
+        <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+        <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+        <script src="assets/libs/js/main-js.js"></script>
     </body>
 </html>

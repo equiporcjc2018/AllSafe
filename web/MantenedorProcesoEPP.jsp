@@ -114,23 +114,21 @@
             <div class="dashboard-wrapper">
                 <div class="container-fluid dashboard-content">
                     <div class="row">
-                        <form name="frmRegistroEppProceso" method="post" action="./registroEppProcesoServlet">
+                        
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <h3 class="text-center">Gestion de EPP</h3>
-
+                            <h3 class="text-center">Proceso de EPP</h3>
+<form name="frmRegistroEppProceso" method="post" action="./registroEppProcesoServlet">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="section-block" id="basicform">
-                                    <h3 class="section-title">Asignacion de EPP</h3>
-                                    <p>Use custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.</p>
+                                    <h3 class="section-title">Proceso de EPP</h3>
+                                    <p>Aqui se asignan Epps a proyectos y Trabajadores </p>
                                 </div>
+                                
                                 <div class="card">
                                     <h5 class="card-header">Seleccion de Proyecto</h5>
                                     <div class="card-body">
 
-
-                                        
-
-
+                                        <div class="table-responsive">
                                             <c:choose>
                                                 <c:when test="${sessionScope.listadoProyectos!=null}">
                                                     <table class="table table-striped table-bordered" id="proyecto">
@@ -166,11 +164,11 @@
                                                     </table>
                                                 </c:when>
 
-
                                                 <c:otherwise>
                                                     No existen resultados
                                                 </c:otherwise>
                                             </c:choose>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -182,10 +180,8 @@
                                     <h2 class="card-header">Seleccion de Persona</h2>
                                     <div class="card-body">
 
-
-
-
-                                        <c:choose>
+                                        <div class="table-responsive">
+                                            <c:choose>
                                             <c:when test="${sessionScope.listaTrabajadores!=null}">
                                                 <table class="table table-striped table-bordered"  id="persona">
                                                     <thead>
@@ -218,6 +214,7 @@
                                                 No existen resultados
                                             </c:otherwise>
                                         </c:choose>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -228,8 +225,8 @@
                                     <h2 class="card-header">Seleccion de EPP</h2>
                                     <div class="card-body">
 
-
-                                        <c:choose>
+                                        <div class="table-responsive">
+                                            <c:choose>
                                             <c:when test="${sessionScope.listadoEpps!=null}">
                                                 <table class="table table-striped table-bordered"  id="epp">
                                                     <thead>
@@ -265,6 +262,7 @@
                                                 No existen resultados
                                             </c:otherwise>
                                         </c:choose>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -275,8 +273,8 @@
                                     <h2 class="card-header">Datos de Proceso</h2>
                                     <div class="card-body">
 
-                                        <div class="form-group form-inline">
-                                            <label for="ddlEstadoProyecto-select">Estado Proyecto:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <div class="form-group ">
+                                            <label for="ddlEstadoProyecto-select">Estado Proyecto:</label>
                                             <select required class="form-control" id="ddlEstadoProyecto" name="ddlEstadoProyecto">
                                                 <option value="">---Seleccione---</option>
                                                 <c:forEach items="${sessionScope.listadoEstadosproyectos}" var="estadoproyecto">
@@ -284,21 +282,28 @@
                                                 </c:forEach>
                                             </select>
                                         </div> 
-
-                                        <div class="form-group form-inline">
-                                            <label for="txtTallaProceso" class="col-form-label">Talla EPP:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                            <input id="txtTallaProceso" name="txtTallaProceso" type="text" class="form-control">
-                                            <label for="txtUnidadProceso" class="col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unidad Epp:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                            <input id="txtUnidadProceso" name="txtUnidadProceso" type="text" class="form-control">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="txtTallaProceso" class="">Talla EPP</label>
+                                                <input id="txtTallaProceso" name="txtTallaProceso" type="text" class="form-control">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="txtUnidadProceso" class="">Unidad Epp:</label>
+                                                <input id="txtUnidadProceso" name="txtUnidadProceso" type="text" class="form-control">
+                                            </div>
                                         </div>
-                                        <div class="form-group form-inline">
-                                            <label for="txtCantidadProceso" class="col-form-label">Cantidad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                            <input id="txtCantidadProceso" name="txtCantidadProceso" type="text" class="form-control">
-                                            <label for="txtPrecioUnitarioProceso" class="col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Precio Unitario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                            <input id="txtPrecioUnitarioProceso" name="txtPrecioUnitarioProceso" type="text" class="form-control">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="txtCantidadProceso" class="col-form-label">Cantidad:</label>
+                                                <input id="txtCantidadProceso" name="txtCantidadProceso" type="text" class="form-control">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="txtPrecioUnitarioProceso" class="col-form-label">Precio Unitario:</label>
+                                                <input id="txtPrecioUnitarioProceso" name="txtPrecioUnitarioProceso" type="text" class="form-control">
+                                            </div>
                                         </div>
-                                        <div class="form-group form-inline">
-                                            <label for="txtDestinoDevolucionProceso" class="col-form-label">Cantidad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <div class="form-group">
+                                            <label for="txtDestinoDevolucionProceso" class="col-form-label">Destino Devolucion:</label>
                                             <input id="txtDestinoDevolucionProceso" name="txtDestinoDevolucionProceso" type="text" class="form-control">
 
                                         </div>
@@ -313,14 +318,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr>
+</form>                       
+                                <hr>
                             <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
                                 <div class="card">
                                     <h2 class="card-header">Listado de EPP en Proceso</h2>
                                     <div class="card-body">
 
 
-                                        <c:choose>
+                                        <div class="table-responsive">
+                                            <c:choose>
                                             <c:when test="${sessionScope.listadoEppProceso!=null}">
                                                 <table class="table table-striped table-bordered"  id="eppproceso">
                                                     <thead>
@@ -380,6 +387,7 @@
                                                 No existen resultados
                                             </c:otherwise>
                                         </c:choose>
+                                        </div>
                                     </div>
                                 </div>
                             </div> 
@@ -391,7 +399,7 @@
 
 
                         </div>
-                                                        </form>
+                                                        
 
                     </div>
                 </div>
