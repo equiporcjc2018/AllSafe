@@ -30,227 +30,202 @@
         </script> 
     </head>
     <body>
-        <jsp:include page="./cargaPais" flush="true"></jsp:include>
-        <jsp:include page="./cargaCiudad" flush="true"></jsp:include>
-        <jsp:include page="./cargaEmpresa" flush="true"></jsp:include>
-        <jsp:include page="./cargaProyectoServlet" flush="true"/>
-        <jsp:useBean id="proyecto" class="allSafe.Entities.Proyecto" scope="page"/>
-        <jsp:useBean id="pais" class="allSafe.Entities.Pais" scope="page"></jsp:useBean>
-        <jsp:useBean id="ciudad" class="allSafe.Entities.Ciudad" scope="page"></jsp:useBean>
-        <jsp:useBean id="empresa" class="allSafe.Entities.Empresa" scope="page"></jsp:useBean>
-            <!-- ============================================================== -->
-            <!-- main wrapper -->
-            <!-- ============================================================== -->
-            <div class="dashboard-main-wrapper">
-                <!-- ============================================================== -->
-                <!-- navbar -->
-                <!-- ============================================================== -->
-                <div class="dashboard-header">
-                    <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                        <a class="navbar-brand" href="index.html">
-                            AllSafe <i class="fa fa-user-secret" aria-hidden="true"></i>
-                        </a>
-                        <h5>
-                            Bienvenido ${usuarioConectado.personarutPasaportePersona.nombresPersona} 
-                        ${usuarioConectado.personarutPasaportePersona.apePatPersona}
-                    </h5>                
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto navbar-right-top">                        
-                            <li class="nav-item dropdown nav-user">
-                                <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png" alt="" class="user-avatar-md rounded-circle"></a>
-                                <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
-                                    <div class="nav-user-info">
-                                        <h5 class="mb-0 text-white nav-user-name">
-                                            ${usuarioConectado.personarutPasaportePersona.nombresPersona} 
-                                            ${usuarioConectado.personarutPasaportePersona.apePatPersona}
-                                        </h5>
-                                        <span class="status"></span><span class="ml-2">Available</span>
-                                    </div>                                                                
-                                    <a class="dropdown-item" href="/AllSafe/Login.jsp" ><i class="fas fa-power-off mr-2"></i>Logout</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>      
-            </div>
-            <!-- ============================================================== -->
-            <!-- end navbar -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- left sidebar -->
-            <!-- ============================================================== -->
-            <jsp:include page="/common/Menu.jsp" flush="true"/>
-            <!-- ============================================================== -->
-            <!-- end left sidebar -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- wrapper  -->
-            <!-- ============================================================== -->
+        <c:choose>
+            <c:when test="${usuarioConectado!=null}">
+                <jsp:include page="./cargaPais" flush="true"></jsp:include>
+                <jsp:include page="./cargaCiudad" flush="true"></jsp:include>
+                <jsp:include page="./cargaEmpresa" flush="true"></jsp:include>
+                <jsp:include page="./cargaProyectoServlet" flush="true"/>
+                <jsp:useBean id="proyecto" class="allSafe.Entities.Proyecto" scope="page"/>
+                <jsp:useBean id="pais" class="allSafe.Entities.Pais" scope="page"></jsp:useBean>
+                <jsp:useBean id="ciudad" class="allSafe.Entities.Ciudad" scope="page"></jsp:useBean>
+                <jsp:useBean id="empresa" class="allSafe.Entities.Empresa" scope="page"></jsp:useBean>
+                    <!-- ============================================================== -->
+                    <!-- main wrapper -->
+                    <div class="dashboard-main-wrapper">
+                        <!-- ============================================================== -->
+                    <jsp:include page="/common/Header.jsp" flush="true"/>
+                    <!-- ============================================================== -->
+                    <!-- end navbar -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- left sidebar -->
+                    <!-- ============================================================== -->
+                    <jsp:include page="/common/Menu.jsp" flush="true"/>
+                    <!-- ============================================================== -->
+                    <!-- end left sidebar -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- wrapper  -->
+                    <!-- ============================================================== -->
 
-            <div class="dashboard-wrapper">
-                <div class="container-fluid dashboard-content">
-                    <div class="row">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <h1 class="text-center">Proyectos</h1>
+                    <div class="dashboard-wrapper">
+                        <div class="container-fluid dashboard-content">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <h1 class="text-center">Proyectos</h1>
 
-                            <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
-                                <h3 class="section-title">Gestion Proyectos</h3>
+                                    <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
+                                        <h3 class="section-title">Gestion Proyectos</h3>
                                         <p>Aqui puedes Registrar, editar, y dar de baja Proyectos</p>
-                                <div class="card">
-                                    <h3 class="card-header">Registro de Proyectos</h3>
-                                    <div class="card-body">
+                                        <div class="card">
+                                            <h3 class="card-header">Registro de Proyectos</h3>
+                                            <div class="card-body">
 
 
-                                            <form  name="frmRegistroProyectos" method="post" action="./agregarProyecto">
-                                                <div class="form-row">
-                                                    <div class="form-group col-md-6">
-                                                        <label for="txtNombreProyecto" class="col-form-label">Nombre proyecto</label>
-                                                        <input id="txtNombreProyecto" name="txtNombreProyecto" type="text" class="form-control">
+                                                <form  name="frmRegistroProyectos" method="post" action="./agregarProyecto">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="txtNombreProyecto" class="col-form-label">Nombre proyecto</label>
+                                                            <input id="txtNombreProyecto" name="txtNombreProyecto" type="text" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="txtUbicacion" class="col-form-label">Ubicación</label>
+                                                            <input id="txtUbicacion" name="txtUbicacion" type="text" class="form-control">
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="txtUbicacion" class="col-form-label">Ubicación</label>
-                                                        <input id="txtUbicacion" name="txtUbicacion" type="text" class="form-control">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="txtFechaInicio" class="col-form-label">Fecha inicio</label>
+                                                            <input id="txtFechaInicio" name="txtFechaInicio" type="date" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="txtFechaTermino" class="col-form-label">Fecha término</label>
+                                                            <input id="txtFechaTermino" name="txtFechaTermino" type="date" class="form-control">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-row">
-                                                    <div class="form-group col-md-6">
-                                                        <label for="txtFechaInicio" class="col-form-label">Fecha inicio</label>
-                                                        <input id="txtFechaInicio" name="txtFechaInicio" type="date" class="form-control">
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="txtFechaTermino" class="col-form-label">Fecha término</label>
-                                                        <input id="txtFechaTermino" name="txtFechaTermino" type="date" class="form-control">
-                                                    </div>
-                                                </div>
 
-                                                
-                                                <div class="form-row">
-                                                    <div class="form-group col-md-4">
-                                                    <label for="ddlPais-select">País</label>
-                                                    <select required class="form-control" id="ddlPais" name="ddlPais">
-                                                        <option value="">---Seleccione---</option>
-                                                        <c:forEach items="${sessionScope.listaPais}" var="pais">
-                                                            <option value="<c:out value="${pais.idPais}"></c:out>"><c:out value="${pais.pais}"></c:out></option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </div> 
-                                                <div class="form-group col-md-4 ">
-                                                    <label for="ddlCiudad-select">Ciudad</label>
-                                                    <select required class="form-control" id="ddlCiudad" name="ddlCiudad">
-                                                        <option value="">---Seleccione---</option>
-                                                        <c:forEach items="${sessionScope.listaCiudad}" var="ciudad">
-                                                            <option value="<c:out value="${ciudad.idCiudad}"></c:out>"><c:out value="${ciudad.nombreCiudad}"></c:out></option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </div> 
-                                                <div class="form-group col-md-4 ">
-                                                    <label for="ddlEmpresa-select">Empresa</label>
-                                                    <select required class="form-control" id="ddlEmpresa" name="ddlEmpresa">
-                                                        <option value="">---Seleccione---</option>
-                                                        <c:forEach items="${sessionScope.listaEmpresa}" var="empresa">
-                                                            <option value="<c:out value="${empresa.idEmpresa}"></c:out>"><c:out value="${empresa.razonSocialEmpresa}"></c:out></option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </div> 
-                                                </div>
-                                                
-                                               
-                                                <input class="btn btn-success btn-space" type="submit" name="btnGuardar" value="Registrar">
-                                            </form>
-                                        <c:if test="${sessionScope.msg!=null}">
-                                            <c:out value="${msg}"></c:out>
-                                            <c:remove var="msg"></c:remove>
-                                        </c:if>   
 
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-4">
+                                                            <label for="ddlPais-select">País</label>
+                                                            <select required class="form-control" id="ddlPais" name="ddlPais">
+                                                                <option value="">---Seleccione---</option>
+                                                                <c:forEach items="${sessionScope.listaPais}" var="pais">
+                                                                    <option value="<c:out value="${pais.idPais}"></c:out>"><c:out value="${pais.pais}"></c:out></option>
+                                                                </c:forEach>
+                                                            </select>
+                                                        </div> 
+                                                        <div class="form-group col-md-4 ">
+                                                            <label for="ddlCiudad-select">Ciudad</label>
+                                                            <select required class="form-control" id="ddlCiudad" name="ddlCiudad">
+                                                                <option value="">---Seleccione---</option>
+                                                                <c:forEach items="${sessionScope.listaCiudad}" var="ciudad">
+                                                                    <option value="<c:out value="${ciudad.idCiudad}"></c:out>"><c:out value="${ciudad.nombreCiudad}"></c:out></option>
+                                                                </c:forEach>
+                                                            </select>
+                                                        </div> 
+                                                        <div class="form-group col-md-4 ">
+                                                            <label for="ddlEmpresa-select">Empresa</label>
+                                                            <select required class="form-control" id="ddlEmpresa" name="ddlEmpresa">
+                                                                <option value="">---Seleccione---</option>
+                                                                <c:forEach items="${sessionScope.listaEmpresa}" var="empresa">
+                                                                    <option value="<c:out value="${empresa.idEmpresa}"></c:out>"><c:out value="${empresa.razonSocialEmpresa}"></c:out></option>
+                                                                </c:forEach>
+                                                            </select>
+                                                        </div> 
+                                                    </div>
+
+
+                                                    <input class="btn btn-success btn-space" type="submit" name="btnGuardar" value="Registrar">
+                                                </form>
+                                                <c:if test="${sessionScope.msg!=null}">
+                                                    <c:out value="${msg}"></c:out>
+                                                    <c:remove var="msg"></c:remove>
+                                                </c:if>   
+
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
-                                <div class="card">
-                                    <h3 class="card-header">Listado Proyectos</h3>
-                                    <div class="card-body">
+                                    <hr>
+                                    <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
+                                        <div class="card">
+                                            <h3 class="card-header">Listado Proyectos</h3>
+                                            <div class="card-body">
 
-                                        <div class="table-responsive">
-                                            <c:choose>
-                                                <c:when test="${sessionScope.listadoProyectos!=null}">
-                                                    <table class="table table-striped" id="proyecto">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Nombre proyecto</th>
-                                                                <th>País</th>
-                                                                <th>Ciudad</th>
-                                                                <th>Rut Empresa</th>
-                                                                <th>Razon Social Empresa</th>
-                                                                <th>Fecha inicio</th>
-                                                                <th>Fecha término</th>
-                                                                <th>Editar</th>
-                                                                <th>Eliminar</th>
-                                                            </tr> 
-                                                        </thead>
-                                                        <tfoot>
-                                                            <tr>
-                                                                <th>Nombre proyecto</th>
-                                                                <th>País</th>
-                                                                <th>Ciudad</th>
-                                                                <th>Rut Empresa</th>
-                                                                <th>Razon Social Empresa</th>
-                                                                <th>Fecha inicio</th>
-                                                                <th>Fecha término</th>
-                                                                <th>Editar</th>
-                                                                <th>Eliminar</th>
-                                                            </tr> 
-                                                        </tfoot>
-                                                        <tbody>
-                                                            <c:forEach items="${sessionScope.listadoProyectos}" var="proyecto">
-                                                                <tr>
-                                                                    <td><c:out value="${proyecto.nombreProyecto}"/></td>
-                                                                    <td><c:out value="${proyecto.ciudadidCiudad.paisidPais.pais}"/></td>
-                                                                    <td><c:out value="${proyecto.ciudadidCiudad.nombreCiudad}"/></td>
-                                                                    <td><c:out value="${proyecto.empresaidEmpresa.rutEmpresa}"/></td>
-                                                                    <td><c:out value="${proyecto.empresaidEmpresa.razonSocialEmpresa}"/></td>
-                                                                    <td><c:out value="${proyecto.fechaInicioProyecto}"/></td>
-                                                                    <td><c:out value="${proyecto.fechaTerminoProyecto}"/></td>
-                                                                    <td><input type="button" class="btn btn-primary btn-space" name="btnEditar" value="Editar"/></td>
-                                                                    <td><input type="button" class="btn btn-secondary btn-space" name="btnEliminar" value="Eliminar"/></td>
-                                                                </tr>
-                                                            </c:forEach>
-                                                        </tbody>
-                                                    </table>
-                                                </c:when>
+                                                <div class="table-responsive">
+                                                    <c:choose>
+                                                        <c:when test="${sessionScope.listadoProyectos!=null}">
+                                                            <table class="table table-striped" id="proyecto">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Nombre proyecto</th>
+                                                                        <th>País</th>
+                                                                        <th>Ciudad</th>
+                                                                        <th>Rut Empresa</th>
+                                                                        <th>Razon Social Empresa</th>
+                                                                        <th>Fecha inicio</th>
+                                                                        <th>Fecha término</th>
+                                                                        <th>Editar</th>
+                                                                        <th>Eliminar</th>
+                                                                    </tr> 
+                                                                </thead>
+                                                                <tfoot>
+                                                                    <tr>
+                                                                        <th>Nombre proyecto</th>
+                                                                        <th>País</th>
+                                                                        <th>Ciudad</th>
+                                                                        <th>Rut Empresa</th>
+                                                                        <th>Razon Social Empresa</th>
+                                                                        <th>Fecha inicio</th>
+                                                                        <th>Fecha término</th>
+                                                                        <th>Editar</th>
+                                                                        <th>Eliminar</th>
+                                                                    </tr> 
+                                                                </tfoot>
+                                                                <tbody>
+                                                                    <c:forEach items="${sessionScope.listadoProyectos}" var="proyecto">
+                                                                        <tr>
+                                                                            <td><c:out value="${proyecto.nombreProyecto}"/></td>
+                                                                            <td><c:out value="${proyecto.ciudadidCiudad.paisidPais.pais}"/></td>
+                                                                            <td><c:out value="${proyecto.ciudadidCiudad.nombreCiudad}"/></td>
+                                                                            <td><c:out value="${proyecto.empresaidEmpresa.rutEmpresa}"/></td>
+                                                                            <td><c:out value="${proyecto.empresaidEmpresa.razonSocialEmpresa}"/></td>
+                                                                            <td><c:out value="${proyecto.fechaInicioProyecto}"/></td>
+                                                                            <td><c:out value="${proyecto.fechaTerminoProyecto}"/></td>
+                                                                            <td><input type="button" class="btn btn-primary btn-space" name="btnEditar" value="Editar"/></td>
+                                                                            <td><input type="button" class="btn btn-secondary btn-space" name="btnEliminar" value="Eliminar"/></td>
+                                                                        </tr>
+                                                                    </c:forEach>
+                                                                </tbody>
+                                                            </table>
+                                                        </c:when>
 
 
-                                                <c:otherwise>
-                                                    No existen resultados
-                                                </c:otherwise>
-                                            </c:choose>
-                                                    
+                                                        <c:otherwise>
+                                                            No existen resultados
+                                                        </c:otherwise>
+                                                    </c:choose>
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- ============================================================== -->
+                        <!-- footer -->
+                        <!-- ============================================================== -->
+                        <jsp:include page="Footer.jsp" flush="true"/> 
+                        <!-- ============================================================== -->
+                        <!-- end footer -->
+                        <!-- ============================================================== -->
                     </div>
                 </div>
                 <!-- ============================================================== -->
-                <!-- footer -->
+                <!-- end main wrapper -->
                 <!-- ============================================================== -->
-                <jsp:include page="Footer.jsp" flush="true"/> 
-                <!-- ============================================================== -->
-                <!-- end footer -->
-                <!-- ============================================================== -->
-            </div>
-        </div>
-        <!-- ============================================================== -->
-        <!-- end main wrapper -->
-        <!-- ============================================================== -->
-        <!-- Optional JavaScript -->
-        <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
-        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-        <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
-        <script src="assets/libs/js/main-js.js"></script>
+                <!-- Optional JavaScript -->
+                <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+                <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+                <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+                <script src="assets/libs/js/main-js.js"></script>
+            </c:when>
+            <c:otherwise>
+                <c:redirect url="Login.jsp"/>
+            </c:otherwise>
+        </c:choose>
+
     </body>
 </html>
