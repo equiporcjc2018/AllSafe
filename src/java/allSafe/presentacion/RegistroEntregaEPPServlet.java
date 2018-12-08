@@ -5,7 +5,9 @@
  */
 package allSafe.presentacion;
 
+import allSafe.Entities.Persona;
 import allSafe.persistencia.EppDAOSessionBean;
+import allSafe.persistencia.PersonaSessionBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
@@ -16,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import allSafe.persistencia.PersonaDAOSessionBean;
 import allSafe.persistencia.TipoEppDAOSessionBean;
+import java.util.List;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -25,7 +29,7 @@ import allSafe.persistencia.TipoEppDAOSessionBean;
 public class RegistroEntregaEPPServlet extends HttpServlet {
 
     @EJB
-    private PersonaDAOSessionBean personaDAOSessionBeans;
+    private PersonaSessionBean personaDAOSessionBeans;
     
     @EJB 
     private EppDAOSessionBean eppDAOSessionBean;
@@ -43,7 +47,11 @@ public class RegistroEntregaEPPServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        HttpSession sesion = request.getSession();
+        String personaIngresar = (request.getParameter("txtRut"));
+        List<Persona> infoPersona = this.personaDAOSessionBeans.buscaPersonaXRut2(personaIngresar);
+        sesion.setAttribute("infoPersona", infoPersona);
+        response.sendRedirect("MantenedorEntregaEPP.jsp");
         
         
     }

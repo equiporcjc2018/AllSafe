@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        
         <script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
         <!--[if IE]><script type="text/javascript" src="/excanvas.js"></script><![endif]-->
         <style>
@@ -24,41 +26,92 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/libs/css/style.css">
+    <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+    <link rel="stylesheet" href="assets/vendor/charts/chartist-bundle/chartist.css">
+    <link rel="stylesheet" href="assets/vendor/charts/morris-bundle/morris.css">
+    <link rel="stylesheet" href="assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
+    <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
         <title>GestionEPP</title>
     </head>
 
 
 
     <body onload="prepareCanvas();">
-
-         <jsp:include page="./listarTallaOberolServlet" flush="true"/>
-        <jsp:include page="./listarTallaPantalonServlet" flush="true"/>
-        <jsp:include page="./listarTallaPoleraServlet" flush="true"/>
-        <jsp:include page="./listarTallaZapatoServlet" flush="true"/>
-        <jsp:include page="./listarCargoServlet" flush="true"/>
-        <jsp:include page="./listarTipoPlantaServlet" flush="true"/>
-        <jsp:include page="./listarPersonaServlet" flush="true"/>
-        <jsp:useBean id="oberol" class="allSafe.Entities.Tallaoberol" scope="page"/>
-        <jsp:useBean id="pantalon" class="allSafe.Entities.Tallapantalon" scope="page"/>
-        <jsp:useBean id="polera" class="allSafe.Entities.Tallapoleracamisa" scope="page"/>
-        <jsp:useBean id="zapato" class="allSafe.Entities.Tallazapato" scope="page"/>
-        <jsp:useBean id="cargo" class="allSafe.Entities.Cargo" scope="page"/>
-        <jsp:useBean id="epp" class="allSafe.Entities.Epp" scope="page"/>
-        <jsp:useBean id="tipoEpp" class="allSafe.Entities.Tipoepp" scope="page"/>
+        <c:choose>
+            <c:when test="${usuarioConectado!=null}">
+        <jsp:include page="./registroEntregaEPP" flush="true"/>    
+        <jsp:useBean id="persona" class="allSafe.Entities.Persona" scope="page"/>   
+        
         
         <div class="jumbotron text-center">
-            <h1>Gestión Epp</h1>
-            <p>Realiza entrega de EPPS</p> 
+            <h1>Gestión EPP</h1>
+            <p>Realiza entrega de EPP</p> 
         </div>
         
-        <div class="container">
+        <div class="container-fluid">
             <div class="panel panel-default">
                 <div class="panel-body">
+                    <div class="container">
                     <fieldset><legend>Datos trabajador</legend>
+                        <div class="jumbotron">
+                        <div class="panel-body">
+                        
+                        <form name="frmBuscaColaborador" method="POST" action="./registroEntregaEPP">
 
-                        <form class="form-group" name="frmRegistroEntrega" method="post" action="./registroEntregaEPP">
-                            <p>Rut <input class="form-control" type="text" name="txtRut"><input class="btn btn-primary" type="button" value="Ingresar Rut"/></p>
-                            <p>Nombre trabajador<input class="form-control" type="text" name="txtNombre" disabled="true"></p>
+                            <p>Rut <input class="form-control" type="text" name="txtRut">
+                            <br>
+                            <button type="submit" class="btn btn-default center-block">Buscar</button></p>
+                        </form>
+                            <p>Datos del colaborador </p>
+                             
+                            
+                            <c:if test="${infoPersona!=null}">   
+                                <table class="table table-bordered table-striped ">
+                                   <thead>
+                                       <tr>
+
+                                           <td>Nombre</td>
+                                           <td>Apellido Pat.</td>
+                                           <td>Apellido Mat</td>
+                                           <td>Talla Pantalon</td>
+                                           <td>Talla Polera</td>
+                                           <td>Talla Overol</td>
+                                           <td>Talla Zapato</td>
+                                   </thead>
+                                   <tbody>
+                                       <c:forEach items="${infoPersona}" var="persona">
+
+                                           <tr>
+
+                                           <!--td--><!--c:out value="$//{personal.rutPersonal}"/></td-->
+                                           <td><c:out value="${persona.nombresPersona}"/></td>   
+                                           <td><c:out value="${persona.apePatPersona}"/></td>
+                                           <td><c:out value="${persona.apeMatPersona}"/></td>
+                                           <td><c:out value="${persona.tallaPantalonidTallaPantalon.numeroTallaPantalon}"/></td>
+                                           <td><c:out value="${persona.tallaPoleraCamisaidtallaPoleraCamisa.letraPoleraCamisa}"/></td>
+                                           <td><c:out value="${persona.tallaOberolidTallaOberol.letraTallaOberol}"/></td>
+                                           <td><c:out value="${persona.tallaZApatoidtallaZApato.numeroZapato}"/></td>
+
+                                           </tr>
+
+                                   </c:forEach>
+
+                                   </tbody>
+                               </table>
+                            </c:if>
+                            
+                            </div>
+                            </div>
+                            </div>
+                             <%--<p>Nombre trabajador<input class="form-control" type="text" name="txtNombre" disabled="true"></p>--%>
                             
                             <legend>Lista Epps a entregar</legend>
                             <div class="container">
@@ -120,7 +173,7 @@
                             <br><input type="button" id="borrador" value="Limpiar firma" />
                             <input type="submit" name="btnEntregar" value="Ingresar entrega">
 
-</form>
+
                             <div class="container">
                                 <div class="panel panel-default">
                                     <div class="panel-body">
@@ -224,6 +277,12 @@
                     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
                     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+            
+                    </c:when>
+            <c:otherwise>
+                <c:redirect url="Login.jsp"/>
+            </c:otherwise>
+           </c:choose>
                     </body>
 
                     </html>

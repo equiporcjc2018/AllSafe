@@ -61,4 +61,21 @@ public class PersonaSessionBean {
         }
         return infoPersonaEntidad;
     }
+    
+   
+    public List<Persona> buscaPersonaXRut2(String rut) {
+        try {
+                return em.createNamedQuery("Persona.findByRutPasaportePersona", Persona.class)
+                .setParameter("rutPasaportePersona", rut)
+                .getResultList();
+                
+            } catch (NoResultException ex) {
+                return null;
+            }catch(NonUniqueResultException ex)
+                {
+                    throw ex;
+                }
+        
+    }
+    
 }
