@@ -47,10 +47,38 @@
     <body onload="prepareCanvas();">
         <c:choose>
             <c:when test="${usuarioConectado!=null}">
+                
+                
         <jsp:include page="./registroEntregaEPP" flush="true"/>    
         <jsp:useBean id="persona" class="allSafe.Entities.Persona" scope="page"/>   
+        <!-- ============================================================== -->
+                <!-- main wrapper -->
+                <!-- ============================================================== -->
+                <div class="dashboard-main-wrapper">
+                    <!-- ============================================================== -->
+                    <!-- navbar -->
+                    <!-- ============================================================== -->
+                    <jsp:include page="/common/Header.jsp" flush="true"/>
+                    <!-- ============================================================== -->
+                    <!-- end navbar -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- left sidebar -->
+                    <!-- ============================================================== -->
+                    <jsp:include page="/common/Menu.jsp" flush="true"/>
+                    <!-- ============================================================== -->
+                    <!-- end left sidebar -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- wrapper  -->
+                    <!-- ============================================================== -->
         
-        
+                    <div class="dashboard-wrapper">
+                        <div class="container-fluid dashboard-content">
+                            <div class="row">
+
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    
         <div class="jumbotron text-center">
             <h1>Gestión EPP</h1>
             <p>Realiza entrega de EPP</p> 
@@ -106,7 +134,7 @@
 
                                    </tbody>
                                </table>
-                            </c:if>
+                            
                             
                             </div>
                             </div>
@@ -160,12 +188,12 @@
                                     <td><input type="text" name="cantZapato"></td>
                                 </table>
                             </div>
-                
+                </c:if>
                 </div>
             </div>
         </div>
 
-
+                        <c:if test="${infoPersona!=null}">   
 
 
                             <canvas id="canvasEjemplo" width="300" height="200"></canvas>
@@ -209,6 +237,8 @@
                                     </div>
                                 </div>
                             </div>
+                            </c:if>
+                            
                             <script>
 
                                 var miLienzo; // el canvas
@@ -277,7 +307,30 @@
                     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
                     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-            
+                    
+                     </div>
+
+
+                            </div>
+                        </div>
+                        <!-- ============================================================== -->
+                        <!-- footer -->
+                        <!-- ============================================================== -->
+                        <jsp:include page="Footer.jsp" flush="true"/> 
+                        <!-- ============================================================== -->
+                        <!-- end footer -->
+                        <!-- ============================================================== -->
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- end main wrapper -->
+                <!-- ============================================================== -->
+                <!-- Optional JavaScript -->
+                <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+                <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+                <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+                <script src="assets/libs/js/main-js.js"></script> 
+                    
                     </c:when>
             <c:otherwise>
                 <c:redirect url="Login.jsp"/>
