@@ -25,26 +25,16 @@
         </style>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/libs/css/style.css">
-    <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-    <link rel="stylesheet" href="assets/vendor/charts/chartist-bundle/chartist.css">
-    <link rel="stylesheet" href="assets/vendor/charts/morris-bundle/morris.css">
-    <link rel="stylesheet" href="assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
-    <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-        <title>GestionEPP</title>
-    
-    <link href="datatables/media/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
-    <script src="datatables/media/js/jquery.js" type="text/javascript"></script>
-    <script src="datatables/media/js/jquery.dataTables.js" type="text/javascript"></script>
-        
+        <title>AllSafe - Proceso</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+        <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/libs/css/style.css">
+        <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+
+        <link href="datatables/media/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+        <script src="datatables/media/js/jquery.js" type="text/javascript"></script>
+        <script src="datatables/media/js/jquery.dataTables.js" type="text/javascript"></script>
         <script>
             $(document).ready(function ()
             {
@@ -52,22 +42,30 @@
             });
         </script> 
         <script>
-            function pulsar(obj) {
-                if (!obj.checked)
-                    return
-                elem = document.getElementsByName(obj.name);
-                for (i = 0; i < elem.length; i++)
-                    elem[i].checked = false;
-                obj.checked = true;
-            }
-        </script>
+            $(document).ready(function ()
+            {
+                $('#persona').DataTable();
+            });
+        </script> 
+        <script>
+            $(document).ready(function ()
+            {
+                $('#epp').DataTable();
+            });
+        </script> 
+        <script>
+            $(document).ready(function ()
+            {
+                $('#eppproceso').DataTable();
+            });
+        </script> 
     </head>
 
 
 
     <body onload="prepareCanvas();">
         <c:choose>
-            <c:when test="${usuarioConectado!=null}">
+            <c:when test="${sessionScope.usuarioConectado!=null}">
                 
                 
         <jsp:include page="./registroEntregaEPP" flush="true"/>    
@@ -142,7 +140,9 @@
                             <!-- ============================================================== -->    
 
                             
-                            <c:if test="${infoPersona!=null}">   
+                            <%--<c:if test="${infoPersona!=null}">--%>
+                            <c:choose>
+                                <c:when test="${sessionScope.infoPersona!=null}">
                                 <table class="table table-bordered table-striped ">
                                    <thead>
                                        <tr>
@@ -175,7 +175,12 @@
 
                                    </tbody>
                                </table>
-                            
+                            </c:when>
+
+                                                            <c:otherwise>
+                                                                Favor ingresar un rut
+                                                            </c:otherwise>
+                                                        </c:choose>
                             
                             </div>
                             </div>
@@ -187,6 +192,9 @@
                             
                             <legend>Lista Epps a entregar</legend>
                             
+                            
+                            <div class="container-fluid dashboard-content">
+                            <div class="row">
                             <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
                                             <div class="card">
                                                 <h2 class="card-header">Seleccion de EPP</h2>
@@ -231,66 +239,13 @@
                                                                         </c:forEach>
                                                                     </tbody>
                                                                 </table>
-                                                            </c:when>
-
-                                                            <c:otherwise>
-                                                                No existen resultados
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                            <%--
-                            <div class="container">
-
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Overol</th>
-                                            <td>Cant.</td>
-                                            <th>Pantalón</th>
-                                            <td>Cant.</td>
-                                            <th>Polera</th>
-                                            <td>Cant.</td>
-                                            <th>Zapato</th>
-                                            <th>Cant.</th>
-                                        </tr>
-                                    </thead>
-
-                                    <td><select required name="ddlOberol">
-                                            <option value="">--Seleccione--</option>
-                                            <c:forEach items="${sessionScope.listaOberol}" var="oberol">
-                                                <option value="${oberol.idTallaOberol}"><c:out value="${oberol.letraTallaOberol} - ${oberol.numeroTallaOberol}" ></c:out></option>
-                                            </c:forEach>
-                                        </select></td>
-                                    <td><input type="text" name="cantOberol"></td>
-                                    <td><select required name="ddlPantalon">
-                                            <option value="">--Seleccione--</option>
-                                            <c:forEach items="${sessionScope.listaPantalon}" var="pantalon">
-                                                <option value="${pantalon.idTallaPantalon}"><c:out value="${pantalon.letraTallaPantalon} - ${pantalon.numeroTallaPantalon} " ></c:out></option>
-                                            </c:forEach>
-                                        </select></td>
-                                    <td><input type="text" name="cantPantalon"></td>
-                                    <td><select required name="ddlPolera">
-                                            <option value="">--Seleccione--</option>
-                                            <c:forEach items="${sessionScope.listaPolera}" var="polera">
-                                                <option value="${polera.idTallaPoleraCamisa}"><c:out value="${polera.letraPoleraCamisa}- ${polera.numeroPoleraCamisa}" ></c:out></option>
-                                            </c:forEach>
-                                        </select></td>
-                                    <td><input type="text" name="cantPolera"></td>
-                                    <td><select required name="ddlZapato">
-                                            <option value="">--Seleccione--</option>
-                                            <c:forEach items="${sessionScope.listaZapato}" var="zapato">
-                                                <option value="${zapato.idTallaZapato}"><c:out value="${zapato.numeroZapato}" ></c:out></option>
-                                            </c:forEach>
-                                        </select></td>
-                                    <td><input type="text" name="cantZapato"></td>
-                                </table>
-                            </div>
-                            --%>
-                            
-                            <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
+                                                                
+                                                                
+                                                                <br>
+                                                                <br>
+                                                                <br>
+                                                                
+                                                                <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
                                         <div class="card">
                                             <h2 class="card-header">Listado de EPP en Proceso</h2>
                                             <div class="card-body">
@@ -359,11 +314,7 @@
                                             </div>
                                         </div>
                                     </div> 
-               
-               
-
-                          
-
+                                                                
                             <div class="jumbotron text-center">
                             <p>Firma Recepción de EPP</p> 
         
@@ -372,6 +323,43 @@
                             <br><input type="button" id="borrador" value="Limpiar firma" />
                             <input type="submit" name="btnEntregar" value="Ingresar entrega">
                             </div>
+                                                                
+                                                                
+                                                                
+                                                                
+                                                            </c:when>
+
+                                                            <c:otherwise>
+                                                                No existen resultados
+                                                            </c:otherwise>
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                        </c:choose>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- footer -->
+                            <!-- ============================================================== -->
+                            <jsp:include page="Footer.jsp" flush="true"/> 
+                            <!-- ============================================================== -->
+                            <!-- end footer -->
+                            <!-- ============================================================== -->
+
+                            
+               
+               
+
+                          
+
+                            
                             
                             <%--
                             <div class="container">
@@ -477,7 +465,7 @@
                             
                             
                             
-                             </c:if>
+                            <%-- </c:if> --%>
                          </div>
             </div>
         </div>
