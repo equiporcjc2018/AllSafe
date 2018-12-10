@@ -128,6 +128,11 @@
 
 
                                                     <input class="btn btn-success btn-space" type="submit" name="btnGuardar" value="Registrar">
+                                                    <hr>
+                                                    <div class="form-group">
+                                                        <label for="exampleFormControlFile1">Llenar tabla Con Arrchivo CVS. o XLS</label>
+                                                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                                    </div>
                                                 </form>
                                                 <c:if test="${sessionScope.msg!=null}">
                                                     <c:out value="${msg}"></c:out>
