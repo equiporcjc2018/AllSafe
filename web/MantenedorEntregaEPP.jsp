@@ -64,11 +64,11 @@
 
     <body onload="prepareCanvas();">
         <c:choose>
-            
+
             <c:when test="${sessionScope.usuarioConectado!=null}">
 
-                
-                <jsp:include page="./registroEntregaEPP" flush="true"/>    
+
+
                 <jsp:useBean id="persona" class="allSafe.Entities.Persona" scope="page"/>
                 <jsp:include page="./listarPersonaServlet" flush="true"/>
                 <jsp:include page="./listarEppsServlet" flush="true"/>
@@ -77,7 +77,7 @@
                 <jsp:useBean id="tipoEpp" class="allSafe.Entities.Tipoepp" scope="page"/>
 
                 <jsp:include page="./listarEppProcesoServlet" flush="true"/>
-                <jsp:useBean id="eppproceso" class="allSafe.Entities.Eppterreno" scope="page"/>
+                <jsp:useBean id="eppproceso" class="allSafe.Entities.Eppproceso" scope="page"/>
                 <jsp:include page="./listarEppTerrenoServlet" flush="true"/>
                 <jsp:useBean id="eppterreno" class="allSafe.Entities.Eppterreno" scope="page"/>
                 <!-- ============================================================== -->
@@ -101,84 +101,84 @@
                     <!-- ============================================================== -->
                     <!-- wrapper  -->
                     <!-- ============================================================== -->
-                    <form name="frmBuscaColaborador" method="POST" action="./registroEntregaEPP">
-                    <div class="dashboard-wrapper">
-                        <div class="container-fluid dashboard-content">
-                            <div class="row">
+                    
+                        <div class="dashboard-wrapper">
+                            <div class="container-fluid dashboard-content">
+                                <div class="row">
 
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
-                                    <div class="container-fluid">
-                                        <div class="jumbotron text-center">
-                                            <h1>Gestión EPP</h1>
-                                            <p>Realiza entrega de EPP</p> 
-                                        </div>
+                                        <div class="container-fluid">
+                                            <div class="jumbotron text-center">
+                                                <h1>Gestión EPP</h1>
+                                                <p>Realiza entrega de EPP</p> 
+                                            </div>
 
-           
-                                                                <br>
-                                                                <br>
-                                                                <br>
-                                                                
-                                                                
-                                                                <c:if test="${sessionScope.usuarioConectado!=null}">
-                                                                 <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
-                                            <div class="card">
-                                                <h2 class="card-header">Seleccion de Persona</h2>
-                                                <div class="card-body">
 
-                                                    <div class="table-responsive">
-                                                        <c:choose>
-                                                            <c:when test="${sessionScope.listaTrabajadores!=null}">
-                                                                <table class="table table-striped table-bordered"  id="persona">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>rut</th>
-                                                                            <th>Nombre</th>
-                                                                            <th>Seleccion</th>
-                                                                        </tr> 
-                                                                    </thead>
-                                                                    <tfoot>
-                                                                        <tr>
-                                                                            <th>rut</th>
-                                                                            <th>Nombre</th>
-                                                                            <th>Seleccion</th>
-                                                                        </tr> 
-                                                                    </tfoot>
-                                                                    <tbody>
-                                                                        <c:forEach items="${sessionScope.listaTrabajadores}" var="persona">
-                                                                            <tr>
-                                                                                <td><c:out value="${persona.rutPasaportePersona}"/></td>
-                                                                                <td><c:out value="${persona.nombresPersona} ${persona.apePatPersona} ${persona.apePatPersona}"/></td>
-                                                                                <td>
-                                                                                    <div class="custom-control custom-radio">
-                                                                                        <input required type="radio" id="${persona.rutPasaportePersona}" name="rdbPersonaTerreno" value="${persona.rutPasaportePersona}" class="custom-control-input">
-                                                                                        <label class="custom-control-label" for="${persona.rutPasaportePersona}"></label>
-                                                                                    </div>
+                                            <br>
+                                            <br>
+                                            <br>
 
-                                                                                </td>
+<form name="frmBuscaColaborador" method="POST" action="./registroEntregaEPP">
 
-                                                                            </tr>
-                                                                        </c:forEach>
-                                                                    </tbody>
-                                                                </table>
-                                                            </c:when>
+                                                <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
+                                                    <div class="card">
+                                                        <h2 class="card-header">Seleccion de Persona</h2>
+                                                        <div class="card-body">
 
-                                                            <c:otherwise>
-                                                                No existen resultados
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                            <div class="table-responsive">
+                                                                <c:choose>
+                                                                    <c:when test="${sessionScope.listaTrabajadores!=null}">
+                                                                        <table class="table table-striped table-bordered"  id="persona">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>rut</th>
+                                                                                    <th>Nombre</th>
+                                                                                    <th>Seleccion</th>
+                                                                                </tr> 
+                                                                            </thead>
+                                                                            <tfoot>
+                                                                                <tr>
+                                                                                    <th>rut</th>
+                                                                                    <th>Nombre</th>
+                                                                                    <th>Seleccion</th>
+                                                                                </tr> 
+                                                                            </tfoot>
+                                                                            <tbody>
+                                                                                <c:forEach items="${sessionScope.listaTrabajadores}" var="persona">
+                                                                                    <tr>
+                                                                                        <td><c:out value="${persona.rutPasaportePersona}"/></td>
+                                                                                        <td><c:out value="${persona.nombresPersona} ${persona.apePatPersona} ${persona.apePatPersona}"/></td>
+                                                                                        <td>
+                                                                                            <div class="custom-control custom-radio">
+                                                                                                <input required type="radio" id="${persona.rutPasaportePersona}" name="rdbPersonaTerreno" value="${persona.rutPasaportePersona}" class="custom-control-input">
+                                                                                                <label class="custom-control-label" for="${persona.rutPasaportePersona}"></label>
+                                                                                            </div>
+
+                                                                                        </td>
+
+                                                                                    </tr>
+                                                                                </c:forEach>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </c:when>
+
+                                                                    <c:otherwise>
+                                                                        No existen resultados
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                                                                
-                                                                                
-                                                                                
-                                                                                
 
-                                                                                <br>
-                                                                                <br>
-                                                                                <br>
+
+
+
+
+                                                <br>
+                                                <br>
+                                                <br>
 
 
                                                 <%--<p>Nombre trabajador<input class="form-control" type="text" name="txtNombre" disabled="true"></p>--%>
@@ -194,11 +194,11 @@
                                                                 <div class="card-body">
 
                                                                     <div class="table-responsive">
-                                                                        
+
                                                                         <c:choose>
                                                                             <%--<c:when test="${sessionScope.listadoEpps!=null}">--%>
                                                                             <c:when test="${sessionScope.usuarioConectado!=null}">
-                                                                                
+
 
                                                                                 <table class="table table-striped table-bordered"  id="epp">
                                                                                     <thead>
@@ -235,25 +235,14 @@
                                                                                         </c:forEach>
                                                                                     </tbody>
                                                                                 </table>
-                                                                                
+
                                                                                 <p><input type="submit" class="btn btn-success btn-space" name="btnGuardar" value="Asignar"></p>
-                                                                                
+
                                                                                 <br>
                                                                                 <br>
                                                                                 <br>
                                                                                 
-                                                                               
-                                                                                
-                                                                                
-                                                                                
-                                                                                
-                                                                                
-                                                                                
-                                                                                
-                                                                                
-                                                                                
-                                                                                
-                                                                                
+
                                                                                 <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
                                                                                     <div class="card">
                                                                                         <h2 class="card-header">Listado de EPP Asociados </h2>
@@ -272,11 +261,11 @@
                                                                                                             <th>Rut del Trabajador</th>
                                                                                                             <th>Nombre Trabajador</th>
                                                                                                             <th>Talla EPP</th>
-                                                                                                            
+
                                                                                                             <th>Nombre EPP</th>
                                                                                                             <th>Cantidad</th>
-                                                                                                            
-                                                                                                            
+
+
                                                                                                             <th>Editar</th>
                                                                                                             <th>Eliminar</th>    
                                                                                                         </tr> 
@@ -289,11 +278,11 @@
                                                                                                             <th>Rut del Trabajador</th>
                                                                                                             <th>Nombre Trabajador</th>
                                                                                                             <th>Talla EPP</th>
-                                                                                                            
+
                                                                                                             <th>Nombre EPP</th>
                                                                                                             <th>Cantidad</th>
-                                                                                                            
-                                                                                                            
+
+
                                                                                                             <th>Editar</th>
                                                                                                             <th>Eliminar</th>
                                                                                                         </tr> 
@@ -308,10 +297,10 @@
                                                                                                                 <td><c:out value="${eppterreno.personarutPasaportePersona.nombresPersona} ${eppterreno.personarutPasaportePersona.apePatPersona} ${eppterreno.personarutPasaportePersona.apeMatPersona} "/></td>
                                                                                                                 <td><c:out value="${eppterreno.tallaEppTerreno}"/></td>
                                                                                                                 <td><c:out value="${eppterreno.EPPidEPP.nombreEPPcol}"/></td>
-                                                                                                                
+
                                                                                                                 <td><c:out value="${eppterreno.cantidadEppTerreno}"/></td>
-                                                                                                                
-                                                                                                                
+
+
                                                                                                                 <td><input type="button" class="btn btn-primary btn-space" name="btnEditar" value="Editar"/></td>
                                                                                                                 <td><input type="button" class="btn btn-secondary btn-space"  name="btnEliminar" value="Eliminar"/></td>
                                                                                                             </tr>
@@ -332,14 +321,14 @@
 
                                                                                     <canvas id="canvasEjemplo" width="300" height="200"></canvas>
                                                                                     <p>Firma recepción trabajador</p>
-                                                                                    
+
                                                                                     <input type="file" name="foto"/>
-                                                                                    
-                                                                                    
+
+
                                                                                     <br><input type="button" id="borrador" value="Limpiar firma" />
                                                                                     <input type="submit" name="btnEntregar" value="Ingresar entrega">
                                                                                 </div>
-                                                                               
+
 
                                                                                 <script>
 
@@ -424,6 +413,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+</form>
                                                 <!-- ============================================================== -->
                                                 <!-- footer -->
                                                 <!-- ============================================================== -->
@@ -451,37 +441,36 @@
 
 
                             </div>
-                        </div>
-                        <!-- ============================================================== -->
-                        <!-- footer -->
-                        <!-- ============================================================== -->
-                        <jsp:include page="Footer.jsp" flush="true"/> 
-                        <!-- ============================================================== -->
-                        <!-- end footer -->
-                        <!-- ============================================================== -->
                     </div>
-                        </c:if>
-                        </form>
+                    <!-- ============================================================== -->
+                    <!-- footer -->
+                    <!-- ============================================================== -->
+                    <jsp:include page="Footer.jsp" flush="true"/> 
+                    <!-- ============================================================== -->
+                    <!-- end footer -->
+                    <!-- ============================================================== -->
                 </div>
-                <!-- ============================================================== -->
-                <!-- end main wrapper -->
-                <!-- ============================================================== -->
-                <!-- Optional JavaScript -->
-                <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
-                <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-                <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
-                <script src="assets/libs/js/main-js.js"></script> 
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- end main wrapper -->
+    <!-- ============================================================== -->
+    <!-- Optional JavaScript -->
+    <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <script src="assets/libs/js/main-js.js"></script> 
 
 
 
-            </c:when>
+</c:when>
 
-            <c:otherwise>
-                <c:redirect url="Login.jsp"/>
-            </c:otherwise>
+<c:otherwise>
+    <c:redirect url="Login.jsp"/>
+</c:otherwise>
 
-        </c:choose>
+</c:choose>
 
 
-    </body>
+</body>
 </html>

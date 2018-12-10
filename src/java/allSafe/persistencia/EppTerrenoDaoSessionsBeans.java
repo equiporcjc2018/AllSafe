@@ -29,13 +29,20 @@ public class EppTerrenoDaoSessionsBeans {
     
     public void addEppTerreno(EppTerrenoProyectoEPPPErsonalDTO eppterrenoDTO) throws ControllerException {
         Eppterreno objEppterreno = new Eppterreno();
-        
-        objEppterreno.setProyectoidProyecto(eppterrenoDTO.getObjProyecto());
-        objEppterreno.setEPPidEPP(eppterrenoDTO.getObjEpp());
-        objEppterreno.setFechaEppTerreno(eppterrenoDTO.getObjEppterreno().getFechaEppTerreno());
+   
         objEppterreno.setPersonarutPasaportePersona(eppterrenoDTO.getObjPersona());
-        objEppterreno.setTallaEppTerreno(eppterrenoDTO.getObjEppterreno().getTallaEppTerreno());
+        objEppterreno.setFechaEppTerreno(eppterrenoDTO.getObjEppterreno().getFechaEppTerreno());
+        objEppterreno.setIdUsuario(eppterrenoDTO.getObjEppterreno().getIdUsuario());        
+        objEppterreno.setProyectoidProyecto(eppterrenoDTO.getObjProyecto());
+        objEppterreno.setEstadoEppTerreno(eppterrenoDTO.getObjEppterreno().getEstadoEppTerreno());
+        objEppterreno.setEPPidEPP(eppterrenoDTO.getObjEpp());       
         objEppterreno.setCantidadEppTerreno(eppterrenoDTO.getObjEppterreno().getCantidadEppTerreno());
+        objEppterreno.setTallaEppTerreno(eppterrenoDTO.getObjEppterreno().getTallaEppTerreno());
+        objEppterreno.setObservacionEppTerreno(eppterrenoDTO.getObjEppterreno().getObservacionEppTerreno());
+        objEppterreno.setFirmaEppTerreno(null);
+        objEppterreno.setTipoEntregaEppTerreno(eppterrenoDTO.getObjEppterreno().getTipoEntregaEppTerreno());
+        
+        
         
         em.persist(objEppterreno);
     }
