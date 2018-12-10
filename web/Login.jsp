@@ -43,12 +43,12 @@
         <!-- ============================================================== -->
         <div class="splash-container">
             <div class="card ">
-                <div class="card-header text-center"><a href="#"><img class="logo-img" src="assets/images/logo.png" alt="logo"></a>
-                    <span class="splash-description">Cambiar el Logo y este Titulo.</span></div>
+                <div class="card-header text-center"><a href="#"><img class="logo-img" style="width: 180px; height: 80px;" src="assets/images/fieldcore.png" alt="logo"></a>
+                    <span class="splash-description"></span></div>
                 <div class="card-body">
 
                     <form name="frmIngreso" class="form-signin" method="POST" action="./validaIngresobj" >
-                        <h2 class="form-signin-heading text-center">Ingreso al Sistema AllSafe RCV</h2>
+                        <h2 class="form-signin-heading text-center">Ingreso al Sistema AllSafe</h2>
                         <br/>
                         <label for="txtLogin" class="">Login de acceso</label>                    
                         <div class="form-group">
@@ -59,7 +59,7 @@
                         </div>
                         <div class="form-group">
                             <label class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox"><span class="custom-control-label">Remember Me</span>
+                                <input class="custom-control-input" type="checkbox"><span class="custom-control-label">Recordarme</span>
                             </label>
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Ingresar</button>
@@ -89,10 +89,9 @@
 
                 </div>
                 <div class="card-footer bg-white p-0  ">
+                    
                     <div class="card-footer-item card-footer-item-bordered">
-                        <a href="#" class="footer-link">Create An Account</a></div>
-                    <div class="card-footer-item card-footer-item-bordered">
-                        <a href="#" class="footer-link">Forgot Password</a>
+                        <a href="#" class="footer-link">Recuperar Contraseña</a>
                     </div>
                 </div>
             </div>

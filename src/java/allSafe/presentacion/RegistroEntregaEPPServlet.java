@@ -16,7 +16,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import allSafe.persistencia.PersonaDAOSessionBean;
 import allSafe.persistencia.TipoEppDAOSessionBean;
 import java.util.List;
 import javax.servlet.http.HttpSession;
