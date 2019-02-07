@@ -29,12 +29,14 @@ public class ProyectoDAOSessionBean {
     public void guardarProyecto (ProyectoCiudadEmpresaDTO pceDTO) throws ControllerException
     {
         Proyecto objProyecto = new Proyecto();
+        objProyecto.setNumeroProyecto(pceDTO.getObjProyecto().getNumeroProyecto());
         objProyecto.setNombreProyecto(pceDTO.getObjProyecto().getNombreProyecto());
         objProyecto.setUbicacionProyecto(pceDTO.getObjProyecto().getUbicacionProyecto());
         objProyecto.setFechaInicioProyecto(pceDTO.getObjProyecto().getFechaInicioProyecto());
         objProyecto.setFechaTerminoProyecto(pceDTO.getObjProyecto().getFechaTerminoProyecto());
         objProyecto.setCiudadidCiudad(pceDTO.getObjCiudad());
         objProyecto.setEmpresaidEmpresa(pceDTO.getObjEmpresa());
+        objProyecto.setVigenteproyecto(pceDTO.getObjProyecto().getVigenteproyecto());
         em.persist(objProyecto);
     }
     

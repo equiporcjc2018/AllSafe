@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author hachi
+ * @author rcv
  */
 @Stateless
 public class EppDAOSessionBean {
@@ -30,11 +30,27 @@ public class EppDAOSessionBean {
 
     }
     
+    public List<Epp> getAllEppEstandar(int estandar) throws ControllerException
+    {
+        return em.createNamedQuery("Epp.findByTipoEPP", Epp.class)
+                .setParameter("tipoEPPidTipoEPP", estandar)
+                .getResultList();
+    }
+    
+    public List<Epp> getAllEppNoEstandar(int noEstandar) throws ControllerException
+    {
+        Epp objEpp = null;
+        return em.createNamedQuery("Epp.findByTipoEPP", Epp.class)
+                .setParameter("tipoEPPidTipoEPP", noEstandar)
+                .getResultList();
+    }
+    
     public void addEpp(EppTipoEppDTO eppTipoEppDTO) throws ControllerException {
         Epp objEpp = new Epp();
         objEpp.setNombreEPPcol(eppTipoEppDTO.getObjEpp().getNombreEPPcol());
         objEpp.setDescripcionEPP(eppTipoEppDTO.getObjEpp().getDescripcionEPP());
         objEpp.setTipoEPPidTipoEPP(eppTipoEppDTO.getObjTipoepp());
+        objEpp.setVigenteepp(eppTipoEppDTO.getObjEpp().getVigenteepp());
         em.persist(objEpp);
     }
     
@@ -50,5 +66,36 @@ public class EppDAOSessionBean {
             throw  ex;
         }
         return infoEppEntidad;
+    }
+    
+    public Epp buscaEppXcodigo(int codigoFormato){
+        return  em.createNamedQuery("Epp.findByIdEPP",Epp.class)
+                .setParameter("idEPP", codigoFormato)
+                .getSingleResult();
+    }
+    
+    
+    public void updateVigenteEpp(Epp epp)
+    {
+        Epp infoEpp = new Epp();
+        String vigente = epp.getVigenteepp();
+        if (vigente.equals("Si")) 
+        {
+            infoEpp.setIdEPP(epp.getIdEPP());
+            infoEpp.setNombreEPPcol(epp.getNombreEPPcol());
+            infoEpp.setDescripcionEPP(epp.getDescripcionEPP());
+            infoEpp.setTipoEPPidTipoEPP(epp.getTipoEPPidTipoEPP());
+            infoEpp.setVigenteepp("No");
+        }
+        else
+        {
+            infoEpp.setIdEPP(epp.getIdEPP());
+            infoEpp.setNombreEPPcol(epp.getNombreEPPcol());
+            infoEpp.setDescripcionEPP(epp.getDescripcionEPP());
+            infoEpp.setTipoEPPidTipoEPP(epp.getTipoEPPidTipoEPP());
+            infoEpp.setVigenteepp("Si");
+        }
+        
+        em.merge(infoEpp);
     }
 }

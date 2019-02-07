@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f5a5211b-36ed-451d-adbd-3d0aca59d425">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     *,
+     eppterreno.`idEppTerreno` AS eppterreno_idEppTerreno,
+     eppterreno.`Persona_rutPasaportePersona` AS eppterreno_Persona_rutPasaportePersona,
+     eppterreno.`fechaEppTerreno` AS eppterreno_fechaEppTerreno,
+     eppterreno.`idUsuario` AS eppterreno_idUsuario,
+     eppterreno.`Proyecto_idProyecto` AS eppterreno_Proyecto_idProyecto,
+     eppterreno.`EstadoEppTerreno` AS eppterreno_EstadoEppTerreno,
+     eppterreno.`EPP_idEPP` AS eppterreno_EPP_idEPP,
+     eppterreno.`CantidadEppTerreno` AS eppterreno_CantidadEppTerreno,
+     eppterreno.`TallaEppTerreno` AS eppterreno_TallaEppTerreno,
+     eppterreno.`observacionEppTerreno` AS eppterreno_observacionEppTerreno,
+     eppterreno.`firmaEppTerreno` AS eppterreno_firmaEppTerreno,
+     eppterreno.`tipoEntregaEppTerreno` AS eppterreno_tipoEntregaEppTerreno
+FROM
+     `persona` persona INNER JOIN `eppterreno` eppterreno ON persona.`rutPasaportePersona` = eppterreno.`Persona_rutPasaportePersona`]]>
+	</queryString>
+	<field name="rutPasaportePersona" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombresPersona" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apePatPersona" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apeMatPersona" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="eppterreno_idEppTerreno" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="2" width="552" height="77" uuid="325450e7-6fcb-407e-81e4-979531121815"/>
+				<text><![CDATA[Reporte EPP]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="111" height="20" uuid="2f83d85d-56c1-49ed-bddb-081621da917a"/>
+				<text><![CDATA[eppterreno_idEppTerreno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="0" width="111" height="20" uuid="275ef2ba-d425-480c-bd2e-fddc540074f0"/>
+				<text><![CDATA[rutPasaportePersona]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="111" height="20" uuid="58625028-1b0b-4e10-97f2-9720cc4a8f9a"/>
+				<text><![CDATA[nombresPersona]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="0" width="111" height="20" uuid="c5738e7b-db3d-4972-b819-39f55a83e7ba"/>
+				<text><![CDATA[apePatPersona]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="444" y="0" width="111" height="20" uuid="fa476090-bf14-44b1-91f3-263e6b91deb4"/>
+				<text><![CDATA[apeMatPersona]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="111" height="20" uuid="7856bf5a-ce9f-4fd4-92fe-b9a3139f3ef2"/>
+				<textFieldExpression><![CDATA[$F{eppterreno_idEppTerreno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="0" width="111" height="20" uuid="7d5acd70-b296-4b9a-9f3d-228793c485e2"/>
+				<textFieldExpression><![CDATA[$F{rutPasaportePersona}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="0" width="111" height="20" uuid="e9e502e3-452c-4f18-8602-17f59de2f60c"/>
+				<textFieldExpression><![CDATA[$F{nombresPersona}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="0" width="111" height="20" uuid="df55f62a-86ed-4185-bdfa-37782fd2bfa3"/>
+				<textFieldExpression><![CDATA[$F{apePatPersona}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="0" width="111" height="20" uuid="db6ba388-2e34-422e-9de1-ad1dd23cfce4"/>
+				<textFieldExpression><![CDATA[$F{apeMatPersona}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

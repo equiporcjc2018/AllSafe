@@ -5,7 +5,7 @@
  */
 package allSafe.persistencia;
 
-import allSafe.Entities.Eppproceso;
+import allSafe.Entities.Asignaeppaproyecto;
 import allSafe.dto.EppProcesoProyectoEPPPersonaEstadoProyectoDTO;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -22,26 +22,26 @@ public class EppProcesoDaoSessionBeans {
     @PersistenceContext
     EntityManager em;
     
-    public List<Eppproceso> getAllEppProceso() throws ControllerException{
+    public List<Asignaeppaproyecto> getAllEppProceso() throws ControllerException{
         
-        return em.createNamedQuery("Eppproceso.findAll", Eppproceso.class).getResultList();
+        return em.createNamedQuery("Asignaeppaproyecto.findAll", Asignaeppaproyecto.class).getResultList();
 
     }
     
     public void addEppProceso(EppProcesoProyectoEPPPersonaEstadoProyectoDTO eppepppepDTO) throws ControllerException {
-        Eppproceso objEppproceso = new Eppproceso();
+        Asignaeppaproyecto objEppproceso = new Asignaeppaproyecto();
         
         objEppproceso.setProyectoidProyecto(eppepppepDTO.getObjProyecto());
-        objEppproceso.setEPPidEPP(eppepppepDTO.getObjEpp());
-        objEppproceso.setFechaCreacionEppProceso(eppepppepDTO.getObjEppproceso().getFechaCreacionEppProceso());
-        objEppproceso.setPersonarutPasaportePersona(eppepppepDTO.getObjPersona());
-        objEppproceso.setTallaEppProceso(eppepppepDTO.getObjEppproceso().getTallaEppProceso());
-        objEppproceso.setUnidadEppProceso(eppepppepDTO.getObjEppproceso().getUnidadEppProceso());
-        objEppproceso.setCantidadEppProceso(eppepppepDTO.getObjEppproceso().getCantidadEppProceso());
-        objEppproceso.setPrecioUnitarioEppProceso(eppepppepDTO.getObjEppproceso().getPrecioUnitarioEppProceso());
-        objEppproceso.setDestinoDevolucionEppProceso(eppepppepDTO.getObjEppproceso().getDestinoDevolucionEppProceso());
-        objEppproceso.setMotivoEppProceso(eppepppepDTO.getObjEppproceso().getMotivoEppProceso());
-        objEppproceso.setEstadosProyectoidEstadosProyecto(eppepppepDTO.getObjEstadosproyecto());
+        objEppproceso.setEppidEPP(eppepppepDTO.getObjEpp());
+        //objEppproceso.setFechaCreacionEppProceso(eppepppepDTO.getObjEppproceso().getFechaCreacionEppProceso());
+        //objEppproceso.setIdasignaeppaproyecto(eppepppepDTO.getObjPersona());
+        //objEppproceso.setTallaEppProceso(eppepppepDTO.getObjEppproceso().getTallaEppProceso());
+        //objEppproceso.setUnidadEppProceso(eppepppepDTO.getObjEppproceso().getUnidadEppProceso());
+        //objEppproceso.setCantidadEppProceso(eppepppepDTO.getObjEppproceso().getCantidadEppProceso());
+        //objEppproceso.setPrecioUnitarioEppProceso(eppepppepDTO.getObjEppproceso().getPrecioUnitarioEppProceso());
+        //objEppproceso.setDestinoDevolucionEppProceso(eppepppepDTO.getObjEppproceso().getDestinoDevolucionEppProceso());
+        //objEppproceso.setMotivoEppProceso(eppepppepDTO.getObjEppproceso().getMotivoEppProceso());
+        //objEppproceso.setEstadosProyectoidEstadosProyecto(eppepppepDTO.getObjEstadosproyecto());
         em.persist(objEppproceso);
     }
     

@@ -6,7 +6,7 @@
 package allSafe.presentacion;
 
 import allSafe.Entities.Epp;
-import allSafe.Entities.Eppproceso;
+import allSafe.Entities.Asignaeppaproyecto;
 import allSafe.Entities.Estadosproyecto;
 import allSafe.Entities.Persona;
 import allSafe.Entities.Proyecto;

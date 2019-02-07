@@ -23,23 +23,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author hachi
+ * @author Ruben
  */
 @Entity
-@Table(name = "eppproceso")
+@Table(name = "asignacantidadepp")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Eppproceso.findAll", query = "SELECT e FROM Eppproceso e")
-    , @NamedQuery(name = "Eppproceso.findByIdEppProceso", query = "SELECT e FROM Eppproceso e WHERE e.idEppProceso = :idEppProceso")
-    , @NamedQuery(name = "Eppproceso.findByFechaCreacionEppProceso", query = "SELECT e FROM Eppproceso e WHERE e.fechaCreacionEppProceso = :fechaCreacionEppProceso")
-    , @NamedQuery(name = "Eppproceso.findByTallaEppProceso", query = "SELECT e FROM Eppproceso e WHERE e.tallaEppProceso = :tallaEppProceso")
-    , @NamedQuery(name = "Eppproceso.findByUnidadEppProceso", query = "SELECT e FROM Eppproceso e WHERE e.unidadEppProceso = :unidadEppProceso")
-    , @NamedQuery(name = "Eppproceso.findByCantidadEppProceso", query = "SELECT e FROM Eppproceso e WHERE e.cantidadEppProceso = :cantidadEppProceso")
-    , @NamedQuery(name = "Eppproceso.findByPrecioUnitarioEppProceso", query = "SELECT e FROM Eppproceso e WHERE e.precioUnitarioEppProceso = :precioUnitarioEppProceso")
-    , @NamedQuery(name = "Eppproceso.findByDestinoDevolucionEppProceso", query = "SELECT e FROM Eppproceso e WHERE e.destinoDevolucionEppProceso = :destinoDevolucionEppProceso")
-    , @NamedQuery(name = "Eppproceso.findByMotivoEppProceso", query = "SELECT e FROM Eppproceso e WHERE e.motivoEppProceso = :motivoEppProceso")
-    , @NamedQuery(name = "Eppproceso.findByUsuarioEppProceso", query = "SELECT e FROM Eppproceso e WHERE e.usuarioEppProceso = :usuarioEppProceso")})
-public class Eppproceso implements Serializable {
+    @NamedQuery(name = "Asignacantidadepp.findAll", query = "SELECT a FROM Asignacantidadepp a")
+    , @NamedQuery(name = "Asignacantidadepp.findByIdEppProceso", query = "SELECT a FROM Asignacantidadepp a WHERE a.idEppProceso = :idEppProceso")
+    , @NamedQuery(name = "Asignacantidadepp.findByCantidad", query = "SELECT c.nombreProyecto,SUM(a.cantidadEppProceso) FROM Asignacantidadepp a, Asignaeppaproyecto b,Proyecto c GROUP BY b.proyectoidProyecto")
+    , @NamedQuery(name = "Asignacantidadepp.findByFechaCreacionEppProceso", query = "SELECT a FROM Asignacantidadepp a WHERE a.fechaCreacionEppProceso = :fechaCreacionEppProceso")
+    , @NamedQuery(name = "Asignacantidadepp.findByTallaEppProceso", query = "SELECT a FROM Asignacantidadepp a WHERE a.tallaEppProceso = :tallaEppProceso")
+    , @NamedQuery(name = "Asignacantidadepp.findByUnidadEppProceso", query = "SELECT a FROM Asignacantidadepp a WHERE a.unidadEppProceso = :unidadEppProceso")
+    , @NamedQuery(name = "Asignacantidadepp.findByCantidadEppProceso", query = "SELECT a FROM Asignacantidadepp a WHERE a.cantidadEppProceso = :cantidadEppProceso")
+    , @NamedQuery(name = "Asignacantidadepp.findByIdEpp", query = "SELECT a FROM Asignacantidadepp a WHERE a.asignaeppaproyectoIdasignaeppaproyecto.eppidEPP.idEPP = :asignaeppaproyectoIdasignaeppaproyecto")
+    , @NamedQuery(name = "AsignacantidadeppGrafico.findByIdEpp", query = "SELECT a FROM Asignacantidadepp a WHERE a.asignaeppaproyectoIdasignaeppaproyecto.eppidEPP.idEPP = :asignaeppaproyectoIdasignaeppaproyecto")
+    , @NamedQuery(name = "Asignacantidadepp.findByPrecioUnitarioEppProceso", query = "SELECT a FROM Asignacantidadepp a WHERE a.precioUnitarioEppProceso = :precioUnitarioEppProceso")})
+public class Asignacantidadepp implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -63,55 +63,36 @@ public class Eppproceso implements Serializable {
     private int unidadEppProceso;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "cantidadEppProceso")
-    private String cantidadEppProceso;
+    private Number cantidadEppProceso;
     @Basic(optional = false)
     @NotNull
     @Column(name = "precioUnitarioEppProceso")
     private int precioUnitarioEppProceso;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "destinoDevolucionEppProceso")
-    private String destinoDevolucionEppProceso;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "motivoEppProceso")
-    private String motivoEppProceso;
-    @Size(max = 45)
-    @Column(name = "usuarioEppProceso")
-    private String usuarioEppProceso;
-    @JoinColumn(name = "EPP_idEPP", referencedColumnName = "idEPP")
-    @ManyToOne(optional = false)
-    private Epp ePPidEPP;
     @JoinColumn(name = "EstadosProyecto_idEstadosProyecto", referencedColumnName = "idEstadosProyecto")
     @ManyToOne(optional = false)
     private Estadosproyecto estadosProyectoidEstadosProyecto;
-    @JoinColumn(name = "Persona_rutPasaportePersona", referencedColumnName = "rutPasaportePersona")
+    @JoinColumn(name = "asignaeppaproyecto_idasignaeppaproyecto", referencedColumnName = "idasignaeppaproyecto")
     @ManyToOne(optional = false)
-    private Persona personarutPasaportePersona;
-    @JoinColumn(name = "Proyecto_idProyecto", referencedColumnName = "idProyecto")
+    private Asignaeppaproyecto asignaeppaproyectoIdasignaeppaproyecto;
+    @JoinColumn(name = "tipodecarga_idtipodecarga", referencedColumnName = "idtipodecarga")
     @ManyToOne(optional = false)
-    private Proyecto proyectoidProyecto;
+    private Tipodecarga tipodecargaIdtipodecarga;
 
-    public Eppproceso() {
+    public Asignacantidadepp() {
     }
 
-    public Eppproceso(Integer idEppProceso) {
+    public Asignacantidadepp(Integer idEppProceso) {
         this.idEppProceso = idEppProceso;
     }
 
-    public Eppproceso(Integer idEppProceso, String fechaCreacionEppProceso, String tallaEppProceso, int unidadEppProceso, String cantidadEppProceso, int precioUnitarioEppProceso, String destinoDevolucionEppProceso, String motivoEppProceso) {
+    public Asignacantidadepp(Integer idEppProceso, String fechaCreacionEppProceso, String tallaEppProceso, int unidadEppProceso, int cantidadEppProceso, int precioUnitarioEppProceso) {
         this.idEppProceso = idEppProceso;
         this.fechaCreacionEppProceso = fechaCreacionEppProceso;
         this.tallaEppProceso = tallaEppProceso;
         this.unidadEppProceso = unidadEppProceso;
         this.cantidadEppProceso = cantidadEppProceso;
         this.precioUnitarioEppProceso = precioUnitarioEppProceso;
-        this.destinoDevolucionEppProceso = destinoDevolucionEppProceso;
-        this.motivoEppProceso = motivoEppProceso;
     }
 
     public Integer getIdEppProceso() {
@@ -146,11 +127,11 @@ public class Eppproceso implements Serializable {
         this.unidadEppProceso = unidadEppProceso;
     }
 
-    public String getCantidadEppProceso() {
+    public Number getCantidadEppProceso() {
         return cantidadEppProceso;
     }
 
-    public void setCantidadEppProceso(String cantidadEppProceso) {
+    public void setCantidadEppProceso(Number cantidadEppProceso) {
         this.cantidadEppProceso = cantidadEppProceso;
     }
 
@@ -162,38 +143,6 @@ public class Eppproceso implements Serializable {
         this.precioUnitarioEppProceso = precioUnitarioEppProceso;
     }
 
-    public String getDestinoDevolucionEppProceso() {
-        return destinoDevolucionEppProceso;
-    }
-
-    public void setDestinoDevolucionEppProceso(String destinoDevolucionEppProceso) {
-        this.destinoDevolucionEppProceso = destinoDevolucionEppProceso;
-    }
-
-    public String getMotivoEppProceso() {
-        return motivoEppProceso;
-    }
-
-    public void setMotivoEppProceso(String motivoEppProceso) {
-        this.motivoEppProceso = motivoEppProceso;
-    }
-
-    public String getUsuarioEppProceso() {
-        return usuarioEppProceso;
-    }
-
-    public void setUsuarioEppProceso(String usuarioEppProceso) {
-        this.usuarioEppProceso = usuarioEppProceso;
-    }
-
-    public Epp getEPPidEPP() {
-        return ePPidEPP;
-    }
-
-    public void setEPPidEPP(Epp ePPidEPP) {
-        this.ePPidEPP = ePPidEPP;
-    }
-
     public Estadosproyecto getEstadosProyectoidEstadosProyecto() {
         return estadosProyectoidEstadosProyecto;
     }
@@ -202,20 +151,20 @@ public class Eppproceso implements Serializable {
         this.estadosProyectoidEstadosProyecto = estadosProyectoidEstadosProyecto;
     }
 
-    public Persona getPersonarutPasaportePersona() {
-        return personarutPasaportePersona;
+    public Asignaeppaproyecto getAsignaeppaproyectoIdasignaeppaproyecto() {
+        return asignaeppaproyectoIdasignaeppaproyecto;
     }
 
-    public void setPersonarutPasaportePersona(Persona personarutPasaportePersona) {
-        this.personarutPasaportePersona = personarutPasaportePersona;
+    public void setAsignaeppaproyectoIdasignaeppaproyecto(Asignaeppaproyecto asignaeppaproyectoIdasignaeppaproyecto) {
+        this.asignaeppaproyectoIdasignaeppaproyecto = asignaeppaproyectoIdasignaeppaproyecto;
     }
 
-    public Proyecto getProyectoidProyecto() {
-        return proyectoidProyecto;
+    public Tipodecarga getTipodecargaIdtipodecarga() {
+        return tipodecargaIdtipodecarga;
     }
 
-    public void setProyectoidProyecto(Proyecto proyectoidProyecto) {
-        this.proyectoidProyecto = proyectoidProyecto;
+    public void setTipodecargaIdtipodecarga(Tipodecarga tipodecargaIdtipodecarga) {
+        this.tipodecargaIdtipodecarga = tipodecargaIdtipodecarga;
     }
 
     @Override
@@ -228,10 +177,10 @@ public class Eppproceso implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Eppproceso)) {
+        if (!(object instanceof Asignacantidadepp)) {
             return false;
         }
-        Eppproceso other = (Eppproceso) object;
+        Asignacantidadepp other = (Asignacantidadepp) object;
         if ((this.idEppProceso == null && other.idEppProceso != null) || (this.idEppProceso != null && !this.idEppProceso.equals(other.idEppProceso))) {
             return false;
         }
@@ -240,7 +189,7 @@ public class Eppproceso implements Serializable {
 
     @Override
     public String toString() {
-        return "allSafe.Entities.Eppproceso[ idEppProceso=" + idEppProceso + " ]";
+        return "allSafe.Entities.Asignacantidadepp[ idEppProceso=" + idEppProceso + " ]";
     }
     
 }

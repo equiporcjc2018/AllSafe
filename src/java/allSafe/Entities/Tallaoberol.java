@@ -8,7 +8,6 @@ package allSafe.Entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author hachi
+ * @author Ruben
  */
 @Entity
 @Table(name = "tallaoberol")
@@ -52,7 +51,7 @@ public class Tallaoberol implements Serializable {
     @Size(min = 1, max = 3)
     @Column(name = "letraTallaOberol")
     private String letraTallaOberol;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tallaOberolidTallaOberol")
+    @OneToMany(mappedBy = "tallaOberolidTallaOberol")
     private List<Persona> personaList;
 
     public Tallaoberol() {

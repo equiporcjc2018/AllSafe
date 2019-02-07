@@ -5,7 +5,7 @@
  */
 package allSafe.presentacion;
 
-import allSafe.Entities.Eppproceso;
+import allSafe.Entities.Asignaeppaproyecto;
 import allSafe.persistencia.ControllerException;
 import allSafe.persistencia.EppProcesoDaoSessionBeans;
 import java.io.IOException;
@@ -34,7 +34,7 @@ public class ListarEppProcesoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion= request.getSession();
-        List<Eppproceso>listadoEppProceso;
+        List<Asignaeppaproyecto>listadoEppProceso;
         try {
             listadoEppProceso = objEppProcesoDaoSessionBeans.getAllEppProceso();
             sesion.setAttribute("listadoEppProceso", listadoEppProceso);

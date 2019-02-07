@@ -18,8 +18,9 @@
         <link rel="stylesheet" href="assets/libs/css/style.css">
         <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
 
-        <link href="datatables/media/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
         <script src="datatables/media/js/jquery.js" type="text/javascript"></script>
+        <link href="datatables/media/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+        
         <script src="datatables/media/js/jquery.dataTables.js" type="text/javascript"></script>
         <script>
             $(document).ready(function ()
@@ -220,6 +221,11 @@
                                                                             <th>Descripcion</th>
                                                                             <th>Tipo</th>
                                                                             <th>Seleccion</th>
+                                                                            <th>Talla</th>
+                                                                            <th>Unidad</th>
+                                                                            <th>Cantidad</th>
+                                                                            <th>Precio</th>
+                                                                            
                                                                         </tr> 
                                                                     </thead>
                                                                     <tfoot>
@@ -228,6 +234,11 @@
                                                                             <th>Descripcion</th>
                                                                             <th>Tipo</th>
                                                                             <th>Seleccion</th>
+                                                                            <th>Talla</th>
+                                                                            <th>Unidad</th>
+                                                                            <th>Cantidad</th>
+                                                                            <th>Precio</th>
+                                                                            
                                                                         </tr> 
                                                                     </tfoot>
                                                                     <tbody>
@@ -237,12 +248,17 @@
                                                                                 <td><c:out value="${epp.descripcionEPP}"/></td>
                                                                                 <td><c:out value="${epp.tipoEPPidTipoEPP.descripcionTipoEPP}"/></td>
                                                                                 <td>
-                                                                                    <div class="custom-control custom-radio">
-                                                                                        <input required type="radio" id="EPP${epp.idEPP}" name="rdbEpp" value="${epp.idEPP}" class="custom-control-input">
+                                                                                    <div class="custom-control custom-checkbox">
+                                                                                        <input  type="checkbox" id="EPP${epp.idEPP}" name="rdbEpp" value="${epp.idEPP}" class="custom-control-input">
                                                                                         <label class="custom-control-label" for="EPP${epp.idEPP}"></label>
+                                                                                        
                                                                                     </div>
 
                                                                                 </td>
+                                                                                <td><input id="txtTallaProceso" name="txtTallaProceso" type="text" class="form-control"></td>
+                                                                                <td><input id="txtUnidadProceso" name="txtUnidadProceso" type="text" class="form-control"></td>
+                                                                                <td><input id="txtCantidadProceso" name="txtCantidadProceso" type="text" class="form-control"></td>
+                                                                                <td><input id="txtPrecioUnitarioProceso" name="txtPrecioUnitarioProceso" type="text" class="form-control"></td>
                                                                            
                                                                             </tr>
                                                                         </c:forEach>
@@ -328,12 +344,13 @@
                                                                         <th>Nombre Proyecto</th>
                                                                         <th>Estado Del Proyecto</th>
                                                                         <th>Nombre Trabajador</th>
+                                                                        <th>Nombre EPP</th>
                                                                         <th>Talla EPP</th>
                                                                         <th>Unidad EPP</th>
                                                                         <th>Cantidad</th>
                                                                         <th>Precio Unitario</th>
                                                                         <th>Destino Devolucion</th>
-                                                                        <th>Motivido</th>
+                                                                        <th>Motivo</th>
                                                                         <th>Editar</th>
                                                                         <th>Eliminar</th>      
                                                                     </tr> 
@@ -344,12 +361,13 @@
                                                                         <th>Nombre Proyecto</th>
                                                                         <th>Estado Del Proyecto</th>
                                                                         <th>Nombre Trabajador</th>
+                                                                        <th>Nombre EPP</th>
                                                                         <th>Talla EPP</th>
                                                                         <th>Unidad EPP</th>
                                                                         <th>Cantidad</th>
                                                                         <th>Precio Unitario</th>
                                                                         <th>Destino Devolucion</th>
-                                                                        <th>Motivido</th>
+                                                                        <th>Motivo</th>
                                                                         <th>Editar</th>
                                                                         <th>Eliminar</th>
                                                                     </tr> 
@@ -361,6 +379,7 @@
                                                                             <td><c:out value="${eppproceso.proyectoidProyecto.nombreProyecto}"/></td>
                                                                             <td><c:out value="${eppproceso.estadosProyectoidEstadosProyecto.descripcionEstadosProyecto}"/></td>
                                                                             <td><c:out value="${eppproceso.personarutPasaportePersona.nombresPersona} ${eppproceso.personarutPasaportePersona.apePatPersona} ${eppproceso.personarutPasaportePersona.apeMatPersona} "/></td>
+                                                                            <td><c:out value="${eppproceso.EPPidEPP.nombreEPPcol}"/></td>
                                                                             <td><c:out value="${eppproceso.tallaEppProceso}"/></td>
                                                                             <td><c:out value="${eppproceso.unidadEppProceso}"/></td>
                                                                             <td><c:out value="${eppproceso.cantidadEppProceso}"/></td>

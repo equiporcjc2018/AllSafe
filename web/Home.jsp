@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
         <link rel="stylesheet" href="assets/vendor/charts/morris-bundle/morris.css">
         <title>AllSafe - Home</title>
+        
+       
     </head>
 
     <body>
@@ -72,7 +74,7 @@
                                     <div class="card">
                                         <h5 class="card-header">Proyectos</h5>
                                         <div class="card-body">
-                                            <div id="morris_donut"></div>
+                                            <div id="morris_donut2"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -88,7 +90,7 @@
                                     <div class="card">
                                         <h5 class="card-header">EPP</h5>
                                         <div class="card-body">
-                                            <div id="morris_bar"></div>
+                                            <div id="morris_bar2"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +104,7 @@
                                     <div class="card">
                                         <h5 class="card-header">Inventario EPP</h5>
                                         <div class="card-body">
-                                            <div id="morris_stacked"></div>
+                                            <div id="morris_stacked2"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -110,8 +112,42 @@
                                 <!--end stacked chart  -->
                                 <!-- ============================================================== -->
                             </div>
-
-
+                            
+                            
+                            
+                            
+                                <!-- ============================================================== -->
+                                <!-- ============================================================== -->
+                                <!--Prueba otro grafico  -->
+                                <!-- ============================================================== -->
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="card">
+                                        <h2 class="card-header">Cantidad de EPP por Proyecto</h2>
+                                        <h5 class="card-header">Cantidad EPP </h5>
+                                        <div class="card-body">
+                                            <div id="morris_bar"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="card">
+                                        <h2 class="card-header">Cantidad de Trabajadores por Proyecto</h2>
+                                        <h5 class="card-header">Cantidad Trabajador </h5>
+                                        <div class="card-body">
+                                            <div id="morris_donut"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
+                            
+                                
+                                
+                                
+                                
+                                
                         </div>
                         <!-- ============================================================== -->
                         <!-- footer -->

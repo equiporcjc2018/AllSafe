@@ -6,7 +6,7 @@
 package allSafe.presentacion;
 
 import allSafe.Entities.Epp;
-import allSafe.Entities.Eppproceso;
+import allSafe.Entities.Asignaeppaproyecto;
 import allSafe.Entities.Estadosproyecto;
 import allSafe.Entities.Persona;
 import allSafe.Entities.Proyecto;
@@ -60,13 +60,14 @@ public class RegistroEppProcesoServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
         EppProcesoProyectoEPPPersonaEstadoProyectoDTO objEppepppepDTO = new EppProcesoProyectoEPPPersonaEstadoProyectoDTO();
-        Eppproceso objEppproceso = new Eppproceso();
+        Asignaeppaproyecto objEppproceso = new Asignaeppaproyecto();
         Proyecto objProyecto = new Proyecto();
         Persona objPersona = new Persona();
         Epp objEpp = new Epp();
         Estadosproyecto objEstadosproyecto = new Estadosproyecto();
         try {
             
+                        
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	    Date date = new Date();
             
@@ -74,7 +75,17 @@ public class RegistroEppProcesoServlet extends HttpServlet {
             
             String proyecto = request.getParameter("rdbProyecto");
             String persona = request.getParameter("rdbPersona");
-            String epp = request.getParameter("rdbEpp");
+            //String epp = request.getParameter("rdbEpp");
+            String epp = "";
+            String [] epp2 = request.getParameterValues("rdbEpp");
+            //String [] talla2 = request.getParameterValues("txtTallaProceso");
+            
+            
+            //String eppBd="";
+            //for(int i=0; i<epp2.length;i++){
+            //eppBd=eppBd+epp2[i];
+            //}
+            
             String estadoProyecto = request.getParameter("ddlEstadoProyecto");
             
             String talla = request.getParameter("txtTallaProceso");
@@ -86,16 +97,20 @@ public class RegistroEppProcesoServlet extends HttpServlet {
 
             if (!(fecha == null || proyecto == null || persona == null || epp == null || estadoProyecto == null || talla == null || cantidad == null || precio == null || destinoDevolucion == null || motivo == null || unidad == null )) {
                 
+                epp="";
+                for(int i=0; i<epp2.length;i++){
+                epp = epp2[i];
+                //talla = talla2[i];
                 objProyecto = objProyectoDAOSessionBean.buscaProyectoXID(Integer.parseInt(proyecto));
                 objEpp = objEppDAOSessionBean.buscaEppXID(Integer.parseInt(epp));
-                objEppproceso.setFechaCreacionEppProceso(fecha);
+                //objEppproceso.setFechaCreacionEppProceso(fecha);
                 objPersona = objPersonaSessionBean.buscaPersonaXRut(persona);
-                objEppproceso.setTallaEppProceso(talla);
-                objEppproceso.setUnidadEppProceso(Integer.parseInt(unidad));
-                objEppproceso.setCantidadEppProceso(cantidad);
-                objEppproceso.setPrecioUnitarioEppProceso(Integer.parseInt(precio));
-                objEppproceso.setDestinoDevolucionEppProceso(destinoDevolucion);
-                objEppproceso.setMotivoEppProceso(motivo);
+                //objEppproceso.setTallaEppProceso(talla);
+                //objEppproceso.setUnidadEppProceso(Integer.parseInt(unidad));
+                //objEppproceso.setCantidadEppProceso(cantidad);
+                //objEppproceso.setPrecioUnitarioEppProceso(Integer.parseInt(precio));
+                //objEppproceso.setDestinoDevolucionEppProceso(destinoDevolucion);
+                //objEppproceso.setMotivoEppProceso(motivo);
                 objEstadosproyecto = objEstadoProyectoDAOSessionBeans.buscaEstadosproyectoXID(Integer.parseInt(estadoProyecto));
                 objEppepppepDTO.setObjEppproceso(objEppproceso);
                 objEppepppepDTO.setObjProyecto(objProyecto);
@@ -104,6 +119,8 @@ public class RegistroEppProcesoServlet extends HttpServlet {
                 objEppepppepDTO.setObjEstadosproyecto(objEstadosproyecto);
                 objEppProcesoDaoSessionBeans.addEppProceso(objEppepppepDTO);
                 sesion.setAttribute("Exito", "EPP Proceso Agregado Correctamente");
+                }
+                
                 response.sendRedirect("MantenedorProcesoEPP.jsp");
                 
             }else{

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="726001c1-5216-4d27-a8d1-76ebaaec6fd6">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="10"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Rut" class="java.lang.String">
+		<parameterDescription><![CDATA[Pasar Rut]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     epp.`idEPP` AS epp_idEPP,
+     epp.`nombreEPPcol` AS epp_nombreEPPcol,
+     epp.`descripcionEPP` AS epp_descripcionEPP,
+     epp.`TipoEPP_idTipoEPP` AS epp_TipoEPP_idTipoEPP,
+     eppterreno.`idEppTerreno` AS eppterreno_idEppTerreno,
+     eppterreno.`Persona_rutPasaportePersona` AS eppterreno_Persona_rutPasaportePersona,
+     eppterreno.`fechaEppTerreno` AS eppterreno_fechaEppTerreno,
+     eppterreno.`idUsuario` AS eppterreno_idUsuario,
+     eppterreno.`Proyecto_idProyecto` AS eppterreno_Proyecto_idProyecto,
+     eppterreno.`EstadoEppTerreno` AS eppterreno_EstadoEppTerreno,
+     eppterreno.`EPP_idEPP` AS eppterreno_EPP_idEPP,
+     eppterreno.`CantidadEppTerreno` AS eppterreno_CantidadEppTerreno,
+     eppterreno.`TallaEppTerreno` AS eppterreno_TallaEppTerreno,
+     eppterreno.`observacionEppTerreno` AS eppterreno_observacionEppTerreno,
+     eppterreno.`firmaEppTerreno` AS eppterreno_firmaEppTerreno,
+     eppterreno.`tipoEntregaEppTerreno` AS eppterreno_tipoEntregaEppTerreno,
+     persona.`rutPasaportePersona` AS persona_rutPasaportePersona,
+     persona.`nombresPersona` AS persona_nombresPersona,
+     persona.`apePatPersona` AS persona_apePatPersona,
+     persona.`apeMatPersona` AS persona_apeMatPersona,
+     persona.`fechaNacPersona` AS persona_fechaNacPersona,
+     persona.`nacionalidadPersona` AS persona_nacionalidadPersona,
+     persona.`TipoPlanta_idTipoPlanta` AS persona_TipoPlanta_idTipoPlanta,
+     persona.`correoPersona` AS persona_correoPersona,
+     persona.`Cargo_idCargo` AS persona_Cargo_idCargo,
+     persona.`tallaZApato_idtallaZApato` AS persona_tallaZApato_idtallaZApato,
+     persona.`tallaPoleraCamisa_idtallaPoleraCamisa` AS persona_tallaPoleraCamisa_idtallaPoleraCamisa,
+     persona.`TallaPantalon_idTallaPantalon` AS persona_TallaPantalon_idTallaPantalon,
+     persona.`TallaOberol_idTallaOberol` AS persona_TallaOberol_idTallaOberol
+FROM
+     `epp` epp LEFT OUTER JOIN `eppterreno` eppterreno ON epp.`idEPP` = eppterreno.`EPP_idEPP`
+     INNER JOIN `persona` persona ON eppterreno.`Persona_rutPasaportePersona` = persona.`rutPasaportePersona`
+Where
+eppterreno.`Persona_rutPasaportePersona` = $P{Rut}]]>
+	</queryString>
+	<field name="epp_idEPP" class="java.lang.Integer"/>
+	<field name="epp_nombreEPPcol" class="java.lang.String"/>
+	<field name="epp_descripcionEPP" class="java.lang.String"/>
+	<field name="epp_TipoEPP_idTipoEPP" class="java.lang.Integer"/>
+	<field name="eppterreno_idEppTerreno" class="java.lang.Integer"/>
+	<field name="eppterreno_Persona_rutPasaportePersona" class="java.lang.String"/>
+	<field name="eppterreno_fechaEppTerreno" class="java.lang.String"/>
+	<field name="eppterreno_idUsuario" class="java.lang.Integer"/>
+	<field name="eppterreno_Proyecto_idProyecto" class="java.lang.Integer"/>
+	<field name="eppterreno_EstadoEppTerreno" class="java.lang.String"/>
+	<field name="eppterreno_EPP_idEPP" class="java.lang.Integer"/>
+	<field name="eppterreno_CantidadEppTerreno" class="java.lang.Integer"/>
+	<field name="eppterreno_TallaEppTerreno" class="java.lang.String"/>
+	<field name="eppterreno_observacionEppTerreno" class="java.lang.String"/>
+	<field name="eppterreno_firmaEppTerreno" class="java.lang.Object"/>
+	<field name="eppterreno_tipoEntregaEppTerreno" class="java.lang.String"/>
+	<field name="persona_rutPasaportePersona" class="java.lang.String"/>
+	<field name="persona_nombresPersona" class="java.lang.String"/>
+	<field name="persona_apePatPersona" class="java.lang.String"/>
+	<field name="persona_apeMatPersona" class="java.lang.String"/>
+	<field name="persona_fechaNacPersona" class="java.lang.String"/>
+	<field name="persona_nacionalidadPersona" class="java.lang.String"/>
+	<field name="persona_TipoPlanta_idTipoPlanta" class="java.lang.Integer"/>
+	<field name="persona_correoPersona" class="java.lang.String"/>
+	<field name="persona_Cargo_idCargo" class="java.lang.Integer"/>
+	<field name="persona_tallaZApato_idtallaZApato" class="java.lang.Integer"/>
+	<field name="persona_tallaPoleraCamisa_idtallaPoleraCamisa" class="java.lang.Integer"/>
+	<field name="persona_TallaPantalon_idTallaPantalon" class="java.lang.Integer"/>
+	<field name="persona_TallaOberol_idTallaOberol" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="553" height="79" uuid="a95a40c0-5a08-4ff5-a20a-6bbf790a0ddc"/>
+				<imageExpression><![CDATA["C:\\Users\\Ruben\\Documents\\Inventos\\03 AllSafe\\09 Codigo\\23.12.2018\\AllSafe\\web\\assets\\images\\fieldcore.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="89" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="345a3dcd-1715-4076-845c-4fa626f6a286"/>
+				<textFieldExpression><![CDATA[$F{persona_rutPasaportePersona}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="23" width="100" height="20" uuid="95a774ff-9d2a-48e7-9f8c-a921736a16e1"/>
+				<textFieldExpression><![CDATA[$F{persona_nombresPersona}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="43" width="100" height="20" uuid="0906d891-d012-4a06-9602-f63123fecb4d"/>
+				<textFieldExpression><![CDATA[$F{persona_apePatPersona}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="63" width="100" height="20" uuid="76541830-7d00-479e-9b41-fd1b9d650f30"/>
+				<textFieldExpression><![CDATA[$F{persona_apeMatPersona}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="376" y="0" width="179" height="20" uuid="7f5c226f-d922-452c-bcba-8e50c7e014e7"/>
+				<textFieldExpression><![CDATA[DATEFORMAT(NOW(),"d' de 'MMMM' de 'yyyy.hh:mm:ss")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="307" y="0" width="69" height="20" uuid="e92f30bd-a48d-4d99-843a-fdb743be5957"/>
+				<text><![CDATA[Fecha reporte :]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="79" height="20" uuid="16590957-9b7d-4999-85b8-f541541fd8d7"/>
+				<text><![CDATA[Id EPP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="79" y="0" width="79" height="20" uuid="6c96f8e9-88ee-43ee-afec-9e0c1ed8a92d"/>
+				<text><![CDATA[Nombre EPP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="0" width="79" height="20" uuid="ef2bcec3-86f3-4ef5-b33a-02fc2175638b"/>
+				<text><![CDATA[Descripcion EPP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="237" y="0" width="79" height="20" uuid="c6af700c-b80a-41f5-92f0-ed45d8b467e6"/>
+				<text><![CDATA[Talla Zapato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="0" width="79" height="20" uuid="d4734ed2-ad14-4c64-a1f2-ce2858b0d6b2"/>
+				<text><![CDATA[Talla Polera]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="0" width="79" height="20" uuid="70cb9498-0c67-40c5-b994-2aa9e1fa4a24"/>
+				<text><![CDATA[Talla Pantalon]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="474" y="0" width="79" height="20" uuid="7687accd-e6ee-4053-ac43-af70a995f1c3"/>
+				<text><![CDATA[Talla Oberol]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="79" height="20" uuid="832480e4-55b1-488f-bd47-0ce815bbd312"/>
+				<textFieldExpression><![CDATA[$F{epp_idEPP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="0" width="79" height="20" uuid="c532c284-fe75-4fc4-bb08-dcdcef82f58e"/>
+				<textFieldExpression><![CDATA[$F{epp_nombreEPPcol}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="158" y="0" width="79" height="20" uuid="0e1f15d6-a7ae-44e2-abb9-1ad974992ae5"/>
+				<textFieldExpression><![CDATA[$F{epp_descripcionEPP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="237" y="0" width="79" height="20" uuid="c5ce1277-7e50-4cb7-8323-03e4102ac7d0"/>
+				<textFieldExpression><![CDATA[$F{persona_tallaZApato_idtallaZApato}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="316" y="0" width="79" height="20" uuid="d430ebdc-bac1-4170-85c5-39ea217be27d"/>
+				<textFieldExpression><![CDATA[$F{persona_tallaPoleraCamisa_idtallaPoleraCamisa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="0" width="79" height="20" uuid="74b06a60-0dee-42ee-be4c-8589b215b400"/>
+				<textFieldExpression><![CDATA[$F{persona_TallaPantalon_idTallaPantalon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="474" y="0" width="79" height="20" uuid="8581c6fe-d401-4795-9fed-dacd0ff28a10"/>
+				<textFieldExpression><![CDATA[$F{persona_TallaOberol_idTallaOberol}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="c19bc5f5-ebc4-4de8-8f8f-b489d2a9475b"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

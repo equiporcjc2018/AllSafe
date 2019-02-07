@@ -55,9 +55,11 @@ public class RegistroEppServlet extends HttpServlet {
             String nombre = request.getParameter("txtnombre");
             String descripcion = request.getParameter("txtDescripcion");
             String tipoEpp = request.getParameter("RDBtipoEPP");
+            String vigente = "Si";
             if (!(nombre == null || descripcion == null ||tipoEpp == null )) {
                 objEpp.setNombreEPPcol(nombre);
                 objEpp.setDescripcionEPP(descripcion);
+                objEpp.setVigenteepp(vigente);
                 objTipoepp = objTipoEppDAOSessionBean.buscaTipoEPPXID(Integer.parseInt(tipoEpp));
                 objEppTipoEppDTO.setObjEpp(objEpp);
                 objEppTipoEppDTO.setObjTipoepp(objTipoepp);

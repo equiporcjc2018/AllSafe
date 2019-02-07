@@ -36,9 +36,11 @@ public class ListarEppsServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession sesion= request.getSession();
-        List<Epp>listadoEpps;
+        List<Epp>listadoEpps = null;
         try {
-            listadoEpps = objEppDAOSessionBean.getAllEpps();
+            //String vigente = "Si";
+            int estandar = 1;
+            listadoEpps = objEppDAOSessionBean.getAllEppEstandar(estandar);
             sesion.setAttribute("listadoEpps", listadoEpps);
         } catch (ControllerException ex) {
             Logger.getLogger(ListarEppsServlet.class.getName()).log(Level.SEVERE, null, ex);

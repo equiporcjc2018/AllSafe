@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author hachi
+ * @author Ruben
  */
 @Entity
 @Table(name = "persona")
@@ -33,12 +33,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
     , @NamedQuery(name = "Persona.findByRutPasaportePersona", query = "SELECT p FROM Persona p WHERE p.rutPasaportePersona = :rutPasaportePersona")
+    , @NamedQuery(name = "Persona.findByEmployeeId", query = "SELECT p FROM Persona p WHERE p.employeeId = :employeeId")
     , @NamedQuery(name = "Persona.findByNombresPersona", query = "SELECT p FROM Persona p WHERE p.nombresPersona = :nombresPersona")
     , @NamedQuery(name = "Persona.findByApePatPersona", query = "SELECT p FROM Persona p WHERE p.apePatPersona = :apePatPersona")
     , @NamedQuery(name = "Persona.findByApeMatPersona", query = "SELECT p FROM Persona p WHERE p.apeMatPersona = :apeMatPersona")
     , @NamedQuery(name = "Persona.findByFechaNacPersona", query = "SELECT p FROM Persona p WHERE p.fechaNacPersona = :fechaNacPersona")
     , @NamedQuery(name = "Persona.findByNacionalidadPersona", query = "SELECT p FROM Persona p WHERE p.nacionalidadPersona = :nacionalidadPersona")
-    , @NamedQuery(name = "Persona.findByCorreoPersona", query = "SELECT p FROM Persona p WHERE p.correoPersona = :correoPersona")})
+    , @NamedQuery(name = "Persona.findByCorreoPersona", query = "SELECT p FROM Persona p WHERE p.correoPersona = :correoPersona")
+    , @NamedQuery(name = "Persona.findByVigentepersona", query = "SELECT p FROM Persona p WHERE p.vigentepersona = :vigentepersona")})
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,6 +50,8 @@ public class Persona implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "rutPasaportePersona")
     private String rutPasaportePersona;
+    @Column(name = "EmployeeId")
+    private Integer employeeId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -78,30 +82,35 @@ public class Persona implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "correoPersona")
     private String correoPersona;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 2)
+    @Column(name = "vigentepersona")
+    private String vigentepersona;
     @JoinColumn(name = "Cargo_idCargo", referencedColumnName = "idCargo")
     @ManyToOne(optional = false)
     private Cargo cargoidCargo;
     @JoinColumn(name = "TallaOberol_idTallaOberol", referencedColumnName = "idTallaOberol")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Tallaoberol tallaOberolidTallaOberol;
     @JoinColumn(name = "TallaPantalon_idTallaPantalon", referencedColumnName = "idTallaPantalon")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Tallapantalon tallaPantalonidTallaPantalon;
     @JoinColumn(name = "TipoPlanta_idTipoPlanta", referencedColumnName = "idTipoPlanta")
     @ManyToOne(optional = false)
     private Tipoplanta tipoPlantaidTipoPlanta;
     @JoinColumn(name = "tallaPoleraCamisa_idtallaPoleraCamisa", referencedColumnName = "idTallaPoleraCamisa")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Tallapoleracamisa tallaPoleraCamisaidtallaPoleraCamisa;
     @JoinColumn(name = "tallaZApato_idtallaZApato", referencedColumnName = "idTallaZapato")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Tallazapato tallaZApatoidtallaZApato;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personarutPasaportePersona")
     private List<Eppterreno> eppterrenoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personarutPasaportePersona")
     private List<Usuarioallsafe> usuarioallsafeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personarutPasaportePersona")
-    private List<Eppproceso> eppprocesoList;
+    private List<Asignatrabajadorproyecto> asignatrabajadorproyectoList;
 
     public Persona() {
     }
@@ -110,7 +119,7 @@ public class Persona implements Serializable {
         this.rutPasaportePersona = rutPasaportePersona;
     }
 
-    public Persona(String rutPasaportePersona, String nombresPersona, String apePatPersona, String apeMatPersona, String fechaNacPersona, String nacionalidadPersona, String correoPersona) {
+    public Persona(String rutPasaportePersona, String nombresPersona, String apePatPersona, String apeMatPersona, String fechaNacPersona, String nacionalidadPersona, String correoPersona, String vigentepersona) {
         this.rutPasaportePersona = rutPasaportePersona;
         this.nombresPersona = nombresPersona;
         this.apePatPersona = apePatPersona;
@@ -118,6 +127,7 @@ public class Persona implements Serializable {
         this.fechaNacPersona = fechaNacPersona;
         this.nacionalidadPersona = nacionalidadPersona;
         this.correoPersona = correoPersona;
+        this.vigentepersona = vigentepersona;
     }
 
     public String getRutPasaportePersona() {
@@ -126,6 +136,14 @@ public class Persona implements Serializable {
 
     public void setRutPasaportePersona(String rutPasaportePersona) {
         this.rutPasaportePersona = rutPasaportePersona;
+    }
+
+    public Integer getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getNombresPersona() {
@@ -174,6 +192,14 @@ public class Persona implements Serializable {
 
     public void setCorreoPersona(String correoPersona) {
         this.correoPersona = correoPersona;
+    }
+
+    public String getVigentepersona() {
+        return vigentepersona;
+    }
+
+    public void setVigentepersona(String vigentepersona) {
+        this.vigentepersona = vigentepersona;
     }
 
     public Cargo getCargoidCargo() {
@@ -243,12 +269,12 @@ public class Persona implements Serializable {
     }
 
     @XmlTransient
-    public List<Eppproceso> getEppprocesoList() {
-        return eppprocesoList;
+    public List<Asignatrabajadorproyecto> getAsignatrabajadorproyectoList() {
+        return asignatrabajadorproyectoList;
     }
 
-    public void setEppprocesoList(List<Eppproceso> eppprocesoList) {
-        this.eppprocesoList = eppprocesoList;
+    public void setAsignatrabajadorproyectoList(List<Asignatrabajadorproyecto> asignatrabajadorproyectoList) {
+        this.asignatrabajadorproyectoList = asignatrabajadorproyectoList;
     }
 
     @Override

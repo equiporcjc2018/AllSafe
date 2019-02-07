@@ -55,17 +55,21 @@ public class AgregarProyectoServlet extends HttpServlet {
         Ciudad objCiudad = new Ciudad();
         Empresa objEmpresa = new Empresa();
         try {
+            int numProy = Integer.parseInt(request.getParameter("txtNumProyecto"));
             String nombre = request.getParameter("txtNombreProyecto");
             String ubicacion = request.getParameter("txtUbicacion");
             String fechaIn = request.getParameter("txtFechaInicio");
             String fechaTer= request.getParameter("txtFechaTermino");
             String ciudad= request.getParameter("ddlCiudad");
             String empresa= request.getParameter("ddlEmpresa");
+            String vigenteProy = "Si";
             if (!(nombre == null || ubicacion == null ||fechaIn == null ||fechaTer == null ||ciudad == null ||empresa == null )) {
+                objProyecto.setNumeroProyecto(numProy);
                 objProyecto.setNombreProyecto(nombre);
                 objProyecto.setUbicacionProyecto(ubicacion);
                 objProyecto.setFechaInicioProyecto(fechaIn);
                 objProyecto.setFechaTerminoProyecto(fechaTer);
+                objProyecto.setVigenteproyecto(vigenteProy);
                 objCiudad = objCiudadDAOSessionBean.buscaCiudadXID(Integer.parseInt(ciudad));
                 objEmpresa = objEmpresaDAOSessionBean.buscaEmpresaXID(Integer.parseInt(empresa));
                 objPCEDTO.setObjProyecto(objProyecto);

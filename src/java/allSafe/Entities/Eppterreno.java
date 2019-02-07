@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author hachi
+ * @author Ruben
  */
 @Entity
 @Table(name = "eppterreno")
@@ -75,6 +75,8 @@ public class Eppterreno implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "observacionEppTerreno")
     private String observacionEppTerreno;
+    @Basic(optional = false)
+    @NotNull
     @Lob
     @Column(name = "firmaEppTerreno")
     private byte[] firmaEppTerreno;
@@ -100,7 +102,7 @@ public class Eppterreno implements Serializable {
         this.idEppTerreno = idEppTerreno;
     }
 
-    public Eppterreno(Integer idEppTerreno, String fechaEppTerreno, int idUsuario, String estadoEppTerreno, int cantidadEppTerreno, String tallaEppTerreno, String observacionEppTerreno, String tipoEntregaEppTerreno) {
+    public Eppterreno(Integer idEppTerreno, String fechaEppTerreno, int idUsuario, String estadoEppTerreno, int cantidadEppTerreno, String tallaEppTerreno, String observacionEppTerreno, byte[] firmaEppTerreno, String tipoEntregaEppTerreno) {
         this.idEppTerreno = idEppTerreno;
         this.fechaEppTerreno = fechaEppTerreno;
         this.idUsuario = idUsuario;
@@ -108,6 +110,7 @@ public class Eppterreno implements Serializable {
         this.cantidadEppTerreno = cantidadEppTerreno;
         this.tallaEppTerreno = tallaEppTerreno;
         this.observacionEppTerreno = observacionEppTerreno;
+        this.firmaEppTerreno = firmaEppTerreno;
         this.tipoEntregaEppTerreno = tipoEntregaEppTerreno;
     }
 

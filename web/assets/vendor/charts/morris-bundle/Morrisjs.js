@@ -53,29 +53,27 @@
 
         }
 
-        if ($('#morris_bar').length) {
+       if ($('#morris_bar').length) {
+           var testData = $.get("dataGraficoServlet", function(data, status){
+                  
+           var coche = JSON.stringify(testData,null,'\t');   
+           //console.log(coche);   
+               // alert("Data aca: " + data + "\nStatus: " + status + coche);
+                
             Morris.Bar({
                 element: 'morris_bar',
-                data: [
-                    { x: '2011 Q1', y: 0 },
-                    { x: '2011 Q2', y: 1 },
-                    { x: '2011 Q3', y: 2 },
-                    { x: '2011 Q4', y: 3 },
-                    { x: '2012 Q1', y: 4 },
-                    { x: '2012 Q2', y: 5 },
-                    { x: '2012 Q3', y: 6 },
-                    { x: '2012 Q4', y: 7 },
-                    { x: '2013 Q1', y: 8 }
-                ],
-                xkey: 'x',
-                ykeys: ['y'],
-                labels: ['Y'],
-                   barColors: ['#5969ff'],
-                     resize: true,
-                        gridTextSize: '14px'
+                data: data,
+                xkey: 'nombre',
+                ykeys: ['cantidad'],
+                labels: ['cantidad'],
+                barColors: ['#5969ff'],
+                resize: true,
+                gridTextSize: '14px'
 
             });
+            }); 
         }
+        
 
 
         if ($('#morris_stacked').length) {
@@ -140,12 +138,13 @@
         if ($('#morris_donut').length) {
             Morris.Donut({
                 element: 'morris_donut',
+                
                 data: [
-                    { value: 70, label: 'foo' },
-                    { value: 15, label: 'bar' },
-                    { value: 10, label: 'baz' },
-                    { value: 5, label: 'A really really long label' }
-                ],
+                        {label: "Candelaria", value: 30},
+                        {label: "Nueva Aldea", value: 15},
+                        {label: "Rancagua", value: 45},
+                        {label: "Otra", value: 10}
+                      ],
              
                 labelColor: '#2e2f39',
                    gridTextSize: '14px',

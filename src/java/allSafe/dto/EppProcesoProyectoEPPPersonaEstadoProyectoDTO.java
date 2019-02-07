@@ -6,7 +6,7 @@
 package allSafe.dto;
 
 import allSafe.Entities.Epp;
-import allSafe.Entities.Eppproceso;
+import allSafe.Entities.Asignaeppaproyecto;
 import allSafe.Entities.Estadosproyecto;
 import allSafe.Entities.Persona;
 import allSafe.Entities.Proyecto;
@@ -18,7 +18,7 @@ import java.io.Serializable;
  */
 public class EppProcesoProyectoEPPPersonaEstadoProyectoDTO implements Serializable{
     
-    private Eppproceso objEppproceso;
+    private Asignaeppaproyecto objEppproceso;
     private Proyecto objProyecto;
     private Epp objEpp;
     private Persona objPersona;
@@ -27,7 +27,7 @@ public class EppProcesoProyectoEPPPersonaEstadoProyectoDTO implements Serializab
     public EppProcesoProyectoEPPPersonaEstadoProyectoDTO() {
     }
 
-    public EppProcesoProyectoEPPPersonaEstadoProyectoDTO(Eppproceso objEppproceso, Proyecto objProyecto, Epp objEpp, Persona objPersona, Estadosproyecto objEstadosproyecto) {
+    public EppProcesoProyectoEPPPersonaEstadoProyectoDTO(Asignaeppaproyecto objEppproceso, Proyecto objProyecto, Epp objEpp, Persona objPersona, Estadosproyecto objEstadosproyecto) {
         this.objEppproceso = objEppproceso;
         this.objProyecto = objProyecto;
         this.objEpp = objEpp;
@@ -35,11 +35,11 @@ public class EppProcesoProyectoEPPPersonaEstadoProyectoDTO implements Serializab
         this.objEstadosproyecto = objEstadosproyecto;
     }
 
-    public Eppproceso getObjEppproceso() {
+    public Asignaeppaproyecto getObjEppproceso() {
         return objEppproceso;
     }
 
-    public void setObjEppproceso(Eppproceso objEppproceso) {
+    public void setObjEppproceso(Asignaeppaproyecto objEppproceso) {
         this.objEppproceso = objEppproceso;
     }
 

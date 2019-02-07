@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author hachi
+ * @author Ruben
  */
 @Entity
 @Table(name = "proyecto")
@@ -35,10 +35,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Proyecto.findAll", query = "SELECT p FROM Proyecto p")
     , @NamedQuery(name = "Proyecto.findByIdProyecto", query = "SELECT p FROM Proyecto p WHERE p.idProyecto = :idProyecto")
+    , @NamedQuery(name = "Proyecto.findByNumeroProyecto", query = "SELECT p FROM Proyecto p WHERE p.numeroProyecto = :numeroProyecto")
     , @NamedQuery(name = "Proyecto.findByNombreProyecto", query = "SELECT p FROM Proyecto p WHERE p.nombreProyecto = :nombreProyecto")
     , @NamedQuery(name = "Proyecto.findByUbicacionProyecto", query = "SELECT p FROM Proyecto p WHERE p.ubicacionProyecto = :ubicacionProyecto")
     , @NamedQuery(name = "Proyecto.findByFechaInicioProyecto", query = "SELECT p FROM Proyecto p WHERE p.fechaInicioProyecto = :fechaInicioProyecto")
-    , @NamedQuery(name = "Proyecto.findByFechaTerminoProyecto", query = "SELECT p FROM Proyecto p WHERE p.fechaTerminoProyecto = :fechaTerminoProyecto")})
+    , @NamedQuery(name = "Proyecto.findByFechaTerminoProyecto", query = "SELECT p FROM Proyecto p WHERE p.fechaTerminoProyecto = :fechaTerminoProyecto")
+    , @NamedQuery(name = "Proyecto.findByVigenteproyecto", query = "SELECT p FROM Proyecto p WHERE p.vigenteproyecto = :vigenteproyecto")})
 public class Proyecto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,6 +49,10 @@ public class Proyecto implements Serializable {
     @Basic(optional = false)
     @Column(name = "idProyecto")
     private Integer idProyecto;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "numeroProyecto")
+    private int numeroProyecto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
@@ -67,8 +73,15 @@ public class Proyecto implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "fechaTerminoProyecto")
     private String fechaTerminoProyecto;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 2)
+    @Column(name = "vigenteproyecto")
+    private String vigenteproyecto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyectoidProyecto")
     private List<Eppterreno> eppterrenoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyectoidProyecto")
+    private List<Asignaeppaproyecto> asignaeppaproyectoList;
     @JoinColumn(name = "Ciudad_idCiudad", referencedColumnName = "idCiudad")
     @ManyToOne(optional = false)
     private Ciudad ciudadidCiudad;
@@ -78,7 +91,7 @@ public class Proyecto implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyectoidProyecto")
     private List<Eppsolicitudterreno> eppsolicitudterrenoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyectoidProyecto")
-    private List<Eppproceso> eppprocesoList;
+    private List<Asignatrabajadorproyecto> asignatrabajadorproyectoList;
 
     public Proyecto() {
     }
@@ -87,12 +100,14 @@ public class Proyecto implements Serializable {
         this.idProyecto = idProyecto;
     }
 
-    public Proyecto(Integer idProyecto, String nombreProyecto, String ubicacionProyecto, String fechaInicioProyecto, String fechaTerminoProyecto) {
+    public Proyecto(Integer idProyecto, int numeroProyecto, String nombreProyecto, String ubicacionProyecto, String fechaInicioProyecto, String fechaTerminoProyecto, String vigenteproyecto) {
         this.idProyecto = idProyecto;
+        this.numeroProyecto = numeroProyecto;
         this.nombreProyecto = nombreProyecto;
         this.ubicacionProyecto = ubicacionProyecto;
         this.fechaInicioProyecto = fechaInicioProyecto;
         this.fechaTerminoProyecto = fechaTerminoProyecto;
+        this.vigenteproyecto = vigenteproyecto;
     }
 
     public Integer getIdProyecto() {
@@ -101,6 +116,14 @@ public class Proyecto implements Serializable {
 
     public void setIdProyecto(Integer idProyecto) {
         this.idProyecto = idProyecto;
+    }
+
+    public int getNumeroProyecto() {
+        return numeroProyecto;
+    }
+
+    public void setNumeroProyecto(int numeroProyecto) {
+        this.numeroProyecto = numeroProyecto;
     }
 
     public String getNombreProyecto() {
@@ -135,6 +158,14 @@ public class Proyecto implements Serializable {
         this.fechaTerminoProyecto = fechaTerminoProyecto;
     }
 
+    public String getVigenteproyecto() {
+        return vigenteproyecto;
+    }
+
+    public void setVigenteproyecto(String vigenteproyecto) {
+        this.vigenteproyecto = vigenteproyecto;
+    }
+
     @XmlTransient
     public List<Eppterreno> getEppterrenoList() {
         return eppterrenoList;
@@ -142,6 +173,15 @@ public class Proyecto implements Serializable {
 
     public void setEppterrenoList(List<Eppterreno> eppterrenoList) {
         this.eppterrenoList = eppterrenoList;
+    }
+
+    @XmlTransient
+    public List<Asignaeppaproyecto> getAsignaeppaproyectoList() {
+        return asignaeppaproyectoList;
+    }
+
+    public void setAsignaeppaproyectoList(List<Asignaeppaproyecto> asignaeppaproyectoList) {
+        this.asignaeppaproyectoList = asignaeppaproyectoList;
     }
 
     public Ciudad getCiudadidCiudad() {
@@ -170,12 +210,12 @@ public class Proyecto implements Serializable {
     }
 
     @XmlTransient
-    public List<Eppproceso> getEppprocesoList() {
-        return eppprocesoList;
+    public List<Asignatrabajadorproyecto> getAsignatrabajadorproyectoList() {
+        return asignatrabajadorproyectoList;
     }
 
-    public void setEppprocesoList(List<Eppproceso> eppprocesoList) {
-        this.eppprocesoList = eppprocesoList;
+    public void setAsignatrabajadorproyectoList(List<Asignatrabajadorproyecto> asignatrabajadorproyectoList) {
+        this.asignatrabajadorproyectoList = asignatrabajadorproyectoList;
     }
 
     @Override

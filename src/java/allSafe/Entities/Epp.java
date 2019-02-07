@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author hachi
+ * @author Ruben
  */
 @Entity
 @Table(name = "epp")
@@ -36,7 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Epp.findAll", query = "SELECT e FROM Epp e")
     , @NamedQuery(name = "Epp.findByIdEPP", query = "SELECT e FROM Epp e WHERE e.idEPP = :idEPP")
     , @NamedQuery(name = "Epp.findByNombreEPPcol", query = "SELECT e FROM Epp e WHERE e.nombreEPPcol = :nombreEPPcol")
-    , @NamedQuery(name = "Epp.findByDescripcionEPP", query = "SELECT e FROM Epp e WHERE e.descripcionEPP = :descripcionEPP")})
+    , @NamedQuery(name = "Epp.findByDescripcionEPP", query = "SELECT e FROM Epp e WHERE e.descripcionEPP = :descripcionEPP")
+    , @NamedQuery(name = "Epp.findByTipoEPP", query = "SELECT e FROM Epp e WHERE e.tipoEPPidTipoEPP.idTipoEPP = :tipoEPPidTipoEPP")
+    , @NamedQuery(name = "Epp.findByVigenteepp", query = "SELECT e FROM Epp e WHERE e.vigenteepp = :vigenteepp")})
 public class Epp implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,15 +57,20 @@ public class Epp implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "descripcionEPP")
     private String descripcionEPP;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 2)
+    @Column(name = "vigenteepp")
+    private String vigenteepp;
     @JoinColumn(name = "TipoEPP_idTipoEPP", referencedColumnName = "idTipoEPP")
     @ManyToOne(optional = false)
     private Tipoepp tipoEPPidTipoEPP;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ePPidEPP")
     private List<Eppterreno> eppterrenoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eppidEPP")
+    private List<Asignaeppaproyecto> asignaeppaproyectoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ePPidEPP")
     private List<Eppsolicitudterreno> eppsolicitudterrenoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ePPidEPP")
-    private List<Eppproceso> eppprocesoList;
 
     public Epp() {
     }
@@ -72,10 +79,11 @@ public class Epp implements Serializable {
         this.idEPP = idEPP;
     }
 
-    public Epp(Integer idEPP, String nombreEPPcol, String descripcionEPP) {
+    public Epp(Integer idEPP, String nombreEPPcol, String descripcionEPP, String vigenteepp) {
         this.idEPP = idEPP;
         this.nombreEPPcol = nombreEPPcol;
         this.descripcionEPP = descripcionEPP;
+        this.vigenteepp = vigenteepp;
     }
 
     public Integer getIdEPP() {
@@ -102,6 +110,14 @@ public class Epp implements Serializable {
         this.descripcionEPP = descripcionEPP;
     }
 
+    public String getVigenteepp() {
+        return vigenteepp;
+    }
+
+    public void setVigenteepp(String vigenteepp) {
+        this.vigenteepp = vigenteepp;
+    }
+
     public Tipoepp getTipoEPPidTipoEPP() {
         return tipoEPPidTipoEPP;
     }
@@ -120,21 +136,21 @@ public class Epp implements Serializable {
     }
 
     @XmlTransient
+    public List<Asignaeppaproyecto> getAsignaeppaproyectoList() {
+        return asignaeppaproyectoList;
+    }
+
+    public void setAsignaeppaproyectoList(List<Asignaeppaproyecto> asignaeppaproyectoList) {
+        this.asignaeppaproyectoList = asignaeppaproyectoList;
+    }
+
+    @XmlTransient
     public List<Eppsolicitudterreno> getEppsolicitudterrenoList() {
         return eppsolicitudterrenoList;
     }
 
     public void setEppsolicitudterrenoList(List<Eppsolicitudterreno> eppsolicitudterrenoList) {
         this.eppsolicitudterrenoList = eppsolicitudterrenoList;
-    }
-
-    @XmlTransient
-    public List<Eppproceso> getEppprocesoList() {
-        return eppprocesoList;
-    }
-
-    public void setEppprocesoList(List<Eppproceso> eppprocesoList) {
-        this.eppprocesoList = eppprocesoList;
     }
 
     @Override

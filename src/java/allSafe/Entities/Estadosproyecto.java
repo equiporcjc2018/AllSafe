@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author hachi
+ * @author Ruben
  */
 @Entity
 @Table(name = "estadosproyecto")
@@ -48,7 +48,7 @@ public class Estadosproyecto implements Serializable {
     @Column(name = "descripcionEstadosProyecto")
     private String descripcionEstadosProyecto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadosProyectoidEstadosProyecto")
-    private List<Eppproceso> eppprocesoList;
+    private List<Asignacantidadepp> asignacantidadeppList;
 
     public Estadosproyecto() {
     }
@@ -79,12 +79,12 @@ public class Estadosproyecto implements Serializable {
     }
 
     @XmlTransient
-    public List<Eppproceso> getEppprocesoList() {
-        return eppprocesoList;
+    public List<Asignacantidadepp> getAsignacantidadeppList() {
+        return asignacantidadeppList;
     }
 
-    public void setEppprocesoList(List<Eppproceso> eppprocesoList) {
-        this.eppprocesoList = eppprocesoList;
+    public void setAsignacantidadeppList(List<Asignacantidadepp> asignacantidadeppList) {
+        this.asignacantidadeppList = asignacantidadeppList;
     }
 
     @Override

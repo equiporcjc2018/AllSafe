@@ -6,7 +6,7 @@
 package allSafe.presentacion;
 
 import allSafe.Entities.Epp;
-import allSafe.Entities.Eppproceso;
+import allSafe.Entities.Asignaeppaproyecto;
 import allSafe.Entities.Eppterreno;
 import allSafe.Entities.Estadosproyecto;
 import allSafe.Entities.Persona;
@@ -69,7 +69,7 @@ public class RegistroEntregaEPPServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
         EppTerrenoProyectoEPPPErsonalDTO objEppepppepDTO = new EppTerrenoProyectoEPPPErsonalDTO();
-        Eppproceso objEppproceso = new Eppproceso();
+        Asignaeppaproyecto objEppproceso = new Asignaeppaproyecto();
         Eppterreno objEppterreno = new Eppterreno();
         Proyecto objProyecto = new Proyecto();
         Persona objPersona = new Persona();

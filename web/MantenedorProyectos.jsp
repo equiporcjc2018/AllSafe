@@ -12,7 +12,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>AllSafe - Proyectos</title>
+        <title>AllSafe - Proyectos Revision Proyectos 30.12.2018</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
         <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
@@ -75,11 +75,15 @@
 
                                                 <form  name="frmRegistroProyectos" method="post" action="./agregarProyecto">
                                                     <div class="form-row">
-                                                        <div class="form-group col-md-6">
+                                                        <div class="form-group col-md-4">
+                                                            <label for="txtNumProyecto" class="col-form-label">Numero proyecto</label>
+                                                            <input id="txtNumProyecto" name="txtNumProyecto" type="text" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-md-4">
                                                             <label for="txtNombreProyecto" class="col-form-label">Nombre proyecto</label>
                                                             <input id="txtNombreProyecto" name="txtNombreProyecto" type="text" class="form-control">
                                                         </div>
-                                                        <div class="form-group col-md-6">
+                                                        <div class="form-group col-md-4">
                                                             <label for="txtUbicacion" class="col-form-label">Ubicación</label>
                                                             <input id="txtUbicacion" name="txtUbicacion" type="text" class="form-control">
                                                         </div>
@@ -153,7 +157,8 @@
                                                         <c:when test="${sessionScope.listadoProyectos!=null}">
                                                             <table class="table table-striped" id="proyecto">
                                                                 <thead>
-                                                                    <tr>
+                                                                    <tr> 
+                                                                        <th>Numero proyecto</th>
                                                                         <th>Nombre proyecto</th>
                                                                         <th>País</th>
                                                                         <th>Ciudad</th>
@@ -161,12 +166,14 @@
                                                                         <th>Razon Social Empresa</th>
                                                                         <th>Fecha inicio</th>
                                                                         <th>Fecha término</th>
+                                                                        <th>Proyecto Vigente</th>
                                                                         <th>Editar</th>
                                                                         <th>Eliminar</th>
                                                                     </tr> 
                                                                 </thead>
                                                                 <tfoot>
                                                                     <tr>
+                                                                        <th>Numero proyecto</th>
                                                                         <th>Nombre proyecto</th>
                                                                         <th>País</th>
                                                                         <th>Ciudad</th>
@@ -174,6 +181,7 @@
                                                                         <th>Razon Social Empresa</th>
                                                                         <th>Fecha inicio</th>
                                                                         <th>Fecha término</th>
+                                                                        <th>Proyecto Vigente</th>
                                                                         <th>Editar</th>
                                                                         <th>Eliminar</th>
                                                                     </tr> 
@@ -181,6 +189,7 @@
                                                                 <tbody>
                                                                     <c:forEach items="${sessionScope.listadoProyectos}" var="proyecto">
                                                                         <tr>
+                                                                            <td><c:out value="${proyecto.numeroProyecto}"/></td>
                                                                             <td><c:out value="${proyecto.nombreProyecto}"/></td>
                                                                             <td><c:out value="${proyecto.ciudadidCiudad.paisidPais.pais}"/></td>
                                                                             <td><c:out value="${proyecto.ciudadidCiudad.nombreCiudad}"/></td>
@@ -188,6 +197,7 @@
                                                                             <td><c:out value="${proyecto.empresaidEmpresa.razonSocialEmpresa}"/></td>
                                                                             <td><c:out value="${proyecto.fechaInicioProyecto}"/></td>
                                                                             <td><c:out value="${proyecto.fechaTerminoProyecto}"/></td>
+                                                                            <td><c:out value="${proyecto.vigenteproyecto}"/></td>
                                                                             <td><input type="button" class="btn btn-primary btn-space" name="btnEditar" value="Editar"/></td>
                                                                             <td><input type="button" class="btn btn-secondary btn-space" name="btnEliminar" value="Eliminar"/></td>
                                                                         </tr>

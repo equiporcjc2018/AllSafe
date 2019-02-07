@@ -7,7 +7,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>AllSafe - Epps</title>
+        <title>AllSafe - Epp</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
         <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
@@ -21,6 +21,12 @@
             $(document).ready(function ()
             {
                 $('#proyecto').DataTable();
+            });
+        </script> 
+        <script>
+            $(document).ready(function ()
+            {
+                $('#proyecto2').DataTable();
             });
         </script> 
         <script>
@@ -63,21 +69,22 @@
                         <div class="container-fluid dashboard-content">
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <h1 class="text-center">Epps</h1>
+                                    <h1 class="text-center">EPP : Elementos de Protección Personal</h1>
 
 
 
                                     <jsp:include page="./listarEppsServlet" flush="true"/>
                                     <jsp:include page="./listarTipoEppsServlet" flush="true"/>
+                                    <jsp:include page="./listarEppNoEstandarServlet" flush="true"/>
                                     <jsp:useBean id="epp" class="allSafe.Entities.Epp" scope="page"/>
                                     <jsp:useBean id="tipoEpp" class="allSafe.Entities.Tipoepp" scope="page"/>
+                                    
                                     <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
-                                        <h3 class="section-title">Gestion Epps</h3>
-                                        <p>Aqui puedes Registrar, editar, y dar de baja Epps</p>
+                                        <h3 class="section-title">Ingreso Epp</h3>
+                                        <p>Aquí puedes ingresar, editar, y activar Epp</p>
                                         <div class="card">
                                             <h3 class="card-header">Agregar EPP</h3>
                                             <div class="card-body">
-
 
                                                 <form name="frmRegistroEPP" method="post" action="./registroEppServlet">
 
@@ -107,7 +114,7 @@
                                                     <input type="submit" class="btn btn-success btn-space" name="btnGuardar" value="Registrar">
                                                     <hr>
                                                     <div class="form-group">
-                                                        <label for="exampleFormControlFile1">Llenar tabla Con Arrchivo CVS. o XLS</label>
+                                                        <label for="exampleFormControlFile1">Llenar tabla Con Archivo CVS. o XLS</label>
                                                         <input type="file" class="form-control-file" id="exampleFormControlFile1">
                                                     </div>
                                                 </form>
@@ -116,61 +123,139 @@
                                         </div>
                                     </div>
 
-
-                                    <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
-                                        <div class="card">
-                                            <h3 class="card-header">Listado EPPS</h3>
-                                            <div class="card-body">
-                                                <div class="table-responsive">
-                                                    <c:choose>
-                                                        <c:when test="${sessionScope.listadoEpps!=null}">
-                                                            <table class="table table-striped" id="proyecto">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Id</th>
-                                                                        <th>Nombre</th>
-                                                                        <th>Descripcion</th>
-                                                                        <th>Tipo EPP</th>
-                                                                        <th>Editar</th>
-                                                                        <th>Eliminar</th>
-                                                                    </tr> 
-                                                                </thead>
-                                                                <tfoot>
-                                                                    <tr>
-                                                                        <th>Id</th>
-                                                                        <th>Nombre</th>
-                                                                        <th>Descripcion</th>
-                                                                        <th>Tipo EPP</th>
-                                                                        <th>Editar</th>
-                                                                        <th>Eliminar</th>
-                                                                    </tr> 
-                                                                </tfoot>
-                                                                <tbody>
-                                                                    <c:forEach items="${sessionScope.listadoEpps}" var="epp">
+                                    <div class="form-row ">    
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <h3 class="card-header">Listado EPP Estándar</h3>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <c:choose>
+                                                            <c:when test="${sessionScope.listadoEpps!=null}">
+                                                                <table class="table table-striped" id="proyecto">
+                                                                    <thead>
                                                                         <tr>
-                                                                            <td><c:out value="${epp.idEPP}"/></td>
-                                                                            <td><c:out value="${epp.nombreEPPcol}"/></td>
-                                                                            <td><c:out value="${epp.descripcionEPP}"/></td>
-                                                                            <td><c:out value="${epp.tipoEPPidTipoEPP.descripcionTipoEPP}"/></td>
-                                                                            <td><input type="button" class="btn btn-primary btn-space" name="btnEditar" value="Editar"/></td>
-                                                                            <td><input type="button" class="btn btn-secondary btn-space" name="btnEliminar" value="Eliminar"/></td>
+                                                                            <th>Id</th>
+                                                                            <th>Nombre</th>
+                                                                            <th>Descripcion</th>
+                                                                            <th>Tipo EPP</th>
+                                                                            <th>Vigente</th>
+                                                                            <th>Editar</th>
+                                                                            <th>Habilitado</th>
+                                                                        </tr> 
+                                                                    </thead>
+                                                                    <tfoot>
+                                                                        <tr>
+                                                                            <th>Id</th>
+                                                                            <th>Nombre</th>
+                                                                            <th>Descripcion</th>
+                                                                            <th>Tipo EPP</th>
+                                                                            <th>Vigente</th>
+                                                                            <th>Editar</th>
+                                                                            <th>Habilitado</th>
+                                                                        </tr> 
+                                                                    </tfoot>
+                                                                    <tbody>
+                                                                        <c:forEach items="${sessionScope.listadoEpps}" var="epp">
+                                                                            <tr>
+                                                                                <td><c:out value="${epp.idEPP}"/></td>
+                                                                                <td><c:out value="${epp.nombreEPPcol}"/></td>
+                                                                                <td><c:out value="${epp.descripcionEPP}"/></td>
+                                                                                <td><c:out value="${epp.tipoEPPidTipoEPP.descripcionTipoEPP}"/></td>
+                                                                                <td><c:out value="${epp.vigenteepp}"/></td>
+                                                                                <td><input type="button" class="btn btn-primary btn-space" name="btnEditar" value="Editar"/></td>
+                                                                                
+                                                                                    <c:url value="./cambiaEstadoVigenteEpp" var="cambiaEstadoEPP">
+                                                                                        <c:param name="id_epp" value="${epp.idEPP}"/>
+                                                                                    </c:url>
+                                                                                <td>
+                                                                                    <input type="button" class="btn btn-secondary btn-space" name="btnHabilitadoEstandar" onclick="window.location.href='<c:out value="${cambiaEstadoEPP}"/>'"/>
+                                                                                </td>
+                                                                                
+                                                                                         
+                                                                            
+                                                                            </tr>
+                                                                        </c:forEach>
+                                                                    </tbody>
+                                                                </table>
+                                                            </c:when>
 
-                                                                        </tr>
-                                                                    </c:forEach>
-                                                                </tbody>
-                                                            </table>
-                                                        </c:when>
 
+                                                            <c:otherwise>
+                                                                No existen resultados
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <h3 class="card-header">Listado EPP No Estándar</h3>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <c:choose>
+                                                            <c:when test="${sessionScope.listadoEppNoEstandar!=null}">
+                                                                <table class="table table-striped" id="proyecto2">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Id</th>
+                                                                            <th>Nombre</th>
+                                                                            <th>Descripcion</th>
+                                                                            <th>Tipo EPP</th>
+                                                                            <th>Vigente</th>
+                                                                            <th>Editar</th>
+                                                                            <th>Eliminar</th>
+                                                                        </tr> 
+                                                                    </thead>
+                                                                    <tfoot>
+                                                                        <tr>
+                                                                            <th>Id</th>
+                                                                            <th>Nombre</th>
+                                                                            <th>Descripcion</th>
+                                                                            <th>Tipo EPP</th>
+                                                                            <th>Vigente</th>
+                                                                            <th>Editar</th>
+                                                                            <th>Eliminar</th>
+                                                                        </tr> 
+                                                                    </tfoot>
+                                                                    <tbody>
+                                                                        <c:forEach items="${sessionScope.listadoEppNoEstandar}" var="epp">
+                                                                            <tr>
+                                                                                <td><c:out value="${epp.idEPP}"/></td>
+                                                                                <td><c:out value="${epp.nombreEPPcol}"/></td>
+                                                                                <td><c:out value="${epp.descripcionEPP}"/></td>
+                                                                                <td><c:out value="${epp.tipoEPPidTipoEPP.descripcionTipoEPP}"/></td>
+                                                                                <td><c:out value="${epp.vigenteepp}"/></td>
+                                                                                <td><input type="button" class="btn btn-primary btn-space" name="btnEditar" value="Editar"/></td>
+                                                                                <c:url value="./cambiaEstadoVigenteEpp" var="cambiaEstadoEPP">
+                                                                                        <c:param name="id_epp" value="${epp.idEPP}"/>
+                                                                                    </c:url>
+                                                                                <td>
+                                                                                    <button type="button" class="btn btn-secondary btn-space" onclick="window.location.href='<c:out value="${cambiaEstadoEPP}"/>'">Cambia Vigente</button>
+                                                                                    
+                                                                                </td>
+                                                                                
 
-                                                        <c:otherwise>
-                                                            No existen resultados
-                                                        </c:otherwise>
-                                                    </c:choose>
+                                                                            </tr>
+                                                                        </c:forEach>
+                                                                    </tbody>
+                                                                </table>
+                                                            </c:when>
+                                                           
+
+                                                            <c:otherwise>
+                                                                No existen resultados
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
+                                    <c:if test="${sessionScope.ExitoCambio!=null}">
+                                        <c:remove var="id_epp"/>
+                                    </c:if>
 
 
 
@@ -202,4 +287,4 @@
     </c:choose>
 </body>
 
-</html>
+ </html>

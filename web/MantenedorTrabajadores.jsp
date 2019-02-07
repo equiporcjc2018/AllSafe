@@ -233,8 +233,9 @@
                                                                         <th scope="col">Pantalon</th>
                                                                         <th scope="col">Polera</th>
                                                                         <th scope="col">Zapato</th>
+                                                                        <th scope="col">Vigente</th>
                                                                         <th scope="col">Editar</th>
-                                                                        <th scope="col">Eliminar</th>
+                                                                        <th scope="col">Cambiar Estado</th>
                                                                     </tr> 
                                                                 </thead>
                                                                 <tfoot>
@@ -250,8 +251,9 @@
                                                                         <th>Pantalon</th>
                                                                         <th>Polera</th>
                                                                         <th>Zapato</th>
+                                                                        <th>Vigente</th>
                                                                         <th>Editar</th>
-                                                                        <th>Eliminar</th>
+                                                                        <th>Cambiar Estado</th>
                                                                     </tr> 
                                                                 </tfoot>
                                                                 <tbody>
@@ -268,8 +270,9 @@
                                                                             <td><c:out value="${persona.tallaPantalonidTallaPantalon.letraTallaPantalon} - ${persona.tallaPantalonidTallaPantalon.numeroTallaPantalon}"/></td>
                                                                             <td><c:out value="${persona.tallaPoleraCamisaidtallaPoleraCamisa.letraPoleraCamisa} - ${persona.tallaPoleraCamisaidtallaPoleraCamisa.numeroPoleraCamisa}"/></td>
                                                                             <td><c:out value="${persona.tallaZApatoidtallaZApato.numeroZapato}"/></td>
+                                                                            <td><c:out value="${persona.vigentepersona}"/></td>
                                                                             <td><input type="button" class="btn btn-primary btn-space" name="btnEditar" value="Editar"/></td>
-                                                                            <td><input type="button" class="btn btn-secondary btn-space"  name="btnEliminar" value="Eliminar"/></td>
+                                                                            <td><input type="button" class="btn btn-secondary btn-space"  name="btnCambiarEstado" value="Cambiar Estado"/></td>
 
                                                                         </tr>
                                                                     </c:forEach>

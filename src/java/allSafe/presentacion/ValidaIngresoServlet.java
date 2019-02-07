@@ -27,6 +27,7 @@ import javax.servlet.http.HttpSession;
 public class ValidaIngresoServlet extends HttpServlet {
 @EJB
 UsuarioDAOSessionBean objUsuarioDAOSessionBean;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
