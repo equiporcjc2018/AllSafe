@@ -41,7 +41,7 @@ public class AsignarDAOSessionBean {
     }
     public List<Asignacantidadepp> getAllAsignaCantidadEppAProy() throws ControllerException{
         
-        return em.createNamedQuery("Asignacantidadepp.findByCantidad", Asignacantidadepp.class).getResultList();
+        return em.createNamedQuery("Asignacantidadepp.findAll", Asignacantidadepp.class).getResultList();
 
     }
     public List<Asignacantidadepp> getGraficoAsignaCantidadEppAProy() throws ControllerException{

@@ -42,9 +42,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="/AllSafe/AsignarEPPaProyecto.jsp">Vincular EPP a Proyecto<span class="badge badge-secondary">Vincular EPP a Proyecto</span></a>
                                 </li>    
-                                <li class="nav-item">
+                                <!--li class="nav-item">
                                     <a class="nav-link" href="/AllSafe/AsignarCargaInicialEpp.jsp">Carga inicial de EPP cantidades proyecto<span class="badge badge-secondary">Carga inicial de EPP cantidades proyecto</span></a>
-                                </li>    
+                                </li-->    
                                 <li class="nav-item">
                                     <a class="nav-link" href="/AllSafe/AsignarCargaInicialEpp2.jsp">Carga inicial de EPP cantidades proyecto2<span class="badge badge-secondary">Carga inicial de EPP cantidades proyecto</span></a>
                                 </li>    

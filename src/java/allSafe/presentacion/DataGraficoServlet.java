@@ -63,6 +63,8 @@ public class DataGraficoServlet extends HttpServlet {
 
                 //for (Asignaeppaproyecto asignaeppaproyecto : listadoEppCantidadProyecto) {
                 for (Asignacantidadepp asignaeppaproyecto : listadoEppCantidadProyecto) {
+                    //String name = asignaeppaproyecto.getProyectoidProyecto().getNombreProyecto();
+                    //Number descripEpp = asignaeppaproyecto.getEppidEPP().getIdEPP();
                     String name = asignaeppaproyecto.getAsignaeppaproyectoIdasignaeppaproyecto().getProyectoidProyecto().getNombreProyecto();
                     Number descripEpp = asignaeppaproyecto.getCantidadEppProceso();
                     int cantidad = descripEpp.intValue();

@@ -147,6 +147,7 @@
                 <jsp:include page="./cargaProyectoServlet" flush="true"/>
                 
                 <jsp:include page="./listarEppsServlet" flush="true"/>
+                <jsp:include page="./listarEppNoEstandarServlet" flush="true"/>
                 <jsp:include page="./listarEppProyectoServlet" flush="true"/>
                 <jsp:include page="./listarEstadoProyectoServlet" flush="true"/> 
                 <jsp:include page="./cargaPaisServlet" flush="true"/> 
@@ -255,7 +256,7 @@
 
                                         <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
                                             <div class="card">
-                                                <h2 class="card-header">Selección de EPP</h2>
+                                                <h2 class="card-header">Selección de EPP Estándar</h2>
                                                 <div class="card-body">
                                                     <hr>
                                         
@@ -269,7 +270,7 @@
                                                                     <a class="toggle-vis btn btn-sm btn-info" data-column="1">Nombre</a>
                                                                     <a class="toggle-vis btn btn-sm btn-info" data-column="2">Descripción</a>
                                                                     <a class="toggle-vis btn btn-sm btn-info" data-column="3">Tipo EPP</a>
-                                                                    <a class="toggle-vis btn btn-sm btn-info" data-column="4">Cantidad</a>
+                                                                    
                                                                 </div>
                                                                 <table class="table table-striped table-bordered"  id="epp">
                                                                 
@@ -279,7 +280,7 @@
                                                                             <th>Nombre</th>
                                                                             <th>Descripción</th>
                                                                             <th>Tipo EPP</th>
-                                                                            <th>Cantidad</th>
+                                                                            
                                                                             <th>Seleccion</th>
                                                                         </tr> 
                                                                     </thead>
@@ -289,7 +290,7 @@
                                                                             <th>Nombre</th>
                                                                             <th>Descripción</th>
                                                                             <th>Tipo EPP</th>
-                                                                            <th>Cantidad</th>
+                                                                            
                                                                             <th>Seleccion</th>
                                                                         </tr> 
                                                                     </tfoot>
@@ -300,11 +301,83 @@
                                                                                 <td><c:out value="${epp.nombreEPPcol}"/></td>
                                                                                 <td><c:out value="${epp.descripcionEPP}"/></td>
                                                                                 <td><c:out value="${epp.tipoEPPidTipoEPP.descripcionTipoEPP}"/></td>
-                                                                                <td><input type="number" class="form-control" id="txtCantidad" name="txtCantidad" placeholder="Ingrese"></td>
+                                                                                
                                                                                 <td>
                                                                                     <div class="custom-control custom-checkbox">
                                                                                         <input  type="checkbox" id="epp${epp.idEPP}" name="chkEpp" value="${epp.idEPP}" class="custom-control-input">
                                                                                         <label class="custom-control-label" for="epp${epp.idEPP}"></label>
+                                                                                        
+                                                                                    </div>
+
+                                                                                </td>
+                                                                                    
+                                                                            </tr>
+                                                                        </c:forEach>
+                                                                    </tbody>
+                                                                </table>
+                                                            </c:when>
+
+                                                            <c:otherwise>
+                                                                No existen resultados
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
+                                            <div class="card">
+                                                <h2 class="card-header">Selección de EPP No Estándar</h2>
+                                                <div class="card-body">
+                                                    <hr>
+                                        
+                                        <hr>
+                                                    <div class="table-responsive">
+                                                        <c:choose>
+                                                            <c:when test="${sessionScope.listadoEppNoEstandar!=null}">
+                                                                
+                                                                <div class="text-center">
+                                                                    <a class="toggle-vis btn btn-sm btn-info" data-column="0">Id</a>
+                                                                    <a class="toggle-vis btn btn-sm btn-info" data-column="1">Nombre</a>
+                                                                    <a class="toggle-vis btn btn-sm btn-info" data-column="2">Descripción</a>
+                                                                    <a class="toggle-vis btn btn-sm btn-info" data-column="3">Tipo EPP</a>
+                                                                    
+                                                                </div>
+                                                                <table class="table table-striped table-bordered"  id="epp">
+                                                                
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Id</th>
+                                                                            <th>Nombre</th>
+                                                                            <th>Descripción</th>
+                                                                            <th>Tipo EPP</th>
+                                                                            
+                                                                            <th>Seleccion</th>
+                                                                        </tr> 
+                                                                    </thead>
+                                                                    <tfoot>
+                                                                        <tr>
+                                                                            <th>Id</th>
+                                                                            <th>Nombre</th>
+                                                                            <th>Descripción</th>
+                                                                            <th>Tipo EPP</th>
+                                                                            
+                                                                            <th>Seleccion</th>
+                                                                        </tr> 
+                                                                    </tfoot>
+                                                                    <tbody>
+                                                                        <c:forEach items="${sessionScope.listadoEppNoEstandar}" var="eppNoE">
+                                                                            <tr>
+                                                                                <td><c:out value="${eppNoE.idEPP}"/></td>
+                                                                                <td><c:out value="${eppNoE.nombreEPPcol}"/></td>
+                                                                                <td><c:out value="${eppNoE.descripcionEPP}"/></td>
+                                                                                <td><c:out value="${eppNoE.tipoEPPidTipoEPP.descripcionTipoEPP}"/></td>
+                                                                                
+                                                                                <td>
+                                                                                    <div class="custom-control custom-checkbox">
+                                                                                        <input  type="checkbox" id="epp${eppNoE.idEPP}" name="chkEpp" value="${eppNoE.idEPP}" class="custom-control-input">
+                                                                                        <label class="custom-control-label" for="epp${eppNoE.idEPP}"></label>
                                                                                         
                                                                                     </div>
 
