@@ -5,6 +5,7 @@
  */
 package allSafe.presentacion;
 
+import allSafe.Entities.Asignaeppaproyecto;
 import allSafe.Entities.Epp;
 import allSafe.Entities.Proyecto;
 import allSafe.dto.EppProyectoDTO;
@@ -52,6 +53,7 @@ public class RegistrarEppProyectoServlet extends HttpServlet {
         
         Proyecto objProyecto = new Proyecto();
         Epp objEpp = new Epp();
+        Asignaeppaproyecto objAsignaeppaproyecto = new Asignaeppaproyecto();
         
         try {
                       
@@ -66,14 +68,19 @@ public class RegistrarEppProyectoServlet extends HttpServlet {
                 
                 for(int i=0; i<epp2.length;i++){
                 epp = Integer.parseInt(epp2[i]);
-                
+                //Se obtiene el objeto proyecto
                 objProyecto = objProyectoDAOSessionBean.buscaProyectoXID(Integer.parseInt(proyecto));
-                objEpp = objEppDAOSessionBean.buscaEppXcodigo(epp);
-                objEppProyectoDTO.setObjProyecto(objProyecto);
-                objEppProyectoDTO.setObjEpp(objEpp);
+                //Se busca si el epp ya fue asignado
+                objAsignaeppaproyecto = objAsignarDaoSessionBean.buscaAsigEppXID(epp,Integer.parseInt(proyecto));
+                    if ((objAsignaeppaproyecto==null)) {
+                        objEpp = objEppDAOSessionBean.buscaEppXcodigo(epp);
+                        objEppProyectoDTO.setObjProyecto(objProyecto);
+                        objEppProyectoDTO.setObjEpp(objEpp);
                 
-                objAsignarDaoSessionBean.addEppProy(objEppProyectoDTO);
-                sesion.setAttribute("Exito4", "Epp Proceso Agregado Correctamente");
+                        objAsignarDaoSessionBean.addEppProy(objEppProyectoDTO);
+                        sesion.setAttribute("Exito4", "Epp Proceso Agregado Correctamente");
+                    }
+                
                 }
                 
                 response.sendRedirect("AsignarEPPaProyecto.jsp");
