@@ -168,7 +168,7 @@
                                                                                         <c:param name="id_epp" value="${epp.idEPP}"/>
                                                                                     </c:url>
                                                                                 <td>
-                                                                                    <input type="button" class="btn btn-secondary btn-space" name="btnHabilitadoEstandar" onclick="window.location.href='<c:out value="${cambiaEstadoEPP}"/>'"/>
+                                                                                    <input type="button" class="btn btn-secondary btn-space" name="btnHabilitadoEstandar" value="Vigente" onclick="window.location.href='<c:out value="${cambiaEstadoEPP}"/>'"/>
                                                                                 </td>
                                                                                 
                                                                                          
