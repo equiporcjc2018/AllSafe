@@ -61,11 +61,13 @@ public class RegistrarCargaEppCantidadServlet extends HttpServlet {
             //int epp = Integer.parseInt(request.getParameter("id"));
             //int epp = Integer.parseInt(request.getParameter("txtIdEpp"));
             String [] epp2 = request.getParameterValues("txtIdEpp");
+            String [] proy2 = request.getParameterValues("txtIdProy");
             String [] cantidad = request.getParameterValues("txtCantidad");
                        
             //for (String item : cantidad) {
             for (int i = 0; i < cantidad.length; i++) {
                int epp =  Integer.parseInt(epp2[i]);
+               int proy =  Integer.parseInt(proy2[i]);
             
                 if (!(cantidad[i].equals(""))) {
                 
@@ -75,7 +77,7 @@ public class RegistrarCargaEppCantidadServlet extends HttpServlet {
                 
                 int precio = 1000;
                             
-                objAsignaeppaproyecto = objAsignarDaoSessionBean.buscaAsigEppXID(epp);
+                objAsignaeppaproyecto = objAsignarDaoSessionBean.buscaAsigEppXID(epp,proy);
                  
                 int estadoProy = 1;
                 int tipoCarga = 1;

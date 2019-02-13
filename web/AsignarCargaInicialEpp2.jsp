@@ -118,6 +118,7 @@
                                                                     <c:forEach items="${sessionScope.listadoEppProyecto}" var="asignaeppproyecto">
                                                                         <tr>
                                                                             <td><c:out value="${asignaeppproyecto.proyectoidProyecto.numeroProyecto}"/></td>
+                                                                            <td style="display:none;"><input type="text" id="txtIdProy" name="txtIdProy" value="${asignaeppproyecto.proyectoidProyecto.idProyecto}" readonly="true" /></td>
                                                                             <td><c:out value="${asignaeppproyecto.proyectoidProyecto.nombreProyecto}"/></td>
                                                                             <td style="display:none;"><input type="text" id="txtIdEpp" name="txtIdEpp" value="${asignaeppproyecto.eppidEPP.idEPP}" readonly="true" /></td>                                                                                                                                                                                                                                        
                                                                             <td><c:out value="${asignaeppproyecto.eppidEPP.nombreEPPcol}"/></td>

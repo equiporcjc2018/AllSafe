@@ -81,11 +81,12 @@ public class AsignarDAOSessionBean {
         return infoAsignaeppaproyecto;
     }
     
-    public Asignaeppaproyecto buscaAsigEppXID(int id){
+    public Asignaeppaproyecto buscaAsigEppXID(int id, int proy){
         Asignaeppaproyecto infoAsignaeppaproyecto = null;
         try {
             infoAsignaeppaproyecto =em.createNamedQuery("Asignaeppaproyecto.findByEpp",Asignaeppaproyecto.class)
                     .setParameter("eppidEPP", id)
+                    .setParameter("proyectoidProyecto", proy)
                     .getSingleResult();
         } catch (NoResultException ex) {
             return null;
