@@ -47,17 +47,7 @@
             
     
         </script> 
-        <script>
-            $(document).ready(function() 
-            {
-                var table = $('#proyecto').DataTable();
-
-                $('#proyecto tbody').on('click', 'tr', function () {
-                    var data = table.row( this ).data();
-                    alert( 'Proyecto '+data[1]+' seleccionado' );
-                } );
-            } );
-        </script> 
+         
          
         <script>
             $(document).ready(function ()
