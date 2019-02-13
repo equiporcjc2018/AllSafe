@@ -15,7 +15,7 @@
                             <i class="fa fa-fw fa-user-circle"></i>Dashboard</a>       
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/AllSafe/Home.jsp" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Administración</a>
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Administración</a>
                         <div id="submenu-2" class="collapse submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
@@ -33,7 +33,7 @@
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="/AllSafe/Home.jsp" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fa fa-fw fa-rocket"></i>Operación</a>
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fa fa-fw fa-rocket"></i>Operación</a>
                         <div id="submenu-3" class="collapse submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
@@ -60,7 +60,7 @@
                         <div id="submenu-4" class="collapse submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="">Reporte de entrega a cliente<span class="badge badge-secondary">Reporte de entrega a cliente</span></a>
+                                    <a class="nav-link" href="/AllSafe/EjemploReporte.jsp">Reporte de entrega a cliente<span class="badge badge-secondary">Reporte de entrega a cliente</span></a>
                                 </li>    
                                 <li class="nav-item">
                                     <a class="nav-link" href="">Reporte de entrega histórico por trabajador<span class="badge badge-secondary">Reporte de entrega histórico por trabajador</span></a>
