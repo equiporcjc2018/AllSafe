@@ -136,15 +136,16 @@
 
 
         if ($('#morris_donut').length) {
+            //var testData = $.get("dataGraficoDonaServlet", function(data, status){
+                
             Morris.Donut({
                 element: 'morris_donut',
                 
                 data: [
-                        {label: "Candelaria", value: 30},
-                        {label: "Nueva Aldea", value: 15},
-                        {label: "Rancagua", value: 45},
-                        {label: "Otra", value: 10}
-                      ],
+                    { value: 70, label: 'Candelaria' },
+                    { value: 15, label: 'Nueva Aldea' },
+                    { value: 10, label: 'Otro' }
+                ],
              
                 labelColor: '#2e2f39',
                    gridTextSize: '14px',
@@ -159,6 +160,7 @@
                 formatter: function(x) { return x + "%" },
                   resize: true
             });
+            //});
         }
 
 

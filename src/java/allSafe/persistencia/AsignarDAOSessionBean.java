@@ -9,6 +9,7 @@ import allSafe.Entities.Asignacantidadepp;
 import allSafe.Entities.Asignaeppaproyecto;
 import allSafe.Entities.Asignatrabajadorproyecto;
 import allSafe.Entities.Estadosproyecto;
+import allSafe.Entities.Proyecto;
 import allSafe.Entities.Tipodecarga;
 import allSafe.dto.EppProyectoDTO;
 import allSafe.dto.PersonaProyectoDTO;
@@ -42,6 +43,21 @@ public class AsignarDAOSessionBean {
     public List<Asignacantidadepp> getAllAsignaCantidadEppAProy() throws ControllerException{
         
         return em.createNamedQuery("Asignacantidadepp.findAll", Asignacantidadepp.class).getResultList();
+
+    }
+    public List<Proyecto> getGrafico() throws ControllerException{
+        
+        return em.createNamedQuery("Proyecto.findAll", Proyecto.class).getResultList();
+
+    }
+    public List<Asignacantidadepp> getInventario() throws ControllerException{
+        
+        return em.createNamedQuery("Asignacantidadepp.findByInventario", Asignacantidadepp.class).getResultList();
+
+    }
+    public List<Asignacantidadepp> getAllAsignaCantidadEppAProy2() throws ControllerException{
+        
+        return em.createNamedQuery("Asignacantidadepp.findByCantidad", Asignacantidadepp.class).getResultList();
 
     }
     public List<Asignacantidadepp> getGraficoAsignaCantidadEppAProy() throws ControllerException{

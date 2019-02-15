@@ -8,11 +8,13 @@ package allSafe.presentacion;
 
 import allSafe.Entities.Asignacantidadepp;
 import allSafe.Entities.Asignaeppaproyecto;
+import allSafe.Entities.Proyecto;
 import allSafe.persistencia.AsignarDAOSessionBean;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -53,30 +55,53 @@ public class DataGraficoServlet extends HttpServlet {
         //HttpSession sesion= request.getSession();
         //List<Asignaeppaproyecto> listadoEppCantidadProyecto;
         List<Asignacantidadepp> listadoEppCantidadProyecto;
-
+        List<Proyecto> cantiProyecto;
+        String name = "";
+        int cantidad =0;
+        
         try {
             //listadoEppCantidadProyecto = objAsignarDaoSessionBean.getAllAsignaEppAProy();
             listadoEppCantidadProyecto = objAsignarDaoSessionBean.getAllAsignaCantidadEppAProy();
+            cantiProyecto = objAsignarDaoSessionBean.getGrafico();
             List<DataJsonFinanciero> datos = new LinkedList();
             if (listadoEppCantidadProyecto != null) {
                 //Se recorren los datos
-
-                //for (Asignaeppaproyecto asignaeppaproyecto : listadoEppCantidadProyecto) {
-                for (Asignacantidadepp asignaeppaproyecto : listadoEppCantidadProyecto) {
-                    //String name = asignaeppaproyecto.getProyectoidProyecto().getNombreProyecto();
-                    //Number descripEpp = asignaeppaproyecto.getEppidEPP().getIdEPP();
-                    String name = asignaeppaproyecto.getAsignaeppaproyectoIdasignaeppaproyecto().getProyectoidProyecto().getNombreProyecto();
-                    Number descripEpp = asignaeppaproyecto.getCantidadEppProceso();
-                    int cantidad = descripEpp.intValue();
-
-                    //Se crea el objeto
+                                
+                for (Proyecto listaProy : cantiProyecto) {
+                    int recorreProy = listaProy.getIdProyecto();
+                                    
+                    int descripEpp2 =0; 
+                    for (Asignacantidadepp asignaeppaproyecto : listadoEppCantidadProyecto) {
+                         int obtengoProyecto = asignaeppaproyecto.getAsignaeppaproyectoIdasignaeppaproyecto().getProyectoidProyecto().getIdProyecto();
+                         //int cantiProyecto2 = next.getAsignaeppaproyectoIdasignaeppaproyecto().getProyectoidProyecto().getIdProyecto();
+                        
+                            if (obtengoProyecto==recorreProy) {
+                             
+                                descripEpp2 = descripEpp2+Integer.parseInt(asignaeppaproyecto.getCantidadEppProceso().toString());
+                                name = asignaeppaproyecto.getAsignaeppaproyectoIdasignaeppaproyecto().getProyectoidProyecto().getNombreProyecto();
+                                //Number descripEpp = asignaeppaproyecto.getCantidadEppProceso();
+                                Number descripEpp = descripEpp2;
+                                cantidad = descripEpp.intValue();
+                                obtengoProyecto++;
+                                }
+                             
+                             
+                    }
+                    if (!(name.isEmpty())&&(!(cantidad==0))) {
+                         //Se crea el objeto
                     DataJsonFinanciero objDataJsonFinanciero = new DataJsonFinanciero(name, cantidad);
                     //Se agrega el objeto a la lista
                     datos.add(objDataJsonFinanciero);
-
+                    
+                    name = "";
+                    cantidad =0;
+                    }
+                   
+                    
+            }
                 }
 
-            }
+            
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
             String json = gson.toJson(datos);
@@ -96,6 +121,10 @@ public class DataGraficoServlet extends HttpServlet {
         String nombre;
         Number cantidad;
 
+        public DataJsonFinanciero() {
+        }
+
+        
         public DataJsonFinanciero(String nombre, int cantidad) {
             this.nombre = nombre;
             this.cantidad = cantidad;

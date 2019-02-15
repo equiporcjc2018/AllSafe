@@ -49,7 +49,7 @@
                                     <a class="nav-link" href="/AllSafe/AsignarCargaInicialEpp2.jsp">Carga inicial de EPP cantidades proyecto2<span class="badge badge-secondary">Carga inicial de EPP cantidades proyecto</span></a>
                                 </li>    
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/AllSafe/MantenedorProcesoEPP.jsp">Asignar EPP a Persona<span class="badge badge-secondary">Asignar EPP a Persona</span></a>
+                                    <a class="nav-link" href="/AllSafe/DevolucionToolCenter.jsp">Devolución Tool Center<span class="badge badge-secondary">Asignar EPP a Persona</span></a>
                                 </li>    
                             </ul>
                         </div>
