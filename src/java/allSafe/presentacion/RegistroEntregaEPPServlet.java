@@ -11,6 +11,7 @@ import allSafe.Entities.Eppterreno;
 import allSafe.Entities.Estadosproyecto;
 import allSafe.Entities.Persona;
 import allSafe.Entities.Proyecto;
+import allSafe.Entities.Usuarioallsafe;
 import allSafe.dto.EppProcesoProyectoEPPPersonaEstadoProyectoDTO;
 import allSafe.dto.EppTerrenoProyectoEPPPErsonalDTO;
 import allSafe.persistencia.EppDAOSessionBean;
@@ -29,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import allSafe.persistencia.PersonaSessionBean;
 import allSafe.persistencia.ProyectoDAOSessionBean;
 import allSafe.persistencia.TipoEppDAOSessionBean;
+import allSafe.persistencia.UsuarioDAOSessionBean;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -54,6 +56,8 @@ public class RegistroEntregaEPPServlet extends HttpServlet {
     PersonaSessionBean objPersonaSessionBean;
     @EJB
     EstadoProyectoDAOSessionBeans objEstadoProyectoDAOSessionBeans;
+    @EJB
+    UsuarioDAOSessionBean objUsuarioDAOSessionBean;
     
     
     
@@ -73,6 +77,7 @@ public class RegistroEntregaEPPServlet extends HttpServlet {
         Eppterreno objEppterreno = new Eppterreno();
         Proyecto objProyecto = new Proyecto();
         Persona objPersona = new Persona();
+        Usuarioallsafe objUsuarioallsafe = new Usuarioallsafe();
         Epp objEpp = new Epp();
         Estadosproyecto objEstadosproyecto = new Estadosproyecto();
         try {
@@ -101,8 +106,9 @@ public class RegistroEntregaEPPServlet extends HttpServlet {
                 objEpp = objEppDAOSessionBean.buscaEppXID(Integer.parseInt(idEpp));
                 objEppterreno.setFechaEppTerreno(fecha);
                 objPersona = objPersonaSessionBean.buscaPersonaXRut(persona);
+                objUsuarioallsafe = objUsuarioDAOSessionBean.buscaUsuarioXCodigo(usuario);
+                
                 objEppterreno.setTallaEppTerreno(talla);
-                objEppterreno.setIdUsuario(usuario);
                 objEppterreno.setEstadoEppTerreno(estadoEPP);
                 objEppterreno.setCantidadEppTerreno(cantidad);
                 objEppterreno.setObservacionEppTerreno(observacion);
@@ -120,6 +126,7 @@ public class RegistroEntregaEPPServlet extends HttpServlet {
                 objEppepppepDTO.setObjProyecto(objProyecto);
                 objEppepppepDTO.setObjEpp(objEpp);
                 objEppepppepDTO.setObjPersona(objPersona);
+                objEppepppepDTO.setObjUsuarioallsafe(objUsuarioallsafe);
                 
                 
                 objEppTerrenoDaoSessionBeans.addEppTerreno(objEppepppepDTO);

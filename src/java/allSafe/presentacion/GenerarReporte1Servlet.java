@@ -5,13 +5,16 @@
  */
 package allSafe.presentacion;
 
+import allSafe.Entities.Eppterreno;
 import allSafe.dto.Conexion;
+import allSafe.persistencia.EppTerrenoDaoSessionsBeans;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
+import javax.ejb.EJB;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -29,8 +32,8 @@ import net.sf.jasperreports.engine.JasperRunManager;
 @WebServlet(name = "GenerarReporte1Servlet", urlPatterns = {"/generarReporte1Servlet"})
 public class GenerarReporte1Servlet extends HttpServlet {
 
+    
   
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

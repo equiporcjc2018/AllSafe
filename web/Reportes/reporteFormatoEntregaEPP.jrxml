@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="139a01aa-ba5d-4ba3-9f6f-1c89c145d8e9">
-	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="38"/>
-	<property name="ireport.y" value="21"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="73"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -60,11 +60,28 @@
      epp.`nombreEPPcol` AS epp_nombreEPPcol,
      epp.`descripcionEPP` AS epp_descripcionEPP,
      epp.`TipoEPP_idTipoEPP` AS epp_TipoEPP_idTipoEPP,
-     epp.`vigenteepp` AS epp_vigenteepp
+     epp.`vigenteepp` AS epp_vigenteepp,
+     usuarioallsafe.`idUsuarioAllSafe` AS usuarioallsafe_idUsuarioAllSafe,
+     usuarioallsafe.`loginUsuarioAllSafe` AS usuarioallsafe_loginUsuarioAllSafe,
+     usuarioallsafe.`passUsuarioAllSafe` AS usuarioallsafe_passUsuarioAllSafe,
+     usuarioallsafe.`Persona_rutPasaportePersona` AS usuarioallsafe_Persona_rutPasaportePersona,
+     usuarioallsafe.`PerfilAllSafe_idPerfilAllSafe` AS usuarioallsafe_PerfilAllSafe_idPerfilAllSafe,
+     (SELECT
+     CONCAT(persona.nombresPersona,' ',persona.apePatPersona,' ',persona.apeMatPersona) AS persona_nombresPersona
+     
+FROM
+     `persona` persona INNER JOIN `usuarioallsafe` usuarioallsafe ON persona.`rutPasaportePersona` = usuarioallsafe.`Persona_rutPasaportePersona`
+    where usuarioallsafe.idUsuarioAllSafe = eppterreno.idUsuario ) as nombre_usuario
+    
 FROM
      `persona` persona INNER JOIN `eppterreno` eppterreno ON persona.`rutPasaportePersona` = eppterreno.`Persona_rutPasaportePersona`
      INNER JOIN `epp` epp ON eppterreno.`EPP_idEPP` = epp.`idEPP`
-Where eppterreno.`Persona_rutPasaportePersona` =$P{rutPersona}]]>
+     INNER JOIN `usuarioallsafe` usuarioallsafe ON eppterreno.`idUsuario` = usuarioallsafe.`idUsuarioAllSafe`
+     
+     where
+CURRENT_DATE - STR_TO_DATE(eppterreno.`fechaEppTerreno`,'%Y-%m-%d') = (select Min(CURRENT_DATE - STR_TO_DATE(eppterreno.`fechaEppTerreno`,'%Y-%m-%d')) from eppterreno where eppterreno.Persona_rutPasaportePersona = $P{rutPersona})
+AND eppterreno.`Persona_rutPasaportePersona` = $P{rutPersona}
+]]>
 	</queryString>
 	<field name="eppterreno_idEppTerreno" class="java.lang.Integer"/>
 	<field name="eppterreno_Persona_rutPasaportePersona" class="java.lang.String"/>
@@ -76,7 +93,7 @@ Where eppterreno.`Persona_rutPasaportePersona` =$P{rutPersona}]]>
 	<field name="eppterreno_CantidadEppTerreno" class="java.lang.Integer"/>
 	<field name="eppterreno_TallaEppTerreno" class="java.lang.String"/>
 	<field name="eppterreno_observacionEppTerreno" class="java.lang.String"/>
-	<field name="eppterreno_firmaEppTerreno" class="java.lang.Object"/>
+	<field name="eppterreno_firmaEppTerreno" class="java.io.InputStream"/>
 	<field name="eppterreno_tipoEntregaEppTerreno" class="java.lang.String"/>
 	<field name="persona_rutPasaportePersona" class="java.lang.String"/>
 	<field name="persona_EmployeeId" class="java.lang.Integer"/>
@@ -98,6 +115,12 @@ Where eppterreno.`Persona_rutPasaportePersona` =$P{rutPersona}]]>
 	<field name="epp_descripcionEPP" class="java.lang.String"/>
 	<field name="epp_TipoEPP_idTipoEPP" class="java.lang.Integer"/>
 	<field name="epp_vigenteepp" class="java.lang.String"/>
+	<field name="usuarioallsafe_idUsuarioAllSafe" class="java.lang.Integer"/>
+	<field name="usuarioallsafe_loginUsuarioAllSafe" class="java.lang.String"/>
+	<field name="usuarioallsafe_passUsuarioAllSafe" class="java.lang.String"/>
+	<field name="usuarioallsafe_Persona_rutPasaportePersona" class="java.lang.String"/>
+	<field name="usuarioallsafe_PerfilAllSafe_idPerfilAllSafe" class="java.lang.Integer"/>
+	<field name="nombre_usuario" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -105,7 +128,7 @@ Where eppterreno.`Persona_rutPasaportePersona` =$P{rutPersona}]]>
 		<band height="79" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="168" height="79" uuid="3be750a0-8146-40db-969a-58abb338968b"/>
-				<imageExpression><![CDATA["C:\\Users\\Ruben\\Documents\\Inventos\\03 AllSafe\\09 Codigo\\23.12.2018\\AllSafe\\web\\assets\\images\\fieldcore.png"]]></imageExpression>
+				<imageExpression><![CDATA["C:\\Users\\hachi\\Documents\\NetBeansProjects\\AllSafe\\AllSafe\\web\\assets\\images\\fieldcore.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="168" y="52" width="237" height="27" uuid="a1a4fa00-ef5a-4a1f-b4cb-c082d0d0c006"/>
@@ -249,6 +272,14 @@ Where eppterreno.`Persona_rutPasaportePersona` =$P{rutPersona}]]>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Firma del Empleado]]></text>
 			</staticText>
+			<image>
+				<reportElement x="191" y="44" width="183" height="53" uuid="83d16010-d63f-41ce-ba25-507fd7ac1fe7"/>
+				<imageExpression><![CDATA[$F{eppterreno_firmaEppTerreno}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="121" y="142" width="100" height="20" uuid="0b2a539e-95f1-49f0-8815-3ec5a069d670"/>
+				<textFieldExpression><![CDATA[$F{nombre_usuario}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnFooter>
 	<pageFooter>
@@ -261,12 +292,12 @@ Where eppterreno.`Persona_rutPasaportePersona` =$P{rutPersona}]]>
 			<staticText>
 				<reportElement x="0" y="-155" width="555" height="15" uuid="3e58a015-3eda-4db1-9981-0843d794a37c"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[cumplire con el uso correcto de cada uno de los implementos entregados.]]></text>
+				<text><![CDATA[equipo utilizado en todo momento dentro del area de trabajo y ademas comprendere ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="-169" width="555" height="15" uuid="b4e4badb-9c78-4bfb-b24e-65c0a842055a"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[equipo utilizado en todo momento dentro del area de trabajo y ademas comprendere y]]></text>
+				<text><![CDATA[y cumplire con el uso correcto de cada uno de los implementos entregados]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="21" y="-61" width="100" height="20" uuid="7d396810-95cb-4092-b6d2-7875a87880a8"/>

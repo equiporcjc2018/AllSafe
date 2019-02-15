@@ -9,6 +9,7 @@ import allSafe.Entities.Epp;
 import allSafe.Entities.Eppterreno;
 import allSafe.Entities.Persona;
 import allSafe.Entities.Proyecto;
+import allSafe.Entities.Usuarioallsafe;
 import java.io.Serializable;
 
 /**
@@ -20,15 +21,18 @@ public class EppTerrenoProyectoEPPPErsonalDTO implements Serializable{
     private Proyecto objProyecto;
     private Epp objEpp;
     private Persona objPersona;
+    private Usuarioallsafe objUsuarioallsafe;
 
     public EppTerrenoProyectoEPPPErsonalDTO() {
         
     }
-    public EppTerrenoProyectoEPPPErsonalDTO(Eppterreno objEppterreno, Proyecto objProyecto, Epp objEpp, Persona objPersona) {
+
+    public EppTerrenoProyectoEPPPErsonalDTO(Eppterreno objEppterreno, Proyecto objProyecto, Epp objEpp, Persona objPersona, Usuarioallsafe objUsuarioallsafe) {
         this.objEppterreno = objEppterreno;
         this.objProyecto = objProyecto;
         this.objEpp = objEpp;
         this.objPersona = objPersona;
+        this.objUsuarioallsafe = objUsuarioallsafe;
     }
 
     public Eppterreno getObjEppterreno() {
@@ -62,6 +66,16 @@ public class EppTerrenoProyectoEPPPErsonalDTO implements Serializable{
     public void setObjPersona(Persona objPersona) {
         this.objPersona = objPersona;
     }
+
+    public Usuarioallsafe getObjUsuarioallsafe() {
+        return objUsuarioallsafe;
+    }
+
+    public void setObjUsuarioallsafe(Usuarioallsafe objUsuarioallsafe) {
+        this.objUsuarioallsafe = objUsuarioallsafe;
+    }
+
+    
     
     
     

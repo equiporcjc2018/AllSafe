@@ -6,7 +6,9 @@
 package allSafe.Entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,14 +18,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Ruben
+ * @author hachi
  */
 @Entity
 @Table(name = "usuarioallsafe")
@@ -52,12 +56,16 @@ public class Usuarioallsafe implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "passUsuarioAllSafe")
     private String passUsuarioAllSafe;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
+    private List<Eppterreno> eppterrenoList;
     @JoinColumn(name = "PerfilAllSafe_idPerfilAllSafe", referencedColumnName = "idPerfilAllSafe")
     @ManyToOne(optional = false)
     private Perfilallsafe perfilAllSafeidPerfilAllSafe;
     @JoinColumn(name = "Persona_rutPasaportePersona", referencedColumnName = "rutPasaportePersona")
     @ManyToOne(optional = false)
     private Persona personarutPasaportePersona;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
+    private List<Eppsolicitudterreno> eppsolicitudterrenoList;
 
     public Usuarioallsafe() {
     }
@@ -96,6 +104,15 @@ public class Usuarioallsafe implements Serializable {
         this.passUsuarioAllSafe = passUsuarioAllSafe;
     }
 
+    @XmlTransient
+    public List<Eppterreno> getEppterrenoList() {
+        return eppterrenoList;
+    }
+
+    public void setEppterrenoList(List<Eppterreno> eppterrenoList) {
+        this.eppterrenoList = eppterrenoList;
+    }
+
     public Perfilallsafe getPerfilAllSafeidPerfilAllSafe() {
         return perfilAllSafeidPerfilAllSafe;
     }
@@ -110,6 +127,15 @@ public class Usuarioallsafe implements Serializable {
 
     public void setPersonarutPasaportePersona(Persona personarutPasaportePersona) {
         this.personarutPasaportePersona = personarutPasaportePersona;
+    }
+
+    @XmlTransient
+    public List<Eppsolicitudterreno> getEppsolicitudterrenoList() {
+        return eppsolicitudterrenoList;
+    }
+
+    public void setEppsolicitudterrenoList(List<Eppsolicitudterreno> eppsolicitudterrenoList) {
+        this.eppsolicitudterrenoList = eppsolicitudterrenoList;
     }
 
     @Override

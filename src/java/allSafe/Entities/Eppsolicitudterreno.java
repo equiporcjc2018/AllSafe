@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Ruben
+ * @author hachi
  */
 @Entity
 @Table(name = "eppsolicitudterreno")
@@ -32,7 +32,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Eppsolicitudterreno.findAll", query = "SELECT e FROM Eppsolicitudterreno e")
     , @NamedQuery(name = "Eppsolicitudterreno.findByIdEppSolicitudTerreno", query = "SELECT e FROM Eppsolicitudterreno e WHERE e.idEppSolicitudTerreno = :idEppSolicitudTerreno")
     , @NamedQuery(name = "Eppsolicitudterreno.findByFechaEppSolicitudTerreno", query = "SELECT e FROM Eppsolicitudterreno e WHERE e.fechaEppSolicitudTerreno = :fechaEppSolicitudTerreno")
-    , @NamedQuery(name = "Eppsolicitudterreno.findByIdUsuario", query = "SELECT e FROM Eppsolicitudterreno e WHERE e.idUsuario = :idUsuario")
     , @NamedQuery(name = "Eppsolicitudterreno.findByEstadoEppSolicitudTerreno", query = "SELECT e FROM Eppsolicitudterreno e WHERE e.estadoEppSolicitudTerreno = :estadoEppSolicitudTerreno")
     , @NamedQuery(name = "Eppsolicitudterreno.findByCantidadEppSolicitudTerreno", query = "SELECT e FROM Eppsolicitudterreno e WHERE e.cantidadEppSolicitudTerreno = :cantidadEppSolicitudTerreno")
     , @NamedQuery(name = "Eppsolicitudterreno.findByObervacionEppSolicitudTerreno", query = "SELECT e FROM Eppsolicitudterreno e WHERE e.obervacionEppSolicitudTerreno = :obervacionEppSolicitudTerreno")})
@@ -49,11 +48,6 @@ public class Eppsolicitudterreno implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "fechaEppSolicitudTerreno")
     private String fechaEppSolicitudTerreno;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "idUsuario")
-    private String idUsuario;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -74,6 +68,9 @@ public class Eppsolicitudterreno implements Serializable {
     @JoinColumn(name = "Proyecto_idProyecto", referencedColumnName = "idProyecto")
     @ManyToOne(optional = false)
     private Proyecto proyectoidProyecto;
+    @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuarioAllSafe")
+    @ManyToOne(optional = false)
+    private Usuarioallsafe idUsuario;
 
     public Eppsolicitudterreno() {
     }
@@ -82,10 +79,9 @@ public class Eppsolicitudterreno implements Serializable {
         this.idEppSolicitudTerreno = idEppSolicitudTerreno;
     }
 
-    public Eppsolicitudterreno(Integer idEppSolicitudTerreno, String fechaEppSolicitudTerreno, String idUsuario, String estadoEppSolicitudTerreno, int cantidadEppSolicitudTerreno, String obervacionEppSolicitudTerreno) {
+    public Eppsolicitudterreno(Integer idEppSolicitudTerreno, String fechaEppSolicitudTerreno, String estadoEppSolicitudTerreno, int cantidadEppSolicitudTerreno, String obervacionEppSolicitudTerreno) {
         this.idEppSolicitudTerreno = idEppSolicitudTerreno;
         this.fechaEppSolicitudTerreno = fechaEppSolicitudTerreno;
-        this.idUsuario = idUsuario;
         this.estadoEppSolicitudTerreno = estadoEppSolicitudTerreno;
         this.cantidadEppSolicitudTerreno = cantidadEppSolicitudTerreno;
         this.obervacionEppSolicitudTerreno = obervacionEppSolicitudTerreno;
@@ -105,14 +101,6 @@ public class Eppsolicitudterreno implements Serializable {
 
     public void setFechaEppSolicitudTerreno(String fechaEppSolicitudTerreno) {
         this.fechaEppSolicitudTerreno = fechaEppSolicitudTerreno;
-    }
-
-    public String getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
     }
 
     public String getEstadoEppSolicitudTerreno() {
@@ -153,6 +141,14 @@ public class Eppsolicitudterreno implements Serializable {
 
     public void setProyectoidProyecto(Proyecto proyectoidProyecto) {
         this.proyectoidProyecto = proyectoidProyecto;
+    }
+
+    public Usuarioallsafe getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Usuarioallsafe idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     @Override

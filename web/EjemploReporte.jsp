@@ -80,7 +80,7 @@
                                                 <div class="form-row ">
                                                         <div class="form-group col-md-6">
                                                             <label for="txtRutPersona" class="col-form-label">Ingrese rut:</label>
-                                                            <input id="txtRutPersona" name="txtRutPersona" type="text" class="form-control required">
+                                                            <input id="txtRutPersona" name="txtRutPersona" type="text" class="form-control " required>
 
                                                         </div>
                                                         

@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Ruben
+ * @author hachi
  */
 @Entity
 @Table(name = "eppterreno")
@@ -33,7 +33,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Eppterreno.findAll", query = "SELECT e FROM Eppterreno e")
     , @NamedQuery(name = "Eppterreno.findByIdEppTerreno", query = "SELECT e FROM Eppterreno e WHERE e.idEppTerreno = :idEppTerreno")
     , @NamedQuery(name = "Eppterreno.findByFechaEppTerreno", query = "SELECT e FROM Eppterreno e WHERE e.fechaEppTerreno = :fechaEppTerreno")
-    , @NamedQuery(name = "Eppterreno.findByIdUsuario", query = "SELECT e FROM Eppterreno e WHERE e.idUsuario = :idUsuario")
     , @NamedQuery(name = "Eppterreno.findByEstadoEppTerreno", query = "SELECT e FROM Eppterreno e WHERE e.estadoEppTerreno = :estadoEppTerreno")
     , @NamedQuery(name = "Eppterreno.findByCantidadEppTerreno", query = "SELECT e FROM Eppterreno e WHERE e.cantidadEppTerreno = :cantidadEppTerreno")
     , @NamedQuery(name = "Eppterreno.findByTallaEppTerreno", query = "SELECT e FROM Eppterreno e WHERE e.tallaEppTerreno = :tallaEppTerreno")
@@ -52,10 +51,6 @@ public class Eppterreno implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "fechaEppTerreno")
     private String fechaEppTerreno;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "idUsuario")
-    private int idUsuario;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -94,6 +89,9 @@ public class Eppterreno implements Serializable {
     @JoinColumn(name = "Proyecto_idProyecto", referencedColumnName = "idProyecto")
     @ManyToOne(optional = false)
     private Proyecto proyectoidProyecto;
+    @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuarioAllSafe")
+    @ManyToOne(optional = false)
+    private Usuarioallsafe idUsuario;
 
     public Eppterreno() {
     }
@@ -102,10 +100,9 @@ public class Eppterreno implements Serializable {
         this.idEppTerreno = idEppTerreno;
     }
 
-    public Eppterreno(Integer idEppTerreno, String fechaEppTerreno, int idUsuario, String estadoEppTerreno, int cantidadEppTerreno, String tallaEppTerreno, String observacionEppTerreno, byte[] firmaEppTerreno, String tipoEntregaEppTerreno) {
+    public Eppterreno(Integer idEppTerreno, String fechaEppTerreno, String estadoEppTerreno, int cantidadEppTerreno, String tallaEppTerreno, String observacionEppTerreno, byte[] firmaEppTerreno, String tipoEntregaEppTerreno) {
         this.idEppTerreno = idEppTerreno;
         this.fechaEppTerreno = fechaEppTerreno;
-        this.idUsuario = idUsuario;
         this.estadoEppTerreno = estadoEppTerreno;
         this.cantidadEppTerreno = cantidadEppTerreno;
         this.tallaEppTerreno = tallaEppTerreno;
@@ -128,14 +125,6 @@ public class Eppterreno implements Serializable {
 
     public void setFechaEppTerreno(String fechaEppTerreno) {
         this.fechaEppTerreno = fechaEppTerreno;
-    }
-
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
     }
 
     public String getEstadoEppTerreno() {
@@ -208,6 +197,14 @@ public class Eppterreno implements Serializable {
 
     public void setProyectoidProyecto(Proyecto proyectoidProyecto) {
         this.proyectoidProyecto = proyectoidProyecto;
+    }
+
+    public Usuarioallsafe getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Usuarioallsafe idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     @Override
