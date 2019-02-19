@@ -5,6 +5,7 @@
  */
 package allSafe.presentacion;
 
+import allSafe.Entities.Asignacantidadepp;
 import allSafe.Entities.Asignatrabajadorproyecto;
 import allSafe.Entities.Proyecto;
 import allSafe.persistencia.AsignarDAOSessionBean;
@@ -29,9 +30,9 @@ import javax.servlet.http.HttpServletResponse;
 public class DataGraficoDonaServlet extends HttpServlet {
 
     @EJB
-    AsignarTrabajadorProyectoDAOSessionBeans objAsignarTrabajadorProyectoDAOSessionBeans;
-    @EJB
     AsignarDAOSessionBean objAsignarDaoSessionBean;
+    @EJB
+    AsignarTrabajadorProyectoDAOSessionBeans objAsignarTrabajadorProyectoDAOSessionBeans;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,21 +46,26 @@ public class DataGraficoDonaServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        List<Asignatrabajadorproyecto> listadoTrabajador;
-        List<Asignatrabajadorproyecto> cantiTrabajadorProy;
+        /*
+        List<Asignacantidadepp> listadoEppCantidadProyecto;
         List<Proyecto> cantiProyecto;
         String name = "";
-        int cantidad = 0;
-
+        int cantidad =0;
+        */
+        List<Asignatrabajadorproyecto> listadoTrabajador;
+        //List<Asignatrabajadorproyecto> cantiTrabajadorProy;
+        List<Proyecto> cantiProyecto;
+        String name = "";
+        double cantidad = 0;
         try {
-
+            
             listadoTrabajador = objAsignarTrabajadorProyectoDAOSessionBeans.getAllAsignaTrabAProy();
-            cantiTrabajadorProy = objAsignarTrabajadorProyectoDAOSessionBeans.getAllAsignaTrabAProy();
+            //cantiTrabajadorProy = objAsignarTrabajadorProyectoDAOSessionBeans.getAllAsignaTrabAProy();
             cantiProyecto = objAsignarDaoSessionBean.getGrafico();
             List<DataJsonFinanciero> datos = new LinkedList();
             if (listadoTrabajador != null) {
 
-                int cantidadTrabajadores = cantiTrabajadorProy.size();
+                double cantidadTrabajadores = listadoTrabajador.size();
                 
                 //for (Asignatrabajadorproyecto listaTrab : cantiTrabajadorProy) {
                 for (Proyecto listaProy : cantiProyecto) {
@@ -71,7 +77,8 @@ public class DataGraficoDonaServlet extends HttpServlet {
 
                         if (obtengoProyecto == recorreProy) {
 
-                            descripEpp2 = descripEpp2 + Integer.parseInt(asignatrabaproyecto.getIdasignatrabajadorproyecto().toString());
+                            //descripEpp2 = descripEpp2 + Integer.parseInt(asignatrabaproyecto.getIdasignatrabajadorproyecto().toString());
+                            descripEpp2 = descripEpp2 + 1;
                             name = asignatrabaproyecto.getProyectoidProyecto().getNombreProyecto();
 
                             Number descripEpp = descripEpp2;
@@ -82,7 +89,13 @@ public class DataGraficoDonaServlet extends HttpServlet {
                     }
                     if (!(name.isEmpty()) && (!(cantidad == 0))) {
                         //Se crea el objeto
-                        DataJsonFinanciero objDataJsonDona = new DataJsonFinanciero((Math.round((cantidad/cantidadTrabajadores)*100)),name);
+                        double cantidadRedondeada = (cantidad/cantidadTrabajadores);
+                        double cantidadRedondeadax100 = ((cantidad/cantidadTrabajadores)*100);
+                        double cantidadRedondeadax100Math = Math.round((cantidad/cantidadTrabajadores)*100);
+                        
+                        //DataJsonFinanciero objDataJsonDona = new DataJsonFinanciero((Math.round((cantidad/cantidadTrabajadores)*100)),name);
+                        DataJsonFinanciero objDataJsonDona = new DataJsonFinanciero(cantidadRedondeadax100Math,name);
+                        //DataJsonFinanciero objDataJsonDona = new DataJsonFinanciero(10,name);
                         //Se agrega el objeto a la lista
                         datos.add(objDataJsonDona);
 
@@ -107,7 +120,7 @@ public class DataGraficoDonaServlet extends HttpServlet {
     }
 
     private class DataJsonFinanciero {
-        
+
         private Number value;
         private String label;
 
@@ -131,13 +144,10 @@ public class DataGraficoDonaServlet extends HttpServlet {
         public void setLabel(String label) {
             this.label = label;
         }
-        
-
-        
-       
 
     }
 
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
