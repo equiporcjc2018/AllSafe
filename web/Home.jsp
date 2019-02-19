@@ -72,9 +72,10 @@
                                 <!-- ============================================================== -->
                                 <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
                                     <div class="card">
-                                        <h5 class="card-header">Proyectos</h5>
+                                        <h2 class="card-header">Inventario Inicial vs Entregado</h2>
+                                        <h5 class="card-header">Cantidad EPP </h5>
                                         <div class="card-body">
-                                            <div id="morris_donut2"></div>
+                                            <div id="bar-example"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -82,40 +83,7 @@
                                 <!-- end donut chart  -->
                                 <!-- ============================================================== -->
                             </div>               
-                            <div class="row">
-                                <!-- ============================================================== -->
-                                <!--bar chart  -->
-                                <!-- ============================================================== -->
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                                    <div class="card">
-                                        <h5 class="card-header">EPP</h5>
-                                        <div class="card-body">
-                                            <div id="morris_bar2"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- ============================================================== -->
-                                <!--end bar chart  -->
-                                <!-- ============================================================== -->
-                                <!-- ============================================================== -->
-                                <!--stacked chart  -->
-                                <!-- ============================================================== -->
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                                    <div class="card">
-                                        <h5 class="card-header">Inventario EPP</h5>
-                                        <div class="card-body">
-                                            <div id="morris_stacked2"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- ============================================================== -->
-                                <!--end stacked chart  -->
-                                <!-- ============================================================== -->
-                            </div>
-                            
-                            
-                            
-                            
+                           
                                 <!-- ============================================================== -->
                                 <!-- ============================================================== -->
                                 <!--Prueba otro grafico  -->
