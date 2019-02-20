@@ -72,8 +72,8 @@
                                 <!-- ============================================================== -->
                                 <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
                                     <div class="card">
-                                        <h2 class="card-header">Inventario Inicial vs Entregado</h2>
-                                        <h5 class="card-header">Cantidad EPP </h5>
+                                        <h2 class="card-header">Inventario Inicial(II) vs Entregado(E)</h2>
+                                        <h5 class="card-header">Cantidad</h5>
                                         <div class="card-body">
                                             <div id="bar-example"></div>
                                         </div>

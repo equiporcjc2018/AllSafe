@@ -178,7 +178,7 @@
           //],
           xkey: 'y',
           ykeys: ['a', 'b'],
-          labels: ['Series A', 'Series B']
+          labels: ['II', 'E']
         });
         });
             }

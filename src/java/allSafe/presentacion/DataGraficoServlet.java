@@ -74,15 +74,15 @@ public class DataGraficoServlet extends HttpServlet {
                     for (Asignacantidadepp asignaeppaproyecto : listadoEppCantidadProyecto) {
                          int obtengoProyecto = asignaeppaproyecto.getAsignaeppaproyectoIdasignaeppaproyecto().getProyectoidProyecto().getIdProyecto();
                          //int cantiProyecto2 = next.getAsignaeppaproyectoIdasignaeppaproyecto().getProyectoidProyecto().getIdProyecto();
-                        
+                        int tipoCarga = asignaeppaproyecto.getTipodecargaIdtipodecarga().getIdtipodecarga();
                             if (obtengoProyecto==recorreProy) {
-                             
-                                descripEpp2 = descripEpp2+Integer.parseInt(asignaeppaproyecto.getCantidadEppProceso().toString());
                                 name = asignaeppaproyecto.getAsignaeppaproyectoIdasignaeppaproyecto().getProyectoidProyecto().getNombreProyecto();
-                                //Number descripEpp = asignaeppaproyecto.getCantidadEppProceso();
-                                Number descripEpp = descripEpp2;
-                                cantidad = descripEpp.intValue();
-                                obtengoProyecto++;
+                                
+                                if (tipoCarga==1) {
+                                    descripEpp2 = descripEpp2+Integer.parseInt(asignaeppaproyecto.getCantidadEppProceso().toString());
+                                    Number q1_1 = descripEpp2;
+                                    cantidad = q1_1.intValue();
+                                }
                                 }
                              
                              
