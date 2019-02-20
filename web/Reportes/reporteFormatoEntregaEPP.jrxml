@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="139a01aa-ba5d-4ba3-9f6f-1c89c145d8e9">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="73"/>
+	<property name="ireport.y" value="41"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -24,6 +24,7 @@
 		</box>
 	</style>
 	<subDataset name="Table Dataset 1" uuid="52ef8052-f70a-4141-bca7-914c5bc060f3"/>
+	<subDataset name="Table Dataset 2" uuid="6d65246d-b3d3-4586-8f6c-363ae07dc771"/>
 	<parameter name="rutPersona" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -80,8 +81,7 @@ FROM
      
      where
 CURRENT_DATE - STR_TO_DATE(eppterreno.`fechaEppTerreno`,'%Y-%m-%d') = (select Min(CURRENT_DATE - STR_TO_DATE(eppterreno.`fechaEppTerreno`,'%Y-%m-%d')) from eppterreno where eppterreno.Persona_rutPasaportePersona = $P{rutPersona})
-AND eppterreno.`Persona_rutPasaportePersona` = $P{rutPersona}
-]]>
+AND eppterreno.`Persona_rutPasaportePersona` = $P{rutPersona}]]>
 	</queryString>
 	<field name="eppterreno_idEppTerreno" class="java.lang.Integer"/>
 	<field name="eppterreno_Persona_rutPasaportePersona" class="java.lang.String"/>
@@ -128,7 +128,7 @@ AND eppterreno.`Persona_rutPasaportePersona` = $P{rutPersona}
 		<band height="79" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="168" height="79" uuid="3be750a0-8146-40db-969a-58abb338968b"/>
-				<imageExpression><![CDATA["C:\\Users\\hachi\\Documents\\NetBeansProjects\\AllSafe\\AllSafe\\web\\assets\\images\\fieldcore.png"]]></imageExpression>
+				<imageExpression><![CDATA["../assets/images/fieldcore.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="168" y="52" width="237" height="27" uuid="a1a4fa00-ef5a-4a1f-b4cb-c082d0d0c006"/>
@@ -162,18 +162,10 @@ AND eppterreno.`Persona_rutPasaportePersona` = $P{rutPersona}
 				</textElement>
 				<text><![CDATA[Empleado]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="190" y="42" width="167" height="20" uuid="c606a090-3578-4d19-82df-365539323d1a"/>
-				<text><![CDATA[___________________________]]></text>
-			</staticText>
 			<textField>
 				<reportElement x="189" y="40" width="692" height="20" uuid="d5606a98-676c-4f43-9b21-3b5392a67935"/>
 				<textFieldExpression><![CDATA[$F{persona_nombresPersona} +' '+$F{persona_apePatPersona} +' '+ $F{persona_apeMatPersona}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="191" y="75" width="167" height="20" uuid="6034a63d-e7b4-482f-baca-9a9f8a4b9e4f"/>
-				<text><![CDATA[___________________________]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="66" y="75" width="168" height="25" uuid="1af1e2c0-2064-479d-9b99-98fe34f5aadc"/>
 				<textElement>
@@ -185,88 +177,170 @@ AND eppterreno.`Persona_rutPasaportePersona` = $P{rutPersona}
 				<reportElement x="191" y="75" width="166" height="20" uuid="e851d032-88fd-4194-b2a1-34f77cb3cd1a"/>
 				<textFieldExpression><![CDATA[$F{eppterreno_fechaEppTerreno}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="189" y="55" width="155" height="1" uuid="a753dd42-4815-4486-8436-beca563ff095"/>
+			</line>
+			<line>
+				<reportElement x="189" y="87" width="155" height="1" uuid="569b13e9-eacb-4d22-96c9-386f6a7662c5"/>
+			</line>
 		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="34" splitType="Stretch">
-			<staticText>
-				<reportElement x="21" y="13" width="100" height="20" uuid="ed8345e1-8d19-4695-9cb1-0ac9c917ed72"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Nombre Epp]]></text>
-			</staticText>
+			<rectangle>
+				<reportElement x="446" y="13" width="100" height="20" uuid="902558dd-8794-4c86-a4aa-b0cf29dbd702"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="346" y="13" width="100" height="20" uuid="98f6bddc-b241-4666-9736-6b4987103f03"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="246" y="13" width="100" height="20" uuid="ab81ae1d-257e-49f2-b537-edb2f1e9c732"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="189" y="13" width="57" height="20" uuid="aeb9b5e6-4782-4443-8c3e-6b0c8a78ca70"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="121" y="13" width="68" height="20" uuid="7b0e041f-9b8e-4a8d-ab86-c67c1c4e984f"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="21" y="13" width="100" height="20" uuid="b189524c-dbd6-4733-9234-022511f2d6f8"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
 			<staticText>
 				<reportElement x="121" y="13" width="68" height="20" uuid="07b748f0-bd68-44ee-a4b2-001172f72aa8"/>
-				<textElement>
+				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cantidad]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="190" y="13" width="56" height="20" uuid="e51b84df-18c0-48b0-88ac-81e41c3e1c6b"/>
-				<textElement>
+				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Talla]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="246" y="13" width="100" height="20" uuid="7f7624ec-6d27-4053-ab42-48515f330037"/>
-				<textElement>
+				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="346" y="13" width="100" height="20" uuid="d52dbeeb-2e68-415b-b26b-8bb054b0c9e1"/>
-				<textElement>
+				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Iniciales]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="446" y="13" width="100" height="20" uuid="3ab9f10a-b875-43bd-85e5-c30ba4302efd"/>
-				<textElement>
+				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Observaciones]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="21" y="13" width="100" height="20" uuid="40045810-3131-40ff-ac17-49af50f9f54f"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre EPP]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="22" splitType="Stretch">
+		<band height="23" splitType="Stretch">
+			<rectangle>
+				<reportElement x="446" y="0" width="100" height="23" uuid="3fbd7cb4-da31-420a-8bab-733a783bce0c"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="346" y="0" width="100" height="23" uuid="7939ba5b-1775-4fe9-aa3f-c64ff9c77ec4"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="246" y="0" width="100" height="23" uuid="090b0c17-d943-4a75-9323-df68f686594b"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="189" y="0" width="57" height="23" uuid="aa09d5fc-481f-4596-8ed9-3101c84031d2"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="121" y="0" width="68" height="23" uuid="96160ad8-c185-49f8-8044-299b9d5170cc"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="21" y="0" width="100" height="23" uuid="49a1ad52-0f4f-49ef-a896-6116e43272ea"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
 			<textField>
-				<reportElement x="21" y="2" width="100" height="20" uuid="b289702a-534c-4d1a-97c5-c31db40eed59"/>
+				<reportElement x="21" y="0" width="100" height="23" uuid="b289702a-534c-4d1a-97c5-c31db40eed59"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{epp_nombreEPPcol}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="121" y="2" width="68" height="20" uuid="57a41978-2fa2-40f2-ad1d-dc575ed2ae05"/>
+				<reportElement x="122" y="0" width="67" height="23" uuid="57a41978-2fa2-40f2-ad1d-dc575ed2ae05"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{eppterreno_CantidadEppTerreno}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="190" y="2" width="56" height="20" uuid="3a586e91-bb0d-4281-b695-638cb1daf87e"/>
+				<reportElement x="189" y="0" width="57" height="23" uuid="3a586e91-bb0d-4281-b695-638cb1daf87e"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{eppterreno_TallaEppTerreno}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="246" y="2" width="100" height="20" uuid="05e2d923-484a-4be8-93bb-54d0be414981"/>
+				<reportElement x="246" y="-1" width="100" height="24" uuid="05e2d923-484a-4be8-93bb-54d0be414981"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{eppterreno_fechaEppTerreno}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="346" y="2" width="467" height="20" uuid="b482eca3-271a-46de-99d1-0bb09a5fc8be"/>
+				<reportElement x="346" y="-1" width="100" height="24" uuid="b482eca3-271a-46de-99d1-0bb09a5fc8be"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{persona_nombresPersona}.substring(0,1) +'.'+$F{persona_apePatPersona}.substring(0,1) +'.'+ $F{persona_apeMatPersona}.substring(0,1)]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="446" y="2" width="100" height="20" uuid="ce504771-e5f9-490d-bc08-bb8c8f50dba0"/>
+				<reportElement x="446" y="0" width="100" height="23" uuid="ce504771-e5f9-490d-bc08-bb8c8f50dba0"/>
+				<textElement textAlignment="Center">
+					<font isStrikeThrough="false"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{eppterreno_observacionEppTerreno}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
 		<band height="183" splitType="Stretch">
-			<staticText>
-				<reportElement x="121" y="87" width="325" height="20" uuid="692912e0-7458-4ca9-aabe-ecb3259daaf7"/>
-				<text><![CDATA[________________________________________________________]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="189" y="107" width="185" height="20" uuid="e7770c7f-a731-4f48-b308-cbe3927fec4f"/>
 				<textElement textAlignment="Center"/>
@@ -280,6 +354,15 @@ AND eppterreno.`Persona_rutPasaportePersona` = $P{rutPersona}
 				<reportElement x="121" y="142" width="100" height="20" uuid="0b2a539e-95f1-49f0-8815-3ec5a069d670"/>
 				<textFieldExpression><![CDATA[$F{nombre_usuario}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="121" y="98" width="297" height="1" uuid="0458ffd6-a7f9-4039-9b79-8e1c0c9c06ae"/>
+			</line>
+			<line>
+				<reportElement x="120" y="155" width="175" height="1" uuid="a7ef1366-0d8c-4f5f-bccd-6cf222676942"/>
+			</line>
+			<line>
+				<reportElement x="120" y="175" width="175" height="1" uuid="29afb548-c302-485e-a2fc-73fec2388a09"/>
+			</line>
 		</band>
 	</columnFooter>
 	<pageFooter>
@@ -306,14 +389,6 @@ AND eppterreno.`Persona_rutPasaportePersona` = $P{rutPersona}
 			<staticText>
 				<reportElement x="21" y="-41" width="100" height="20" uuid="6c344967-e442-4b80-a188-22ddc46b0a71"/>
 				<text><![CDATA[Nombre y Firma]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="121" y="-41" width="199" height="20" uuid="bb2dfc4d-98c6-4e42-8b6f-caa2090ba170"/>
-				<text><![CDATA[_________________________________]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="121" y="-20" width="199" height="20" uuid="5b14b62d-70d7-450c-b733-0c0b0ff4ef15"/>
-				<text><![CDATA[_________________________________]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="21" y="-21" width="100" height="20" uuid="6cbb2618-cd13-45e9-98d3-99a40a4bb674"/>
