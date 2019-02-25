@@ -45,6 +45,11 @@ public class AsignarDAOSessionBean {
         return em.createNamedQuery("Asignacantidadepp.findAll", Asignacantidadepp.class).getResultList();
 
     }
+    public List<Asignacantidadepp> getAllDevolucion() throws ControllerException{
+        
+        return em.createNamedQuery("Asignacantidadepp.findDevolucion", Asignacantidadepp.class).getResultList();
+
+    }
     public List<Proyecto> getGrafico() throws ControllerException{
         
         return em.createNamedQuery("Proyecto.findAll", Proyecto.class).getResultList();

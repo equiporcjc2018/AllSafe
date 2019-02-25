@@ -178,7 +178,7 @@
           //],
           xkey: 'y',
           ykeys: ['a', 'b'],
-          labels: ['II', 'E']
+          labels: ['Inventario Inicial', 'Epp Entregado']
         });
         });
             }

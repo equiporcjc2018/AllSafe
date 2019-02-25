@@ -34,20 +34,20 @@
        
        
         <script>
-             $(document).ready(function ($)
-            {
-                $('#listadoInventario').DataTable({
-                  info: true,
-                  paging: true,
-                  ordering: true,
-                  searching: true,
-            dom: "B",
-            buttons: [
-                //'copy', 'csv', 'excel', 'pdf', 'print',
-                'excel', 'pdf',
-            ]    
-                });   
-            });
+           //  $(document).ready(function ($)
+            //{
+             //   $('#listadoEppCantidadProyecto').DataTable({
+               //   info: true,
+               //   paging: true,
+               //   ordering: true,
+               //   searching: true,
+           // dom: "B",
+           // buttons: [
+             //   //'copy', 'csv', 'excel', 'pdf', 'print',
+              //  'excel', 'pdf',
+            //]    
+              //  });   
+           // });
         </script> 
         
         
@@ -63,16 +63,18 @@
                 <jsp:include page="./listarEppsServlet" flush="true"/>
                 <jsp:include page="./listarEppProyectoServlet" flush="true"/>
                 <jsp:include page="./listarEstadoProyectoServlet" flush="true"/> 
-                 
+                <jsp:include page="./listarCantidadEppProyectoServlet" flush="true"/> 
                 <jsp:include page="./listarInventarioServlet" flush="true"/> 
-                <jsp:include page="./cargaPaisServlet" flush="true"/> 
+                <jsp:include page="./cargaPaisServlet" flush="true"/>
+                
+                <jsp:include page="./listarDevolucionToolServlet" flush="true"/> 
                 <jsp:useBean id="epp" class="allSafe.Entities.Epp" scope="page"/>
                 <jsp:useBean id="proyecto" class="allSafe.Entities.Proyecto" scope="page"/>
                 <jsp:useBean id="pais" class="allSafe.Entities.Pais" scope="page"/>
                 
                 <jsp:useBean id="estadoproyecto" class="allSafe.Entities.Estadosproyecto" scope="page"/>
                 
-                <jsp:useBean id="listadoInventario" class="allSafe.Entities.Asignacantidadepp" scope="page"/>
+                <jsp:useBean id="listadoDevolucion" class="allSafe.Entities.Asignacantidadepp" scope="page"/>
                 <!-- ============================================================== -->
                 <!-- main wrapper -->
                 <!-- ============================================================== -->
@@ -100,52 +102,40 @@
                             <div class="row">
 
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <h3 class="text-center">Asignar EPP a Proyecto</h3>
+                                    <h3 class="text-center">Devolucion EPP a Tool Center</h3>
                                     <form name="frmRegistroEppProy" method="post" action="./registroCargaEppCantidad">
                                         
                                         <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
                                         <div class="card">
-                                            <h2 class="card-header">Listado de Cantidades de Epp</h2>
+                                            <h2 class="card-header">Listado de Cantidades de Epp por proyecto</h2>
                                             <div class="card-body">
 
 
                                                 <div class="table-responsive">
                                                     <c:choose>
-                                                        <c:when test="${sessionScope.listadoInventario!=null}">
+                                                        <c:when test="${sessionScope.listadoDevolucion!=null}">
                                                             
-                                                            <table class="table table-striped table-bordered"  id="listadoInventario">
+                                                            <table class="table table-striped table-bordered"  id="listadoDevolucion">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Id</th>
-                                                                        <th>Número Proyecto</th>
-                                                                        <th>Nombre Proyecto</th>
-                                                                        <th>Nombre Epp</th>
-                                                                        <th>Cantidad</th>
-                                                                        <th>Devolver Tool Center</th>      
+                                                                        <th>Suma</th>
+                                                                             
                                                                     </tr> 
                                                                 </thead>
                                                                 <tfoot>
                                                                     <tr>
                                                                         <th>Id</th>
-                                                                        <th>Número Proyecto</th>
-                                                                        <th>Nombre Proyecto</th>
-                                                                        <th>Nombre Epp</th>
-                                                                        <th>Cantidad</th>
-                                                                        <th>Devolver Tool Center</th>       
+                                                                        <th>Suma</th>
+                                                                             
                                                                     </tr> 
                                                                 </tfoot>
                                                                 <tbody>
-                                                                    <c:forEach items="${sessionScope.listadoInventario}" var="listadoInventario">
+                                                                    <c:forEach items="${sessionScope.listadoDevolucion}" var="listadoDevolucion">
                                                                         <tr>
-                                                                            
-                                                                            
-                                                                            <td><c:out value="${listadoInventario.asignaeppaproyectoIdasignaeppaproyecto.proyectoidProyecto.nombreProyecto}"/></td>
-                                                                            
-                                                                            <td><c:out value="${listadoInventario.cantidadEppProceso}"/></td>
-                                                                            
-                                                                            
-                                                                           
-                                                                            
+                                                                            <td><c:out value="${listadoDevolucion.idEppProceso}"/></td>
+                                                                            <td><c:out value="${listadoDevolucion.cantidadEppProceso}"/></td>
+                                                                          
                                                                             <td><input type="button" class="btn btn-info btn-space"  name="btnEliminar" value="Devolver"/></td>
                                                                         </tr>
                                                                     </c:forEach>
@@ -203,7 +193,7 @@
                 <!-- end main wrapper -->
                 <!-- ============================================================== -->
                 <!-- Optional JavaScript -->
-                <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+                <!--<script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>-->
                 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
                 <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
                 <script src="assets/libs/js/main-js.js"></script> 
