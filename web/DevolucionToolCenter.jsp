@@ -119,22 +119,27 @@
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Id</th>
-                                                                        <th>Suma</th>
+                                                                        <th>Nombre</th>
+                                                                        <th>Inventario</th>
+                                                                        <th>Devolver</th>
                                                                              
                                                                     </tr> 
                                                                 </thead>
                                                                 <tfoot>
                                                                     <tr>
                                                                         <th>Id</th>
-                                                                        <th>Suma</th>
+                                                                        <th>Nombre</th>
+                                                                        <th>Inventario</th>
+                                                                        <th>Devolver</th>
                                                                              
                                                                     </tr> 
                                                                 </tfoot>
                                                                 <tbody>
                                                                     <c:forEach items="${sessionScope.listadoDevolucion}" var="listadoDevolucion">
                                                                         <tr>
-                                                                            <td><c:out value="${listadoDevolucion.idEppProceso}"/></td>
-                                                                            <td><c:out value="${listadoDevolucion.cantidadEppProceso}"/></td>
+                                                                            <td><c:out value="${listadoDevolucion[0]}"/></td>
+                                                                            <td><c:out value="${listadoDevolucion[1]}"/></td>
+                                                                            <td><c:out value="${listadoDevolucion[2]}"/></td>
                                                                           
                                                                             <td><input type="button" class="btn btn-info btn-space"  name="btnEliminar" value="Devolver"/></td>
                                                                         </tr>
@@ -156,7 +161,7 @@
 
                                         <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
                                             <div class="card">
-                                                <h2 class="card-header">Ingresar Cantidad</h2>
+                                                <h2 class="card-header">Devolución Tool Center</h2>
                                                 <div class="card-body">
 
                                                     <p><button type="submit" class="btn btn-success">Registrar</button></p>

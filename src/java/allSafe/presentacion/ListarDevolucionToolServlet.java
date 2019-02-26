@@ -32,7 +32,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "ListarDevolucionToolServlet", urlPatterns = {"/listarDevolucionToolServlet"})
 public class ListarDevolucionToolServlet extends HttpServlet {
 
-   @EJB
+    @EJB
     AsignarDAOSessionBean objAsignarDAOSessionBean;
 
     
@@ -41,13 +41,13 @@ public class ListarDevolucionToolServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sesion= request.getSession();
         List<Asignacantidadepp> listadoDevolucion;
-        
-                                
+                                       
         try {
-           
-            listadoDevolucion = objAsignarDAOSessionBean.getAllDevolucion();
+            //listadoDevolucion = objAsignarDAOSessionBean.getAllDevolucion();
+            listadoDevolucion = objAsignarDAOSessionBean.NewEncontarSqlArmado();
             sesion.setAttribute("listadoDevolucion", listadoDevolucion);
-        } catch (ControllerException ex) {
+            
+        } catch (Exception ex) {
             Logger.getLogger(ListarEppsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 

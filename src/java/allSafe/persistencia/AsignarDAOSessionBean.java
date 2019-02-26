@@ -16,10 +16,13 @@ import allSafe.dto.PersonaProyectoDTO;
 import allSafe.dto.EppCantidadDTO;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -50,6 +53,18 @@ public class AsignarDAOSessionBean {
         return em.createNamedQuery("Asignacantidadepp.findDevolucion", Asignacantidadepp.class).getResultList();
 
     }
+    
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<Asignacantidadepp> NewEncontarSqlArmado() {
+        List<Asignacantidadepp> archivosList= null;
+
+        Query query = em.createNamedQuery("Asignacantidadepp.findDevolucion");
+        //query.setParameter("asignatura", asignatura);
+        archivosList= query.getResultList();
+
+        return archivosList;
+    }
+    
     public List<Proyecto> getGrafico() throws ControllerException{
         
         return em.createNamedQuery("Proyecto.findAll", Proyecto.class).getResultList();

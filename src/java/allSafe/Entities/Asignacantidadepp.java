@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Asignacantidadepp.findAll", query = "SELECT a FROM Asignacantidadepp a")
     , @NamedQuery(name = "Asignacantidadepp.findByIdEppProceso", query = "SELECT a FROM Asignacantidadepp a WHERE a.idEppProceso = :idEppProceso")
-    , @NamedQuery(name = "Asignacantidadepp.findDevolucion", query = "SELECT a.asignaeppaproyectoIdasignaeppaproyecto.proyectoidProyecto.idProyecto,SUM(a.cantidadEppProceso) FROM Asignacantidadepp a GROUP BY a.asignaeppaproyectoIdasignaeppaproyecto.proyectoidProyecto.idProyecto")
+    , @NamedQuery(name = "Asignacantidadepp.findDevolucion", query = "SELECT a.asignaeppaproyectoIdasignaeppaproyecto.proyectoidProyecto.idProyecto,a.asignaeppaproyectoIdasignaeppaproyecto.proyectoidProyecto.nombreProyecto,SUM(a.cantidadEppProceso) FROM Asignacantidadepp a GROUP BY a.asignaeppaproyectoIdasignaeppaproyecto.proyectoidProyecto.idProyecto,a.asignaeppaproyectoIdasignaeppaproyecto.proyectoidProyecto.nombreProyecto")
     , @NamedQuery(name = "Asignacantidadepp.findByGrafico", query = "SELECT a.asignaeppaproyectoIdasignaeppaproyecto.proyectoidProyecto.idProyecto FROM Asignacantidadepp a")
     , @NamedQuery(name = "Asignacantidadepp.findByCantidad", query = "SELECT SUM(a.cantidadEppProceso) as Cantidad FROM Asignacantidadepp a GROUP BY a.asignaeppaproyectoIdasignaeppaproyecto.proyectoidProyecto.nombreProyecto")
     , @NamedQuery(name = "Asignacantidadepp.findByFechaCreacionEppProceso", query = "SELECT a FROM Asignacantidadepp a WHERE a.fechaCreacionEppProceso = :fechaCreacionEppProceso")
