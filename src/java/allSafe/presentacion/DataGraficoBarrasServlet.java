@@ -84,7 +84,7 @@ public class DataGraficoBarrasServlet extends HttpServlet {
                                     cantidad1 = q_1.intValue();
                                 }
                                 if (tipoCarga==3) {
-                                    cantidad2 = cantidad2+Integer.parseInt(asignaeppaproyecto.getCantidadEppProceso().toString());
+                                    cantidad2 = cantidad2-Integer.parseInt(asignaeppaproyecto.getCantidadEppProceso().toString());
                                     Number q_2 = cantidad2;
                                     cantidad2 = q_2.intValue();
                                 }
