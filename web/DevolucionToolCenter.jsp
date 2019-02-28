@@ -34,20 +34,20 @@
        
        
         <script>
-           //  $(document).ready(function ($)
-            //{
-             //   $('#listadoEppCantidadProyecto').DataTable({
-               //   info: true,
-               //   paging: true,
-               //   ordering: true,
-               //   searching: true,
-           // dom: "B",
-           // buttons: [
-             //   //'copy', 'csv', 'excel', 'pdf', 'print',
-              //  'excel', 'pdf',
-            //]    
-              //  });   
-           // });
+             $(document).ready(function ($)
+            {
+                $('#listadoDevolucion').DataTable({
+                  info: true,
+                  paging: true,
+                  ordering: true,
+                  searching: true,
+            dom: "B",
+            buttons: [
+                //'copy', 'csv', 'excel', 'pdf', 'print',
+                'excel', 'pdf',
+            ]    
+                });   
+            });
         </script> 
         
         
@@ -103,7 +103,7 @@
 
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <h3 class="text-center">Devolucion EPP a Tool Center</h3>
-                                    <form name="frmRegistroEppProy" method="post" action="./registroCargaEppCantidad">
+                                    <form name="frmRegistroEppProy" method="post" action="./registrarDevolucionToolCenterServlet">
                                         
                                         <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
                                         <div class="card">
@@ -120,8 +120,11 @@
                                                                     <tr>
                                                                         <th>Id</th>
                                                                         <th>Nombre</th>
-                                                                        <th>Inventario</th>
+                                                                        <th>Epp</th>
+                                                                        <th>Stock</th>
                                                                         <th>Devolver</th>
+                                                                        <th>BotonForm</th>
+                                                                        <th>Selección</th>
                                                                              
                                                                     </tr> 
                                                                 </thead>
@@ -129,8 +132,11 @@
                                                                     <tr>
                                                                         <th>Id</th>
                                                                         <th>Nombre</th>
-                                                                        <th>Inventario</th>
+                                                                        <th>Epp</th>
+                                                                        <th>Stock</th>
                                                                         <th>Devolver</th>
+                                                                        <th>BotonForm</th>
+                                                                        <th>Selección</th>
                                                                              
                                                                     </tr> 
                                                                 </tfoot>
@@ -140,12 +146,23 @@
                                                                             <td><c:out value="${listadoDevolucion[0]}"/></td>
                                                                             <td><c:out value="${listadoDevolucion[1]}"/></td>
                                                                             <td><c:out value="${listadoDevolucion[2]}"/></td>
+                                                                            <td><c:out value="${listadoDevolucion[3]}"/></td>
                                                                           
-                                                                            <td><input type="button" class="btn btn-info btn-space"  name="btnEliminar" value="Devolver"/></td>
+                                                                            <td><input type="button" class="btn btn-info btn-space"  name="btnDevolver" value="Devolver"/></td>
+                                                                            <td><button type="submit" class="btn btn-success">Registrar</button></td>
+                                                                            <td>
+                                                                                    <div class="custom-control custom-checkbox">
+                                                                                        <input  type="checkbox" id="listadoDevolucion${listadoDevolucion[2]}" name="chkDevIdEpp" value="${listadoDevolucion[2]}" class="custom-control-input">
+                                                                                        <label class="custom-control-label" for="listadoDevolucion${listadoDevolucion[2]}"></label>
+                                                                                        
+                                                                                    </div>
+
+                                                                                </td>
                                                                         </tr>
                                                                     </c:forEach>
                                                                 </tbody>
                                                             </table>
+                                                                
                                                         </c:when>
 
                                                         <c:otherwise>
