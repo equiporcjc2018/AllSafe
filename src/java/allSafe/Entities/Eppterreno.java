@@ -30,7 +30,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "eppterreno")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Eppterreno.findAll", query = "SELECT e FROM Eppterreno e")
+    @NamedQuery(
+            name="Eppterreno.buscarEppTerrenoXRut",
+            query="SELECT e FROM Eppterreno e WHERE e.personarutPasaportePersona.rutPasaportePersona =:rutPasaportePersona")
+    , @NamedQuery(name = "Eppterreno.findAll", query = "SELECT e FROM Eppterreno e")
     , @NamedQuery(name = "Eppterreno.findByIdEppTerreno", query = "SELECT e FROM Eppterreno e WHERE e.idEppTerreno = :idEppTerreno")
     , @NamedQuery(name = "Eppterreno.findByFechaEppTerreno", query = "SELECT e FROM Eppterreno e WHERE e.fechaEppTerreno = :fechaEppTerreno")
     , @NamedQuery(name = "Eppterreno.findByEstadoEppTerreno", query = "SELECT e FROM Eppterreno e WHERE e.estadoEppTerreno = :estadoEppTerreno")

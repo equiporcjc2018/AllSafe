@@ -63,7 +63,7 @@
                                     <a class="nav-link" href="/AllSafe/EjemploReporte.jsp">Reporte de entrega a cliente<span class="badge badge-secondary">Reporte de entrega a cliente</span></a>
                                 </li>    
                                 <li class="nav-item">
-                                    <a class="nav-link" href="">Reporte de entrega histórico por trabajador<span class="badge badge-secondary">Reporte de entrega histórico por trabajador</span></a>
+                                    <a class="nav-link" href="/AllSafe/ReporteHistoricoXTrabajador.jsp">Reporte de entrega histórico por trabajador<span class="badge badge-secondary">Reporte de entrega histórico por trabajador</span></a>
                                 </li>    
                                 <li class="nav-item">
                                     <a class="nav-link" href="">Reporte de inventario<span class="badge badge-secondary">Reporte de inventario</span></a>

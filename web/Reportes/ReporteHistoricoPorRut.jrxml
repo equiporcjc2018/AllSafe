@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="800216c2-d807-404b-af2d-2668f5f370da">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="63"/>
+	<parameter name="rutTrabajador" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     eppterreno.`idEppTerreno` AS eppterreno_idEppTerreno,
+     eppterreno.`Persona_rutPasaportePersona` AS eppterreno_Persona_rutPasaportePersona,
+     eppterreno.`fechaEppTerreno` AS eppterreno_fechaEppTerreno,
+     eppterreno.`idUsuario` AS eppterreno_idUsuario,
+     eppterreno.`Proyecto_idProyecto` AS eppterreno_Proyecto_idProyecto,
+     eppterreno.`EstadoEppTerreno` AS eppterreno_EstadoEppTerreno,
+     eppterreno.`EPP_idEPP` AS eppterreno_EPP_idEPP,
+     eppterreno.`CantidadEppTerreno` AS eppterreno_CantidadEppTerreno,
+     eppterreno.`TallaEppTerreno` AS eppterreno_TallaEppTerreno,
+     eppterreno.`observacionEppTerreno` AS eppterreno_observacionEppTerreno,
+     eppterreno.`firmaEppTerreno` AS eppterreno_firmaEppTerreno,
+     eppterreno.`tipoEntregaEppTerreno` AS eppterreno_tipoEntregaEppTerreno,
+     persona.`rutPasaportePersona` AS persona_rutPasaportePersona,
+     persona.`EmployeeId` AS persona_EmployeeId,
+     persona.`nombresPersona` AS persona_nombresPersona,
+     persona.`apePatPersona` AS persona_apePatPersona,
+     persona.`apeMatPersona` AS persona_apeMatPersona,
+     persona.`fechaNacPersona` AS persona_fechaNacPersona,
+     persona.`nacionalidadPersona` AS persona_nacionalidadPersona,
+     persona.`TipoPlanta_idTipoPlanta` AS persona_TipoPlanta_idTipoPlanta,
+     persona.`correoPersona` AS persona_correoPersona,
+     persona.`Cargo_idCargo` AS persona_Cargo_idCargo,
+     persona.`tallaZApato_idtallaZApato` AS persona_tallaZApato_idtallaZApato,
+     persona.`tallaPoleraCamisa_idtallaPoleraCamisa` AS persona_tallaPoleraCamisa_idtallaPoleraCamisa,
+     persona.`TallaPantalon_idTallaPantalon` AS persona_TallaPantalon_idTallaPantalon,
+     persona.`TallaOberol_idTallaOberol` AS persona_TallaOberol_idTallaOberol,
+     persona.`vigentepersona` AS persona_vigentepersona,
+     epp.`idEPP` AS epp_idEPP,
+     epp.`nombreEPPcol` AS epp_nombreEPPcol,
+     epp.`descripcionEPP` AS epp_descripcionEPP,
+     epp.`TipoEPP_idTipoEPP` AS epp_TipoEPP_idTipoEPP,
+     epp.`vigenteepp` AS epp_vigenteepp,
+     usuarioallsafe.`idUsuarioAllSafe` AS usuarioallsafe_idUsuarioAllSafe,
+     usuarioallsafe.`loginUsuarioAllSafe` AS usuarioallsafe_loginUsuarioAllSafe,
+     usuarioallsafe.`passUsuarioAllSafe` AS usuarioallsafe_passUsuarioAllSafe,
+     usuarioallsafe.`Persona_rutPasaportePersona` AS usuarioallsafe_Persona_rutPasaportePersona,
+     usuarioallsafe.`PerfilAllSafe_idPerfilAllSafe` AS usuarioallsafe_PerfilAllSafe_idPerfilAllSafe,
+     (SELECT
+     CONCAT(persona.nombresPersona,' ',persona.apePatPersona,' ',persona.apeMatPersona) AS persona_nombresPersona
+     
+FROM
+     `persona` persona INNER JOIN `usuarioallsafe` usuarioallsafe ON persona.`rutPasaportePersona` = usuarioallsafe.`Persona_rutPasaportePersona`
+    where usuarioallsafe.idUsuarioAllSafe = eppterreno.idUsuario ) as nombre_usuario
+    
+FROM
+     `persona` persona INNER JOIN `eppterreno` eppterreno ON persona.`rutPasaportePersona` = eppterreno.`Persona_rutPasaportePersona`
+     INNER JOIN `epp` epp ON eppterreno.`EPP_idEPP` = epp.`idEPP`
+     INNER JOIN `usuarioallsafe` usuarioallsafe ON eppterreno.`idUsuario` = usuarioallsafe.`idUsuarioAllSafe`
+
+     
+where eppterreno.`Persona_rutPasaportePersona` = $P{rutTrabajador}]]>
+	</queryString>
+	<field name="eppterreno_idEppTerreno" class="java.lang.Integer"/>
+	<field name="eppterreno_Persona_rutPasaportePersona" class="java.lang.String"/>
+	<field name="eppterreno_fechaEppTerreno" class="java.lang.String"/>
+	<field name="eppterreno_idUsuario" class="java.lang.Integer"/>
+	<field name="eppterreno_Proyecto_idProyecto" class="java.lang.Integer"/>
+	<field name="eppterreno_EstadoEppTerreno" class="java.lang.String"/>
+	<field name="eppterreno_EPP_idEPP" class="java.lang.Integer"/>
+	<field name="eppterreno_CantidadEppTerreno" class="java.lang.Integer"/>
+	<field name="eppterreno_TallaEppTerreno" class="java.lang.String"/>
+	<field name="eppterreno_observacionEppTerreno" class="java.lang.String"/>
+	<field name="eppterreno_firmaEppTerreno" class="java.lang.Object"/>
+	<field name="eppterreno_tipoEntregaEppTerreno" class="java.lang.String"/>
+	<field name="persona_rutPasaportePersona" class="java.lang.String"/>
+	<field name="persona_EmployeeId" class="java.lang.Integer"/>
+	<field name="persona_nombresPersona" class="java.lang.String"/>
+	<field name="persona_apePatPersona" class="java.lang.String"/>
+	<field name="persona_apeMatPersona" class="java.lang.String"/>
+	<field name="persona_fechaNacPersona" class="java.lang.String"/>
+	<field name="persona_nacionalidadPersona" class="java.lang.String"/>
+	<field name="persona_TipoPlanta_idTipoPlanta" class="java.lang.Integer"/>
+	<field name="persona_correoPersona" class="java.lang.String"/>
+	<field name="persona_Cargo_idCargo" class="java.lang.Integer"/>
+	<field name="persona_tallaZApato_idtallaZApato" class="java.lang.Integer"/>
+	<field name="persona_tallaPoleraCamisa_idtallaPoleraCamisa" class="java.lang.Integer"/>
+	<field name="persona_TallaPantalon_idTallaPantalon" class="java.lang.Integer"/>
+	<field name="persona_TallaOberol_idTallaOberol" class="java.lang.Integer"/>
+	<field name="persona_vigentepersona" class="java.lang.String"/>
+	<field name="epp_idEPP" class="java.lang.Integer"/>
+	<field name="epp_nombreEPPcol" class="java.lang.String"/>
+	<field name="epp_descripcionEPP" class="java.lang.String"/>
+	<field name="epp_TipoEPP_idTipoEPP" class="java.lang.Integer"/>
+	<field name="epp_vigenteepp" class="java.lang.String"/>
+	<field name="usuarioallsafe_idUsuarioAllSafe" class="java.lang.Integer"/>
+	<field name="usuarioallsafe_loginUsuarioAllSafe" class="java.lang.String"/>
+	<field name="usuarioallsafe_passUsuarioAllSafe" class="java.lang.String"/>
+	<field name="usuarioallsafe_Persona_rutPasaportePersona" class="java.lang.String"/>
+	<field name="usuarioallsafe_PerfilAllSafe_idPerfilAllSafe" class="java.lang.Integer"/>
+	<field name="nombre_usuario" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="94" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="23" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="99" y="0" width="68" height="22" uuid="89de028b-2f10-42e5-9b99-155b68d78917"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="22" uuid="d21762d5-7a2c-451f-b22e-99d81da236d2"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre EPP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="0" width="56" height="22" uuid="3f08c6dc-ee95-45fd-9213-fffe2f5eec76"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Talla]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="221" y="0" width="100" height="22" uuid="93e843ec-0f94-404f-b818-615326b7b74d"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="419" y="0" width="100" height="22" uuid="a1cfd9fd-7a61-4b6a-80bd-50831c9ee28a"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observaciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="100" height="22" uuid="480522ea-e403-4fa6-9dc8-f00171a74719"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Iniciales]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="23" uuid="381165cc-2378-4631-a51f-1db72d5752d6"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{epp_nombreEPPcol}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="99" y="0" width="67" height="23" uuid="b93a07ab-90e7-4b0c-9b48-f391d80aeb83"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{eppterreno_CantidadEppTerreno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="165" y="0" width="57" height="23" uuid="e351bc0d-befe-44ee-8385-fc9104c049f2"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{eppterreno_TallaEppTerreno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="221" y="0" width="100" height="23" uuid="ff2cc3fe-18ae-4485-a40b-529ab11241fb"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{eppterreno_fechaEppTerreno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="0" width="100" height="23" uuid="694cb2f2-fd54-4eda-9958-dacd69bb6b35"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{persona_nombresPersona}.substring(0,1) +'.'+$F{persona_apePatPersona}.substring(0,1) +'.'+ $F{persona_apeMatPersona}.substring(0,1)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="0" width="100" height="23" uuid="723b6e00-133a-4b38-a05f-a593a7ba2f87"/>
+				<textElement textAlignment="Center">
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{eppterreno_observacionEppTerreno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

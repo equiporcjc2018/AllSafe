@@ -10,6 +10,8 @@ import allSafe.dto.EppTerrenoProyectoEPPPErsonalDTO;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -45,5 +47,12 @@ public class EppTerrenoDaoSessionsBeans {
         
         
         em.persist(objEppterreno);
+    }
+    
+    public List<Eppterreno> buscaEppTerrenoXRut(String rut) {
+        
+                return em.createNamedQuery("Eppterreno.buscarEppTerrenoXRut", Eppterreno.class)
+                .setParameter("rutPasaportePersona", rut)
+                .getResultList();  
     }
 }
