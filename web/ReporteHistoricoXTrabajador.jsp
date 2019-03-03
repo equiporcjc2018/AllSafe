@@ -33,7 +33,10 @@
                 <script src=" //cdn.datatables.net/buttons/1.4.2/js/buttons.print.min.js"></script>
         
         <title>Reporte Historico Por Rut de Trabajador</title>
+        <!--img src="assets/images/fieldcore.png" width="483px" height="150px"/-->
         
+
+
         <script>
             $(document).ready(function ($)
             {
@@ -49,8 +52,7 @@
                 'copy', 'csv', 'excel', 'pdf', 'print'
                 
             ]
-            
-                    
+                  
                 });
                 
                 
