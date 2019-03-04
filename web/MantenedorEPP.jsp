@@ -39,6 +39,17 @@
                 obj.checked = true;
             }
         </script>
+        <script>
+            function cargarArchivo(elemento){
+                 var file = elemento.files[0];
+                 var objHidden = document.frmRegistroEPP.nombre;
+                 objHidden.value = file.name;
+                 document.frmRegistroEPP.target = "null";
+                 //document.frmRegistroEPP.action = "/registroCargaMasivaEppServlet";
+                 //document.frmRegistroEPP.submit();
+                 
+            }
+        </script>
     </head>
 
     <body>
@@ -115,12 +126,15 @@
                                                     <hr>
                                                     
                                                 </form>
-                                                <form name="frmRegistroEPP" method="post" action="./registroCargaMasivaEppServlet" enctype="multipart/form-data">
+                                                <form name="frmRegistroEPP" method="post"  enctype="multipart/form-data" action="./registroCargaMasivaEppServlet">
                                                             <div class="form-group">
                                                                 <label for="exampleFormControlFile1">Llenar tabla Con Archivo CVS. o XLS</label>
-                                                                <input type="file" name="file" class="form-control-file">
+                                                                <input type="file" accept="csv" name="archivo" class="form-control-file" onchange="cargarArchivo(this)">
+                                                                <!--input type="file" webkitdirectory directory multiple/-->
                                                             </div>
                                                     <input type="submit" class="btn btn-dark btn-space" name="btnCargar" value="Cargar csv">
+                                                    <input type="hidden" name="nombre" value="">
+                                                    <iframe name="null" style="display: none;"></iframe>
                                                     <hr>
                                                 </form>
                                             </div>

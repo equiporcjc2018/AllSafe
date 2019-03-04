@@ -15,11 +15,14 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +35,7 @@ import javax.servlet.http.Part;
  * @author Ruben
  */
 @WebServlet(name = "RegistroCargaMasivaEppServlet", urlPatterns = {"/registroCargaMasivaEppServlet"})
+@MultipartConfig
 public class RegistroCargaMasivaEppServlet extends HttpServlet {
 
     @EJB
@@ -61,6 +65,20 @@ public class RegistroCargaMasivaEppServlet extends HttpServlet {
         //String csvFile=request.getParameter("file");
         //String csvFile = filePart.getSubmittedFileName();
         //String csvFile = request.getPart("cargaMasivaEpp");
+        String nombre = request.getParameter("nombre");
+        Part archivo = request.getPart("archivo");
+        //String csvFile = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
+        
+        
+        
+        InputStream is = archivo.getInputStream();
+        
+        
+        String csvFile2 = archivo.getContentType();
+        String csvFile3 = archivo.getHeader(nombre);
+        String csvFile4 = archivo.getName();
+        String csvFile5 = archivo.getSubmittedFileName();
+        
         
         BufferedReader br = null;
         String line = "";
@@ -83,15 +101,15 @@ public class RegistroCargaMasivaEppServlet extends HttpServlet {
                    
                     //try {
                         //String nombre = request.getParameter("txtnombre");
-                        String nombre = datos[0];
+                        String nombre2 = datos[0];
                         //String descripcion = request.getParameter("txtDescripcion");
                         String descripcion = datos[1];
                         //String tipoEpp = request.getParameter("RDBtipoEPP");
                         String tipoEpp = datos[2];
                         String vigente = "Si";
                         //String vigente = datos[3];
-                        if (!(nombre == null || descripcion == null ||tipoEpp == null )) {
-                            objEpp.setNombreEPPcol(nombre);
+                        if (!(nombre2 == null || descripcion == null ||tipoEpp == null )) {
+                            objEpp.setNombreEPPcol(nombre2);
                             objEpp.setDescripcionEPP(descripcion);
                             objEpp.setVigenteepp(vigente);
                             objTipoepp = objTipoEppDAOSessionBean.buscaTipoEPPXID(Integer.parseInt(tipoEpp));
