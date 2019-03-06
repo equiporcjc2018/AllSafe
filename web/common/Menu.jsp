@@ -51,6 +51,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="/AllSafe/DevolucionToolCenter.jsp">Devolución Tool Center<span class="badge badge-secondary">Asignar EPP a Persona</span></a>
                                 </li>    
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/AllSafe/DevolucionToolCenter2.jsp">Devolución Tool Center2<span class="badge badge-secondary">Dev Tool</span></a>
+                                </li>    
                             </ul>
                         </div>
                     </li>
