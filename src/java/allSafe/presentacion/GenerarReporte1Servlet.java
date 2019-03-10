@@ -39,13 +39,19 @@ public class GenerarReporte1Servlet extends HttpServlet {
             throws ServletException, IOException {
          HttpSession sesion= request.getSession();
            ServletContext context = request.getServletContext();
-        File reportfile = new File (context.getRealPath("reportes/reporteFormatoEntregaEPP.jasper"));
+        try{
+           File reportfile = new File (context.getRealPath("Reportes/reporteFormatoEntregaEPP.jasper"));
         
         Map<String,Object> parameter = new HashMap<String,Object>();
         
         String rut = (String) request.getParameter("txtRutPersona");
+        if (rut==null) {
+            rut = "10.000.000-1";
+        }
+        else
+        {
         parameter.put("rutPersona", rut);
-        try{
+        
             Connection con = Conexion.getConexion();
             byte[] bytes = JasperRunManager.runReportToPdf(reportfile.getPath(), parameter, con);
 
@@ -58,10 +64,12 @@ public class GenerarReporte1Servlet extends HttpServlet {
             outputstream.close();
 
             response.sendRedirect("EjemploReporte.jsp");
+        }
         }catch(Exception ex){
             System.out.println("problemas al leer la BD "+ex.getMessage());
             response.sendRedirect("EjemploReporte.jsp");
-        }   
+        }
+        
     }
 
   
