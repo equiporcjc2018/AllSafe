@@ -73,10 +73,10 @@
                 <jsp:useBean id="pais" class="allSafe.Entities.Pais" scope="page"/>
                 
                 <jsp:useBean id="estadoproyecto" class="allSafe.Entities.Estadosproyecto" scope="page"/>
-                
-                <jsp:useBean id="listadoDevolucion" class="allSafe.Entities.Asignacantidadepp" scope="page"/>
+                <jsp:useBean id="listadoReasignacion" class="allSafe.Entities.Asignacantidadepp" scope="page"/>
+                <!--jsp:useBean id="listadoDevolucion" class="allSafe.Entities.Asignacantidadepp" scope="page"/-->
                 <c:choose>
-                    <c:when test="${rutBuscadoHistorico==null && PersonaBuscada==null}">
+                    <c:when test="${listadoDevolucion==null}">
                         <!-- ============================================================== -->
                 <!-- main wrapper -->
                 <!-- ============================================================== -->
@@ -124,7 +124,7 @@
                                     <h3 class="card-header">Devolución</h3>
                                     <div class="card-body">
 
-                                        <form name="formGenExcel" method="post" action="./buscarEppTerrenoXRutServlet" >
+                                        <form name="formGenExcel" method="post" action="./listarDevolucionToolServlet" >
                                             
                                             <div class="ink-form horizontal">
                                                 <div class="form-row">
@@ -136,8 +136,8 @@
                                                         </c:forEach>
                                                     </select>
                                                 </div>
-
-                                                <input type="submit" class="btn btn-success btn-space" name="btnGuardar" value="Buscar Rut">
+                                                <br>
+                                                <input type="submit" class="btn btn-success btn-space" name="btnGuardar" value="Buscar Proyecto">
                                                 
                                             </div>
                                         </form>
@@ -169,7 +169,7 @@
                 <script src="assets/vendor/charts/morris-bundle/Morrisjs.js"></script>
                 <script src="assets/libs/js/main-js.js"></script>
                     </c:when>
-                </c:choose>
+                
                 <c:otherwise>
                 
                 <!-- ============================================================== -->
@@ -193,13 +193,43 @@
                     <!-- ============================================================== -->
                     <!-- wrapper  -->
                     <!-- ============================================================== -->
-
+                    
+                    
                     <div class="dashboard-wrapper">
                         <div class="container-fluid dashboard-content">
                             <div class="row">
+                                
+                                <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
+                                <h3 class="section-title">Devolución Tool</h3>
+                                <p>Aquí puedes realizar la devolución de Epp al tool center y reasignar a otro proyecto</p>
+                                <div class="card">
+                                    <h3 class="card-header">Devolución</h3>
+                                    <div class="card-body">
+
+                                        <form name="formGenExcel" method="post" action="./listarDevolucionToolServlet" >
+                                            
+                                            <div class="ink-form horizontal">
+                                                <div class="form-row">
+                                                    <label for="ddlProyecto-select">Proyecto</label>
+                                                    <select required class="form-control" id="ddlProyecto" name="ddlProyecto">
+                                                        <option value="">---Seleccione---</option>
+                                                        <c:forEach items="${sessionScope.listadoProyectos}" var="proyecto">
+                                                            <option value="<c:out value="${proyecto.idProyecto}"></c:out>"><c:out value="${proyecto.nombreProyecto}"></c:out></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                                <br>
+                                                <input type="submit" class="btn btn-success btn-space" name="btnGuardar" value="Buscar Proyecto">
+                                                
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
 
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <h3 class="text-center">Devolucion EPP a Tool Center</h3>
+                                    <h3 class="text-center">Devolución EPP a Tool Center</h3>
                                     <form name="frmRegistroEppProy" method="post" action="./registrarDevolucionToolCenterServlet">
                                         
                                         <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
@@ -217,10 +247,10 @@
                                                                     <tr>
                                                                         <th>Id</th>
                                                                         <th>Nombre</th>
+                                                                        <th>Proyecto</th>
+                                                                        <th>Id Epp</th>
                                                                         <th>Epp</th>
                                                                         <th>Stock</th>
-                                                                        <th>Devolver</th>
-                                                                        <th>BotonForm</th>
                                                                         <th>Selección</th>
                                                                              
                                                                     </tr> 
@@ -229,10 +259,10 @@
                                                                     <tr>
                                                                         <th>Id</th>
                                                                         <th>Nombre</th>
+                                                                        <th>Proyecto</th>
+                                                                        <th>Id Epp</th>
                                                                         <th>Epp</th>
                                                                         <th>Stock</th>
-                                                                        <th>Devolver</th>
-                                                                        <th>BotonForm</th>
                                                                         <th>Selección</th>
                                                                              
                                                                     </tr> 
@@ -240,17 +270,124 @@
                                                                 <tbody>
                                                                     <c:forEach items="${sessionScope.listadoDevolucion}" var="listadoDevolucion">
                                                                         <tr>
-                                                                            <td><c:out value="${listadoDevolucion[0]}"/></td>
-                                                                            <td><c:out value="${listadoDevolucion[1]}"/></td>
-                                                                            <td><c:out value="${listadoDevolucion[2]}"/></td>
-                                                                            <td><c:out value="${listadoDevolucion[3]}"/></td>
+                                                                            <c:if test="${listadoDevolucion[5]>0}">
+                                                                                <td><c:out value="${listadoDevolucion[0]}"/></td>
+                                                                                <td><c:out value="${listadoDevolucion[1]}"/></td>
+                                                                                <td><c:out value="${listadoDevolucion[2]}"/></td>
+                                                                                <td><c:out value="${listadoDevolucion[3]}"/></td>
+                                                                                <td><c:out value="${listadoDevolucion[4]}"/></td>
+                                                                                <td><c:out value="${listadoDevolucion[5]}"/></td>
+                                                                                <td style="display:none;"><input type="text" id="txtIdProy" name="txtIdProy" value="${listadoDevolucion[0]}" readonly="true" /></td>
+                                                                                <td style="display:none;"><input type="text" id="txtCantidad" name="txtCantidad" value="${listadoDevolucion[5]}" readonly="true" /></td>
+
+                                                                                <td>
+                                                                                    <div class="custom-control custom-checkbox">
+                                                                                        <input  type="checkbox" id="listadoDevolucion${listadoDevolucion[3]}" name="chkDevIdEpp" value="${listadoDevolucion[3]}" class="custom-control-input">
+                                                                                        <label class="custom-control-label" for="listadoDevolucion${listadoDevolucion[3]}"></label>
+
+                                                                                    </div>
+
+                                                                                </td>
+                                                                             </c:if>
+                                                                        </tr>
+                                                                    </c:forEach>
+                                                                </tbody>
+                                                            </table>
+                                                                
+                                                        </c:when>
+
+                                                        <c:otherwise>
+                                                            No existen resultados
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                      
+                                        
+
+                                        <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
+                                            <div class="card">
+                                                <h2 class="card-header">Devolución Tool Center</h2>
+                                                <div class="card-body">
+
+                                                    <p><button type="submit" class="btn btn-success">Devolver</button></p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    
+                                    <hr>
+                                
+                                </div>
+
+                               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <h3 class="text-center">Reasginar EPP de Tool Center a otro Proyecto</h3>
+                                    <form name="frmReasignaEpp" method="post" action="./xxxx">
+                                        
+                                        <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
+                                        <div class="card">
+                                            <h2 class="card-header">Listado de Cantidades de Epp a Reasignar</h2>
+                                            <div class="card-body">
+
+
+                                                <div class="table-responsive">
+                                                    <c:choose>
+                                                        <c:when test="${sessionScope.listadoReasignacion!=null}">
+                                                            
+                                                            <table class="table table-striped table-bordered"  id="listadoReasignacion">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Id</th>
+                                                                        <th>Origen</th>
+                                                                        <th>Proyecto Origen</th>
+                                                                        <th>Id Epp</th>
+                                                                        <th>Epp</th>
+                                                                        <th>Stock Tool</th>
+                                                                        <th>Proyecto Destino</th>
+                                                                        <th>Selección</th>
+                                                                             
+                                                                    </tr> 
+                                                                </thead>
+                                                                <tfoot>
+                                                                    <tr>
+                                                                        <th>Id</th>
+                                                                        <th>Nombre</th>
+                                                                        <th>Proyecto</th>
+                                                                        <th>Id Epp</th>
+                                                                        <th>Epp</th>
+                                                                        <th>Stock</th>
+                                                                        <th>Proyecto Destino</th>
+                                                                        <th>Selección</th>
+                                                                             
+                                                                    </tr> 
+                                                                </tfoot>
+                                                                <tbody>
+                                                                    <c:forEach items="${sessionScope.listadoReasignacion}" var="listadoReasignacion">
+                                                                        <tr>
+                                                                            <td><c:out value="${listadoReasignacion[0]}"/></td>
+                                                                            <td><c:out value="${listadoReasignacion[1]}"/></td>
+                                                                            <td><c:out value="${listadoReasignacion[2]}"/></td>
+                                                                            <td><c:out value="${listadoReasignacion[3]}"/></td>
+                                                                            <td><c:out value="${listadoReasignacion[4]}"/></td>
+                                                                            <td><c:out value="${listadoReasignacion[5]}"/></td>
+                                                                            <td>
+                                                                                <select required class="form-control" id="ddlProyecto" name="ddlProyecto">
+                                                                                    <option value="">---Seleccione---</option>
+                                                                                    <c:forEach items="${sessionScope.listadoProyectos}" var="proyecto">
+                                                                                        <option value="<c:out value="${proyecto.idProyecto}"></c:out>"><c:out value="${proyecto.nombreProyecto}"></c:out></option>
+                                                                                    </c:forEach>
+                                                                                </select>
+                                                                            </td>
+                                                                            
                                                                           
-                                                                            <td><input type="button" class="btn btn-info btn-space"  name="btnDevolver" value="Devolver"/></td>
-                                                                            <td><button type="submit" class="btn btn-success">Registrar</button></td>
+                                                                            
                                                                             <td>
                                                                                     <div class="custom-control custom-checkbox">
-                                                                                        <input  type="checkbox" id="listadoDevolucion${listadoDevolucion[2]}" name="chkDevIdEpp" value="${listadoDevolucion[2]}" class="custom-control-input">
-                                                                                        <label class="custom-control-label" for="listadoDevolucion${listadoDevolucion[2]}"></label>
+                                                                                        <input  type="checkbox" id="listadoReasignacion${listadoReasignacion[3]}" name="chkDevIdEpp" value="${listadoReasignacion[3]}" class="custom-control-input">
+                                                                                        <label class="custom-control-label" for="listadoReasignacion${listadoReasignacion[3]}"></label>
                                                                                         
                                                                                     </div>
 
@@ -270,15 +407,15 @@
                                             </div>
                                         </div>
                                     </div> 
-                                       
+                                    <c:remove var="listadoDevolucion"/>   
                                         
 
                                         <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
                                             <div class="card">
-                                                <h2 class="card-header">Devolución Tool Center</h2>
+                                                <h2 class="card-header">Reasignar</h2>
                                                 <div class="card-body">
 
-                                                    <p><button type="submit" class="btn btn-success">Registrar</button></p>
+                                                    <p><button type="submit" class="btn btn-warning">Reasignar</button></p>
 
                                                 </div>
                                             </div>
@@ -286,16 +423,9 @@
                                     </form>
                                     
                                     <hr>
+                                
+                                </div>     
                                     
-                                    
-
-
-
-
-
-
-                                </div>
-
 
                             </div>
                         </div>
@@ -318,6 +448,7 @@
                 <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
                 <script src="assets/libs/js/main-js.js"></script>
                 </c:otherwise>
+               </c:choose>     
             </c:when>
             <c:otherwise>
                 <c:redirect url="Login.jsp"/>

@@ -55,14 +55,28 @@ public class AsignarDAOSessionBean {
     }
     
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public List<Asignacantidadepp> NewEncontarSqlArmado() {
+    public List<Asignacantidadepp> NewEncontarSqlArmado(int codProy) {
         List<Asignacantidadepp> archivosList= null;
 
-        Query query = em.createNamedQuery("Asignacantidadepp.findDevolucion");
+        Query query = em.createNamedQuery("Asignacantidadepp.findDevolucion")
+        .setParameter("asignaeppaproyectoIdasignaeppaproyecto", codProy);
         //query.setParameter("asignatura", asignatura);
         archivosList= query.getResultList();
 
         return archivosList;
+    }
+    
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<Asignacantidadepp> getReasignacion(int codTipoCarga) {
+        List<Asignacantidadepp> archivosList2= null;
+
+        Query query = em.createNamedQuery("Asignacantidadepp.findReasignacion")
+                .setParameter("tipodecargaIdtipodecarga", codTipoCarga);
+        //.setParameter("asignaeppaproyectoIdasignaeppaproyecto", codProy);
+        //query.setParameter("asignatura", asignatura);
+        archivosList2= query.getResultList();
+
+        return archivosList2;
     }
     
     public List<Proyecto> getGrafico() throws ControllerException{

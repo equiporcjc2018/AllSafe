@@ -40,13 +40,15 @@ public class ListarDevolucionToolServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion= request.getSession();
-        List<Asignacantidadepp> listadoDevolucion;
+        List<Asignacantidadepp> listadoReasignacion;
                                        
         try {
-            //listadoDevolucion = objAsignarDAOSessionBean.getAllDevolucion();
-            listadoDevolucion = objAsignarDAOSessionBean.NewEncontarSqlArmado();
-            sesion.setAttribute("listadoDevolucion", listadoDevolucion);
-            
+            int codTipoCarga= 2;
+            //listadoReasignacion = objAsignarDAOSessionBean.getAllAsignaCantidadEppAProy();
+            listadoReasignacion = objAsignarDAOSessionBean.getReasignacion(codTipoCarga);
+            //listadoReasignacion = objAsignarDAOSessionBean.NewEncontarSqlArmado(codTipoCarga);
+            sesion.setAttribute("listadoReasignacion", listadoReasignacion);
+            response.sendRedirect("DevolucionToolCenter2.jsp");
         } catch (Exception ex) {
             Logger.getLogger(ListarEppsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -59,7 +61,18 @@ public class ListarDevolucionToolServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        HttpSession sesion= request.getSession();
+        List<Asignacantidadepp> listadoDevolucion;
+        try {
+            int codProyecto= Integer.parseInt(request.getParameter("ddlProyecto"));
+            //listadoDevolucion = objAsignarDAOSessionBean.getAllDevolucion();
+            listadoDevolucion = objAsignarDAOSessionBean.NewEncontarSqlArmado(codProyecto);
+            sesion.setAttribute("listadoDevolucion", listadoDevolucion);
+            response.sendRedirect("DevolucionToolCenter2.jsp");
+            
+        } catch (Exception ex) {
+            Logger.getLogger(ListarEppsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
    
