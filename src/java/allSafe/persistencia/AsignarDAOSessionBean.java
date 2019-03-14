@@ -70,13 +70,26 @@ public class AsignarDAOSessionBean {
     public List<Asignacantidadepp> getReasignacion(int codTipoCarga) {
         List<Asignacantidadepp> archivosList2= null;
 
-        Query query = em.createNamedQuery("Asignacantidadepp.findReasignacion")
-                .setParameter("tipodecargaIdtipodecarga", codTipoCarga);
+        //Query query = em.createNamedQuery("Asignacantidadepp.findReasignacion")
+          //      .setParameter("tipodecargaIdtipodecarga", codTipoCarga);
         //.setParameter("asignaeppaproyectoIdasignaeppaproyecto", codProy);
         //query.setParameter("asignatura", asignatura);
-        archivosList2= query.getResultList();
+        //archivosList2= query.getResultList();
 
+       // return archivosList2;
+        
+        try {
+            archivosList2 =em.createNamedQuery("Asignacantidadepp.findReasignaci",Asignacantidadepp.class)
+                    .setParameter("tipodecargaIdtipodecarga", codTipoCarga)
+                    .getResultList();
+        } catch (NoResultException ex) {
+            return null;
+        }catch(NonUniqueResultException ex){
+            throw  ex;
+        }
         return archivosList2;
+        
+        
     }
     
     public List<Proyecto> getGrafico() throws ControllerException{

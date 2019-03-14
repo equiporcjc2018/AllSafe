@@ -41,11 +41,14 @@ public class ListarDevolucionToolServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sesion= request.getSession();
         List<Asignacantidadepp> listadoReasignacion;
+        Tipodecarga listadoTipodeCarga;
                                        
         try {
             int codTipoCarga= 2;
             //listadoReasignacion = objAsignarDAOSessionBean.getAllAsignaCantidadEppAProy();
-            listadoReasignacion = objAsignarDAOSessionBean.getReasignacion(codTipoCarga);
+            listadoTipodeCarga = objAsignarDAOSessionBean.buscaTipoDeCarga(codTipoCarga);
+            int codTC = listadoTipodeCarga.getIdtipodecarga();
+            listadoReasignacion = objAsignarDAOSessionBean.getReasignacion(codTC);
             //listadoReasignacion = objAsignarDAOSessionBean.NewEncontarSqlArmado(codTipoCarga);
             sesion.setAttribute("listadoReasignacion", listadoReasignacion);
             response.sendRedirect("DevolucionToolCenter2.jsp");
