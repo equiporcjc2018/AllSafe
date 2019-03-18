@@ -45,15 +45,15 @@ public class ListarDevolucionToolServlet extends HttpServlet {
                                        
         try {
             int codTipoCarga= 2;
-            //listadoReasignacion = objAsignarDAOSessionBean.getAllAsignaCantidadEppAProy();
+                        
             listadoTipodeCarga = objAsignarDAOSessionBean.buscaTipoDeCarga(codTipoCarga);
             int codTC = listadoTipodeCarga.getIdtipodecarga();
             listadoReasignacion = objAsignarDAOSessionBean.getReasignacion(codTC);
-            //listadoReasignacion = objAsignarDAOSessionBean.NewEncontarSqlArmado(codTipoCarga);
+            
             sesion.setAttribute("listadoReasignacion", listadoReasignacion);
             response.sendRedirect("DevolucionToolCenter2.jsp");
         } catch (Exception ex) {
-            Logger.getLogger(ListarEppsServlet.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(ListarEppsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

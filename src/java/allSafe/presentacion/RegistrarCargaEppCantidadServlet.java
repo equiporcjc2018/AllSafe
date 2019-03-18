@@ -62,6 +62,8 @@ public class RegistrarCargaEppCantidadServlet extends HttpServlet {
             String [] epp2 = request.getParameterValues("txtIdEpp");
             String [] proy2 = request.getParameterValues("txtIdProy");
             String [] cantidad = request.getParameterValues("txtCantidad");
+            
+            
                        
             //for (String item : cantidad) {
             for (int i = 0; i < cantidad.length; i++) {

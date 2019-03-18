@@ -5,6 +5,7 @@
  */
 package allSafe.presentacion;
 
+import allSafe.Entities.Asignacantidadepp;
 import allSafe.Entities.Asignaeppaproyecto;
 import allSafe.Entities.Estadosproyecto;
 import allSafe.Entities.Tipodecarga;
@@ -19,6 +20,7 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -69,10 +71,10 @@ public class RegistrarDevolucionToolCenterServlet extends HttpServlet {
             cantidad = cantidad*(-1);
             int idePP_devolver = 0;
             String [] idePP_devolver2 = request.getParameterValues("chkDevIdEpp");
-            String  idePP_devolver3 = request.getParameter("chkDevIdEpp");
+            int  idePP_devolver3 = Integer.parseInt(request.getParameter("chkDevIdEpp"));
             //String [] persona2 = request.getParameter("chkDevIdEpp");
             
-
+            List<Asignacantidadepp> cant = objAsignarDaoSessionBean.getEppXidXproy(proy2, idePP_devolver3);
             //if (!(proyecto == null || persona == null )) {
             if (( idePP_devolver == 0 )) {
                 

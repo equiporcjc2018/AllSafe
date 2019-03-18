@@ -49,7 +49,11 @@
                 });   
             });
         </script> 
-        
+        <script>
+            $(document).ready(function() {
+                $('#listadoReasignacion').DataTable();
+            } );
+        </script>
         
         
          
@@ -339,7 +343,7 @@
                                                             
                                                             <table class="table table-striped table-bordered"  id="listadoReasignacion">
                                                                 <thead>
-                                                                    <tr>
+                                                                    <tr class="warning">
                                                                         <th>Id</th>
                                                                         <th>Origen</th>
                                                                         <th>Proyecto Origen</th>
@@ -372,9 +376,9 @@
                                                                             <td><c:out value="${listadoReasignacion[2]}"/></td>
                                                                             <td><c:out value="${listadoReasignacion[3]}"/></td>
                                                                             <td><c:out value="${listadoReasignacion[4]}"/></td>
-                                                                            <td><c:out value="${listadoReasignacion[5]}"/></td>
+                                                                            <td><c:out value="${listadoReasignacion[5]*-1}"/></td>
                                                                             <td>
-                                                                                <select required class="form-control" id="ddlProyecto" name="ddlProyecto">
+                                                                                <select required="true"  id="ddlProyecto" name="ddlProyecto">
                                                                                     <option value="">---Seleccione---</option>
                                                                                     <c:forEach items="${sessionScope.listadoProyectos}" var="proyecto">
                                                                                         <option value="<c:out value="${proyecto.idProyecto}"></c:out>"><c:out value="${proyecto.nombreProyecto}"></c:out></option>

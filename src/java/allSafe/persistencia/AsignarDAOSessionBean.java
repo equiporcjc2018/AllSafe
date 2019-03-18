@@ -65,6 +65,18 @@ public class AsignarDAOSessionBean {
 
         return archivosList;
     }
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<Asignacantidadepp> getEppXidXproy(int codProy,int codEpp) {
+        List<Asignacantidadepp> eppXidxProy= null;
+
+        Query query = em.createNamedQuery("Asignacantidadepp.findDevolucionXidXproy")
+        .setParameter("asignaeppaproyectoIdasignaeppaproyecto", codProy)
+        .setParameter("asignaeppaproyectoIdasignaeppaproyecto2", codEpp);
+        //query.setParameter("asignatura", asignatura);
+        eppXidxProy= query.getResultList();
+
+        return eppXidxProy;
+    }
     
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<Asignacantidadepp> getReasignacion(int codTipoCarga) {
