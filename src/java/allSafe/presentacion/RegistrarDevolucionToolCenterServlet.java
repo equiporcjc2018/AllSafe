@@ -50,12 +50,13 @@ public class RegistrarDevolucionToolCenterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String flag2 = "Bandera2";
         String prueba = "asdasd";
         HttpSession sesion = request.getSession();
         EppCantidadDTO objEppCantidadDTO = new EppCantidadDTO();
         PersonaProyectoDTO objPersonaProyectoDTO = new PersonaProyectoDTO();
-        
+        List<Asignacantidadepp> listadoDevolucion;
         Proyecto objProyecto = new Proyecto();
         Persona objPersona = new Persona();
         
@@ -64,35 +65,35 @@ public class RegistrarDevolucionToolCenterServlet extends HttpServlet {
         Tipodecarga objTipodecarga = new Tipodecarga();
         
         try {
-                      
-            //String proyecto = request.getParameter("txtIdProy");
-            int proy2 = Integer.parseInt(request.getParameter("txtIdProy"));
-            int cantidad = Integer.parseInt(request.getParameter("txtCantidad"));
-            cantidad = cantidad*(-1);
-            int idePP_devolver = 0;
-            String [] idePP_devolver2 = request.getParameterValues("chkDevIdEpp");
-            int  idePP_devolver3 = Integer.parseInt(request.getParameter("chkDevIdEpp"));
-            //String [] persona2 = request.getParameter("chkDevIdEpp");
             
-            List<Asignacantidadepp> cant = objAsignarDaoSessionBean.getEppXidXproy(proy2, idePP_devolver3);
-            //if (!(proyecto == null || persona == null )) {
-            if (( idePP_devolver == 0 )) {
+            String id1 = (request.getParameter("id"));
+            
+            String[] parts = id1.split("-");
+            
+            String idEstado = parts[0];
+            String idEpp = parts[1];
+            String idProyecto = parts[2];
+            String idCantidad = parts[3];
+                       
+            if (idEpp!=null) {
                 
-                
-                for(int i=0; i<idePP_devolver2.length;i++){
-                idePP_devolver = Integer.parseInt(idePP_devolver2[i]);
-                
+                //Ingreso de Fecha              
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 Date date = new Date();
                 String fecha = dateFormat.format(date);
-                
+                //Talla - Unidad
                 String talla = "43";
                 int unidad = 1;
-                
+                //Precio
                 int precio = 1;
-                            
-                //objAsignaeppaproyecto = objAsignarDaoSessionBean.buscaAsigEppXID(idePP_devolver,proyecto);
-                objAsignaeppaproyecto = objAsignarDaoSessionBean.buscaAsigEppXID(idePP_devolver,proy2);
+                
+                int id_Epp = Integer.parseInt(idEpp.trim());
+                int id_Proy = Integer.parseInt(idProyecto.trim());
+                
+                int id_Cantidad = Integer.parseInt(idCantidad.trim());
+                id_Cantidad = id_Cantidad*-1;
+                
+                objAsignaeppaproyecto = objAsignarDaoSessionBean.buscaAsigEppXID(id_Epp,id_Proy);
                  
                 int estadoProy = 1;
                 int tipoCarga = 2;
@@ -104,7 +105,7 @@ public class RegistrarDevolucionToolCenterServlet extends HttpServlet {
                 objEppCantidadDTO.setTalla(talla);
                 objEppCantidadDTO.setUnidad(unidad);
                 
-                objEppCantidadDTO.setCantidad(cantidad);
+                objEppCantidadDTO.setCantidad(id_Cantidad);
                 objEppCantidadDTO.setPrecio(precio);
                 objEppCantidadDTO.setObjEstadosproyecto(objEstadosproyecto);
                 objEppCantidadDTO.setObjTipodecarga(objTipodecarga);
@@ -114,7 +115,7 @@ public class RegistrarDevolucionToolCenterServlet extends HttpServlet {
                 
                  objAsignarDaoSessionBean.addCantidadEpp(objEppCantidadDTO);  
                 
-                }
+                
                 
                 response.sendRedirect("DevolucionToolCenter2.jsp");
                 

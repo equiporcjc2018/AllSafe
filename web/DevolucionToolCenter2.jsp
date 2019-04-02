@@ -34,7 +34,7 @@
        
        
         <script>
-             $(document).ready(function ($)
+           /*  $(document).ready(function ($)
             {
                 $('#listadoDevolucion').DataTable({
                   info: true,
@@ -48,11 +48,41 @@
             ]    
                 });   
             });
+            */
         </script> 
         <script>
-            $(document).ready(function() {
-                $('#listadoReasignacion').DataTable();
-            } );
+            //$(document).ready(function() {
+             //   $('#listadoReasignacion').DataTable();
+            //} );
+        </script>
+        <script>
+            function Mensaje(estado, valorIdEpp,valorProyecto,valorCantidad,numProy,nameProy,nameEpp)
+            {
+            console.log(estado + ' - ' +valorIdEpp + ' - ' +valorProyecto + ' - ' +valorCantidad);
+            var dato =(estado + ' - ' +valorIdEpp + ' - ' +valorProyecto + ' - ' +valorCantidad);
+            var mensaje;
+            
+            if (estado===true) 
+            {
+            var opcion = confirm('Presione aceptar para enviar al Tool Center\n La cantidad de '+valorCantidad+' '+nameEpp+
+                    ' desde el proyecto: '+numProy+' - '+nameProy+'\n ,de lo contrario presione cancelar.');
+                if (opcion === true) 
+                {
+                    $("#text").load("registrarDevolucionToolCenterServlet",{id:dato});
+                    mensaje = "Has clickado OK";
+                    window.location.reload();
+                }
+                else
+                {
+                    mensaje = "Has seleccionado Cancelar";
+                    window.location.reload();
+                }
+            }
+            //alert(dato.toString());
+            //var v_id=$("#listadoDevolucion$--{listadoDevolucion[3]}").val();
+            //$("#text").load("registrarDevolucionToolCenterServlet",{id:dato});
+            }
+            
         </script>
         
         
@@ -255,7 +285,9 @@
                                                                         <th>Id Epp</th>
                                                                         <th>Epp</th>
                                                                         <th>Stock</th>
+                                                                        
                                                                         <th>Selección</th>
+                                                                        
                                                                              
                                                                     </tr> 
                                                                 </thead>
@@ -267,7 +299,9 @@
                                                                         <th>Id Epp</th>
                                                                         <th>Epp</th>
                                                                         <th>Stock</th>
+                                                                        
                                                                         <th>Selección</th>
+                                                                        
                                                                              
                                                                     </tr> 
                                                                 </tfoot>
@@ -282,16 +316,27 @@
                                                                                 <td><c:out value="${listadoDevolucion[4]}"/></td>
                                                                                 <td><c:out value="${listadoDevolucion[5]}"/></td>
                                                                                 <td style="display:none;"><input type="text" id="txtIdProy" name="txtIdProy" value="${listadoDevolucion[0]}" readonly="true" /></td>
-                                                                                <td style="display:none;"><input type="text" id="txtCantidad" name="txtCantidad" value="${listadoDevolucion[5]}" readonly="true" /></td>
+                                                                                <td style="display:none;"><input type="text" id="text"  name="txtIdProy" value="${listadoDevolucion[0]}" readonly="true" /></td>
+                                                                                
+                                                                                
 
                                                                                 <td>
                                                                                     <div class="custom-control custom-checkbox">
-                                                                                        <input  type="checkbox" id="listadoDevolucion${listadoDevolucion[3]}" name="chkDevIdEpp" value="${listadoDevolucion[3]}" class="custom-control-input">
+                                                                                        <input  type="checkbox" onchange="Mensaje(this.checked,'${listadoDevolucion[3]}','${listadoDevolucion[0]}','${listadoDevolucion[5]}','${listadoDevolucion[1]}','${listadoDevolucion[2]}','${listadoDevolucion[4]}')" id="listadoDevolucion${listadoDevolucion[3]}" name="chkCantidad" value="${listadoDevolucion[3]}" class="custom-control-input">
+                                                                                        <label class="custom-control-label" for="listadoDevolucion${listadoDevolucion[3]}"></label>
+
+                                                                                    </div>
+                                                                                               
+                                                                                </td>
+                                                                                <!--style="display:none;" 
+                                                                                <td>
+                                                                                    <div class="custom-control custom-checkbox">
+                                                                                        <input  type="checkbox" id="listadoDevolucion${listadoDevolucion[3]}" name="chkCantidad" value="${listadoDevolucion[5]}" class="custom-control-input">
                                                                                         <label class="custom-control-label" for="listadoDevolucion${listadoDevolucion[3]}"></label>
 
                                                                                     </div>
 
-                                                                                </td>
+                                                                                </td>-->
                                                                              </c:if>
                                                                         </tr>
                                                                     </c:forEach>
@@ -311,16 +356,16 @@
                                       
                                         
 
-                                        <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
+                                        <!--div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
                                             <div class="card">
                                                 <h2 class="card-header">Devolución Tool Center</h2>
                                                 <div class="card-body">
 
-                                                    <p><button type="submit" class="btn btn-success">Devolver</button></p>
+                                                    <p><button type="button" class="btn btn-success">Devolver</button></p>
 
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div-->
                                     </form>
                                     
                                     <hr>
@@ -411,7 +456,7 @@
                                             </div>
                                         </div>
                                     </div> 
-                                    <c:remove var="listadoDevolucion"/>   
+                                       
                                         
 
                                         <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
@@ -455,6 +500,7 @@
                </c:choose>     
             </c:when>
             <c:otherwise>
+                <c:remove var="listadoDevolucion"/>
                 <c:redirect url="Login.jsp"/>
             </c:otherwise>
         </c:choose>
