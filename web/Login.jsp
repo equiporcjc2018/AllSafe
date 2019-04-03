@@ -59,7 +59,7 @@
                         </div>
                         <div class="form-group">
                             <label class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox"><span class="custom-control-label">Recordarme</span>
+                                <input class="custom-control-input" id="boolRemember" name="boolRemember" type="checkbox"><span class="custom-control-label">Recordarme</span>
                             </label>
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Ingresar</button>

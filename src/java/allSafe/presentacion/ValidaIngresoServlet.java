@@ -13,6 +13,7 @@ import java.security.NoSuchAlgorithmException;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +39,13 @@ UsuarioDAOSessionBean objUsuarioDAOSessionBean;
             throws ServletException, IOException {
         HttpSession sesion= request.getSession();
         String login=request.getParameter("txtLogin");
-        String pass=generateMD5Signature(request.getParameter("txtPass"));              
+        String pass=generateMD5Signature(request.getParameter("txtPass"));
+        //Si el checkbox esta habilitado, guardar cookie con el nombre de usuario
+        if(null != request.getParameter("boolRemember")){            
+            Cookie c = new Cookie("txtLogin", login);
+            c.setMaxAge(24*60*60);
+            response.addCookie(c);
+        }
         Usuarioallsafe objUsuario;
                 
         
@@ -53,7 +60,7 @@ UsuarioDAOSessionBean objUsuarioDAOSessionBean;
               response.sendRedirect("Login.jsp");
             }
         } catch (IOException e) {
-              System.err.println("Error al obtener usuario, se redirecciona a login"+e);
+              System.err.println("Error al obtener usuario, se redirecciona a loginn"+e);
               sesion.setAttribute("error", "El Usuario no Existe");
               response.sendRedirect("Login.jsp");
         }
