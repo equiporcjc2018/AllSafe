@@ -6,7 +6,11 @@
 package allSafe.persistencia;
 
 
+import allSafe.Entities.UsuarioClaveHistorial;
+import allSafe.Entities.UsuarioClaveRecuperar;
 import allSafe.Entities.Usuarioallsafe;
+import allSafe.dto.UsuarioDTO;
+import java.security.SecureRandom;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -14,6 +18,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 
 /**
  *
@@ -23,7 +29,7 @@ import javax.persistence.PersistenceException;
 public class UsuarioDAOSessionBean {
 
 
-@PersistenceContext
+    @PersistenceContext
     private EntityManager em;
 
     public Usuarioallsafe validaUsuario(String login, String password) {
@@ -51,14 +57,15 @@ public class UsuarioDAOSessionBean {
 
         try {
             objUsuario = this.em.createNamedQuery("Usuarioallsafe.findByLoginUsuarioAllSafe", Usuarioallsafe.class)
-                    .setParameter("user", user)
+                    .setParameter("loginUsuarioAllSafe", user)
                     .getSingleResult();
         } catch (NoResultException ex) {
             System.out.println("Error nro:" + ex.getMessage());
+            return null;
 
         } catch (NonUniqueResultException ex2) {
             System.out.println("Error nro:" + ex2.getMessage());
-
+            return null;
         }
         return objUsuario;
     }
@@ -132,5 +139,95 @@ public class UsuarioDAOSessionBean {
                 .setParameter("rutUsuario", rut)
                 .getSingleResult();
     }*/
+    
+    private String generarCodigoRecuperacionClave(){
+        
+        String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        SecureRandom rnd = new SecureRandom();
+
+        StringBuilder sb = new StringBuilder( 25 );
+        for( int i = 0; i < 25; i++ ){
+            sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
+        }
+        return sb.toString();        
+    }
+    
+    public boolean addCodigoRecuperacion(String username) {
+        boolean result = false;
+        try{
+                
+                UsuarioClaveRecuperar ucr = new UsuarioClaveRecuperar();
+                ucr.setCodigo(generarCodigoRecuperacionClave());
+                ucr.setUsuario(this.getValidaUser(username));
+                ucr.setIdUsuarioClaveRecuperar(ucr.getUsuario().getIdUsuarioAllSafe());
+                System.out.println(ucr.toString()); 
+                
+                em.persist(ucr); 
+                result = true;
+            }catch (ConstraintViolationException ex) {
+            // Aqui tira los errores de constraint
+                for (ConstraintViolation actual : ex.getConstraintViolations()) {
+                    System.out.println(actual.toString());
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        return result;
+    }
+    
+    //TODO
+    public boolean validarCodigoRecuperacionClave(String codigo, Integer idUsuario){
+        boolean resultado = false;
+        try {
+            if(null != em.createNamedQuery("UsuarioClaveRecuperar.findByCodigoAndIdUsuario", UsuarioClaveRecuperar.class)
+                    .setParameter("id", idUsuario)
+                    .setParameter("codigo", codigo)
+                    .getSingleResult()){
+                resultado = true;
+            }
+        } catch (NoResultException ex) {
+            ex.printStackTrace();
+        } catch (NonUniqueResultException ex) {
+            throw ex;
+        }
+        return resultado;
+    }
+    
+    public Integer updateUsuarioPass(UsuarioDTO usuarioDTO) {
+        int update = -1;
+        try {
+            if(this.addHistorialClave(em.createNamedQuery("Usuarioallsafe.findByIdUsuarioAllSafe", Usuarioallsafe.class).setParameter("id", usuarioDTO.getIdUsuarioAllSafe()).getSingleResult())){
+                update = em.createNamedQuery("Usuarioallsafe.updateClave", Usuarioallsafe.class)
+                    .setParameter("id", usuarioDTO.getIdUsuarioAllSafe())
+                    .setParameter("clave", usuarioDTO.getPassUsuarioAllSafe())
+                    .executeUpdate();
+            }else{
+                return 0;
+            }
+        } catch (NoResultException ex) {
+            return 0;
+        } catch (NonUniqueResultException ex) {
+            throw ex;
+        }
+        return update;
+    }
+    
+    public boolean addHistorialClave(Usuarioallsafe user){
+        UsuarioClaveHistorial uch = new UsuarioClaveHistorial();
+        
+        uch.setEstado("I");
+        uch.setIdUsuarioClaveHistorial(user.getIdUsuarioAllSafe());
+        try{
+            em.persist(uch); 
+            return true;
+        }catch (ConstraintViolationException ex) {
+        // Aqui tira los errores de constraint
+            for (ConstraintViolation actual : ex.getConstraintViolations()) {
+                System.out.println(actual.toString());
+            }
+        }catch(Exception e){
+        }
+        return false;
+    }
 
 }
