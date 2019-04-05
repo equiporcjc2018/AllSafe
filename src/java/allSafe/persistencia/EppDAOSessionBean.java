@@ -54,6 +54,17 @@ public class EppDAOSessionBean {
         em.persist(objEpp);
     }
     
+    public void UpdateEpp(EppTipoEppDTO eppTipoEppDTO) throws ControllerException {
+        Epp objEpp = new Epp();
+        objEpp.setIdEPP(eppTipoEppDTO.getObjEpp().getIdEPP());
+        objEpp.setNombreEPPcol(eppTipoEppDTO.getObjEpp().getNombreEPPcol());
+        objEpp.setDescripcionEPP(eppTipoEppDTO.getObjEpp().getDescripcionEPP());
+        objEpp.setTipoEPPidTipoEPP(eppTipoEppDTO.getObjTipoepp());
+        objEpp.setVigenteepp(eppTipoEppDTO.getObjEpp().getVigenteepp());
+        em.merge(objEpp);
+        
+    }
+    
     public Epp buscaEppXID(int id){
         Epp infoEppEntidad = null;
         try {
