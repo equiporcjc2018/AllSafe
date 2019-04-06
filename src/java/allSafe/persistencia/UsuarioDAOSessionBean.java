@@ -23,7 +23,7 @@ import javax.persistence.PersistenceException;
 public class UsuarioDAOSessionBean {
 
 
-@PersistenceContext
+    @PersistenceContext
     private EntityManager em;
 
     public Usuarioallsafe validaUsuario(String login, String password) {
@@ -41,7 +41,6 @@ public class UsuarioDAOSessionBean {
     }
 
     public List<Usuarioallsafe> getAllUser() {
-        Usuarioallsafe objUsuario = null;
         return em.createNamedQuery("Usuarioallsafe.findAll", Usuarioallsafe.class).getResultList();
 
     }
@@ -51,67 +50,24 @@ public class UsuarioDAOSessionBean {
 
         try {
             objUsuario = this.em.createNamedQuery("Usuarioallsafe.findByLoginUsuarioAllSafe", Usuarioallsafe.class)
-                    .setParameter("user", user)
+                    .setParameter("loginUsuarioAllSafe", user)
                     .getSingleResult();
         } catch (NoResultException ex) {
             System.out.println("Error nro:" + ex.getMessage());
+            return null;
 
         } catch (NonUniqueResultException ex2) {
             System.out.println("Error nro:" + ex2.getMessage());
-
+            return null;
         }
         return objUsuario;
     }
-/*
-    public void addUsuario(UsuarioDTO usuarioDto) throws ControladorExceptions {
-        Usuariobj infoUsuario = new Usuariobj();
 
-        infoUsuario.setIdusuarioBj(getAllUser().size()+1);
-        infoUsuario.setUserBj(usuarioDto.getLogin());
-        infoUsuario.setPassBj(usuarioDto.getPassword());
-        infoUsuario.setNombreBj(usuarioDto.getNombreUsuario());
-        infoUsuario.setApePatBj(usuarioDto.getApePatUsuario());
-        infoUsuario.setApeMatBj(usuarioDto.getApeMatUsuario());
-        infoUsuario.setCorreoBj(usuarioDto.getCorreoUsuario());
-        Perfilbj infoPerfil = em.find(Perfilbj.class, usuarioDto.getPerfilIdperfil());
-        infoUsuario.setPerfilBjidperfilBj(infoPerfil);
-
-        em.persist(infoUsuario);
-
-    }
-
-    public void updateUsuario(UsuarioDTO usuarioDTO) throws ControladorExceptions {
-        Usuariobj infoUsuario = new Usuariobj();
-        infoUsuario.setIdusuarioBj(usuarioDTO.getIdusuario());
-        infoUsuario.setUserBj(usuarioDTO.getLogin());
-        infoUsuario.setPassBj(usuarioDTO.getPassword());
-        infoUsuario.setNombreBj(usuarioDTO.getNombreUsuario());
-        infoUsuario.setApePatBj(usuarioDTO.getApePatUsuario());
-        infoUsuario.setApeMatBj(usuarioDTO.getApeMatUsuario());
-        infoUsuario.setCorreoBj(usuarioDTO.getCorreoUsuario());
-        Perfilbj infoPerfil = em.find(Perfilbj.class, usuarioDTO.getPerfilIdperfil());
-        infoUsuario.setPerfilBjidperfilBj(infoPerfil);
-        //Sucursal infoSucursal = em.find(Sucursal.class, usuarioDTO.getIdSucursal());
-        //infoUsuario.setSucursalIdSucursal(infoSucursal);
-        em.merge(infoUsuario);
-    }
-    */
-/*
-    public void eliminaUsuario(Usuario usuario) throws ControladorExceptions {
-        em.remove(usuario);
-        
-    }
-    
-     public void deleteUsuario(int codigoUsuario)throws ControladorExceptions{
-        Usuario UsuarioEntity =em.find(Usuario.class, codigoUsuario);
-        em.remove(UsuarioEntity);
-    }
-*/
     public Usuarioallsafe buscaUsuarioXCodigo(int codigo) {
         Usuarioallsafe infoUsuario = null;
         try {
             infoUsuario = em.createNamedQuery("Usuarioallsafe.findByIdUsuarioAllSafe", Usuarioallsafe.class)
-                    .setParameter("idUsuario", codigo)
+                    .setParameter("idUsuarioAllSafe", codigo)
                     .getSingleResult();
         } catch (NoResultException ex) {
             return null;
@@ -120,17 +76,23 @@ public class UsuarioDAOSessionBean {
         }
         return infoUsuario;
     }
-/*
-    public List<Usuario> buscaUsuariosXCodigoPerfil(int codigoPerfil) {
-        return em.createNamedQuery("Usuario.UsuariosXCodigoPerfil", Usuario.class)
-                .setParameter("idPerfil", codigoPerfil)
-                .getResultList();
+    
+    public Usuarioallsafe updateUsuario(Usuarioallsafe usuario) {
+        try {
+            System.out.println(usuario.toString());
+            Usuarioallsafe auxUsuario = this.buscaUsuarioXCodigo(usuario.getIdUsuarioAllSafe());
+            auxUsuario.setPassUsuarioAllSafe(usuario.getPassUsuarioAllSafe());
+            usuario = em.merge(usuario);
+            em.flush();
+            return auxUsuario;
+        } catch (NoResultException ex) {
+            ex.printStackTrace();
+            return null;
+        } catch (NonUniqueResultException ex) {
+            ex.printStackTrace();
+            throw ex;
+        }
     }
-
-    public Usuarioallsafe buscaUsuariosXRut(String rut) {
-        return em.createNamedQuery("Usuario.findByRutUsuario", Usuarioallsafe.class)
-                .setParameter("rutUsuario", rut)
-                .getSingleResult();
-    }*/
+    
 
 }

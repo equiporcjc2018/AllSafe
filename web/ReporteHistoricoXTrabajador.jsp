@@ -250,7 +250,7 @@
                                                                         <th>Talla</th>
                                                                         <th>Fecha</th>
                                                                         <th>Iniciales</th>
-                                                                        <th>Observaciones</th>                                                                      
+                                                                        <th>Observaciones</th>
                                                                     </tr> 
                                                                 </thead>
                                                                 <tfoot>

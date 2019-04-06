@@ -14,7 +14,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Login</title>
+        <title>Recuperar Contraseña</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
         <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
@@ -47,24 +47,14 @@
                     <span class="splash-description"></span></div>
                 <div class="card-body">
 
-                    <form name="frmIngreso" class="form-signin" method="POST" action="./validaIngresobj" >
-                        <h2 class="form-signin-heading text-center">Ingreso al Sistema AllSafe</h2>
+                    <form name="frmIngreso" class="form-signin" method="POST" action="./enviarCodigoClave" >
+                        <h2 class="form-signin-heading text-center">Recuperar contraseña</h2>
                         <br/>
-                        <label for="txtLogin" class="">Login de acceso</label>                    
+                        <label for="txtLogin" class="">Enviaremos un correo a la direccion indicada</label>                    
                         <div class="form-group">
-                            <input class="form-control form-control-lg" id="txtLogin" name="txtLogin" type="text" placeholder="Username">
+                            <input class="form-control form-control-lg" id="txtLogin" name="txtLogin" type="text" placeholder="Su nombre de usuario">
                         </div>
-                        <div class="form-group">
-                            <input class="form-control form-control-lg" id="txtPass" name="txtPass" type="password" placeholder="Password">
-                        </div>
-                        <div class="form-group">
-                            <label class="custom-control custom-checkbox">
-                                <input class="custom-control-input" id="boolRemember" name="boolRemember" type="checkbox"><span class="custom-control-label">Recordarme</span>
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">Ingresar</button>
-                        <!--<button class="btn btn-info" type="button" onclick="window.location.href='RegistraNuevoUsuario.jsp'">Registrarse</button>-->                
-
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Enviar</button>
                     </form>
                     <br>
 
@@ -89,12 +79,10 @@
 
                 </div>
                 <div class="card-footer bg-white p-0  ">
-                    
                     <div class="card-footer-item card-footer-item-bordered">
-                        
-                        <a href="./RecuperarClave.jsp" class="footer-link">Recuperar Contraseña</a>
-                        
+                        <a class="footer-link" href="Login.jsp">Volver al login</a>
                     </div>
+
                 </div>
             </div>
         </div>

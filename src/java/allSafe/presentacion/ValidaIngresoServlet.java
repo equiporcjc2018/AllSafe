@@ -7,6 +7,7 @@ package allSafe.presentacion;
 
 import allSafe.Entities.Usuarioallsafe;
 import allSafe.persistencia.UsuarioDAOSessionBean;
+import allSafe.util.Utilidades;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -39,7 +40,7 @@ UsuarioDAOSessionBean objUsuarioDAOSessionBean;
             throws ServletException, IOException {
         HttpSession sesion= request.getSession();
         String login=request.getParameter("txtLogin");
-        String pass=generateMD5Signature(request.getParameter("txtPass"));
+        String pass=Utilidades.generateMD5Signature(request.getParameter("txtPass"));
         //Si el checkbox esta habilitado, guardar cookie con el nombre de usuario
         if(null != request.getParameter("boolRemember")){            
             Cookie c = new Cookie("txtLogin", login);
@@ -67,34 +68,5 @@ UsuarioDAOSessionBean objUsuarioDAOSessionBean;
         
 
     }
-    
-    //Se agrega metodos para encriptar MD5
-       public static String generateMD5Signature(String input) {
-    try {
-        //Cambiando MD5 por SHA-1 podríamos obtener la huella usando este otro algoritmo
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        //MessageDigest md = MessageDigest.getInstance(input);
-        byte[] huella = md.digest(input.getBytes());
-        return transformaAHexadecimal(huella);
-    } catch (NoSuchAlgorithmException ex) {
-        //Logger.getLogger(Tools.class.getName()).log(Level.SEVERE,
-          //      "No se ha encontrado el algoritmo MD5", ex);
-        return "-1";
-    }
-}
- 
-//Método para transformar el array de bytes en una cadena hexadecimal
-private static String transformaAHexadecimal(byte buf[]) {
-    StringBuilder strbuf = new StringBuilder(buf.length * 2);
-    for (int i = 0; i < buf.length; i++) {
-        if (((int) buf[i] & 0xff) < 0x10) {
-            strbuf.append("0");
-        }
-        strbuf.append(Long.toString((int) buf[i] & 0xff, 16));
-    }
-    return strbuf.toString();
-}
-
-    
 
 }

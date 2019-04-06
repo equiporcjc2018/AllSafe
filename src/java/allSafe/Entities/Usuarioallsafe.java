@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     ,@NamedQuery(name = "Usuarioallsafe.findAll", query = "SELECT u FROM Usuarioallsafe u")
     , @NamedQuery(name = "Usuarioallsafe.findByIdUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.idUsuarioAllSafe = :idUsuarioAllSafe")
     , @NamedQuery(name = "Usuarioallsafe.findByLoginUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.loginUsuarioAllSafe = :loginUsuarioAllSafe")
+    , @NamedQuery(name = "Usuarioallsafe.updateClave", query = "UPDATE Usuarioallsafe u SET u.passUsuarioAllSafe=:clave where u.idUsuarioAllSafe = :id")
     , @NamedQuery(name = "Usuarioallsafe.findByPassUsuarioAllSafe", query = "SELECT u FROM Usuarioallsafe u WHERE u.passUsuarioAllSafe = :passUsuarioAllSafe")})
 public class Usuarioallsafe implements Serializable {
 
@@ -160,7 +161,8 @@ public class Usuarioallsafe implements Serializable {
 
     @Override
     public String toString() {
-        return "allSafe.Entities.Usuarioallsafe[ idUsuarioAllSafe=" + idUsuarioAllSafe + " ]";
+        return "Usuarioallsafe{" + "idUsuarioAllSafe=" + idUsuarioAllSafe + ", loginUsuarioAllSafe=" + loginUsuarioAllSafe + ", passUsuarioAllSafe=" + passUsuarioAllSafe + ", eppterrenoList=" + eppterrenoList + ", perfilAllSafeidPerfilAllSafe=" + perfilAllSafeidPerfilAllSafe + ", personarutPasaportePersona=" + personarutPasaportePersona + ", eppsolicitudterrenoList=" + eppsolicitudterrenoList + '}';
     }
+
     
 }

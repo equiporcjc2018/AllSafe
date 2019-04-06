@@ -14,7 +14,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Login</title>
+        <title>Recuperar contraseña</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
         <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
@@ -46,25 +46,20 @@
                 <div class="card-header text-center"><a href="#"><img class="logo-img" style="width: 180px; height: 80px;" src="assets/images/fieldcore.png" alt="logo"></a>
                     <span class="splash-description"></span></div>
                 <div class="card-body">
-
-                    <form name="frmIngreso" class="form-signin" method="POST" action="./validaIngresobj" >
-                        <h2 class="form-signin-heading text-center">Ingreso al Sistema AllSafe</h2>
-                        <br/>
-                        <label for="txtLogin" class="">Login de acceso</label>                    
+                   
+                    <form name="frmIngreso" class="form-signin" method="POST" action="./recuperarClave" >
+                        <h2 class="form-signin-heading text-center">Cambiar contraseña</h2>
+                        <br/>  
+                        <input type=hidden id="codigo" name="codigo" value="<%= request.getParameter("codigo") %>">
+                        <input type=hidden id="id" name="id" value="<%= request.getParameter("id") %>">
+                        
                         <div class="form-group">
-                            <input class="form-control form-control-lg" id="txtLogin" name="txtLogin" type="text" placeholder="Username">
+                            <input class="form-control form-control-lg" id="txtClave" name="txtClave" type="password" placeholder="Clave">
                         </div>
                         <div class="form-group">
-                            <input class="form-control form-control-lg" id="txtPass" name="txtPass" type="password" placeholder="Password">
+                            <input class="form-control form-control-lg" id="txtClave2" name="txtClave2" type="password" placeholder="Repetir">
                         </div>
-                        <div class="form-group">
-                            <label class="custom-control custom-checkbox">
-                                <input class="custom-control-input" id="boolRemember" name="boolRemember" type="checkbox"><span class="custom-control-label">Recordarme</span>
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">Ingresar</button>
-                        <!--<button class="btn btn-info" type="button" onclick="window.location.href='RegistraNuevoUsuario.jsp'">Registrarse</button>-->                
-
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Enviar</button>
                     </form>
                     <br>
 
@@ -87,14 +82,6 @@
                     </c:if>                  
 
 
-                </div>
-                <div class="card-footer bg-white p-0  ">
-                    
-                    <div class="card-footer-item card-footer-item-bordered">
-                        
-                        <a href="./RecuperarClave.jsp" class="footer-link">Recuperar Contraseña</a>
-                        
-                    </div>
                 </div>
             </div>
         </div>
