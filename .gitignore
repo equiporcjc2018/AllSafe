@@ -9,3 +9,9 @@ nbproject/project.properties
 nbproject/project.xml
 src/conf/persistence.xml
 web/WEB-INF/glassfish-resources.xml
+nbproject/build-impl.xml
+nbproject/genfiles.properties
+nbproject/project.properties
+nbproject/project.xml
+src/conf/persistence.xml
+web/WEB-INF/glassfish-resources.xml
