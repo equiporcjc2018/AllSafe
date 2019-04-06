@@ -12,8 +12,13 @@ package allSafe.util;
 public class Constantes {
  
     
-    public static String correoRecuperacion = "equiporcjc2018@gmail.com";
-    public static String claveRecuperacion = "escribaLaClave";
-    public static String asuntoCorreoRecuperacion = "Recuperacion de clave AllSafe";
+    public static Integer PARAM_LoginCorreoRecuperacion = 1;
+    public static Integer PARAM_AsuntoMailRecuperacion = 2;
+    public static Integer PARAM_CuerpoMailRecuperacion = 3;
+    public static Integer PARAM_ClaveCorreoRecuperacion = 4;
+    public static Integer PARAM_IpServidorAplicacion = 5;
+    public static Integer PARAM_PuertoServidorAplicacion = 6;
+    
     
 }
+    

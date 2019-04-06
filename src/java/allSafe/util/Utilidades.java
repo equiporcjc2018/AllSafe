@@ -41,13 +41,4 @@ public abstract class Utilidades {
         return strbuf.toString();
     }
     
-    public static String generarCuerpoCorreoRecuperacion(UsuarioClaveRecuperar ucr, Usuarioallsafe usuario){
-        return "Te hemos enviado este correo porque has solicitado recuperar tu clave de AllSafe. <br> Si has sido tú, debes seguir "
-                + "<a href='http://localhost:8080/AllSafe/CambiarClave.jsp?codigo="+ucr.getCodigo()+"&id="+usuario.getIdUsuarioAllSafe()+"'>este enlace</a> "
-                + "para poder reestablecer tu clave. <br><br> Si el enlace no funciona, copia y pega esto en tu navegador: <br><br>"
-                + "http://localhost:8080/AllSafe/CambiarClave.jsp?codigo="+ucr.getCodigo()+"&id="+usuario.getIdUsuarioAllSafe()
-                + "<br><br>Si no has solicitado el cambio de tu clave, alguien puede estar intentando acceder a tu cuenta."
-                ;
-    }
-
 }

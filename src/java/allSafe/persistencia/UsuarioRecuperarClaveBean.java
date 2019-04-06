@@ -9,7 +9,6 @@ package allSafe.persistencia;
 import allSafe.Entities.UsuarioClaveHistorial;
 import allSafe.Entities.UsuarioClaveRecuperar;
 import allSafe.Entities.Usuarioallsafe;
-import allSafe.dto.UsuarioDTO;
 import allSafe.util.Constantes;
 import allSafe.util.Utilidades;
 import java.security.SecureRandom;
@@ -25,6 +24,7 @@ import javax.validation.ConstraintViolationException;
 import java.util.*;  
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.mail.*;  
 import javax.mail.internet.*;  
 
@@ -38,6 +38,9 @@ public class UsuarioRecuperarClaveBean {
 
     @PersistenceContext
     private EntityManager em;
+    
+    @EJB
+    private ParametroBean paramBean;
 
     public Usuarioallsafe validaUsuario(String login, String password) {
         Usuarioallsafe objUsuario = null;
@@ -132,12 +135,12 @@ public class UsuarioRecuperarClaveBean {
     }
     
     private int sendEmailToUser(Usuarioallsafe usuario, UsuarioClaveRecuperar ucr) throws AddressException, MessagingException {
+        System.out.println("Comenzando envio de mail ...");
         int result = -1;
         Properties mailServerProperties;
 	Session getMailSession;
-	MimeMessage generateMailMessage;     
+	MimeMessage generateMailMessage;  
         
-        System.out.println("Enviando mail");
         mailServerProperties = System.getProperties();
         mailServerProperties.put("mail.smtp.port", "587");
         mailServerProperties.put("mail.smtp.auth", "true");
@@ -146,19 +149,39 @@ public class UsuarioRecuperarClaveBean {
         getMailSession = Session.getDefaultInstance(mailServerProperties, null);
         generateMailMessage = new MimeMessage(getMailSession);
         generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(usuario.getPersonarutPasaportePersona().getCorreoPersona()));
-        generateMailMessage.setSubject(Constantes.asuntoCorreoRecuperacion);
-        String emailBody = Utilidades.generarCuerpoCorreoRecuperacion(ucr, usuario);
+        System.out.println("El correo se enviará a: "+usuario.getPersonarutPasaportePersona().getCorreoPersona());
+        generateMailMessage.setSubject(paramBean.findByLlave(Constantes.PARAM_AsuntoMailRecuperacion).getValor());
+        String emailBody = generarCuerpoCorreoRecuperacion(ucr, usuario);
         generateMailMessage.setContent(emailBody, "text/html");
 
         Transport transport = getMailSession.getTransport("smtp");
 
-        result = -2;
-        transport.connect("smtp.gmail.com", Constantes.correoRecuperacion, Constantes.claveRecuperacion);
-        transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
-        transport.close();
-        result = 0;
+        System.out.println("Ingresando a cuenta de correo ...");
+        //Si retorna -2 es porque no se pudo iniciar sesion en la cuenta de correo desde donde se envia el mail
+        String correoRemitente = paramBean.getValorByParamLlave(Constantes.PARAM_LoginCorreoRecuperacion);
+        String claveCorreoRemitente = paramBean.getValorByParamLlave(Constantes.PARAM_ClaveCorreoRecuperacion);
+        try{
+            transport.connect("smtp.gmail.com", 
+                    correoRemitente,  claveCorreoRemitente );
+            transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
+            transport.close();
+            System.out.println("Cuerpo del correo enviado: \n\n"+emailBody);
+            result = 0;
+        }catch(Exception e){
+            result = -2;
+        }
         return result;
     }
+    
+    public String generarCuerpoCorreoRecuperacion(UsuarioClaveRecuperar ucr, Usuarioallsafe usuario){
+        String ipServidor = paramBean.getValorByParamLlave(Constantes.PARAM_IpServidorAplicacion);
+        String string = paramBean.getValorByParamLlave(Constantes.PARAM_CuerpoMailRecuperacion);
+        return string.replace("{{0}}", ipServidor)
+                .replace("{{1}}", ucr.getCodigo())
+                .replace("{{2}}", usuario.getIdUsuarioAllSafe()+"")
+                .replace("{{3}}", usuario.getPersonarutPasaportePersona().getNombresPersona());
+    }
+
     
     public UsuarioClaveRecuperar addCodigoRecuperacion(String username) {
         UsuarioClaveRecuperar ucr = null;
