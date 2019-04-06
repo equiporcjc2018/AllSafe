@@ -6,6 +6,7 @@
 package allSafe.Entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -31,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "UsuarioClaveHistorial.findAll", query = "SELECT a FROM UsuarioClaveHistorial a")
     , @NamedQuery(name = "UsuarioClaveHistorial.findByIdUsuario", query = "SELECT a FROM UsuarioClaveHistorial a WHERE a.usuario = :id")
-    , @NamedQuery(name = "UsuarioClaveHistorial.findActivaByIdUsuario", query = "SELECT a FROM UsuarioClaveHistorial a WHERE a.usuario = :id AND a.estado = :estado")})
+    , @NamedQuery(name = "UsuarioClaveHistorial.findActivaByIdUsuario", query = "SELECT a FROM UsuarioClaveHistorial a WHERE a.usuario.idUsuarioAllSafe = :id AND a.estado = :estado")})
 public class UsuarioClaveHistorial implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,10 +44,9 @@ public class UsuarioClaveHistorial implements Serializable {
     @Column(name = "idusuarioclavehistorial")
     private Integer idUsuarioClaveHistorial;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "fechaCreacion")
-    private String fechaCreacion;
+    @Column(name = "fechaCreacion", insertable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaCreacion;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 1)
@@ -53,6 +55,9 @@ public class UsuarioClaveHistorial implements Serializable {
     @JoinColumn(name = "usuario", referencedColumnName = "idUsuarioAllSafe")
     @ManyToOne(optional = false)
     private Usuarioallsafe usuario;
+    @Basic(optional = false)
+    @Column(name = "clave")
+    private String clave;
 
     public UsuarioClaveHistorial() {
     }
@@ -65,11 +70,11 @@ public class UsuarioClaveHistorial implements Serializable {
         this.idUsuarioClaveHistorial = idUsuarioClaveHistorial;
     }
 
-    public String getFechaCreacion() {
+    public Date getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(String fechaCreacion) {
+    public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
@@ -89,7 +94,7 @@ public class UsuarioClaveHistorial implements Serializable {
         this.usuario = usuario;
     }
 
-    public UsuarioClaveHistorial(Integer idUsuarioClaveHistorial, String fechaCreacion, String estado, Usuarioallsafe usuario) {
+    public UsuarioClaveHistorial(Integer idUsuarioClaveHistorial, Date fechaCreacion, String estado, Usuarioallsafe usuario) {
         this.idUsuarioClaveHistorial = idUsuarioClaveHistorial;
         this.fechaCreacion = fechaCreacion;
         this.estado = estado;
@@ -100,4 +105,13 @@ public class UsuarioClaveHistorial implements Serializable {
         this.idUsuarioClaveHistorial = idUsuarioClaveHistorial;
     }
 
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    
 }

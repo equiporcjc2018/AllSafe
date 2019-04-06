@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package allSafe.presentacion;
-import allSafe.dto.UsuarioDTO;
+import allSafe.Entities.Usuarioallsafe;
 import allSafe.persistencia.UsuarioDAOSessionBean;
+import allSafe.persistencia.UsuarioRecuperarClaveBean;
+import allSafe.util.Utilidades;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -25,31 +27,13 @@ public class RecuperarClaveServlet extends HttpServlet {
     @EJB
     UsuarioDAOSessionBean usuarioDAO;
     
+    @EJB
+    UsuarioRecuperarClaveBean historialDAO;
    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String codigo = request.getParameter("codigo");
-        String id = request.getParameter("id");
-        if(null != codigo && !codigo.isEmpty() && null != id && !id.isEmpty()){
-            try{
-                if(usuarioDAO.validarCodigoRecuperacionClave(codigo, Integer.parseInt(id))){
-                    response.sendRedirect("CambiarClave.jsp/"+codigo+"/"+id);
-                
-                }else{
-                    response.sendRedirect("CodigoExpirado.jsp");
-                    
-                }
-            }catch(Exception e){
-                response.sendRedirect("CodigoExpirado.jsp");
-                e.printStackTrace();
-            }
-            
-        }else{
-            response.sendRedirect("CodigoExpirado.jsp");
-        }
     }
-
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -60,24 +44,26 @@ public class RecuperarClaveServlet extends HttpServlet {
         String codigo = request.getParameter("codigo");
         if(null != clave && !clave.isEmpty() && null != codigo && !codigo.isEmpty() && null != id && !id.isEmpty()){
             try{
-                if(usuarioDAO.validarCodigoRecuperacionClave(codigo, Integer.parseInt(id))){
-                    UsuarioDTO usuario = new UsuarioDTO();
-                    usuario.setPassUsuarioAllSafe(clave);
-                    usuario.setIdUsuarioAllSafe(Integer.parseInt(id));
-                    usuarioDAO.updateUsuarioPass(usuario);
-                
+                if(historialDAO.validarCodigoRecuperacionClave(codigo, Integer.parseInt(id))){
+                    Usuarioallsafe usuario = usuarioDAO.buscaUsuarioXCodigo(Integer.parseInt(id));
+                    usuario.setPassUsuarioAllSafe(Utilidades.generateMD5Signature(clave));
+                    
+                    usuarioDAO.updateUsuario(usuario);
+                    historialDAO.desactivarTodasLasClavesDelHistorial(usuario);
+                    historialDAO.addHistorialClave(usuario);
+                    sesion.setAttribute("exito", "Hemos cambiado tu clave correctamente");
+                    response.sendRedirect("Login.jsp");
                 }else{
                     response.sendRedirect("CodigoExpirado.jsp");
-                    
                 }
             }catch(Exception e){
-                response.sendRedirect("CodigoExpirado.jsp");
+                response.sendRedirect("Login.jsp");
                 e.printStackTrace();
             }
             
         }else{
-            response.sendRedirect("Login.jsp");
             sesion.setAttribute("error", "Ocurrio un error, vuelva a intentarlo");
+            response.sendRedirect("Login.jsp");
         }
         
     }

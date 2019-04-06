@@ -46,10 +46,13 @@
                 <div class="card-header text-center"><a href="#"><img class="logo-img" style="width: 180px; height: 80px;" src="assets/images/fieldcore.png" alt="logo"></a>
                     <span class="splash-description"></span></div>
                 <div class="card-body">
-
-                    <form name="frmIngreso" class="form-signin" method="POST" action="./validaIngresobj" >
-                        <h2 class="form-signin-heading text-center">Recuperar contraseña</h2>
+                   
+                    <form name="frmIngreso" class="form-signin" method="POST" action="./recuperarClave" >
+                        <h2 class="form-signin-heading text-center">Cambiar contraseña</h2>
                         <br/>  
+                        <input type=hidden id="codigo" name="codigo" value="<%= request.getParameter("codigo") %>">
+                        <input type=hidden id="id" name="id" value="<%= request.getParameter("id") %>">
+                        
                         <div class="form-group">
                             <input class="form-control form-control-lg" id="txtClave" name="txtClave" type="password" placeholder="Clave">
                         </div>

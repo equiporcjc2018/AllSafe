@@ -6,6 +6,7 @@
 package allSafe.Entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -31,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "UsuarioClaveRecuperar.findAll", query = "SELECT a FROM UsuarioClaveRecuperar a")
     , @NamedQuery(name = "UsuarioClaveRecuperar.findByIdUsuario", query = "SELECT a FROM UsuarioClaveRecuperar a WHERE a.usuario = :id")
-    , @NamedQuery(name = "UsuarioClaveRecuperar.findByCodigoAndIdUsuario", query = "SELECT a FROM UsuarioClaveRecuperar a WHERE a.usuario = :id AND a.codigo = :codigo")})
+    , @NamedQuery(name = "UsuarioClaveRecuperar.findByCodigoAndIdUsuario", query = "SELECT a FROM UsuarioClaveRecuperar a WHERE a.usuario.idUsuarioAllSafe = :id AND a.codigo = :codigo")})
 public class UsuarioClaveRecuperar implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,9 +44,9 @@ public class UsuarioClaveRecuperar implements Serializable {
     @Column(name = "idusuarioclaverecuperar")
     private Integer idUsuarioClaveRecuperar;
     @Basic(optional = false)
-    
-    @Column(name = "fecha")
-    private String fecha;
+    @Column(name = "fecha", insertable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecha;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
@@ -73,11 +76,11 @@ public class UsuarioClaveRecuperar implements Serializable {
         this.usuario = usuario;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
@@ -89,7 +92,7 @@ public class UsuarioClaveRecuperar implements Serializable {
         this.codigo = codigo;
     }
 
-    public UsuarioClaveRecuperar(Integer idUsuarioClaveRecuperar, String fecha, String codigo, Usuarioallsafe usuario) {
+    public UsuarioClaveRecuperar(Integer idUsuarioClaveRecuperar, Date fecha, String codigo, Usuarioallsafe usuario) {
         this.idUsuarioClaveRecuperar = idUsuarioClaveRecuperar;
         this.fecha = fecha;
         this.codigo = codigo;

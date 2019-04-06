@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package allSafe.presentacion;
-import allSafe.dto.UsuarioDTO;
 import allSafe.persistencia.UsuarioDAOSessionBean;
+import allSafe.persistencia.UsuarioRecuperarClaveBean;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 public class EnviarCodigoClaveRecuperacion extends HttpServlet {
 
     @EJB
-    UsuarioDAOSessionBean usuarioDAO;
+    UsuarioRecuperarClaveBean historialDAO;
     
    
     @Override
@@ -39,25 +39,29 @@ public class EnviarCodigoClaveRecuperacion extends HttpServlet {
         String usuario = request.getParameter("txtLogin");
         if(null != usuario && !usuario.isEmpty()){
             try{
-                if(usuarioDAO.addCodigoRecuperacion(usuario)){
-                    sesion.setAttribute("exito", "Te hemos enviado correo con un enlace para cambiar la contraseña");
-                    response.sendRedirect("RecuperarClave.jsp");
-                    
-                }else{
-                    sesion.setAttribute("error", "Ocurrio un error, vuelva a intentarlo");
-                    response.sendRedirect("Login.jsp");
-                    
+                int resultado = historialDAO.addCodigoRecuperacionYEnviarCorreo(usuario);
+                switch (resultado) {
+                    case 0:
+                        sesion.setAttribute("exito", "Te hemos enviado un mail con un enlace para cambiar tu contraseña de AllSafe.");
+                        break;
+                    case -1:
+                        sesion.setAttribute("error", "Usuario no encontrado");
+                        break;
+                    case -2:
+                        sesion.setAttribute("error", "Error inesperado (CODIGO -2)");
+                        break;
+                    default:
+                        sesion.setAttribute("error", "Error inesperado (CODIGO -3)");
+                        break;
                 }
             }catch(Exception e){
-                sesion.setAttribute("error", "Ocurrio un error, vuelva a intentarlo");
-                response.sendRedirect("Login.jsp");
                 e.printStackTrace();
+                sesion.setAttribute("error", "Algo salió mal.");
             }
-            
         }else{
-            response.sendRedirect("Login.jsp");
-            sesion.setAttribute("error", "Ocurrio un error, vuelva a intentarlo");
+            sesion.setAttribute("error", "Debes ingresar tu nombre de usuario.");
         }
+        response.sendRedirect("Login.jsp");
         
     }
 
