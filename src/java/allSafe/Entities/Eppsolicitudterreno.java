@@ -71,6 +71,19 @@ public class Eppsolicitudterreno implements Serializable {
     @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuarioAllSafe")
     @ManyToOne(optional = false)
     private Usuarioallsafe idUsuario;
+    @Basic(optional = false)
+    @Size(min = 1, max = 1)
+    @Column(name = "vigencia")
+    private String vigencia;
+
+    public String getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
+    }
+    
 
     public Eppsolicitudterreno() {
     }

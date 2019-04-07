@@ -59,6 +59,19 @@ public class Menuallsafe implements Serializable {
     @JoinColumn(name = "PerfilAllSafe_idPerfilAllSafe", referencedColumnName = "idPerfilAllSafe")
     @ManyToOne(optional = false)
     private Perfilallsafe perfilAllSafeidPerfilAllSafe;
+    @Basic(optional = false)
+    @Size(min = 1, max = 1)
+    @Column(name = "vigencia")
+    private String vigencia;
+
+    public String getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
+    }
+    
 
     public Menuallsafe() {
     }

@@ -197,7 +197,7 @@
                                                                             <td><c:out value="${proyecto.empresaidEmpresa.razonSocialEmpresa}"/></td>
                                                                             <td><c:out value="${proyecto.fechaInicioProyecto}"/></td>
                                                                             <td><c:out value="${proyecto.fechaTerminoProyecto}"/></td>
-                                                                            <td><c:out value="${proyecto.vigenteproyecto}"/></td>
+                                                                            <td><c:if test="${proyecto.vigencia == 'Y'}" >Si</c:if><c:if test="${proyecto.vigencia == 'N'}" >No</c:if></td>
                                                                             <td><input type="button" class="btn btn-primary btn-space" name="btnEditar" value="Editar"/></td>
                                                                             <td><input type="button" class="btn btn-secondary btn-space" name="btnEliminar" value="Eliminar"/></td>
                                                                         </tr>

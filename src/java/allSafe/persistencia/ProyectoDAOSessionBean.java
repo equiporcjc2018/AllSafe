@@ -36,7 +36,7 @@ public class ProyectoDAOSessionBean {
         objProyecto.setFechaTerminoProyecto(pceDTO.getObjProyecto().getFechaTerminoProyecto());
         objProyecto.setCiudadidCiudad(pceDTO.getObjCiudad());
         objProyecto.setEmpresaidEmpresa(pceDTO.getObjEmpresa());
-        objProyecto.setVigenteproyecto(pceDTO.getObjProyecto().getVigenteproyecto());
+        objProyecto.setVigencia(pceDTO.getObjProyecto().getVigencia());
         em.persist(objProyecto);
     }
     

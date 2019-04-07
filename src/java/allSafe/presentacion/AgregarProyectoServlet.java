@@ -69,7 +69,7 @@ public class AgregarProyectoServlet extends HttpServlet {
                 objProyecto.setUbicacionProyecto(ubicacion);
                 objProyecto.setFechaInicioProyecto(fechaIn);
                 objProyecto.setFechaTerminoProyecto(fechaTer);
-                objProyecto.setVigenteproyecto(vigenteProy);
+                objProyecto.setVigencia(vigenteProy);
                 objCiudad = objCiudadDAOSessionBean.buscaCiudadXID(Integer.parseInt(ciudad));
                 objEmpresa = objEmpresaDAOSessionBean.buscaEmpresaXID(Integer.parseInt(empresa));
                 objPCEDTO.setObjProyecto(objProyecto);

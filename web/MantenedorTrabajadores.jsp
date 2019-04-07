@@ -270,7 +270,7 @@
                                                                             <td><c:out value="${persona.tallaPantalonidTallaPantalon.letraTallaPantalon} - ${persona.tallaPantalonidTallaPantalon.numeroTallaPantalon}"/></td>
                                                                             <td><c:out value="${persona.tallaPoleraCamisaidtallaPoleraCamisa.letraPoleraCamisa} - ${persona.tallaPoleraCamisaidtallaPoleraCamisa.numeroPoleraCamisa}"/></td>
                                                                             <td><c:out value="${persona.tallaZApatoidtallaZApato.numeroZapato}"/></td>
-                                                                            <td><c:out value="${persona.vigentepersona}"/></td>
+                                                                            <td><c:if test="${persona.vigencia == 'Y'}" >Si</c:if><c:if test="${persona.vigencia == 'N'}" >No</c:if> </td>
                                                                             <td><input type="button" class="btn btn-primary btn-space" name="btnEditar" value="Editar"/></td>
                                                                             <td><input type="button" class="btn btn-secondary btn-space"  name="btnCambiarEstado" value="Cambiar Estado"/></td>
 

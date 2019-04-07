@@ -192,7 +192,7 @@
                                                                 <div class="form-group col-md-6 ">
                                                                     <label for="txtDescripcionAEditar" class="col-form-label">Descripcion</label>
                                                                     <input id="txtDescripcion" name="txtDescripcionAEditar" value="${eppAEditar.descripcionEPP}" type="text" class="form-control" required>
-                                                                    <input type="hidden"name="vigenciaAEditar" value="${eppAEditar.vigenteepp}"/>
+                                                                    <input type="hidden"name="vigenciaAEditar" value="${eppAEditar.vigencia}"/>
                                                                 </div>
                                                             </div>
 
@@ -247,7 +247,7 @@
                                                                                 <td><c:out value="${epp.nombreEPPcol}"/></td>
                                                                                 <td><c:out value="${epp.descripcionEPP}"/></td>
                                                                                 <td><c:out value="${epp.tipoEPPidTipoEPP.descripcionTipoEPP}"/></td>
-                                                                                <td><c:out value="${epp.vigenteepp}"/></td>
+                                                                                <td><c:if test="${epp.vigencia == 'Y'}" >Si</c:if><c:if test="${epp.vigencia == 'N'}" >No</c:if></td>
                                                                                 <c:url value="./editarEppServlet" var="edicionDeEPP">
                                                                                     <c:param name="ideppAEditar" value="${epp.idEPP}"/>
                                                                                 </c:url>
@@ -315,7 +315,7 @@
                                                                                 <td><c:out value="${epp.nombreEPPcol}"/></td>
                                                                                 <td><c:out value="${epp.descripcionEPP}"/></td>
                                                                                 <td><c:out value="${epp.tipoEPPidTipoEPP.descripcionTipoEPP}"/></td>
-                                                                                <td><c:out value="${epp.vigenteepp}"/></td>
+                                                                                <td><c:if test="${epp.vigencia == 'Y'}" >Si</c:if><c:if test="${epp.vigencia == 'N'}" >No</c:if></td>
                                                                                 <c:url value="./editarEppServlet" var="edicionDeEPP">
                                                                                     <c:param name="ideppAEditar" value="${epp.idEPP}"/>
                                                                                 </c:url>

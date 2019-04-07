@@ -20,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -50,7 +51,20 @@ public class Asignaeppaproyecto implements Serializable {
     private Proyecto proyectoidProyecto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "asignaeppaproyectoIdasignaeppaproyecto")
     private List<Asignacantidadepp> asignacantidadeppList;
+    @Basic(optional = false)
+    @Size(min = 1, max = 1)
+    @Column(name = "vigencia")
+    private String vigencia;
 
+    public String getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
+    }
+    
+    
     public Asignaeppaproyecto() {
     }
 

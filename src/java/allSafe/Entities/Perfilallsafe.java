@@ -51,6 +51,19 @@ public class Perfilallsafe implements Serializable {
     private List<Usuarioallsafe> usuarioallsafeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilAllSafeidPerfilAllSafe")
     private List<Menuallsafe> menuallsafeList;
+    @Basic(optional = false)
+    @Size(min = 1, max = 1)
+    @Column(name = "vigencia")
+    private String vigencia;
+
+    public String getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
+    }
+    
 
     public Perfilallsafe() {
     }

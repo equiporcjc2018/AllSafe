@@ -54,7 +54,7 @@ public class UsuarioClaveRecuperar implements Serializable {
     private String codigo;
     @JoinColumn(name = "usuario", referencedColumnName = "idUsuarioAllSafe")
     @ManyToOne(optional = false)
-    private Usuarioallsafe usuario;
+    private Usuarioallsafe usuario;    
 
     public UsuarioClaveRecuperar() {
     }

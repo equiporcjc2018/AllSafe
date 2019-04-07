@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -43,6 +44,19 @@ public class Asignatrabajadorproyecto implements Serializable {
     @JoinColumn(name = "proyecto_idProyecto", referencedColumnName = "idProyecto")
     @ManyToOne(optional = false)
     private Proyecto proyectoidProyecto;
+    @Basic(optional = false)
+    @Size(min = 1, max = 1)
+    @Column(name = "vigencia")
+    private String vigencia;
+
+    public String getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
+    }
+    
 
     public Asignatrabajadorproyecto() {
     }

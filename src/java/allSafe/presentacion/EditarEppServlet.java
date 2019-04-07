@@ -75,7 +75,7 @@ public class EditarEppServlet extends HttpServlet {
                 objEpp.setIdEPP(id);
                 objEpp.setNombreEPPcol(nombre);
                 objEpp.setDescripcionEPP(descripcion);
-                objEpp.setVigenteepp(vigente);
+                objEpp.setVigencia(vigente);
                 objTipoepp = objTipoEppDAOSessionBean.buscaTipoEPPXID(Integer.parseInt(tipoEpp));
                 objEppTipoEppDTO.setObjEpp(objEpp);
                 objEppTipoEppDTO.setObjTipoepp(objTipoepp);

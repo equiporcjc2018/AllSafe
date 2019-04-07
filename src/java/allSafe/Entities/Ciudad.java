@@ -54,6 +54,19 @@ public class Ciudad implements Serializable {
     @JoinColumn(name = "Pais_idPais", referencedColumnName = "idPais")
     @ManyToOne(optional = false)
     private Pais paisidPais;
+    @Basic(optional = false)
+    @Size(min = 1, max = 1)
+    @Column(name = "vigencia")
+    private String vigencia;
+
+    public String getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
+    }
+    
 
     public Ciudad() {
     }

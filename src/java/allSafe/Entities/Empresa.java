@@ -78,6 +78,19 @@ public class Empresa implements Serializable {
     private String giroEmpresa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresaidEmpresa")
     private List<Proyecto> proyectoList;
+    @Basic(optional = false)
+    @Size(min = 1, max = 1)
+    @Column(name = "vigencia")
+    private String vigencia;
+
+    public String getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
+    }
+    
 
     public Empresa() {
     }

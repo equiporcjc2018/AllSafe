@@ -21,7 +21,6 @@ import allSafe.persistencia.TallaPoleraCamisaSessionBean;
 import allSafe.persistencia.TallaZapatoSessionBean;
 import allSafe.persistencia.TipoPlantaSessionBean;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -95,7 +94,7 @@ public class RegistroTrabajadorServlet extends HttpServlet {
             String pantalon = request.getParameter("ddlPantalon");
             String polera = request.getParameter("ddlPolera");
             String zapato = request.getParameter("ddlZapato");
-            String vigente = "Si";
+            String vigente = "Y";
             
             if (!(identificacion == null || nombre == null || apePat == null || apeMat == null || fecNac == null || nacionalidad == null || correo == null  || cargo == null || planta == null || oberol == null || pantalon == null || polera == null || zapato == null )) {
                 objPersona.setRutPasaportePersona(identificacion);
@@ -105,7 +104,7 @@ public class RegistroTrabajadorServlet extends HttpServlet {
                 objPersona.setFechaNacPersona(fecNac);
                 objPersona.setNacionalidadPersona(nacionalidad);
                 objPersona.setCorreoPersona(correo);
-                objPersona.setVigentepersona(vigente);
+                objPersona.setVigencia(vigente);
                 objCargo = objCargoSessionBean.buscaCargoXID(Integer.parseInt(cargo));
                 objTipoplanta = objTipoPlantaSessionBean.buscaTipoPlantaXID(Integer.parseInt(planta));
                 objTallaoberol = objTallaOberolSessionBean.buscaTallaOberolXID(Integer.parseInt(oberol));

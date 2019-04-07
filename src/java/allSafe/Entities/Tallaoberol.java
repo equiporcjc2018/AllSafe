@@ -53,6 +53,19 @@ public class Tallaoberol implements Serializable {
     private String letraTallaOberol;
     @OneToMany(mappedBy = "tallaOberolidTallaOberol")
     private List<Persona> personaList;
+    @Basic(optional = false)
+    @Size(min = 1, max = 1)
+    @Column(name = "vigencia")
+    private String vigencia;
+
+    public String getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
+    }
+    
 
     public Tallaoberol() {
     }
