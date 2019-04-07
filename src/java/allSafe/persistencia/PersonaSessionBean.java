@@ -45,7 +45,7 @@ public class PersonaSessionBean {
         objPersona.setTallaPantalonidTallaPantalon(pctpoppzDTO.getObjTallapantalon());
         objPersona.setTallaPoleraCamisaidtallaPoleraCamisa(pctpoppzDTO.getObjTallapoleracamisa());
         objPersona.setTallaZApatoidtallaZApato(pctpoppzDTO.getObjTallazapato());
-        objPersona.setVigentepersona(pctpoppzDTO.getObjPersona().getVigentepersona());
+        objPersona.setVigencia(pctpoppzDTO.getObjPersona().getVigencia());
         em.persist(objPersona);
     }
     

@@ -49,6 +49,19 @@ public class Tipoplanta implements Serializable {
     private String descripcionTipoPlanta;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoPlantaidTipoPlanta")
     private List<Persona> personaList;
+    @Basic(optional = false)
+    @Size(min = 1, max = 1)
+    @Column(name = "vigencia")
+    private String vigencia;
+
+    public String getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
+    }
+    
 
     public Tipoplanta() {
     }

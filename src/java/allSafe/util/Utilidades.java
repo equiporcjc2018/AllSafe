@@ -5,9 +5,6 @@
  */
 package allSafe.util;
 
-import allSafe.Entities.UsuarioClaveRecuperar;
-import static allSafe.Entities.UsuarioClaveRecuperar_.usuario;
-import allSafe.Entities.Usuarioallsafe;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 

@@ -57,7 +57,7 @@ public class UsuarioClaveHistorial implements Serializable {
     private Usuarioallsafe usuario;
     @Basic(optional = false)
     @Column(name = "clave")
-    private String clave;
+    private String clave;    
 
     public UsuarioClaveHistorial() {
     }

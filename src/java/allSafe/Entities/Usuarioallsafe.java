@@ -67,6 +67,19 @@ public class Usuarioallsafe implements Serializable {
     private Persona personarutPasaportePersona;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
     private List<Eppsolicitudterreno> eppsolicitudterrenoList;
+    @Basic(optional = false)
+    @Size(min = 1, max = 1)
+    @Column(name = "vigencia")
+    private String vigencia;
+
+    public String getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
+    }
+    
 
     public Usuarioallsafe() {
     }

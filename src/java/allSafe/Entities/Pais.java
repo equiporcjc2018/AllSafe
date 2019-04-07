@@ -55,6 +55,19 @@ public class Pais implements Serializable {
     private String nacionalidadPais;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paisidPais")
     private List<Ciudad> ciudadList;
+    @Basic(optional = false)
+    @Size(min = 1, max = 1)
+    @Column(name = "vigencia")
+    private String vigencia;
+
+    public String getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
+    }
+    
 
     public Pais() {
     }

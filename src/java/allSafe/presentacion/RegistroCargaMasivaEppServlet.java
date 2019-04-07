@@ -16,8 +16,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
-import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -106,12 +104,12 @@ public class RegistroCargaMasivaEppServlet extends HttpServlet {
                         String descripcion = datos[1];
                         //String tipoEpp = request.getParameter("RDBtipoEPP");
                         String tipoEpp = datos[2];
-                        String vigente = "Si";
+                        String vigente = "Y";
                         //String vigente = datos[3];
                         if (!(nombre2 == null || descripcion == null ||tipoEpp == null )) {
                             objEpp.setNombreEPPcol(nombre2);
                             objEpp.setDescripcionEPP(descripcion);
-                            objEpp.setVigenteepp(vigente);
+                            objEpp.setVigencia(vigente);
                             objTipoepp = objTipoEppDAOSessionBean.buscaTipoEPPXID(Integer.parseInt(tipoEpp));
                             objEppTipoEppDTO.setObjEpp(objEpp);
                             objEppTipoEppDTO.setObjTipoepp(objTipoepp);

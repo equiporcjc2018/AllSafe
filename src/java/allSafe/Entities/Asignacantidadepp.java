@@ -82,6 +82,20 @@ public class Asignacantidadepp implements Serializable {
     @JoinColumn(name = "tipodecarga_idtipodecarga", referencedColumnName = "idtipodecarga")
     @ManyToOne(optional = false)
     private Tipodecarga tipodecargaIdtipodecarga;
+    @Basic(optional = false)
+    @Size(min = 1, max = 1)
+    @Column(name = "vigencia")
+    private String vigencia;
+
+    public String getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
+    }
+    
+    
 
     public Asignacantidadepp() {
     }

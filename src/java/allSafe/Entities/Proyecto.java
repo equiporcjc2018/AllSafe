@@ -73,11 +73,6 @@ public class Proyecto implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "fechaTerminoProyecto")
     private String fechaTerminoProyecto;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2)
-    @Column(name = "vigenteproyecto")
-    private String vigenteproyecto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyectoidProyecto")
     private List<Eppterreno> eppterrenoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyectoidProyecto")
@@ -92,6 +87,19 @@ public class Proyecto implements Serializable {
     private List<Eppsolicitudterreno> eppsolicitudterrenoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyectoidProyecto")
     private List<Asignatrabajadorproyecto> asignatrabajadorproyectoList;
+    @Basic(optional = false)
+    @Size(min = 1, max = 1)
+    @Column(name = "vigencia")
+    private String vigencia;
+
+    public String getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
+    }
+    
 
     public Proyecto() {
     }
@@ -100,14 +108,14 @@ public class Proyecto implements Serializable {
         this.idProyecto = idProyecto;
     }
 
-    public Proyecto(Integer idProyecto, int numeroProyecto, String nombreProyecto, String ubicacionProyecto, String fechaInicioProyecto, String fechaTerminoProyecto, String vigenteproyecto) {
+    public Proyecto(Integer idProyecto, int numeroProyecto, String nombreProyecto, String ubicacionProyecto, String fechaInicioProyecto, String fechaTerminoProyecto, String vigencia) {
         this.idProyecto = idProyecto;
         this.numeroProyecto = numeroProyecto;
         this.nombreProyecto = nombreProyecto;
         this.ubicacionProyecto = ubicacionProyecto;
         this.fechaInicioProyecto = fechaInicioProyecto;
         this.fechaTerminoProyecto = fechaTerminoProyecto;
-        this.vigenteproyecto = vigenteproyecto;
+        this.vigencia = vigencia;
     }
 
     public Integer getIdProyecto() {
@@ -156,14 +164,6 @@ public class Proyecto implements Serializable {
 
     public void setFechaTerminoProyecto(String fechaTerminoProyecto) {
         this.fechaTerminoProyecto = fechaTerminoProyecto;
-    }
-
-    public String getVigenteproyecto() {
-        return vigenteproyecto;
-    }
-
-    public void setVigenteproyecto(String vigenteproyecto) {
-        this.vigenteproyecto = vigenteproyecto;
     }
 
     @XmlTransient

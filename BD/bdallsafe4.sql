@@ -1,35 +1,31 @@
--- phpMyAdmin SQL Dump
--- version 4.8.3
--- https://www.phpmyadmin.net/
+CREATE DATABASE  IF NOT EXISTS `bdallsafe4` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `bdallsafe4`;
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 15-02-2019 a las 21:54:23
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.2.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: localhost    Database: bdallsafe4
+-- ------------------------------------------------------
+-- Server version	5.6.43-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Base de datos: `bdallsafe4`
+-- Table structure for table `asignacantidadepp`
 --
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `asignacantidadepp`
---
-
+DROP TABLE IF EXISTS `asignacantidadepp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `asignacantidadepp` (
-  `idEppProceso` int(11) NOT NULL,
+  `idEppProceso` int(11) NOT NULL AUTO_INCREMENT,
   `fechaCreacionEppProceso` varchar(45) NOT NULL,
   `tallaEppProceso` varchar(45) NOT NULL,
   `unidadEppProceso` int(11) NOT NULL,
@@ -37,200 +33,246 @@ CREATE TABLE `asignacantidadepp` (
   `precioUnitarioEppProceso` int(11) NOT NULL,
   `EstadosProyecto_idEstadosProyecto` int(11) NOT NULL,
   `tipodecarga_idtipodecarga` int(11) NOT NULL,
-  `asignaeppaproyecto_idasignaeppaproyecto` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `asignaeppaproyecto_idasignaeppaproyecto` int(11) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idEppProceso`),
+  KEY `fk_EppProceso_EstadosProyecto1_idx` (`EstadosProyecto_idEstadosProyecto`),
+  KEY `fk_asignaeppproyecto_tipodecarga1_idx` (`tipodecarga_idtipodecarga`),
+  KEY `fk_asignacantidadepp_asignaeppaproyecto1_idx` (`asignaeppaproyecto_idasignaeppaproyecto`),
+  CONSTRAINT `fk_EppProceso_EstadosProyecto1` FOREIGN KEY (`EstadosProyecto_idEstadosProyecto`) REFERENCES `estadosproyecto` (`idEstadosProyecto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_asignacantidadepp_asignaeppaproyecto1` FOREIGN KEY (`asignaeppaproyecto_idasignaeppaproyecto`) REFERENCES `asignaeppaproyecto` (`idasignaeppaproyecto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_asignaeppproyecto_tipodecarga1` FOREIGN KEY (`tipodecarga_idtipodecarga`) REFERENCES `tipodecarga` (`idtipodecarga`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `asignacantidadepp`
+-- Dumping data for table `asignacantidadepp`
 --
 
-INSERT INTO `asignacantidadepp` (`idEppProceso`, `fechaCreacionEppProceso`, `tallaEppProceso`, `unidadEppProceso`, `cantidadEppProceso`, `precioUnitarioEppProceso`, `EstadosProyecto_idEstadosProyecto`, `tipodecarga_idtipodecarga`, `asignaeppaproyecto_idasignaeppaproyecto`) VALUES
-(1, '2019/01/29 14:39:17', '43', 1, 100, 1000, 1, 1, 15),
-(2, '2019/01/29 14:55:02', '43', 1, 20, 1000, 1, 1, 15),
-(3, '2019/01/29 15:11:01', '43', 1, 30, 1000, 1, 1, 16),
-(4, '2019/01/29 15:11:23', '43', 1, 30, 1000, 1, 1, 16),
-(5, '2019/01/29 15:11:53', '43', 1, 20, 1000, 1, 1, 16),
-(6, '2019/01/29 16:14:03', '43', 1, 20, 1000, 1, 1, 16),
-(7, '2019/02/02 01:56:36', '43', 1, 50, 1000, 1, 1, 17),
-(8, '2019/02/02 01:56:48', '43', 1, 20, 1000, 1, 1, 17),
-(9, '2019/02/04 20:13:25', '43', 1, 1000, 1000, 1, 1, 22);
-
--- --------------------------------------------------------
+LOCK TABLES `asignacantidadepp` WRITE;
+/*!40000 ALTER TABLE `asignacantidadepp` DISABLE KEYS */;
+INSERT INTO `asignacantidadepp` VALUES (1,'2019/01/29 14:39:17','43',1,100,1000,1,1,15,'Y'),(2,'2019/01/29 14:55:02','43',1,20,1000,1,1,15,'Y'),(3,'2019/01/29 15:11:01','43',1,30,1000,1,1,16,'Y'),(4,'2019/01/29 15:11:23','43',1,30,1000,1,1,16,'Y'),(5,'2019/01/29 15:11:53','43',1,20,1000,1,1,16,'Y'),(6,'2019/01/29 16:14:03','43',1,20,1000,1,1,16,'Y'),(7,'2019/02/02 01:56:36','43',1,50,1000,1,1,17,'Y'),(8,'2019/02/02 01:56:48','43',1,20,1000,1,1,17,'Y'),(9,'2019/02/04 20:13:25','43',1,1000,1000,1,1,22,'Y');
+/*!40000 ALTER TABLE `asignacantidadepp` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `asignaeppaproyecto`
+-- Table structure for table `asignaeppaproyecto`
 --
 
+DROP TABLE IF EXISTS `asignaeppaproyecto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `asignaeppaproyecto` (
-  `idasignaeppaproyecto` int(11) NOT NULL,
+  `idasignaeppaproyecto` int(11) NOT NULL AUTO_INCREMENT,
   `epp_idEPP` int(11) NOT NULL,
-  `proyecto_idProyecto` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `proyecto_idProyecto` int(11) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idasignaeppaproyecto`),
+  KEY `fk_asignaeppaproyecto_epp1_idx` (`epp_idEPP`),
+  KEY `fk_asignaeppaproyecto_proyecto1_idx` (`proyecto_idProyecto`),
+  CONSTRAINT `fk_asignaeppaproyecto_epp1` FOREIGN KEY (`epp_idEPP`) REFERENCES `epp` (`idEPP`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_asignaeppaproyecto_proyecto1` FOREIGN KEY (`proyecto_idProyecto`) REFERENCES `proyecto` (`idProyecto`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `asignaeppaproyecto`
+-- Dumping data for table `asignaeppaproyecto`
 --
 
-INSERT INTO `asignaeppaproyecto` (`idasignaeppaproyecto`, `epp_idEPP`, `proyecto_idProyecto`) VALUES
-(15, 2, 1),
-(16, 6, 1),
-(17, 11, 2),
-(18, 7, 3),
-(19, 2, 2),
-(20, 7, 2),
-(21, 11, 2),
-(22, 14, 2),
-(23, 2, 1),
-(24, 7, 1),
-(25, 11, 1);
-
--- --------------------------------------------------------
+LOCK TABLES `asignaeppaproyecto` WRITE;
+/*!40000 ALTER TABLE `asignaeppaproyecto` DISABLE KEYS */;
+INSERT INTO `asignaeppaproyecto` VALUES (15,2,1,'Y'),(16,6,1,'Y'),(17,11,2,'Y'),(18,7,3,'Y'),(19,2,2,'Y'),(20,7,2,'Y'),(21,11,2,'Y'),(22,14,2,'Y'),(23,2,1,'Y'),(24,7,1,'Y'),(25,11,1,'Y');
+/*!40000 ALTER TABLE `asignaeppaproyecto` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `asignatrabajadorproyecto`
+-- Table structure for table `asignatrabajadorproyecto`
 --
 
+DROP TABLE IF EXISTS `asignatrabajadorproyecto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `asignatrabajadorproyecto` (
-  `idasignatrabajadorproyecto` int(11) NOT NULL,
+  `idasignatrabajadorproyecto` int(11) NOT NULL AUTO_INCREMENT,
   `persona_rutPasaportePersona` varchar(45) NOT NULL,
-  `proyecto_idProyecto` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `proyecto_idProyecto` int(11) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idasignatrabajadorproyecto`),
+  KEY `fk_asignatrabajadorproyecto_persona1_idx` (`persona_rutPasaportePersona`),
+  KEY `fk_asignatrabajadorproyecto_proyecto1_idx` (`proyecto_idProyecto`),
+  CONSTRAINT `fk_asignatrabajadorproyecto_persona1` FOREIGN KEY (`persona_rutPasaportePersona`) REFERENCES `persona` (`rutPasaportePersona`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_asignatrabajadorproyecto_proyecto1` FOREIGN KEY (`proyecto_idProyecto`) REFERENCES `proyecto` (`idProyecto`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `asignatrabajadorproyecto`
+-- Dumping data for table `asignatrabajadorproyecto`
 --
 
-INSERT INTO `asignatrabajadorproyecto` (`idasignatrabajadorproyecto`, `persona_rutPasaportePersona`, `proyecto_idProyecto`) VALUES
-(1, '10.000.000-1', 1),
-(2, '10.000.000-1', 1),
-(3, '77.777.777-7', 3),
-(4, '12.222.222-2', 1),
-(5, '17.779.184-9', 1),
-(6, '10.000.000-1', 3),
-(8, '11.111.111-1', 4),
-(9, '12.222.222-2', 1),
-(10, '88.888.888-8', 1);
-
--- --------------------------------------------------------
+LOCK TABLES `asignatrabajadorproyecto` WRITE;
+/*!40000 ALTER TABLE `asignatrabajadorproyecto` DISABLE KEYS */;
+INSERT INTO `asignatrabajadorproyecto` VALUES (1,'10.000.000-1',1,'Y'),(2,'10.000.000-1',1,'Y'),(3,'77.777.777-7',3,'Y'),(4,'12.222.222-2',1,'Y'),(5,'17.779.184-9',1,'Y'),(6,'10.000.000-1',3,'Y'),(8,'11.111.111-1',4,'Y'),(9,'12.222.222-2',1,'Y'),(10,'88.888.888-8',1,'Y');
+/*!40000 ALTER TABLE `asignatrabajadorproyecto` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `cargo`
+-- Table structure for table `cargo`
 --
 
+DROP TABLE IF EXISTS `cargo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cargo` (
-  `idCargo` int(11) NOT NULL,
-  `descripcionCargo` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `idCargo` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcionCargo` varchar(100) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idCargo`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `cargo`
+-- Dumping data for table `cargo`
 --
 
-INSERT INTO `cargo` (`idCargo`, `descripcionCargo`) VALUES
-(1, 'Administrador');
-
--- --------------------------------------------------------
+LOCK TABLES `cargo` WRITE;
+/*!40000 ALTER TABLE `cargo` DISABLE KEYS */;
+INSERT INTO `cargo` VALUES (1,'Administrador','Y');
+/*!40000 ALTER TABLE `cargo` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `ciudad`
+-- Table structure for table `ciudad`
 --
 
+DROP TABLE IF EXISTS `ciudad`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ciudad` (
-  `idCiudad` int(11) NOT NULL,
+  `idCiudad` int(11) NOT NULL AUTO_INCREMENT,
   `nombreCiudad` varchar(200) NOT NULL,
-  `Pais_idPais` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `Pais_idPais` int(11) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idCiudad`),
+  KEY `fk_Ciudad_Pais1_idx` (`Pais_idPais`),
+  CONSTRAINT `fk_Ciudad_Pais1` FOREIGN KEY (`Pais_idPais`) REFERENCES `pais` (`idPais`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `ciudad`
+-- Dumping data for table `ciudad`
 --
 
-INSERT INTO `ciudad` (`idCiudad`, `nombreCiudad`, `Pais_idPais`) VALUES
-(1, 'Santiago', 1);
-
--- --------------------------------------------------------
+LOCK TABLES `ciudad` WRITE;
+/*!40000 ALTER TABLE `ciudad` DISABLE KEYS */;
+INSERT INTO `ciudad` VALUES (1,'Santiago',1,'Y');
+/*!40000 ALTER TABLE `ciudad` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `empresa`
+-- Table structure for table `empresa`
 --
 
+DROP TABLE IF EXISTS `empresa`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `empresa` (
-  `idEmpresa` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL AUTO_INCREMENT,
   `rutEmpresa` varchar(15) NOT NULL,
   `razonSocialEmpresa` varchar(255) NOT NULL,
   `direccionEmpresa` varchar(255) NOT NULL,
   `sitioWebEmpresa` varchar(255) NOT NULL,
   `telefonoEmpresa` int(11) NOT NULL,
-  `giroEmpresa` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `giroEmpresa` varchar(255) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idEmpresa`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `empresa`
+-- Dumping data for table `empresa`
 --
 
-INSERT INTO `empresa` (`idEmpresa`, `rutEmpresa`, `razonSocialEmpresa`, `direccionEmpresa`, `sitioWebEmpresa`, `telefonoEmpresa`, `giroEmpresa`) VALUES
-(1, '22.222.222-2', 'Colbun', 'Rancagua', 'www.colbun.cl', 123456, 'Central Hydroelectrica');
-
--- --------------------------------------------------------
+LOCK TABLES `empresa` WRITE;
+/*!40000 ALTER TABLE `empresa` DISABLE KEYS */;
+INSERT INTO `empresa` VALUES (1,'22.222.222-2','Colbun','Rancagua','www.colbun.cl',123456,'Central Hydroelectrica','Y');
+/*!40000 ALTER TABLE `empresa` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `epp`
+-- Table structure for table `epp`
 --
 
+DROP TABLE IF EXISTS `epp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `epp` (
-  `idEPP` int(11) NOT NULL,
+  `idEPP` int(11) NOT NULL AUTO_INCREMENT,
   `nombreEPPcol` varchar(100) NOT NULL,
   `descripcionEPP` varchar(255) NOT NULL,
   `TipoEPP_idTipoEPP` int(11) NOT NULL,
-  `vigenteepp` varchar(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `vigenteepp` varchar(2) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idEPP`),
+  KEY `fk_EPP_TipoEPP1_idx` (`TipoEPP_idTipoEPP`),
+  CONSTRAINT `fk_EPP_TipoEPP1` FOREIGN KEY (`TipoEPP_idTipoEPP`) REFERENCES `tipoepp` (`idTipoEPP`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `epp`
+-- Dumping data for table `epp`
 --
 
-INSERT INTO `epp` (`idEPP`, `nombreEPPcol`, `descripcionEPP`, `TipoEPP_idTipoEPP`, `vigenteepp`) VALUES
-(2, 'Casco', 'Negro', 1, 'No'),
-(3, 'Casco', 'Verde', 2, 'No'),
-(4, 'Pantalon', 'Azul', 2, 'Si'),
-(6, 'Guantes', 'Alto Impacto', 1, 'Si'),
-(7, 'Antiparra', 'Lentes', 1, 'Si'),
-(8, 'Antiparra', 'Lentes', 2, 'Si'),
-(9, 'Overol', 'Ignifugo', 2, 'Si'),
-(10, 'Parka', 'Parka', 1, 'Si'),
-(11, 'Bototo', 'Talla 43', 1, 'Si'),
-(12, 'Bototo', 'Talla 43 Basico', 2, 'Si'),
-(13, 'Parka2', 'Talla 43', 1, 'Si'),
-(14, 'prueba', 'prueba', 1, 'Si'),
-(15, 'prueba2', 'prueba2', 2, 'Si'),
-(16, 'prueba3', 'prueba3', 2, 'No'),
-(17, 'Perro', 'Labrador', 1, 'Si');
-
--- --------------------------------------------------------
+LOCK TABLES `epp` WRITE;
+/*!40000 ALTER TABLE `epp` DISABLE KEYS */;
+INSERT INTO `epp` VALUES (2,'Casco','Negro',1,'No','Y'),(3,'Casco','Verde',2,'No','Y'),(4,'Pantalon','Azul',2,'Si','Y'),(6,'Guantes','Alto Impacto',1,'Si','Y'),(7,'Antiparra','Lentes',1,'Si','Y'),(8,'Antiparra','Lentes',2,'Si','Y'),(9,'Overol','Ignifugo',2,'Si','Y'),(10,'Parka','Parka',1,'Si','Y'),(11,'Bototo','Talla 43',1,'Si','Y'),(12,'Bototo','Talla 43 Basico',2,'Si','Y'),(13,'Parka2','Talla 43',1,'Si','Y'),(14,'prueba','prueba',1,'Si','Y'),(15,'prueba2','prueba2',2,'Si','Y'),(16,'prueba3','prueba3',2,'No','Y'),(17,'Perro','Labrador',1,'Si','Y');
+/*!40000 ALTER TABLE `epp` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `eppsolicitudterreno`
+-- Table structure for table `eppsolicitudterreno`
 --
 
+DROP TABLE IF EXISTS `eppsolicitudterreno`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `eppsolicitudterreno` (
-  `idEppSolicitudTerreno` int(11) NOT NULL,
+  `idEppSolicitudTerreno` int(11) NOT NULL AUTO_INCREMENT,
   `fechaEppSolicitudTerreno` varchar(45) NOT NULL,
   `idUsuario` int(11) NOT NULL,
   `EPP_idEPP` int(11) NOT NULL,
   `estadoEppSolicitudTerreno` varchar(45) NOT NULL,
   `cantidadEppSolicitudTerreno` int(11) NOT NULL,
   `Proyecto_idProyecto` int(11) NOT NULL,
-  `obervacionEppSolicitudTerreno` varchar(255) NOT NULL
+  `obervacionEppSolicitudTerreno` varchar(255) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idEppSolicitudTerreno`),
+  KEY `fk_EppSolicitudTerreno_EPP1_idx` (`EPP_idEPP`),
+  KEY `fk_EppSolicitudTerreno_Proyecto1_idx` (`Proyecto_idProyecto`),
+  KEY `fk_EppSolicitudTerreno_UsuarioAllsafe1_idx` (`idUsuario`),
+  CONSTRAINT `fk_EppSolicitudTerreno_EPP1` FOREIGN KEY (`EPP_idEPP`) REFERENCES `epp` (`idEPP`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_EppSolicitudTerreno_Proyecto1` FOREIGN KEY (`Proyecto_idProyecto`) REFERENCES `proyecto` (`idProyecto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_EppSolicitudTerreno_UsuarioAllsafe1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarioallsafe` (`idUsuarioAllSafe`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `eppterreno`
+-- Dumping data for table `eppsolicitudterreno`
 --
 
+LOCK TABLES `eppsolicitudterreno` WRITE;
+/*!40000 ALTER TABLE `eppsolicitudterreno` DISABLE KEYS */;
+/*!40000 ALTER TABLE `eppsolicitudterreno` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `eppterreno`
+--
+
+DROP TABLE IF EXISTS `eppterreno`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `eppterreno` (
-  `idEppTerreno` int(11) NOT NULL,
+  `idEppTerreno` int(11) NOT NULL AUTO_INCREMENT,
   `Persona_rutPasaportePersona` varchar(45) NOT NULL,
   `fechaEppTerreno` varchar(45) NOT NULL,
   `idUsuario` int(11) NOT NULL,
@@ -241,95 +283,169 @@ CREATE TABLE `eppterreno` (
   `TallaEppTerreno` varchar(45) NOT NULL,
   `observacionEppTerreno` varchar(255) NOT NULL,
   `firmaEppTerreno` blob NOT NULL,
-  `tipoEntregaEppTerreno` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `tipoEntregaEppTerreno` varchar(45) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idEppTerreno`),
+  KEY `fk_EppEntregaTerreno_Persona1_rutPasaportePersonax` (`Persona_rutPasaportePersona`),
+  KEY `fk_EppTerreno_Proyecto1_idx` (`Proyecto_idProyecto`),
+  KEY `fk_EppTerreno_EPP1_idx` (`EPP_idEPP`),
+  KEY `fk_EppTerreno_UsuarioAllsafe1_idx` (`idUsuario`),
+  CONSTRAINT `fk_EppEntregaTerreno_Persona1` FOREIGN KEY (`Persona_rutPasaportePersona`) REFERENCES `persona` (`rutPasaportePersona`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_EppTerreno_EPP1` FOREIGN KEY (`EPP_idEPP`) REFERENCES `epp` (`idEPP`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_EppTerreno_Proyecto1` FOREIGN KEY (`Proyecto_idProyecto`) REFERENCES `proyecto` (`idProyecto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_EppTerreno_UsuarioAllsafe1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarioallsafe` (`idUsuarioAllSafe`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `eppterreno`
+-- Dumping data for table `eppterreno`
 --
 
-INSERT INTO `eppterreno` (`idEppTerreno`, `Persona_rutPasaportePersona`, `fechaEppTerreno`, `idUsuario`, `Proyecto_idProyecto`, `EstadoEppTerreno`, `EPP_idEPP`, `CantidadEppTerreno`, `TallaEppTerreno`, `observacionEppTerreno`, `firmaEppTerreno`, `tipoEntregaEppTerreno`) VALUES
-(1, '10.000.000-1', '2019-02-08', 1, 2, '123', 12, 123, '123', '1232', 0xffd8ffe000104a46494600010100000100010000ffdb008400090607100f10100f1010100f0f100d0f10101010100f0f100f101611161616111515181d2820181a251b151521312125292b2e2e2e171f3338332c37282d2e2b010a0a0a0e0d0e1810101a2d2520262d2d2d2d2b2d2d2d2d2d2d2d2d2d2b2d2d2d2d2d2d2d2d2d2d2b2d2b2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2dffc000110800e100e103011100021101031101ffc4001c0001000105010100000000000000000000000201030506070408ffc4004a10000103020107070807050509000000000100020304110506071221315161132241718191a1142332526272b1c12442436392b2d1335382d2e183a2a3c2f01517345464737493b3ffc4001b01010002030101000000000000000000000001020304050607ffc4003a110100010301050507020502070000000000010203110405122131511322416171063291a1b1c1d11481234252e1f062f1153334437292a2ffda000c03010002110311003f00ee28080808080808080808080808080808080808080808080808080808080808080808080808080808082d4b531b3d37b1bef39adf8a899885e9b7555eec4cbc6fc7a8dbb6aa9c7f6b1feaabda51d619e345a99e56eaf848dc7a8cea1554ff00fba3fd53b4a3ac13a1d4c7fdbabe12f643531bf5b1ec78f65cd77c15a2627930556eba7de898fd9754a8202020202020202020202020202020202020202020d6b1fcb8a1a2bb5f2f2b28bf9a879ee07713b1bda561aefd1473974f49b2355a9e34d388eb3c3fbcb41c5b3ad5525c53451c0de873bcec9fa0ee2b52bd5d53eec61e8f4decd58a78ddaa6a9f847e5adbf1cc4ab5c19cbd4cce3b191970feeb161dfb95ce3332ebc68f43a5a77a69a698eb38facb29419bcaf9b9d2f27003b4cafd27fe16dfc6cb253a4b9573e0d1bded1e8ad70a3357a470f8ce19b873583ebd5ebf661fd5cb24687ad5f273eaf6ae7f96d7c6afecb9266adbf56add7f6a11f2724e863fabe453ed655fcd6bff00afecc656e6d2b62e74324535b668b8c4fec0ed5e2b1d5a3ae39627e4dfb3ed3692e70bb4cd3fb663e5f8621f8962b87bb41f2d5407a1b21739a7ab4aed23a962dfbb6e713330e8d3a6d9dada77a9a69abd39fcb130cfe139d3a98ec2a228e76eabb9be69f6dfaae0f7059a8d6571ef465ccd4fb2d62be366a9a67cf8c7e5bde0596d435966b65e4a536f353731c4ee0763bb0adbb7a8a2bf1799d66c5d5e978d54e69eb1c7fbc36459dc91010101010101010101010101010101061f28f2969b0f8f4e77f3883a1136c6490fb2df99d4b1dcb94d11996e68f437b5556edb8f59f0871eca8ce055d692c638d353dcda38c90f70f6dfb4f50b05a17351557e50f67a0d8b634f8aaa8deabacf2fda1a905aeedc378c92c8292a4366a9d28603adac1aa5946fd7e83789d67a37adab5a69af8d5c21e7b69edfa2c4cdbb1deabaf847e65d430cc321a66727044c89bd3a235bb8b9db5c7ad6fd345344629878dd46a6eea2adfbb54ccf9fda3943da1aacc0986a09808240208555247330c72b1b230ed6bda1c3b8a8aa98aa312c96aed76aa8aedccc4f58737caccdbd83a6a1b91acba9dc6e6df767a7dd3dfd0b42f6931c68f87e1ec3667b4b998b7abffdbf3f98f839bbd8412d20820904116208da085a2f6113131986cf9359755744431ce35105c5e390925a3d876d1d5ac2d8b5a8ae8f38717686c2d36ab35446ed5d63ef1fe4bae64e65353620cd285f6781cf89f61233b3a4710ba36af5372383c2ebf665fd1558b91c3c26394b32b2b9e20202020202020202020202020d372ef2e63c39a628b465ac7375336b6207ebc96f06f4ac17af451c239bafb336557aaab7aae1475ebe9f9711c42be5a991d34f23a491c75b9c6fd8370e0173aaaa6a9ccbdcd8b1459a228b71888580aad88745cde6488786d6d4b6eddb044e1a9df78e0768dc3a76adcd358cf7eafd9e5b6e6d79a6674d6678ff0034fda3cfaf4e4e9cd0b79e3d71a112b8020900824020904154041a3670b23054b5d554ed02a582ef601fb7681bbd71e3b372d3d4e9f7bbd4f3fabd36c2db53a7aa2c5e9ee4f29fe99fc7d39b9015cd7bf5ca5a97c2f6c913dd1c8c376bda48703d6ad133139863bb6a8bb4cd15c6627c25d7721f2fdb55a34f545b1d46c63c73639b87b2ee1d3d1b9746c6a77bbb573783dafb06ad366ed8e3478c78c7e63e9e3d5be2db79a10101010101010101010106979c4cb56e1f1f23090eac91bcd1b442d3f68ee3b82c17af6e46239bafb2f66ceaabdeabdc8f9f97e5c32699d23dd23dc5ef7b8b9ce71bb9ce26e492b9d339e32f736e8a68a629a631108850cd0cfe46e09e5b54d8dd7e458394988b8e603e8df79361deb259b7da578f0f173f6aebbf49a79aa3de9e11ebd7f6e6ee11000000000000002c001a800372eabe7333333995f6a0b8d4171a82682482a808082a838e674727c53540a98db686a492e006a64c35b876edfc4b97aab5bb56f4729fabe83ecded19bf666cd73dea3e74f87c397c1a42d67a42e8acc3ac66e32dccda34556fbcbb2195c75ca3d4793f5b71e9ebdbd0d36a33dca9e1f6eec58b59d4588eef8c74f38f2ebd3d397465baf28202020202020202020d7b2df2a23c3298c86ce99f76411facfb7a4ef6474f60e958eedc8a232ddd068aad55ddd8e5e33e5f97cf3595924f23e695c5f248e2e7b9c6e493f2e0b9933333997bdb36a9b74c514462216c286c424142f0eb59b2c3c4549cb11cfa890baf6d7c9b096b477e91ed5d0d2d18a33d5e1fda1d4cdcd57671ca98f9cf19fb375615b2e12f3505c6a0b8d417020904154040404183cb6c2c5550cf1daef6b0cb1efd366b16eb171dab0dfa37edcc3a5b23553a6d65bafc26713e93fe65c05721f5210038820824106e08d441de14a95444c625dbf375957e5f0f2529fa542d1a7d1cab3609071d80f1eb5d3d3dedf8c4f387ceb6decbfd25ddfa23b9572f29e9f86e0b65c31010101010101046478682e26c00249e083e7fce954cb2e20e748e259c946616ec0c888d9d7a5a5ad73f519dfe2f65b0f73f4d9a638e673ebfecd4c2c0ee426142f0aa895e1def05a7e4a9e9e3f529e207af405fc575e88c5310f99eaae7697ee57d6a9fab271ab35d79a505d694171a505c0826105501010102d7d4761d450ce1f37e2b4fc9544f17eee7963fc2f23e4b895462661f5cd35ced2cd15f5889f8c3caaacea29433191f2ccdafa5e40e8c8676b78169367823a468dd64b59dfa70e76d5a6dce8eef691c313f1f0f9be876bae2ebb0f972a80808080808083039435977081a7739ff0026fcfb9072bceb52d9d4b301b59244e3eeb839bf9dcb4f551c625e9fd9eb9c2e5bf49fb7d9a105a8f4d09850bc2aa25687d0901e6b6dea37f285d987cbaae73eaf546885e6a0b80a0b8d282e34a098282482a808082a107cf1958e06beb2db3cae6ef0f20f8ae35df7eaf57d5366e63476b3fd31f462951bc221b766b29394c4a37744314b2f6e8e80f17f82d8d2d39b91e4e17b47777343547f54c47dfeced51bb45d6e83f15d47cede84040404040416aaa711b1d23b635a4ff441a547297b9cf77a4e7127aca0d5f3a6dbd240ee91556ef8ddfcab5b55eec7abbbb027f8f547fa7ef0e62168bd7424117894942eee993757cad253497be953c60fbcd1a27c415d5b739a225f38d75becf53729ff0054fcf8b32c2aed55f6a0984130505c694130504c1412050550104649034171d8d05c7a80b944c53354c443e6baea832cb2ca76c92bde7f89c4fcd712673397d6acd1d9dba68e9111f05850ca20e899998ef5152ef569da3bdffd16de8e3bd3e8f2bed555fc1b71e7f6754986a5d17895e81fa4d07a761eb41710101010106bf95d55663221b5eed277badfeb6ee418284a0d6b3a07e8517fe633ff00948b5b55ee47abb5b07fea6aff00c67eb0e600ad27af8948150bc4aa0a2d12e9b9afc534e19298fa50bb946718de75dba9df996ee96ae134bc97b41a7ddbb4de8e55709f58fcc7d1bec6f5b4f3cf4b1e82e8282610481412050483904c390483904ae8357ce462e29682500da4a8f30c1d3ce1cf3d8dbf785afa9af7689f3e0ec6c3d2f6faba667953de9fdb97cdc2aeb98fa2e4ba272add0cba46658f9dabff00b517e672dcd1fbd53ca7b55ff2ed7acfd21d4de352df78c5ba5759c5bbc5fb507ad01010101068b94153ca553f732d18ecdbe24a0b51141aa673e5fa340ddf53a5dd191fe65ada9f763d5dcd831fc7aa7cbeee6c0ad27ab8948145e252ba85b2c8e018aba8ea239dbaf44d9edf5d87539bdde3656a2b9a2a8aa1adacd353a9b355b9f1e5e53e12edb4558c958c96376946f68735dbc1f81e8b705d489898cc3e7f72dd56eb9a2b8c4c737b1922951e86c882e87a09b5e8260a0a828241c8260a0969000926c00b92750037942233c21c2b381949e5f544b0fd1e1bc70fb5af9d27f11f00172afdcdfabc9f44d8da0fd258ef7bd5719fb47ecd66eb0baf956e86444e5d033353daae7674be96e3f85edfd56d6927bf31e4f35ed3d19d3d1574abeb0eba5745e21e591da2e0771f0419140404041191e1a0b8ec0093d410732e54b9c5c76b9c5c7ac9ba0f5c6e41a2673aaef253c20fa31be423de7587e42b53533c621e9361518a6baface3e1feed2815aaf4312a82a168948145a255ba84e5b46466549a377252ddd4cf75cdb5985debb4748de3b7af3d9bbb9c279391b5366c6a69dfa3df8f9f94fda5d5a9ea1af6b5ec70731c016b9a6ed70de0ae844e78c3c7554cd3334d51898f07a592a2abed9105c6c8826244131220987a0b8d7a0e5d9c4cb8128751523ef1ec9e66ec937c6df6779e9eadba1a8bf9eed2f5fb17644db98bf7e38f8474f39f3fa39d5d6a3d464ba272add13910cb68cdb5672589d3ebb3642f89dc43986c3f168acba79c5c872b6e5bed3455f9627e13f8cbbb95d57cede5a8083d94aebb1a7d91e1a905d404041e2c6a4d1a798fdd3bc4590738083d11bd072ccafaee5eb2670376b1dc937a99aafdf73dab42ecef572f63b36d765a7a63c678fc58705627422520542d12add16cab750b655ba272cd64f6534f446cc3a71137742f2744f169faa788f1592dddaa8e4d0d6ecfb5aa8cd5c2aeb1fe71748c172ba92a6c049c949fbb94869bf076c77fad4b768bd4d4f2da9d99a8b1c66331d63f1ce1b0365595cf5c6cc82eb664171b2a0c662f95149460f2d30d3e88a3f39213bb447a3db658ebbb4d1ce5b9a6d06a3513fc3a78759e11fe7a39ae54e5d4f5a1d1477a7a637058d377ca3ef1dbbd91abad695dbf557c23843d66cfd8f6b4d8aebef55d7c23d23eed52eb5ddacab744e55ba2d92e89cab750657a92a5d148c95be947231edf79ae0478853138e30adca62e51344f298c7c5f4a51d53668e3999ad92c6d91bd4e17f9aec44e6330f975cb736eb9a2ae7138f82350a545ec34f33a9ce1e283d48080831b945ff0b37b9f30839e941e0c6f11f2682496fce0dd167190ea6febd8a95d5bb4ccb634b67b6bb4d1f1f4f17282eef5a0f67125d427795ba2dbcadd309de57494616de5749309de3494613bcae9260de642831daaa7d514f2300faa1d76fe13a95e9aeaa794b5eee96c5ef7e889fafc598872f6b9a2c5f1bf8ba26dfc2caf17eb69d5b1b493ca263f74dd9c0ae3b0c4de2221f3ba7ea2b2362e963afc58dadca7ad985a4a994b7d56911b4f636c152ab95d5ce5b96b41a5b539a688fafd58a0e58f0dede574942dbca8722d1525a4a13bcadd16de56e89c97509cab745b2ec99a4c6c4d48ea571f394cee6f185e491dceb8ed0b7f4b5e69dde8f15ed0697b3bf1763955f586e752e5b4e02f6147987df3f0083da808083c18eb2f4d30fbb71eed7f241ce9073bcb6c5c4d288586f1c24dc8d8f93a4f50d9deb4ef57bd388f07a5d97a5ece8ed2ae73f46b4b13a6205d41956e89de349309de574913bc69260de5749309de349460df349309df5749309df54394616df57493098a920e5185a2b543930bc54907285a2a574916de54394277920e45a2a56ea16de65b25f1b750554750db968bb6468faf13bd26fcc71015edd7b9565a9aed353aab155b9e7e1e52eed1d63258db246e0f8ded0e6386c2d3b17522626330f9ed745545534d51898e6c9e0ffb3bef7b8fc94aaf7202020b73c7a6c730ec735cdef1641c1f2bb28b900ea689d79f5b64703fb21b0b41f5fe1d7b305dbb8e10ebeced04dc98b9723bbe11d7fb7d5cfd6a3d128a50a220ba2325d1220aa24500891055011220aa05d1395439461315a41e985e2b483946178ad20e50bc54a87285a2a4b4916de5749309de6df90d95be487c9e624d33dd76bb59e41e7a7dc3d23b77df3d8bbb9c279389b5b677ea23b5b7ef47ce3f3d3e0eef85b6d0c7d376075c6b074b5fcd6fbc8727a901010107cdf9d0c20d2627502d664cef288f710fd6eee7692d1bb4e2a7acd9d77b4b14f58e0d4cac6dd50a2142a50a22a2192e864d24c1bcab6e4d80249d800b9298566e447364e9727eb25d6da696dbdc3931fdeb2acd510c556b2d53cea6521c85ad76d1133de93f94155ed29629da36a3abd0dcde567ef29bf1cbfc8a3b5847fc4adf49f97e53ff0077359fbca6fc72ff002276b07fc4adf49f97e50933795e36720ff765b7e6013b5a568da36bcd8dabc92c422b9752cae03a63025fc84ab4574f566a75966afe661a689cc3a2f6b98ef55cd2d3dc5599e9ae2ae3128a2c20028989483946168ad20e4c2f15a41ca30bc54ae928c2dbcc964e61c6aeae9e99bf6b331aee0cbddc7b1a0ab514ef5510c1a9bfd95aaabe90fa858c0d01a05800001b80e85d378399cce524408080839ee797270d5520aa8db79a92ee36dae80fa638dac1dd8561bf46632ea6cbd47677772794fd5c1569bd32851544952acca24a9639a912f538526e443d987e193547a0db37d77735bdfd3d893886addd5d1436cc2f23e21632b9d29dc398cfd4f7ac7557d1a55eb6e55cb836dc3f0e8a2168e3633dc68693d676958a672d59aaaab9ce5660ca6a43308439dae4e484ba0ee41d25eda024d97beadd7d57569b35eeef2b15c670d918d58175d68502fc6d44af06aa8c0e2b959474b298647485ed0d3218e27c8d841d864737d1d5aedacdb5acd458aea8cc2935c44e1959a961a98c173629e37b439a5cd64ac7348b87349e820dee163ccc4b25354c71a65ab6319bba496ee8b4e99fec1d38efc587e442c94dd9f16ddbd75da39f16858ee47d5d25dc59cb442fe722bb801bdcddadf87159a9ae2a742ceb6dd7c394f9b5fbabb73228044aa0a26252d24c2dbcebf98fc9d2394c4646ed061a7beebf9c907836fc1cb66c51fcce06d8d5671663d67eceb6b65c21010101051cd041045c11620eb046e41f3c6737239d86d419631f439de4c447d93f6984f891c3a9695db7bb3e4f53b3f59dbd1bb57bd1f3f36925636fcadbdcad10c1554b2e7f40d64ea006d255e21a972ee1b0e0f818d4f98691e867d56fbdbcf055aaae8e65dd4d5570a5b8d143b38782c332d7866a9a258e6564b1b7ba1a4a9986a31d34cf078861b78a51deaa20ab844ab947474ccc99631818d7b29a37308b078906b2ebedbae96638756be2732da28a91d2318f3f5d8c777b41f9ae34ce270db7b59862aef2330bcdc394651bf4a4ea04c9bf0d3b372d8246e2ee9c31cf9710ab0e2e0093187b9a0760007605d9b788a623ca1af5666730bf9b961930f601b229ea606f06473bdad1f8744762e6ea6317259e8aa3186c525295872be625e39a15689261a2e55644453e949006c13eb3a85a290fb407a2788ed59a8b931cdb563575dbe13c61cb6a617c4f747234b1ec36734ed056c7375e8bb1546610051962a4822cd8722725e5c52a442dbb626d9d3cbd11c7fcc6c401fa2b5146f4e1adabd553a7a333cfc1f4ad0d2470451c31343238d8d631a36068160b7a231c1e4abaa6baa6a9e72bea55101010101079315c361ab85f4f3b049148db39a7e20f411d0544c44c6257b772ab754554cf187cfb979903518638c8d0e9a8cbb9b301ae3bec6c806c3c761e1b169d76e69f47a4d2eba8bf189e157f9c9a348a2192e3219354e1f2b9c75e8345b81276f702ad5727275554f26e7470ec0b0ccb51b261f42752c3554b4433f494602c532bc43c5977186e175d6ff947f89015ec4ff129f545cf765c9b12c7259284c05dcc1111e0ba511de619e4fa270a168621f731fe40b8d573964f0641a54292b81140a0f9c297189609ab9919b0756d583db33d7631c23d216a793a96655fa58638ff00d7d5fe70b4b55efaadf085ab832f3cd4a1ca1969b9d588ada022ead153246279392e75681ad10cf6b3f4cc4e3eb374749b7eab1ef5b7627c1b7a3ae62a9a5cf9ae59a61d4a6a6cd91d921558a49a30b7422690249dc3cdc7c3da7701e0a69b7354f052feb28b14f1e7d1f4464ce4fd3e1d0369e9db6035bde6da72bfa5ee3d27e0b729a6298c43cd5fbf5deaf7aa65959844040404040404119636b9a5ae01cd7021cd7004381da083b4226271c61ccf2bb3414f51a52d13852c86e4c441740e3c3a59d971c161aacc783a36768d5118b9c63e6d029324ab30e9246d545a01fa3c9bc39af8e4b5efa2e1d6351b1582e44d3ccd45da2e6268967b0e875ad7aa5821b2526ab2c352eca42e549598dcb7697e1b5cd1ac9a396dd8dd2f92bd9e1729f556bf765c1aa25fa39e2d5d588ef304cf75f53516a6306e63077342e1cf367c707b1ae4526171ae452615251110f982b8e8d6622df5711ac1fe3397623dda7d2134f8bb366563b61319f5ea6a9ffe316ff9568eae7f88a37b5ad948a05996c51929cb9b673f272a2b590c549119a43501c402d6863431c0b9ce24002e46ddeb6f49133330d9b75d3455bd54ace49e665ac224c464121dbe4f097067f149a89e8d42dd6ba3167aa6eed19c62dc7eeeaf45491c11b62858d8a360b358c01ad68e002cb118736aaa6a9cd53c57d4aa20202020202020202020d5738b49ca52b5e06b8a76b8fba4169f12160d447772c96e78b4281b65a12d865296554984b2314ab1acbf335b2b1f1bbd17b1cc76fd17020fc52384e4716c3b20ebfcb23a59623e4cc99a5f51ab92742d75ee0df6902d6db72ba556a28dcde89e3d1af14559c3e83865f1375c8986d3d2d91159a571b22856694cbd4abbae0f9c2c8ac40e27349474ef9a1ad78903996d18e47001ed79279baee6e6c2c574ec5fa3b388aa7931cd3313c1d932470af20a2a6a4b873a185ad7b86c749b5e470d22573eed7bf5cd49dde0cb991513ba83a545a29589264648a57306e73a47eed168f89f92e96829f7aa60bf3ca1945d06b8808080808080808080808083cf5f4a268a489db24639bd571b7b156aa77a26131389cb93cb03a373a370b398e2d70e20d972a6313896dc714d86ca12f5c351bd56612f5b2755c0f4c750a12f54752ab84e5e965528c2579b52a302eb6a1460c242708612e5d11bb0a19d138597d426078aaaaec15a206cb855398e26b4fa479cef78ebb766cec5dbb36f7288868d756f5597ad655040404040404040404040404041aae5760064fa4422ef03ce306d781b1c388ddd2b53516667bd4b35baf1c25a502b459d5ba09b642105c6d495184af32b146e997a195bc546ea72bedade2a306571b5bc5461394c570dea374cabfed01bd374cadbf131bd4ee997966c5474298a51966726b0b7cce6d44c0b63690e8d876bcf438f01d1bd6f69ac71de960bb73c21b7adf6b88080808080808080808080808080830d8be4dc1524bb5c521faecb6b3ed3761f8ac172c535f1e52c94dc9a5aad6e49d54772c0d99bec1d177e177c895ab569ab8e5c59a2ed32c354534919b491c8cf798e68efd8b04d331ce178989e4b21e15729c2ba4a4c1a48615d3e2860e538950065e29c04e18df21b318f90fb0d73be0a6226791388e6cb51e4bd5cb6bb044ddf21b1fc22e7e0b3d3a7b93e4c7372986cd8564a43090f90f2cf1af9c2cc07837a7b6eb6ade9a9a78cf162aaeccf26c2b618840404040404040404040404040404040404142107927c2a9e4f4e089dc4c6cbf7d9526dd13ce2168aaa8f1791f933447ec1a3dd2f6fc0aa7e9edf44f695755a7649519fb370ea924fd557f4d6fa27b5a94192547fbb71fed1ff00aa7e96df43b5a975b92f443ec1a7adcf3f12a7f4f6fa1dad5d5ea8706a567a34f083bf936dfbecaf16a88e510acd754f8bdad6802c000370160b22aaa02020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020ffd9, '123'),
-(2, '10.000.000-1', '2019-02-08', 1, 2, '123', 6, 555, '16', '1232', 0xffd8ffe000104a46494600010100000100010000ffdb008400090607100f10100f1010100f0f100d0f10101010100f0f100f101611161616111515181d2820181a251b151521312125292b2e2e2e171f3338332c37282d2e2b010a0a0a0e0d0e1810101a2d2520262d2d2d2d2b2d2d2d2d2d2d2d2d2d2b2d2d2d2d2d2d2d2d2d2d2b2d2b2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2dffc000110800e100e103011100021101031101ffc4001c0001000105010100000000000000000000000201030506070408ffc4004a10000103020107070807050509000000000100020304110506071221315161132241718191a1142332526272b1c12442436392b2d1335382d2e183a2a3c2f01517345464737493b3ffc4001b01010002030101000000000000000000000001020304050607ffc4003a110100010301050507020502070000000000010203110405122131511322416171063291a1b1c1d11481234252e1f062f1153334437292a2ffda000c03010002110311003f00ee28080808080808080808080808080808080808080808080808080808080808080808080808080808082d4b531b3d37b1bef39adf8a899885e9b7555eec4cbc6fc7a8dbb6aa9c7f6b1feaabda51d619e345a99e56eaf848dc7a8cea1554ff00fba3fd53b4a3ac13a1d4c7fdbabe12f643531bf5b1ec78f65cd77c15a2627930556eba7de898fd9754a8202020202020202020202020202020202020202020d6b1fcb8a1a2bb5f2f2b28bf9a879ee07713b1bda561aefd1473974f49b2355a9e34d388eb3c3fbcb41c5b3ad5525c53451c0de873bcec9fa0ee2b52bd5d53eec61e8f4decd58a78ddaa6a9f847e5adbf1cc4ab5c19cbd4cce3b191970feeb161dfb95ce3332ebc68f43a5a77a69a698eb38facb29419bcaf9b9d2f27003b4cafd27fe16dfc6cb253a4b9573e0d1bded1e8ad70a3357a470f8ce19b873583ebd5ebf661fd5cb24687ad5f273eaf6ae7f96d7c6afecb9266adbf56add7f6a11f2724e863fabe453ed655fcd6bff00afecc656e6d2b62e74324535b668b8c4fec0ed5e2b1d5a3ae39627e4dfb3ed3692e70bb4cd3fb663e5f8621f8962b87bb41f2d5407a1b21739a7ab4aed23a962dfbb6e713330e8d3a6d9dada77a9a69abd39fcb130cfe139d3a98ec2a228e76eabb9be69f6dfaae0f7059a8d6571ef465ccd4fb2d62be366a9a67cf8c7e5bde0596d435966b65e4a536f353731c4ee0763bb0adbb7a8a2bf1799d66c5d5e978d54e69eb1c7fbc36459dc91010101010101010101010101010101061f28f2969b0f8f4e77f3883a1136c6490fb2df99d4b1dcb94d11996e68f437b5556edb8f59f0871eca8ce055d692c638d353dcda38c90f70f6dfb4f50b05a17351557e50f67a0d8b634f8aaa8deabacf2fda1a905aeedc378c92c8292a4366a9d28603adac1aa5946fd7e83789d67a37adab5a69af8d5c21e7b69edfa2c4cdbb1deabaf847e65d430cc321a66727044c89bd3a235bb8b9db5c7ad6fd345344629878dd46a6eea2adfbb54ccf9fda3943da1aacc0986a09808240208555247330c72b1b230ed6bda1c3b8a8aa98aa312c96aed76aa8aedccc4f58737caccdbd83a6a1b91acba9dc6e6df767a7dd3dfd0b42f6931c68f87e1ec3667b4b998b7abffdbf3f98f839bbd8412d20820904116208da085a2f6113131986cf9359755744431ce35105c5e390925a3d876d1d5ac2d8b5a8ae8f38717686c2d36ab35446ed5d63ef1fe4bae64e65353620cd285f6781cf89f61233b3a4710ba36af5372383c2ebf665fd1558b91c3c26394b32b2b9e20202020202020202020202020d372ef2e63c39a628b465ac7375336b6207ebc96f06f4ac17af451c239bafb336557aaab7aae1475ebe9f9711c42be5a991d34f23a491c75b9c6fd8370e0173aaaa6a9ccbdcd8b1459a228b71888580aad88745cde6488786d6d4b6eddb044e1a9df78e0768dc3a76adcd358cf7eafd9e5b6e6d79a6674d6678ff0034fda3cfaf4e4e9cd0b79e3d71a112b8020900824020904154041a3670b23054b5d554ed02a582ef601fb7681bbd71e3b372d3d4e9f7bbd4f3fabd36c2db53a7aa2c5e9ee4f29fe99fc7d39b9015cd7bf5ca5a97c2f6c913dd1c8c376bda48703d6ad133139863bb6a8bb4cd15c6627c25d7721f2fdb55a34f545b1d46c63c73639b87b2ee1d3d1b9746c6a77bbb573783dafb06ad366ed8e3478c78c7e63e9e3d5be2db79a10101010101010101010106979c4cb56e1f1f23090eac91bcd1b442d3f68ee3b82c17af6e46239bafb2f66ceaabdeabdc8f9f97e5c32699d23dd23dc5ef7b8b9ce71bb9ce26e492b9d339e32f736e8a68a629a631108850cd0cfe46e09e5b54d8dd7e458394988b8e603e8df79361deb259b7da578f0f173f6aebbf49a79aa3de9e11ebd7f6e6ee11000000000000002c001a800372eabe7333333995f6a0b8d4171a82682482a808082a838e674727c53540a98db686a492e006a64c35b876edfc4b97aab5bb56f4729fabe83ecded19bf666cd73dea3e74f87c397c1a42d67a42e8acc3ac66e32dccda34556fbcbb2195c75ca3d4793f5b71e9ebdbd0d36a33dca9e1f6eec58b59d4588eef8c74f38f2ebd3d397465baf28202020202020202020d7b2df2a23c3298c86ce99f76411facfb7a4ef6474f60e958eedc8a232ddd068aad55ddd8e5e33e5f97cf3595924f23e695c5f248e2e7b9c6e493f2e0b9933333997bdb36a9b74c514462216c286c424142f0eb59b2c3c4549cb11cfa890baf6d7c9b096b477e91ed5d0d2d18a33d5e1fda1d4cdcd57671ca98f9cf19fb375615b2e12f3505c6a0b8d417020904154040404183cb6c2c5550cf1daef6b0cb1efd366b16eb171dab0dfa37edcc3a5b23553a6d65bafc26713e93fe65c05721f5210038820824106e08d441de14a95444c625dbf375957e5f0f2529fa542d1a7d1cab3609071d80f1eb5d3d3dedf8c4f387ceb6decbfd25ddfa23b9572f29e9f86e0b65c31010101010101046478682e26c00249e083e7fce954cb2e20e748e259c946616ec0c888d9d7a5a5ad73f519dfe2f65b0f73f4d9a638e673ebfecd4c2c0ee426142f0aa895e1def05a7e4a9e9e3f529e207af405fc575e88c5310f99eaae7697ee57d6a9fab271ab35d79a505d694171a505c0826105501010102d7d4761d450ce1f37e2b4fc9544f17eee7963fc2f23e4b895462661f5cd35ced2cd15f5889f8c3caaacea29433191f2ccdafa5e40e8c8676b78169367823a468dd64b59dfa70e76d5a6dce8eef691c313f1f0f9be876bae2ebb0f972a80808080808083039435977081a7739ff0026fcfb9072bceb52d9d4b301b59244e3eeb839bf9dcb4f551c625e9fd9eb9c2e5bf49fb7d9a105a8f4d09850bc2aa25687d0901e6b6dea37f285d987cbaae73eaf546885e6a0b80a0b8d282e34a098282482a808082a107cf1958e06beb2db3cae6ef0f20f8ae35df7eaf57d5366e63476b3fd31f462951bc221b766b29394c4a37744314b2f6e8e80f17f82d8d2d39b91e4e17b47777343547f54c47dfeced51bb45d6e83f15d47cede84040404040416aaa711b1d23b635a4ff441a547297b9cf77a4e7127aca0d5f3a6dbd240ee91556ef8ddfcab5b55eec7abbbb027f8f547fa7ef0e62168bd7424117894942eee993757cad253497be953c60fbcd1a27c415d5b739a225f38d75becf53729ff0054fcf8b32c2aed55f6a0984130505c694130504c1412050550104649034171d8d05c7a80b944c53354c443e6baea832cb2ca76c92bde7f89c4fcd712673397d6acd1d9dba68e9111f05850ca20e899998ef5152ef569da3bdffd16de8e3bd3e8f2bed555fc1b71e7f6754986a5d17895e81fa4d07a761eb41710101010106bf95d55663221b5eed277badfeb6ee418284a0d6b3a07e8517fe633ff00948b5b55ee47abb5b07fea6aff00c67eb0e600ad27af8948150bc4aa0a2d12e9b9afc534e19298fa50bb946718de75dba9df996ee96ae134bc97b41a7ddbb4de8e55709f58fcc7d1bec6f5b4f3cf4b1e82e8282610481412050483904c390483904ae8357ce462e29682500da4a8f30c1d3ce1cf3d8dbf785afa9af7689f3e0ec6c3d2f6faba667953de9fdb97cdc2aeb98fa2e4ba272add0cba46658f9dabff00b517e672dcd1fbd53ca7b55ff2ed7acfd21d4de352df78c5ba5759c5bbc5fb507ad01010101068b94153ca553f732d18ecdbe24a0b51141aa673e5fa340ddf53a5dd191fe65ada9f763d5dcd831fc7aa7cbeee6c0ad27ab8948145e252ba85b2c8e018aba8ea239dbaf44d9edf5d87539bdde3656a2b9a2a8aa1adacd353a9b355b9f1e5e53e12edb4558c958c96376946f68735dbc1f81e8b705d489898cc3e7f72dd56eb9a2b8c4c737b1922951e86c882e87a09b5e8260a0a828241c8260a0969000926c00b92750037942233c21c2b381949e5f544b0fd1e1bc70fb5af9d27f11f00172afdcdfabc9f44d8da0fd258ef7bd5719fb47ecd66eb0baf956e86444e5d033353daae7674be96e3f85edfd56d6927bf31e4f35ed3d19d3d1574abeb0eba5745e21e591da2e0771f0419140404041191e1a0b8ec0093d410732e54b9c5c76b9c5c7ac9ba0f5c6e41a2673aaef253c20fa31be423de7587e42b53533c621e9361518a6baface3e1feed2815aaf4312a82a168948145a255ba84e5b46466549a377252ddd4cf75cdb5985debb4748de3b7af3d9bbb9c279391b5366c6a69dfa3df8f9f94fda5d5a9ea1af6b5ec70731c016b9a6ed70de0ae844e78c3c7554cd3334d51898f07a592a2abed9105c6c8826244131220987a0b8d7a0e5d9c4cb8128751523ef1ec9e66ec937c6df6779e9eadba1a8bf9eed2f5fb17644db98bf7e38f8474f39f3fa39d5d6a3d464ba272add13910cb68cdb5672589d3ebb3642f89dc43986c3f168acba79c5c872b6e5bed3455f9627e13f8cbbb95d57cede5a8083d94aebb1a7d91e1a905d404041e2c6a4d1a798fdd3bc4590738083d11bd072ccafaee5eb2670376b1dc937a99aafdf73dab42ecef572f63b36d765a7a63c678fc58705627422520542d12add16cab750b655ba272cd64f6534f446cc3a71137742f2744f169faa788f1592dddaa8e4d0d6ecfb5aa8cd5c2aeb1fe71748c172ba92a6c049c949fbb94869bf076c77fad4b768bd4d4f2da9d99a8b1c66331d63f1ce1b0365595cf5c6cc82eb664171b2a0c662f95149460f2d30d3e88a3f39213bb447a3db658ebbb4d1ce5b9a6d06a3513fc3a78759e11fe7a39ae54e5d4f5a1d1477a7a637058d377ca3ef1dbbd91abad695dbf557c23843d66cfd8f6b4d8aebef55d7c23d23eed52eb5ddacab744e55ba2d92e89cab750657a92a5d148c95be947231edf79ae0478853138e30adca62e51344f298c7c5f4a51d53668e3999ad92c6d91bd4e17f9aec44e6330f975cb736eb9a2ae7138f82350a545ec34f33a9ce1e283d48080831b945ff0b37b9f30839e941e0c6f11f2682496fce0dd167190ea6febd8a95d5bb4ccb634b67b6bb4d1f1f4f17282eef5a0f67125d427795ba2dbcadd309de57494616de5749309de3494613bcae9260de642831daaa7d514f2300faa1d76fe13a95e9aeaa794b5eee96c5ef7e889fafc598872f6b9a2c5f1bf8ba26dfc2caf17eb69d5b1b493ca263f74dd9c0ae3b0c4de2221f3ba7ea2b2362e963afc58dadca7ad985a4a994b7d56911b4f636c152ab95d5ce5b96b41a5b539a688fafd58a0e58f0dede574942dbca8722d1525a4a13bcadd16de56e89c97509cab745b2ec99a4c6c4d48ea571f394cee6f185e491dceb8ed0b7f4b5e69dde8f15ed0697b3bf1763955f586e752e5b4e02f6147987df3f0083da808083c18eb2f4d30fbb71eed7f241ce9073bcb6c5c4d288586f1c24dc8d8f93a4f50d9deb4ef57bd388f07a5d97a5ece8ed2ae73f46b4b13a6205d41956e89de349309de574913bc69260de5749309de349460df349309df5749309df54394616df57493098a920e5185a2b543930bc54907285a2a574916de54394277920e45a2a56ea16de65b25f1b750554750db968bb6468faf13bd26fcc71015edd7b9565a9aed353aab155b9e7e1e52eed1d63258db246e0f8ded0e6386c2d3b17522626330f9ed745545534d51898e6c9e0ffb3bef7b8fc94aaf7202020b73c7a6c730ec735cdef1641c1f2bb28b900ea689d79f5b64703fb21b0b41f5fe1d7b305dbb8e10ebeced04dc98b9723bbe11d7fb7d5cfd6a3d128a50a220ba2325d1220aa24500891055011220aa05d1395439461315a41e985e2b483946178ad20e50bc54a87285a2a4b4916de5749309de6df90d95be487c9e624d33dd76bb59e41e7a7dc3d23b77df3d8bbb9c279389b5b677ea23b5b7ef47ce3f3d3e0eef85b6d0c7d376075c6b074b5fcd6fbc8727a901010107cdf9d0c20d2627502d664cef288f710fd6eee7692d1bb4e2a7acd9d77b4b14f58e0d4cac6dd50a2142a50a22a2192e864d24c1bcab6e4d80249d800b9298566e447364e9727eb25d6da696dbdc3931fdeb2acd510c556b2d53cea6521c85ad76d1133de93f94155ed29629da36a3abd0dcde567ef29bf1cbfc8a3b5847fc4adf49f97e53ff0077359fbca6fc72ff002276b07fc4adf49f97e50933795e36720ff765b7e6013b5a568da36bcd8dabc92c422b9752cae03a63025fc84ab4574f566a75966afe661a689cc3a2f6b98ef55cd2d3dc5599e9ae2ae3128a2c20028989483946168ad20e4c2f15a41ca30bc54ae928c2dbcc964e61c6aeae9e99bf6b331aee0cbddc7b1a0ab514ef5510c1a9bfd95aaabe90fa858c0d01a05800001b80e85d378399cce524408080839ee797270d5520aa8db79a92ee36dae80fa638dac1dd8561bf46632ea6cbd47677772794fd5c1569bd32851544952acca24a9639a912f538526e443d987e193547a0db37d77735bdfd3d893886addd5d1436cc2f23e21632b9d29dc398cfd4f7ac7557d1a55eb6e55cb836dc3f0e8a2168e3633dc68693d676958a672d59aaaab9ce5660ca6a43308439dae4e484ba0ee41d25eda024d97beadd7d57569b35eeef2b15c670d918d58175d68502fc6d44af06aa8c0e2b959474b298647485ed0d3218e27c8d841d864737d1d5aedacdb5acd458aea8cc2935c44e1959a961a98c173629e37b439a5cd64ac7348b87349e820dee163ccc4b25354c71a65ab6319bba496ee8b4e99fec1d38efc587e442c94dd9f16ddbd75da39f16858ee47d5d25dc59cb442fe722bb801bdcddadf87159a9ae2a742ceb6dd7c394f9b5fbabb73228044aa0a26252d24c2dbcebf98fc9d2394c4646ed061a7beebf9c907836fc1cb66c51fcce06d8d5671663d67eceb6b65c21010101051cd041045c11620eb046e41f3c6737239d86d419631f439de4c447d93f6984f891c3a9695db7bb3e4f53b3f59dbd1bb57bd1f3f36925636fcadbdcad10c1554b2e7f40d64ea006d255e21a972ee1b0e0f818d4f98691e867d56fbdbcf055aaae8e65dd4d5570a5b8d143b38782c332d7866a9a258e6564b1b7ba1a4a9986a31d34cf078861b78a51deaa20ab844ab947474ccc99631818d7b29a37308b078906b2ebedbae96638756be2732da28a91d2318f3f5d8c777b41f9ae34ce270db7b59862aef2330bcdc394651bf4a4ea04c9bf0d3b372d8246e2ee9c31cf9710ab0e2e0093187b9a0760007605d9b788a623ca1af5666730bf9b961930f601b229ea606f06473bdad1f8744762e6ea6317259e8aa3186c525295872be625e39a15689261a2e55644453e949006c13eb3a85a290fb407a2788ed59a8b931cdb563575dbe13c61cb6a617c4f747234b1ec36734ed056c7375e8bb1546610051962a4822cd8722725e5c52a442dbb626d9d3cbd11c7fcc6c401fa2b5146f4e1adabd553a7a333cfc1f4ad0d2470451c31343238d8d631a36068160b7a231c1e4abaa6baa6a9e72bea55101010101079315c361ab85f4f3b049148db39a7e20f411d0544c44c6257b772ab754554cf187cfb979903518638c8d0e9a8cbb9b301ae3bec6c806c3c761e1b169d76e69f47a4d2eba8bf189e157f9c9a348a2192e3219354e1f2b9c75e8345b81276f702ad5727275554f26e7470ec0b0ccb51b261f42752c3554b4433f494602c532bc43c5977186e175d6ff947f89015ec4ff129f545cf765c9b12c7259284c05dcc1111e0ba511de619e4fa270a168621f731fe40b8d573964f0641a54292b81140a0f9c297189609ab9919b0756d583db33d7631c23d216a793a96655fa58638ff00d7d5fe70b4b55efaadf085ab832f3cd4a1ca1969b9d588ada022ead153246279392e75681ad10cf6b3f4cc4e3eb374749b7eab1ef5b7627c1b7a3ae62a9a5cf9ae59a61d4a6a6cd91d921558a49a30b7422690249dc3cdc7c3da7701e0a69b7354f052feb28b14f1e7d1f4464ce4fd3e1d0369e9db6035bde6da72bfa5ee3d27e0b729a6298c43cd5fbf5deaf7aa65959844040404040404119636b9a5ae01cd7021cd7004381da083b4226271c61ccf2bb3414f51a52d13852c86e4c441740e3c3a59d971c161aacc783a36768d5118b9c63e6d029324ab30e9246d545a01fa3c9bc39af8e4b5efa2e1d6351b1582e44d3ccd45da2e6268967b0e875ad7aa5821b2526ab2c352eca42e549598dcb7697e1b5cd1ac9a396dd8dd2f92bd9e1729f556bf765c1aa25fa39e2d5d588ef304cf75f53516a6306e63077342e1cf367c707b1ae4526171ae452615251110f982b8e8d6622df5711ac1fe3397623dda7d2134f8bb366563b61319f5ea6a9ffe316ff9568eae7f88a37b5ad948a05996c51929cb9b673f272a2b590c549119a43501c402d6863431c0b9ce24002e46ddeb6f49133330d9b75d3455bd54ace49e665ac224c464121dbe4f097067f149a89e8d42dd6ba3167aa6eed19c62dc7eeeaf45491c11b62858d8a360b358c01ad68e002cb118736aaa6a9cd53c57d4aa20202020202020202020d5738b49ca52b5e06b8a76b8fba4169f12160d447772c96e78b4281b65a12d865296554984b2314ab1acbf335b2b1f1bbd17b1cc76fd17020fc52384e4716c3b20ebfcb23a59623e4cc99a5f51ab92742d75ee0df6902d6db72ba556a28dcde89e3d1af14559c3e83865f1375c8986d3d2d91159a571b22856694cbd4abbae0f9c2c8ac40e27349474ef9a1ad78903996d18e47001ed79279baee6e6c2c574ec5fa3b388aa7931cd3313c1d932470af20a2a6a4b873a185ad7b86c749b5e470d22573eed7bf5cd49dde0cb991513ba83a545a29589264648a57306e73a47eed168f89f92e96829f7aa60bf3ca1945d06b8808080808080808080808083cf5f4a268a489db24639bd571b7b156aa77a26131389cb93cb03a373a370b398e2d70e20d972a6313896dc714d86ca12f5c351bd56612f5b2755c0f4c750a12f54752ab84e5e965528c2579b52a302eb6a1460c242708612e5d11bb0a19d138597d426078aaaaec15a206cb855398e26b4fa479cef78ebb766cec5dbb36f7288868d756f5597ad655040404040404040404040404041aae5760064fa4422ef03ce306d781b1c388ddd2b53516667bd4b35baf1c25a502b459d5ba09b642105c6d495184af32b146e997a195bc546ea72bedade2a306571b5bc5461394c570dea374cabfed01bd374cadbf131bd4ee997966c5474298a51966726b0b7cce6d44c0b63690e8d876bcf438f01d1bd6f69ac71de960bb73c21b7adf6b88080808080808080808080808080830d8be4dc1524bb5c521faecb6b3ed3761f8ac172c535f1e52c94dc9a5aad6e49d54772c0d99bec1d177e177c895ab569ab8e5c59a2ed32c354534919b491c8cf798e68efd8b04d331ce178989e4b21e15729c2ba4a4c1a48615d3e2860e538950065e29c04e18df21b318f90fb0d73be0a6226791388e6cb51e4bd5cb6bb044ddf21b1fc22e7e0b3d3a7b93e4c7372986cd8564a43090f90f2cf1af9c2cc07837a7b6eb6ade9a9a78cf162aaeccf26c2b618840404040404040404040404040404040404142107927c2a9e4f4e089dc4c6cbf7d9526dd13ce2168aaa8f1791f933447ec1a3dd2f6fc0aa7e9edf44f695755a7649519fb370ea924fd557f4d6fa27b5a94192547fbb71fed1ff00aa7e96df43b5a975b92f443ec1a7adcf3f12a7f4f6fa1dad5d5ea8706a567a34f083bf936dfbecaf16a88e510acd754f8bdad6802c000370160b22aaa02020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020ffd9, '123'),
-(3, '11.111.111-1', '2019-02-06', 2, 3, '123', 6, 555, '16', '1232', 0xffd8ffe000104a46494600010100000100010000ffdb008400090607100f10100f1010100f0f100d0f10101010100f0f100f101611161616111515181d2820181a251b151521312125292b2e2e2e171f3338332c37282d2e2b010a0a0a0e0d0e1810101a2d2520262d2d2d2d2b2d2d2d2d2d2d2d2d2d2b2d2d2d2d2d2d2d2d2d2d2b2d2b2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2dffc000110800e100e103011100021101031101ffc4001c0001000105010100000000000000000000000201030506070408ffc4004a10000103020107070807050509000000000100020304110506071221315161132241718191a1142332526272b1c12442436392b2d1335382d2e183a2a3c2f01517345464737493b3ffc4001b01010002030101000000000000000000000001020304050607ffc4003a110100010301050507020502070000000000010203110405122131511322416171063291a1b1c1d11481234252e1f062f1153334437292a2ffda000c03010002110311003f00ee28080808080808080808080808080808080808080808080808080808080808080808080808080808082d4b531b3d37b1bef39adf8a899885e9b7555eec4cbc6fc7a8dbb6aa9c7f6b1feaabda51d619e345a99e56eaf848dc7a8cea1554ff00fba3fd53b4a3ac13a1d4c7fdbabe12f643531bf5b1ec78f65cd77c15a2627930556eba7de898fd9754a8202020202020202020202020202020202020202020d6b1fcb8a1a2bb5f2f2b28bf9a879ee07713b1bda561aefd1473974f49b2355a9e34d388eb3c3fbcb41c5b3ad5525c53451c0de873bcec9fa0ee2b52bd5d53eec61e8f4decd58a78ddaa6a9f847e5adbf1cc4ab5c19cbd4cce3b191970feeb161dfb95ce3332ebc68f43a5a77a69a698eb38facb29419bcaf9b9d2f27003b4cafd27fe16dfc6cb253a4b9573e0d1bded1e8ad70a3357a470f8ce19b873583ebd5ebf661fd5cb24687ad5f273eaf6ae7f96d7c6afecb9266adbf56add7f6a11f2724e863fabe453ed655fcd6bff00afecc656e6d2b62e74324535b668b8c4fec0ed5e2b1d5a3ae39627e4dfb3ed3692e70bb4cd3fb663e5f8621f8962b87bb41f2d5407a1b21739a7ab4aed23a962dfbb6e713330e8d3a6d9dada77a9a69abd39fcb130cfe139d3a98ec2a228e76eabb9be69f6dfaae0f7059a8d6571ef465ccd4fb2d62be366a9a67cf8c7e5bde0596d435966b65e4a536f353731c4ee0763bb0adbb7a8a2bf1799d66c5d5e978d54e69eb1c7fbc36459dc91010101010101010101010101010101061f28f2969b0f8f4e77f3883a1136c6490fb2df99d4b1dcb94d11996e68f437b5556edb8f59f0871eca8ce055d692c638d353dcda38c90f70f6dfb4f50b05a17351557e50f67a0d8b634f8aaa8deabacf2fda1a905aeedc378c92c8292a4366a9d28603adac1aa5946fd7e83789d67a37adab5a69af8d5c21e7b69edfa2c4cdbb1deabaf847e65d430cc321a66727044c89bd3a235bb8b9db5c7ad6fd345344629878dd46a6eea2adfbb54ccf9fda3943da1aacc0986a09808240208555247330c72b1b230ed6bda1c3b8a8aa98aa312c96aed76aa8aedccc4f58737caccdbd83a6a1b91acba9dc6e6df767a7dd3dfd0b42f6931c68f87e1ec3667b4b998b7abffdbf3f98f839bbd8412d20820904116208da085a2f6113131986cf9359755744431ce35105c5e390925a3d876d1d5ac2d8b5a8ae8f38717686c2d36ab35446ed5d63ef1fe4bae64e65353620cd285f6781cf89f61233b3a4710ba36af5372383c2ebf665fd1558b91c3c26394b32b2b9e20202020202020202020202020d372ef2e63c39a628b465ac7375336b6207ebc96f06f4ac17af451c239bafb336557aaab7aae1475ebe9f9711c42be5a991d34f23a491c75b9c6fd8370e0173aaaa6a9ccbdcd8b1459a228b71888580aad88745cde6488786d6d4b6eddb044e1a9df78e0768dc3a76adcd358cf7eafd9e5b6e6d79a6674d6678ff0034fda3cfaf4e4e9cd0b79e3d71a112b8020900824020904154041a3670b23054b5d554ed02a582ef601fb7681bbd71e3b372d3d4e9f7bbd4f3fabd36c2db53a7aa2c5e9ee4f29fe99fc7d39b9015cd7bf5ca5a97c2f6c913dd1c8c376bda48703d6ad133139863bb6a8bb4cd15c6627c25d7721f2fdb55a34f545b1d46c63c73639b87b2ee1d3d1b9746c6a77bbb573783dafb06ad366ed8e3478c78c7e63e9e3d5be2db79a10101010101010101010106979c4cb56e1f1f23090eac91bcd1b442d3f68ee3b82c17af6e46239bafb2f66ceaabdeabdc8f9f97e5c32699d23dd23dc5ef7b8b9ce71bb9ce26e492b9d339e32f736e8a68a629a631108850cd0cfe46e09e5b54d8dd7e458394988b8e603e8df79361deb259b7da578f0f173f6aebbf49a79aa3de9e11ebd7f6e6ee11000000000000002c001a800372eabe7333333995f6a0b8d4171a82682482a808082a838e674727c53540a98db686a492e006a64c35b876edfc4b97aab5bb56f4729fabe83ecded19bf666cd73dea3e74f87c397c1a42d67a42e8acc3ac66e32dccda34556fbcbb2195c75ca3d4793f5b71e9ebdbd0d36a33dca9e1f6eec58b59d4588eef8c74f38f2ebd3d397465baf28202020202020202020d7b2df2a23c3298c86ce99f76411facfb7a4ef6474f60e958eedc8a232ddd068aad55ddd8e5e33e5f97cf3595924f23e695c5f248e2e7b9c6e493f2e0b9933333997bdb36a9b74c514462216c286c424142f0eb59b2c3c4549cb11cfa890baf6d7c9b096b477e91ed5d0d2d18a33d5e1fda1d4cdcd57671ca98f9cf19fb375615b2e12f3505c6a0b8d417020904154040404183cb6c2c5550cf1daef6b0cb1efd366b16eb171dab0dfa37edcc3a5b23553a6d65bafc26713e93fe65c05721f5210038820824106e08d441de14a95444c625dbf375957e5f0f2529fa542d1a7d1cab3609071d80f1eb5d3d3dedf8c4f387ceb6decbfd25ddfa23b9572f29e9f86e0b65c31010101010101046478682e26c00249e083e7fce954cb2e20e748e259c946616ec0c888d9d7a5a5ad73f519dfe2f65b0f73f4d9a638e673ebfecd4c2c0ee426142f0aa895e1def05a7e4a9e9e3f529e207af405fc575e88c5310f99eaae7697ee57d6a9fab271ab35d79a505d694171a505c0826105501010102d7d4761d450ce1f37e2b4fc9544f17eee7963fc2f23e4b895462661f5cd35ced2cd15f5889f8c3caaacea29433191f2ccdafa5e40e8c8676b78169367823a468dd64b59dfa70e76d5a6dce8eef691c313f1f0f9be876bae2ebb0f972a80808080808083039435977081a7739ff0026fcfb9072bceb52d9d4b301b59244e3eeb839bf9dcb4f551c625e9fd9eb9c2e5bf49fb7d9a105a8f4d09850bc2aa25687d0901e6b6dea37f285d987cbaae73eaf546885e6a0b80a0b8d282e34a098282482a808082a107cf1958e06beb2db3cae6ef0f20f8ae35df7eaf57d5366e63476b3fd31f462951bc221b766b29394c4a37744314b2f6e8e80f17f82d8d2d39b91e4e17b47777343547f54c47dfeced51bb45d6e83f15d47cede84040404040416aaa711b1d23b635a4ff441a547297b9cf77a4e7127aca0d5f3a6dbd240ee91556ef8ddfcab5b55eec7abbbb027f8f547fa7ef0e62168bd7424117894942eee993757cad253497be953c60fbcd1a27c415d5b739a225f38d75becf53729ff0054fcf8b32c2aed55f6a0984130505c694130504c1412050550104649034171d8d05c7a80b944c53354c443e6baea832cb2ca76c92bde7f89c4fcd712673397d6acd1d9dba68e9111f05850ca20e899998ef5152ef569da3bdffd16de8e3bd3e8f2bed555fc1b71e7f6754986a5d17895e81fa4d07a761eb41710101010106bf95d55663221b5eed277badfeb6ee418284a0d6b3a07e8517fe633ff00948b5b55ee47abb5b07fea6aff00c67eb0e600ad27af8948150bc4aa0a2d12e9b9afc534e19298fa50bb946718de75dba9df996ee96ae134bc97b41a7ddbb4de8e55709f58fcc7d1bec6f5b4f3cf4b1e82e8282610481412050483904c390483904ae8357ce462e29682500da4a8f30c1d3ce1cf3d8dbf785afa9af7689f3e0ec6c3d2f6faba667953de9fdb97cdc2aeb98fa2e4ba272add0cba46658f9dabff00b517e672dcd1fbd53ca7b55ff2ed7acfd21d4de352df78c5ba5759c5bbc5fb507ad01010101068b94153ca553f732d18ecdbe24a0b51141aa673e5fa340ddf53a5dd191fe65ada9f763d5dcd831fc7aa7cbeee6c0ad27ab8948145e252ba85b2c8e018aba8ea239dbaf44d9edf5d87539bdde3656a2b9a2a8aa1adacd353a9b355b9f1e5e53e12edb4558c958c96376946f68735dbc1f81e8b705d489898cc3e7f72dd56eb9a2b8c4c737b1922951e86c882e87a09b5e8260a0a828241c8260a0969000926c00b92750037942233c21c2b381949e5f544b0fd1e1bc70fb5af9d27f11f00172afdcdfabc9f44d8da0fd258ef7bd5719fb47ecd66eb0baf956e86444e5d033353daae7674be96e3f85edfd56d6927bf31e4f35ed3d19d3d1574abeb0eba5745e21e591da2e0771f0419140404041191e1a0b8ec0093d410732e54b9c5c76b9c5c7ac9ba0f5c6e41a2673aaef253c20fa31be423de7587e42b53533c621e9361518a6baface3e1feed2815aaf4312a82a168948145a255ba84e5b46466549a377252ddd4cf75cdb5985debb4748de3b7af3d9bbb9c279391b5366c6a69dfa3df8f9f94fda5d5a9ea1af6b5ec70731c016b9a6ed70de0ae844e78c3c7554cd3334d51898f07a592a2abed9105c6c8826244131220987a0b8d7a0e5d9c4cb8128751523ef1ec9e66ec937c6df6779e9eadba1a8bf9eed2f5fb17644db98bf7e38f8474f39f3fa39d5d6a3d464ba272add13910cb68cdb5672589d3ebb3642f89dc43986c3f168acba79c5c872b6e5bed3455f9627e13f8cbbb95d57cede5a8083d94aebb1a7d91e1a905d404041e2c6a4d1a798fdd3bc4590738083d11bd072ccafaee5eb2670376b1dc937a99aafdf73dab42ecef572f63b36d765a7a63c678fc58705627422520542d12add16cab750b655ba272cd64f6534f446cc3a71137742f2744f169faa788f1592dddaa8e4d0d6ecfb5aa8cd5c2aeb1fe71748c172ba92a6c049c949fbb94869bf076c77fad4b768bd4d4f2da9d99a8b1c66331d63f1ce1b0365595cf5c6cc82eb664171b2a0c662f95149460f2d30d3e88a3f39213bb447a3db658ebbb4d1ce5b9a6d06a3513fc3a78759e11fe7a39ae54e5d4f5a1d1477a7a637058d377ca3ef1dbbd91abad695dbf557c23843d66cfd8f6b4d8aebef55d7c23d23eed52eb5ddacab744e55ba2d92e89cab750657a92a5d148c95be947231edf79ae0478853138e30adca62e51344f298c7c5f4a51d53668e3999ad92c6d91bd4e17f9aec44e6330f975cb736eb9a2ae7138f82350a545ec34f33a9ce1e283d48080831b945ff0b37b9f30839e941e0c6f11f2682496fce0dd167190ea6febd8a95d5bb4ccb634b67b6bb4d1f1f4f17282eef5a0f67125d427795ba2dbcadd309de57494616de5749309de3494613bcae9260de642831daaa7d514f2300faa1d76fe13a95e9aeaa794b5eee96c5ef7e889fafc598872f6b9a2c5f1bf8ba26dfc2caf17eb69d5b1b493ca263f74dd9c0ae3b0c4de2221f3ba7ea2b2362e963afc58dadca7ad985a4a994b7d56911b4f636c152ab95d5ce5b96b41a5b539a688fafd58a0e58f0dede574942dbca8722d1525a4a13bcadd16de56e89c97509cab745b2ec99a4c6c4d48ea571f394cee6f185e491dceb8ed0b7f4b5e69dde8f15ed0697b3bf1763955f586e752e5b4e02f6147987df3f0083da808083c18eb2f4d30fbb71eed7f241ce9073bcb6c5c4d288586f1c24dc8d8f93a4f50d9deb4ef57bd388f07a5d97a5ece8ed2ae73f46b4b13a6205d41956e89de349309de574913bc69260de5749309de349460df349309df5749309df54394616df57493098a920e5185a2b543930bc54907285a2a574916de54394277920e45a2a56ea16de65b25f1b750554750db968bb6468faf13bd26fcc71015edd7b9565a9aed353aab155b9e7e1e52eed1d63258db246e0f8ded0e6386c2d3b17522626330f9ed745545534d51898e6c9e0ffb3bef7b8fc94aaf7202020b73c7a6c730ec735cdef1641c1f2bb28b900ea689d79f5b64703fb21b0b41f5fe1d7b305dbb8e10ebeced04dc98b9723bbe11d7fb7d5cfd6a3d128a50a220ba2325d1220aa24500891055011220aa05d1395439461315a41e985e2b483946178ad20e50bc54a87285a2a4b4916de5749309de6df90d95be487c9e624d33dd76bb59e41e7a7dc3d23b77df3d8bbb9c279389b5b677ea23b5b7ef47ce3f3d3e0eef85b6d0c7d376075c6b074b5fcd6fbc8727a901010107cdf9d0c20d2627502d664cef288f710fd6eee7692d1bb4e2a7acd9d77b4b14f58e0d4cac6dd50a2142a50a22a2192e864d24c1bcab6e4d80249d800b9298566e447364e9727eb25d6da696dbdc3931fdeb2acd510c556b2d53cea6521c85ad76d1133de93f94155ed29629da36a3abd0dcde567ef29bf1cbfc8a3b5847fc4adf49f97e53ff0077359fbca6fc72ff002276b07fc4adf49f97e50933795e36720ff765b7e6013b5a568da36bcd8dabc92c422b9752cae03a63025fc84ab4574f566a75966afe661a689cc3a2f6b98ef55cd2d3dc5599e9ae2ae3128a2c20028989483946168ad20e4c2f15a41ca30bc54ae928c2dbcc964e61c6aeae9e99bf6b331aee0cbddc7b1a0ab514ef5510c1a9bfd95aaabe90fa858c0d01a05800001b80e85d378399cce524408080839ee797270d5520aa8db79a92ee36dae80fa638dac1dd8561bf46632ea6cbd47677772794fd5c1569bd32851544952acca24a9639a912f538526e443d987e193547a0db37d77735bdfd3d893886addd5d1436cc2f23e21632b9d29dc398cfd4f7ac7557d1a55eb6e55cb836dc3f0e8a2168e3633dc68693d676958a672d59aaaab9ce5660ca6a43308439dae4e484ba0ee41d25eda024d97beadd7d57569b35eeef2b15c670d918d58175d68502fc6d44af06aa8c0e2b959474b298647485ed0d3218e27c8d841d864737d1d5aedacdb5acd458aea8cc2935c44e1959a961a98c173629e37b439a5cd64ac7348b87349e820dee163ccc4b25354c71a65ab6319bba496ee8b4e99fec1d38efc587e442c94dd9f16ddbd75da39f16858ee47d5d25dc59cb442fe722bb801bdcddadf87159a9ae2a742ceb6dd7c394f9b5fbabb73228044aa0a26252d24c2dbcebf98fc9d2394c4646ed061a7beebf9c907836fc1cb66c51fcce06d8d5671663d67eceb6b65c21010101051cd041045c11620eb046e41f3c6737239d86d419631f439de4c447d93f6984f891c3a9695db7bb3e4f53b3f59dbd1bb57bd1f3f36925636fcadbdcad10c1554b2e7f40d64ea006d255e21a972ee1b0e0f818d4f98691e867d56fbdbcf055aaae8e65dd4d5570a5b8d143b38782c332d7866a9a258e6564b1b7ba1a4a9986a31d34cf078861b78a51deaa20ab844ab947474ccc99631818d7b29a37308b078906b2ebedbae96638756be2732da28a91d2318f3f5d8c777b41f9ae34ce270db7b59862aef2330bcdc394651bf4a4ea04c9bf0d3b372d8246e2ee9c31cf9710ab0e2e0093187b9a0760007605d9b788a623ca1af5666730bf9b961930f601b229ea606f06473bdad1f8744762e6ea6317259e8aa3186c525295872be625e39a15689261a2e55644453e949006c13eb3a85a290fb407a2788ed59a8b931cdb563575dbe13c61cb6a617c4f747234b1ec36734ed056c7375e8bb1546610051962a4822cd8722725e5c52a442dbb626d9d3cbd11c7fcc6c401fa2b5146f4e1adabd553a7a333cfc1f4ad0d2470451c31343238d8d631a36068160b7a231c1e4abaa6baa6a9e72bea55101010101079315c361ab85f4f3b049148db39a7e20f411d0544c44c6257b772ab754554cf187cfb979903518638c8d0e9a8cbb9b301ae3bec6c806c3c761e1b169d76e69f47a4d2eba8bf189e157f9c9a348a2192e3219354e1f2b9c75e8345b81276f702ad5727275554f26e7470ec0b0ccb51b261f42752c3554b4433f494602c532bc43c5977186e175d6ff947f89015ec4ff129f545cf765c9b12c7259284c05dcc1111e0ba511de619e4fa270a168621f731fe40b8d573964f0641a54292b81140a0f9c297189609ab9919b0756d583db33d7631c23d216a793a96655fa58638ff00d7d5fe70b4b55efaadf085ab832f3cd4a1ca1969b9d588ada022ead153246279392e75681ad10cf6b3f4cc4e3eb374749b7eab1ef5b7627c1b7a3ae62a9a5cf9ae59a61d4a6a6cd91d921558a49a30b7422690249dc3cdc7c3da7701e0a69b7354f052feb28b14f1e7d1f4464ce4fd3e1d0369e9db6035bde6da72bfa5ee3d27e0b729a6298c43cd5fbf5deaf7aa65959844040404040404119636b9a5ae01cd7021cd7004381da083b4226271c61ccf2bb3414f51a52d13852c86e4c441740e3c3a59d971c161aacc783a36768d5118b9c63e6d029324ab30e9246d545a01fa3c9bc39af8e4b5efa2e1d6351b1582e44d3ccd45da2e6268967b0e875ad7aa5821b2526ab2c352eca42e549598dcb7697e1b5cd1ac9a396dd8dd2f92bd9e1729f556bf765c1aa25fa39e2d5d588ef304cf75f53516a6306e63077342e1cf367c707b1ae4526171ae452615251110f982b8e8d6622df5711ac1fe3397623dda7d2134f8bb366563b61319f5ea6a9ffe316ff9568eae7f88a37b5ad948a05996c51929cb9b673f272a2b590c549119a43501c402d6863431c0b9ce24002e46ddeb6f49133330d9b75d3455bd54ace49e665ac224c464121dbe4f097067f149a89e8d42dd6ba3167aa6eed19c62dc7eeeaf45491c11b62858d8a360b358c01ad68e002cb118736aaa6a9cd53c57d4aa20202020202020202020d5738b49ca52b5e06b8a76b8fba4169f12160d447772c96e78b4281b65a12d865296554984b2314ab1acbf335b2b1f1bbd17b1cc76fd17020fc52384e4716c3b20ebfcb23a59623e4cc99a5f51ab92742d75ee0df6902d6db72ba556a28dcde89e3d1af14559c3e83865f1375c8986d3d2d91159a571b22856694cbd4abbae0f9c2c8ac40e27349474ef9a1ad78903996d18e47001ed79279baee6e6c2c574ec5fa3b388aa7931cd3313c1d932470af20a2a6a4b873a185ad7b86c749b5e470d22573eed7bf5cd49dde0cb991513ba83a545a29589264648a57306e73a47eed168f89f92e96829f7aa60bf3ca1945d06b8808080808080808080808083cf5f4a268a489db24639bd571b7b156aa77a26131389cb93cb03a373a370b398e2d70e20d972a6313896dc714d86ca12f5c351bd56612f5b2755c0f4c750a12f54752ab84e5e965528c2579b52a302eb6a1460c242708612e5d11bb0a19d138597d426078aaaaec15a206cb855398e26b4fa479cef78ebb766cec5dbb36f7288868d756f5597ad655040404040404040404040404041aae5760064fa4422ef03ce306d781b1c388ddd2b53516667bd4b35baf1c25a502b459d5ba09b642105c6d495184af32b146e997a195bc546ea72bedade2a306571b5bc5461394c570dea374cabfed01bd374cadbf131bd4ee997966c5474298a51966726b0b7cce6d44c0b63690e8d876bcf438f01d1bd6f69ac71de960bb73c21b7adf6b88080808080808080808080808080830d8be4dc1524bb5c521faecb6b3ed3761f8ac172c535f1e52c94dc9a5aad6e49d54772c0d99bec1d177e177c895ab569ab8e5c59a2ed32c354534919b491c8cf798e68efd8b04d331ce178989e4b21e15729c2ba4a4c1a48615d3e2860e538950065e29c04e18df21b318f90fb0d73be0a6226791388e6cb51e4bd5cb6bb044ddf21b1fc22e7e0b3d3a7b93e4c7372986cd8564a43090f90f2cf1af9c2cc07837a7b6eb6ade9a9a78cf162aaeccf26c2b618840404040404040404040404040404040404142107927c2a9e4f4e089dc4c6cbf7d9526dd13ce2168aaa8f1791f933447ec1a3dd2f6fc0aa7e9edf44f695755a7649519fb370ea924fd557f4d6fa27b5a94192547fbb71fed1ff00aa7e96df43b5a975b92f443ec1a7adcf3f12a7f4f6fa1dad5d5ea8706a567a34f083bf936dfbecaf16a88e510acd754f8bdad6802c000370160b22aaa02020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020ffd9, '123');
-INSERT INTO `eppterreno` (`idEppTerreno`, `Persona_rutPasaportePersona`, `fechaEppTerreno`, `idUsuario`, `Proyecto_idProyecto`, `EstadoEppTerreno`, `EPP_idEPP`, `CantidadEppTerreno`, `TallaEppTerreno`, `observacionEppTerreno`, `firmaEppTerreno`, `tipoEntregaEppTerreno`) VALUES
-(4, '10.000.000-1', '2019-02-07', 2, 2, '123', 6, 555, '16', '1232', 0xffd8ffe000104a46494600010100000100010000ffdb008400090607100f10100f1010100f0f100d0f10101010100f0f100f101611161616111515181d2820181a251b151521312125292b2e2e2e171f3338332c37282d2e2b010a0a0a0e0d0e1810101a2d2520262d2d2d2d2b2d2d2d2d2d2d2d2d2d2b2d2d2d2d2d2d2d2d2d2d2b2d2b2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2dffc000110800e100e103011100021101031101ffc4001c0001000105010100000000000000000000000201030506070408ffc4004a10000103020107070807050509000000000100020304110506071221315161132241718191a1142332526272b1c12442436392b2d1335382d2e183a2a3c2f01517345464737493b3ffc4001b01010002030101000000000000000000000001020304050607ffc4003a110100010301050507020502070000000000010203110405122131511322416171063291a1b1c1d11481234252e1f062f1153334437292a2ffda000c03010002110311003f00ee28080808080808080808080808080808080808080808080808080808080808080808080808080808082d4b531b3d37b1bef39adf8a899885e9b7555eec4cbc6fc7a8dbb6aa9c7f6b1feaabda51d619e345a99e56eaf848dc7a8cea1554ff00fba3fd53b4a3ac13a1d4c7fdbabe12f643531bf5b1ec78f65cd77c15a2627930556eba7de898fd9754a8202020202020202020202020202020202020202020d6b1fcb8a1a2bb5f2f2b28bf9a879ee07713b1bda561aefd1473974f49b2355a9e34d388eb3c3fbcb41c5b3ad5525c53451c0de873bcec9fa0ee2b52bd5d53eec61e8f4decd58a78ddaa6a9f847e5adbf1cc4ab5c19cbd4cce3b191970feeb161dfb95ce3332ebc68f43a5a77a69a698eb38facb29419bcaf9b9d2f27003b4cafd27fe16dfc6cb253a4b9573e0d1bded1e8ad70a3357a470f8ce19b873583ebd5ebf661fd5cb24687ad5f273eaf6ae7f96d7c6afecb9266adbf56add7f6a11f2724e863fabe453ed655fcd6bff00afecc656e6d2b62e74324535b668b8c4fec0ed5e2b1d5a3ae39627e4dfb3ed3692e70bb4cd3fb663e5f8621f8962b87bb41f2d5407a1b21739a7ab4aed23a962dfbb6e713330e8d3a6d9dada77a9a69abd39fcb130cfe139d3a98ec2a228e76eabb9be69f6dfaae0f7059a8d6571ef465ccd4fb2d62be366a9a67cf8c7e5bde0596d435966b65e4a536f353731c4ee0763bb0adbb7a8a2bf1799d66c5d5e978d54e69eb1c7fbc36459dc91010101010101010101010101010101061f28f2969b0f8f4e77f3883a1136c6490fb2df99d4b1dcb94d11996e68f437b5556edb8f59f0871eca8ce055d692c638d353dcda38c90f70f6dfb4f50b05a17351557e50f67a0d8b634f8aaa8deabacf2fda1a905aeedc378c92c8292a4366a9d28603adac1aa5946fd7e83789d67a37adab5a69af8d5c21e7b69edfa2c4cdbb1deabaf847e65d430cc321a66727044c89bd3a235bb8b9db5c7ad6fd345344629878dd46a6eea2adfbb54ccf9fda3943da1aacc0986a09808240208555247330c72b1b230ed6bda1c3b8a8aa98aa312c96aed76aa8aedccc4f58737caccdbd83a6a1b91acba9dc6e6df767a7dd3dfd0b42f6931c68f87e1ec3667b4b998b7abffdbf3f98f839bbd8412d20820904116208da085a2f6113131986cf9359755744431ce35105c5e390925a3d876d1d5ac2d8b5a8ae8f38717686c2d36ab35446ed5d63ef1fe4bae64e65353620cd285f6781cf89f61233b3a4710ba36af5372383c2ebf665fd1558b91c3c26394b32b2b9e20202020202020202020202020d372ef2e63c39a628b465ac7375336b6207ebc96f06f4ac17af451c239bafb336557aaab7aae1475ebe9f9711c42be5a991d34f23a491c75b9c6fd8370e0173aaaa6a9ccbdcd8b1459a228b71888580aad88745cde6488786d6d4b6eddb044e1a9df78e0768dc3a76adcd358cf7eafd9e5b6e6d79a6674d6678ff0034fda3cfaf4e4e9cd0b79e3d71a112b8020900824020904154041a3670b23054b5d554ed02a582ef601fb7681bbd71e3b372d3d4e9f7bbd4f3fabd36c2db53a7aa2c5e9ee4f29fe99fc7d39b9015cd7bf5ca5a97c2f6c913dd1c8c376bda48703d6ad133139863bb6a8bb4cd15c6627c25d7721f2fdb55a34f545b1d46c63c73639b87b2ee1d3d1b9746c6a77bbb573783dafb06ad366ed8e3478c78c7e63e9e3d5be2db79a10101010101010101010106979c4cb56e1f1f23090eac91bcd1b442d3f68ee3b82c17af6e46239bafb2f66ceaabdeabdc8f9f97e5c32699d23dd23dc5ef7b8b9ce71bb9ce26e492b9d339e32f736e8a68a629a631108850cd0cfe46e09e5b54d8dd7e458394988b8e603e8df79361deb259b7da578f0f173f6aebbf49a79aa3de9e11ebd7f6e6ee11000000000000002c001a800372eabe7333333995f6a0b8d4171a82682482a808082a838e674727c53540a98db686a492e006a64c35b876edfc4b97aab5bb56f4729fabe83ecded19bf666cd73dea3e74f87c397c1a42d67a42e8acc3ac66e32dccda34556fbcbb2195c75ca3d4793f5b71e9ebdbd0d36a33dca9e1f6eec58b59d4588eef8c74f38f2ebd3d397465baf28202020202020202020d7b2df2a23c3298c86ce99f76411facfb7a4ef6474f60e958eedc8a232ddd068aad55ddd8e5e33e5f97cf3595924f23e695c5f248e2e7b9c6e493f2e0b9933333997bdb36a9b74c514462216c286c424142f0eb59b2c3c4549cb11cfa890baf6d7c9b096b477e91ed5d0d2d18a33d5e1fda1d4cdcd57671ca98f9cf19fb375615b2e12f3505c6a0b8d417020904154040404183cb6c2c5550cf1daef6b0cb1efd366b16eb171dab0dfa37edcc3a5b23553a6d65bafc26713e93fe65c05721f5210038820824106e08d441de14a95444c625dbf375957e5f0f2529fa542d1a7d1cab3609071d80f1eb5d3d3dedf8c4f387ceb6decbfd25ddfa23b9572f29e9f86e0b65c31010101010101046478682e26c00249e083e7fce954cb2e20e748e259c946616ec0c888d9d7a5a5ad73f519dfe2f65b0f73f4d9a638e673ebfecd4c2c0ee426142f0aa895e1def05a7e4a9e9e3f529e207af405fc575e88c5310f99eaae7697ee57d6a9fab271ab35d79a505d694171a505c0826105501010102d7d4761d450ce1f37e2b4fc9544f17eee7963fc2f23e4b895462661f5cd35ced2cd15f5889f8c3caaacea29433191f2ccdafa5e40e8c8676b78169367823a468dd64b59dfa70e76d5a6dce8eef691c313f1f0f9be876bae2ebb0f972a80808080808083039435977081a7739ff0026fcfb9072bceb52d9d4b301b59244e3eeb839bf9dcb4f551c625e9fd9eb9c2e5bf49fb7d9a105a8f4d09850bc2aa25687d0901e6b6dea37f285d987cbaae73eaf546885e6a0b80a0b8d282e34a098282482a808082a107cf1958e06beb2db3cae6ef0f20f8ae35df7eaf57d5366e63476b3fd31f462951bc221b766b29394c4a37744314b2f6e8e80f17f82d8d2d39b91e4e17b47777343547f54c47dfeced51bb45d6e83f15d47cede84040404040416aaa711b1d23b635a4ff441a547297b9cf77a4e7127aca0d5f3a6dbd240ee91556ef8ddfcab5b55eec7abbbb027f8f547fa7ef0e62168bd7424117894942eee993757cad253497be953c60fbcd1a27c415d5b739a225f38d75becf53729ff0054fcf8b32c2aed55f6a0984130505c694130504c1412050550104649034171d8d05c7a80b944c53354c443e6baea832cb2ca76c92bde7f89c4fcd712673397d6acd1d9dba68e9111f05850ca20e899998ef5152ef569da3bdffd16de8e3bd3e8f2bed555fc1b71e7f6754986a5d17895e81fa4d07a761eb41710101010106bf95d55663221b5eed277badfeb6ee418284a0d6b3a07e8517fe633ff00948b5b55ee47abb5b07fea6aff00c67eb0e600ad27af8948150bc4aa0a2d12e9b9afc534e19298fa50bb946718de75dba9df996ee96ae134bc97b41a7ddbb4de8e55709f58fcc7d1bec6f5b4f3cf4b1e82e8282610481412050483904c390483904ae8357ce462e29682500da4a8f30c1d3ce1cf3d8dbf785afa9af7689f3e0ec6c3d2f6faba667953de9fdb97cdc2aeb98fa2e4ba272add0cba46658f9dabff00b517e672dcd1fbd53ca7b55ff2ed7acfd21d4de352df78c5ba5759c5bbc5fb507ad01010101068b94153ca553f732d18ecdbe24a0b51141aa673e5fa340ddf53a5dd191fe65ada9f763d5dcd831fc7aa7cbeee6c0ad27ab8948145e252ba85b2c8e018aba8ea239dbaf44d9edf5d87539bdde3656a2b9a2a8aa1adacd353a9b355b9f1e5e53e12edb4558c958c96376946f68735dbc1f81e8b705d489898cc3e7f72dd56eb9a2b8c4c737b1922951e86c882e87a09b5e8260a0a828241c8260a0969000926c00b92750037942233c21c2b381949e5f544b0fd1e1bc70fb5af9d27f11f00172afdcdfabc9f44d8da0fd258ef7bd5719fb47ecd66eb0baf956e86444e5d033353daae7674be96e3f85edfd56d6927bf31e4f35ed3d19d3d1574abeb0eba5745e21e591da2e0771f0419140404041191e1a0b8ec0093d410732e54b9c5c76b9c5c7ac9ba0f5c6e41a2673aaef253c20fa31be423de7587e42b53533c621e9361518a6baface3e1feed2815aaf4312a82a168948145a255ba84e5b46466549a377252ddd4cf75cdb5985debb4748de3b7af3d9bbb9c279391b5366c6a69dfa3df8f9f94fda5d5a9ea1af6b5ec70731c016b9a6ed70de0ae844e78c3c7554cd3334d51898f07a592a2abed9105c6c8826244131220987a0b8d7a0e5d9c4cb8128751523ef1ec9e66ec937c6df6779e9eadba1a8bf9eed2f5fb17644db98bf7e38f8474f39f3fa39d5d6a3d464ba272add13910cb68cdb5672589d3ebb3642f89dc43986c3f168acba79c5c872b6e5bed3455f9627e13f8cbbb95d57cede5a8083d94aebb1a7d91e1a905d404041e2c6a4d1a798fdd3bc4590738083d11bd072ccafaee5eb2670376b1dc937a99aafdf73dab42ecef572f63b36d765a7a63c678fc58705627422520542d12add16cab750b655ba272cd64f6534f446cc3a71137742f2744f169faa788f1592dddaa8e4d0d6ecfb5aa8cd5c2aeb1fe71748c172ba92a6c049c949fbb94869bf076c77fad4b768bd4d4f2da9d99a8b1c66331d63f1ce1b0365595cf5c6cc82eb664171b2a0c662f95149460f2d30d3e88a3f39213bb447a3db658ebbb4d1ce5b9a6d06a3513fc3a78759e11fe7a39ae54e5d4f5a1d1477a7a637058d377ca3ef1dbbd91abad695dbf557c23843d66cfd8f6b4d8aebef55d7c23d23eed52eb5ddacab744e55ba2d92e89cab750657a92a5d148c95be947231edf79ae0478853138e30adca62e51344f298c7c5f4a51d53668e3999ad92c6d91bd4e17f9aec44e6330f975cb736eb9a2ae7138f82350a545ec34f33a9ce1e283d48080831b945ff0b37b9f30839e941e0c6f11f2682496fce0dd167190ea6febd8a95d5bb4ccb634b67b6bb4d1f1f4f17282eef5a0f67125d427795ba2dbcadd309de57494616de5749309de3494613bcae9260de642831daaa7d514f2300faa1d76fe13a95e9aeaa794b5eee96c5ef7e889fafc598872f6b9a2c5f1bf8ba26dfc2caf17eb69d5b1b493ca263f74dd9c0ae3b0c4de2221f3ba7ea2b2362e963afc58dadca7ad985a4a994b7d56911b4f636c152ab95d5ce5b96b41a5b539a688fafd58a0e58f0dede574942dbca8722d1525a4a13bcadd16de56e89c97509cab745b2ec99a4c6c4d48ea571f394cee6f185e491dceb8ed0b7f4b5e69dde8f15ed0697b3bf1763955f586e752e5b4e02f6147987df3f0083da808083c18eb2f4d30fbb71eed7f241ce9073bcb6c5c4d288586f1c24dc8d8f93a4f50d9deb4ef57bd388f07a5d97a5ece8ed2ae73f46b4b13a6205d41956e89de349309de574913bc69260de5749309de349460df349309df5749309df54394616df57493098a920e5185a2b543930bc54907285a2a574916de54394277920e45a2a56ea16de65b25f1b750554750db968bb6468faf13bd26fcc71015edd7b9565a9aed353aab155b9e7e1e52eed1d63258db246e0f8ded0e6386c2d3b17522626330f9ed745545534d51898e6c9e0ffb3bef7b8fc94aaf7202020b73c7a6c730ec735cdef1641c1f2bb28b900ea689d79f5b64703fb21b0b41f5fe1d7b305dbb8e10ebeced04dc98b9723bbe11d7fb7d5cfd6a3d128a50a220ba2325d1220aa24500891055011220aa05d1395439461315a41e985e2b483946178ad20e50bc54a87285a2a4b4916de5749309de6df90d95be487c9e624d33dd76bb59e41e7a7dc3d23b77df3d8bbb9c279389b5b677ea23b5b7ef47ce3f3d3e0eef85b6d0c7d376075c6b074b5fcd6fbc8727a901010107cdf9d0c20d2627502d664cef288f710fd6eee7692d1bb4e2a7acd9d77b4b14f58e0d4cac6dd50a2142a50a22a2192e864d24c1bcab6e4d80249d800b9298566e447364e9727eb25d6da696dbdc3931fdeb2acd510c556b2d53cea6521c85ad76d1133de93f94155ed29629da36a3abd0dcde567ef29bf1cbfc8a3b5847fc4adf49f97e53ff0077359fbca6fc72ff002276b07fc4adf49f97e50933795e36720ff765b7e6013b5a568da36bcd8dabc92c422b9752cae03a63025fc84ab4574f566a75966afe661a689cc3a2f6b98ef55cd2d3dc5599e9ae2ae3128a2c20028989483946168ad20e4c2f15a41ca30bc54ae928c2dbcc964e61c6aeae9e99bf6b331aee0cbddc7b1a0ab514ef5510c1a9bfd95aaabe90fa858c0d01a05800001b80e85d378399cce524408080839ee797270d5520aa8db79a92ee36dae80fa638dac1dd8561bf46632ea6cbd47677772794fd5c1569bd32851544952acca24a9639a912f538526e443d987e193547a0db37d77735bdfd3d893886addd5d1436cc2f23e21632b9d29dc398cfd4f7ac7557d1a55eb6e55cb836dc3f0e8a2168e3633dc68693d676958a672d59aaaab9ce5660ca6a43308439dae4e484ba0ee41d25eda024d97beadd7d57569b35eeef2b15c670d918d58175d68502fc6d44af06aa8c0e2b959474b298647485ed0d3218e27c8d841d864737d1d5aedacdb5acd458aea8cc2935c44e1959a961a98c173629e37b439a5cd64ac7348b87349e820dee163ccc4b25354c71a65ab6319bba496ee8b4e99fec1d38efc587e442c94dd9f16ddbd75da39f16858ee47d5d25dc59cb442fe722bb801bdcddadf87159a9ae2a742ceb6dd7c394f9b5fbabb73228044aa0a26252d24c2dbcebf98fc9d2394c4646ed061a7beebf9c907836fc1cb66c51fcce06d8d5671663d67eceb6b65c21010101051cd041045c11620eb046e41f3c6737239d86d419631f439de4c447d93f6984f891c3a9695db7bb3e4f53b3f59dbd1bb57bd1f3f36925636fcadbdcad10c1554b2e7f40d64ea006d255e21a972ee1b0e0f818d4f98691e867d56fbdbcf055aaae8e65dd4d5570a5b8d143b38782c332d7866a9a258e6564b1b7ba1a4a9986a31d34cf078861b78a51deaa20ab844ab947474ccc99631818d7b29a37308b078906b2ebedbae96638756be2732da28a91d2318f3f5d8c777b41f9ae34ce270db7b59862aef2330bcdc394651bf4a4ea04c9bf0d3b372d8246e2ee9c31cf9710ab0e2e0093187b9a0760007605d9b788a623ca1af5666730bf9b961930f601b229ea606f06473bdad1f8744762e6ea6317259e8aa3186c525295872be625e39a15689261a2e55644453e949006c13eb3a85a290fb407a2788ed59a8b931cdb563575dbe13c61cb6a617c4f747234b1ec36734ed056c7375e8bb1546610051962a4822cd8722725e5c52a442dbb626d9d3cbd11c7fcc6c401fa2b5146f4e1adabd553a7a333cfc1f4ad0d2470451c31343238d8d631a36068160b7a231c1e4abaa6baa6a9e72bea55101010101079315c361ab85f4f3b049148db39a7e20f411d0544c44c6257b772ab754554cf187cfb979903518638c8d0e9a8cbb9b301ae3bec6c806c3c761e1b169d76e69f47a4d2eba8bf189e157f9c9a348a2192e3219354e1f2b9c75e8345b81276f702ad5727275554f26e7470ec0b0ccb51b261f42752c3554b4433f494602c532bc43c5977186e175d6ff947f89015ec4ff129f545cf765c9b12c7259284c05dcc1111e0ba511de619e4fa270a168621f731fe40b8d573964f0641a54292b81140a0f9c297189609ab9919b0756d583db33d7631c23d216a793a96655fa58638ff00d7d5fe70b4b55efaadf085ab832f3cd4a1ca1969b9d588ada022ead153246279392e75681ad10cf6b3f4cc4e3eb374749b7eab1ef5b7627c1b7a3ae62a9a5cf9ae59a61d4a6a6cd91d921558a49a30b7422690249dc3cdc7c3da7701e0a69b7354f052feb28b14f1e7d1f4464ce4fd3e1d0369e9db6035bde6da72bfa5ee3d27e0b729a6298c43cd5fbf5deaf7aa65959844040404040404119636b9a5ae01cd7021cd7004381da083b4226271c61ccf2bb3414f51a52d13852c86e4c441740e3c3a59d971c161aacc783a36768d5118b9c63e6d029324ab30e9246d545a01fa3c9bc39af8e4b5efa2e1d6351b1582e44d3ccd45da2e6268967b0e875ad7aa5821b2526ab2c352eca42e549598dcb7697e1b5cd1ac9a396dd8dd2f92bd9e1729f556bf765c1aa25fa39e2d5d588ef304cf75f53516a6306e63077342e1cf367c707b1ae4526171ae452615251110f982b8e8d6622df5711ac1fe3397623dda7d2134f8bb366563b61319f5ea6a9ffe316ff9568eae7f88a37b5ad948a05996c51929cb9b673f272a2b590c549119a43501c402d6863431c0b9ce24002e46ddeb6f49133330d9b75d3455bd54ace49e665ac224c464121dbe4f097067f149a89e8d42dd6ba3167aa6eed19c62dc7eeeaf45491c11b62858d8a360b358c01ad68e002cb118736aaa6a9cd53c57d4aa20202020202020202020d5738b49ca52b5e06b8a76b8fba4169f12160d447772c96e78b4281b65a12d865296554984b2314ab1acbf335b2b1f1bbd17b1cc76fd17020fc52384e4716c3b20ebfcb23a59623e4cc99a5f51ab92742d75ee0df6902d6db72ba556a28dcde89e3d1af14559c3e83865f1375c8986d3d2d91159a571b22856694cbd4abbae0f9c2c8ac40e27349474ef9a1ad78903996d18e47001ed79279baee6e6c2c574ec5fa3b388aa7931cd3313c1d932470af20a2a6a4b873a185ad7b86c749b5e470d22573eed7bf5cd49dde0cb991513ba83a545a29589264648a57306e73a47eed168f89f92e96829f7aa60bf3ca1945d06b8808080808080808080808083cf5f4a268a489db24639bd571b7b156aa77a26131389cb93cb03a373a370b398e2d70e20d972a6313896dc714d86ca12f5c351bd56612f5b2755c0f4c750a12f54752ab84e5e965528c2579b52a302eb6a1460c242708612e5d11bb0a19d138597d426078aaaaec15a206cb855398e26b4fa479cef78ebb766cec5dbb36f7288868d756f5597ad655040404040404040404040404041aae5760064fa4422ef03ce306d781b1c388ddd2b53516667bd4b35baf1c25a502b459d5ba09b642105c6d495184af32b146e997a195bc546ea72bedade2a306571b5bc5461394c570dea374cabfed01bd374cadbf131bd4ee997966c5474298a51966726b0b7cce6d44c0b63690e8d876bcf438f01d1bd6f69ac71de960bb73c21b7adf6b88080808080808080808080808080830d8be4dc1524bb5c521faecb6b3ed3761f8ac172c535f1e52c94dc9a5aad6e49d54772c0d99bec1d177e177c895ab569ab8e5c59a2ed32c354534919b491c8cf798e68efd8b04d331ce178989e4b21e15729c2ba4a4c1a48615d3e2860e538950065e29c04e18df21b318f90fb0d73be0a6226791388e6cb51e4bd5cb6bb044ddf21b1fc22e7e0b3d3a7b93e4c7372986cd8564a43090f90f2cf1af9c2cc07837a7b6eb6ade9a9a78cf162aaeccf26c2b618840404040404040404040404040404040404142107927c2a9e4f4e089dc4c6cbf7d9526dd13ce2168aaa8f1791f933447ec1a3dd2f6fc0aa7e9edf44f695755a7649519fb370ea924fd557f4d6fa27b5a94192547fbb71fed1ff00aa7e96df43b5a975b92f443ec1a7adcf3f12a7f4f6fa1dad5d5ea8706a567a34f083bf936dfbecaf16a88e510acd754f8bdad6802c000370160b22aaa02020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020ffd9, '123');
-
--- --------------------------------------------------------
+LOCK TABLES `eppterreno` WRITE;
+/*!40000 ALTER TABLE `eppterreno` DISABLE KEYS */;
+INSERT INTO `eppterreno` VALUES (1,'10.000.000-1','2019-02-08',1,2,'123',12,123,'123','1232','ÿ\Øÿ\à\0JFIF\0\0\0\0\0\0ÿ\Û\0\0	\r( \Z%!1!%)+...383,7(-.+\n\n\n\r\Z-% &----+---------+----------+-+----------------------ÿÀ\0\0\á\0\á\0ÿ\Ä\0\0\0\0\0\0\0\0\0\0\0\0\0\0ÿ\Ä\0J\0	\0\0\0\0\0!1Qa\"Aq¡#2Rbr±Á$BCc²\Ñ3S\Òá¢£\Âð4Tdst³ÿ\Ä\0\0\0\0\0\0\0\0\0\0\0\0\0ÿ\Ä\0:\0\0\0\0\0\0!1Q\"Aaq2¡±Á\Ñ#BR\áðbñ34Cr¢ÿ\Ú\0\0\0?\0\î(-KS=7±¾óß\é·U^\ìL¼oÇ¨Û¶ªk\ê«\ÚQ\Ö\ãE©V\êøH\Üz\êTÿ\0û£ýS´£¬¡\Ô\Çýº¾öCSõ±\ìxö\\\×|¢by0Unº}\èýT¨                     Ö±ü¸¡¢»_/+(¿\àw±½¥a®ýsOI²5Z4Ó\ë<?¼´[:\ÕR\\SE\r\ès¼ì \î+R½]S\î\ÆM\ìÕxÝªj~Z\Ûñ\ÌJµÁ½L\Î;pþ\ëû\Î32\ëÆC¥§zi¦\ë8ú\Ë)A\Êù¹\Òòp´\Êý\'þ\ß\Æ\Ë%:Ks\àÑ½\í\×\n3W¤pø\Î¸sX>½^¿f\Õ\Ë$hz\Õòs\êö®\×Æ¯\ì¹&j\Ûõj\ÝjòrN?«\äS\íe_\Íkÿ\0¯\ì\ÆV\æÒ¶.t2E5¶h¸\ÄþÀ\í^+Z:\ã\'\äß³\í6\ç´\Í?¶c\åøbb¸{´-T¡²9§«J\í#©bß»nq30\èÓ¦\Ù\Ú\Úw©¦½9ü±0\Ï\á9Ó©Â¢(\çn«¹¾iößª\à÷eq\ïF\\\ÍO²\Ö+\ãf©¦|ø\Ç\å½\àYmCYf¶^JSo571\Ä\îc»\nÛ·¨¢¿\Öl]^Tæ±\Çû\ÃdYÜ(òNwó:6\ÆI²ßÔ±Ü¹Mnhô7µUnÛYðÊ\àUÖ\Æ8\ÓS\Ü\Ú8\Épöß´õ¡sQU~Pöz\rcOª\êº\Ï/\Ú\ZZ\î\Ü7\È)*Cf©Ò­¬\Z¥o\×\è7\Öz7­«Zi¯\\!ç¶ß¢\ÄÍ»\êºøG\æ]C\Ã!¦g\'L½:#[¸¹\Û\\z\Öý4SDbx\ÝF¦î¢­ûµLÏ\Ú9C\Ú\Z¬Àj	@ U$s0\Ç+#Ö½¡Ã¸¨ªª1,®\×j¨®\Ü\ÌOXs|¬Í½¦¡¹\ZË©\Ünm÷g§\Ý=ýBöhø~\Ãf{Kz¿ý¿?ø9»\ØA- 	b\ÚZ/aÏYuWDC\ãQ\ÅãZ=mZ\ÂØµ¨®8qv\Â\Ój³TF\í]c\ï\äº\æNe56 \Í(_gÏö3³¤q£jõ7#\Â\ëöeýX¹<&9K2²¹\â\r7.ò\æ<9¦(´e¬su3kb\ë\Éoô¬¯E#¯³6Uzª·ª\áG^¾\Ä+å©\ÓO#¤\Ç[o\Ø7sªªj\Ë\ÜØ±E\"qªØE\Í\æH\ÖÔ¶\í\ÛN\Z÷h\Ü:v­\Í5÷\êý[nmy¦gMfxÿ\04ý£Ï¯NNÐ·=q¡¸	\0@ AT\Z6p²0Tµ\ÕT\í¥\ï`·h½q\ã³r\Ó\Ô\é÷»\Ôóú½6\Â\ÛS§ª,^\äò\é\ÇÓ\Í{õ\ÊZ\Âö\É\Ý7k\ÚHp=j\Ñ3c»j´\Í\Æb|%\×r/\ÛU£OT[F\Æ<sc²\î=FÆ§{»W7\Úû­6n\Ø\ãGx\Ç\æ>=[\â\Ûy¡Lµn#	¬¼Ñ´B\Óö\ã¸,¯nF#¯²öl\ê«Þ«Ü\å\Ã&\Ò=\Ò=\Å\ï{\ç¹\Î&ä¹\Ó9\ã/snh¦)¦1P\ÍþF\à[T\Ø\Ý~E`>÷aÞ²Y·\ÚW?j\ë¿I§£Þ\ë\×ö\æ\î\0\0\0\0\0\0\0,\0\Zr\ê¾s339ö ¸\Ô\Zh$¨*gG\'\Å5@©¶¤\à¦L5¸v\íüKªµ»Vôr«\è>\Í\í¿fl\×=\ê>tø|9|\ZB\ÖzB\è¬Ã¬f\ã-\Ì\Ú4Uo¼»!\Ç\\£\Ôy?[q\é\ë\Û\Ð\Ój3Ü©\áö\îÅY\ÔX\ïtó.½=9teºò\r{-ò¢<2\Èl\évA¬ûzNöGO`\éX\îÜ#-\Ý­U\Ý\Ø\å\ã>_\Ï5O#\æ\ÅòH\â\ç¹\Æ\äòà¹33{\Û6©·LQDb!l(lBABð\ëY²\Ã\ÄT±ú¯m|	kG~\í]\r-£=^\ÚL\Ü\ÕvqÊù\Ïû7V²\á/5Æ ¸\Ô	@@@A\Ël,UP\Ï®ö°\Ëý6k\ë«\rú7\í\Ì:[#U:meºü&q>þeÀW!õ!\08$n\ÔA\Þ©TD\Æ%\Ûóu~_%)úT-\Z}«6	ñ\ë]==\íø\ÄóÎ¶\Þ\Ëý%\Ýú#¹W/)\éøne\ÃFG\âl\0$>ÎL²\ât%f\ìzZZ\×?Qþ/e°÷?Mcg>¿\ì\Ô\ÂÀ\îBaBðª^\ï§\ä©\é\ãõ)\â¯@_\Åu\èSùª\çi~\å}j«\'\Z³]y¥Ö\ZP\\&U\×\ÔvE\áó~+O\ÉTO\î\ç?\Âò>KTbf\\\Ó\\\í,\Ñ_Xø\ÃÊªÎ¢3,Í¯¥\äv·i6x#¤h\Ýdµúp\çmZmÎ\ïi1?\èvº\â\ë°ùr¨09CYw\Zw9ÿ\0&üûr¼\ëR\ÙÔ³µD\ã\î¸9¿\ËOUb^\Ù\ë.[ô·Ù¡¨ôÐP¼*¢VÐkm\ê7òÙËª\ç>¯Thæ ¸\n(.4 ($¨*|ñ¾²\Û<®nðò\ã]÷\êõ}Sf\æ4v³ý1ôb\Â!·f²Ä£wD1K/nñ\Ø\ÒÓ\ä\á{GwsCTT\Ä}þ\Î\Õ´]nñ]G\ÎÞª§±\Ò;cZOôA¥G){÷zNq\'¬ \Õó¦\Û\Ò@\îUnø\Ýü«[U\îÇ«»°\'øõGú~ð\æ!h½t$x.\î7W\Ê\ÒSI{\éS\Æ¼Ñ¢|A][s\"_8\×[\ìõ7)ÿ\0Tüø³,*\íUö A0P\\iA0PLPFIAq\Ø\Ð\\z¹D\Å3T\ÄC\æº\ê,²\Êv\É+\Þ\Äü\×g3Ö¬\Ñ\ÙÛ¦ðXP\Ê èõ.õi\Ú;\ßýÞ;\Ó\èò¾\ÕUüq\çöuI¥\Ñx\è¤\Ðzv´kù]Uf2!µ\î\Òwº\ß\ën\ä(J\rk:\èQ\æ3ÿ\0[U\îG«µ°\êjÿ\0\Æ~°\æ\0­\'¯HÄª\n-é¹¯\Å4áúP»g\ÞuÛ©ßn\éj\á4¼´\Z}Û´ÞUpXü\ÇÑ¾\Æõ´ó\ÏK\è(&HL9J\è5|\äbâP\r¤¨ó<\á\Ï=¿xZú÷h>\Æ\Ã\ÒöúºfySÞÛ\ÍÂ®¹¢\äº\'*\ÝºFe«ÿ\0µ\ær\Ü\Ñû\Õ<§µ_ò\íz\Ï\ÒM\ãR\ßxÅºWYÅ»\ÅûPz\Ðh¹AS\ÊU?s-\ì\Û\âJQ\Z¦s\åú4\r\ßS¥\Ý\æZÚv=]ÍÇª|¾\îl\n\Òz¸E\âRº²\È\à«¨\ê#ºôM\ß]S\Ý\ãej+*¡­¬\ÓS©³U¹ñ\å\å>\í´U7iFö5\ÛÁøp]H\Ì>r\ÝV\ë+Ls{\"È\èz	µ\è&\n\nA\È&\n	i\0	&Àu\07\"3\Â+8I\åõD°ý\Çµ¯\'ñ\0*ý\Íú¼D\Ø\Ú\ÒX\ï{\Õq´~\Íf\ë¯nDN]3SÚ®vt¾\ãø^\ß\Õmi\'¿1\äó^\ÓÑ=t«\ëºWE\âY¢\àwá ¸\ì\0\Ôs.T¹\Å\Çk\\zÉº\\nA¢g:®òS\Â£\ä#\Þu\ä+SS<baQk¯¬\ã\áþ\í(ªô1*¡hE¢Uº\å´dfT7rR\Ý\Ô\ÏuÍµ]\ë´tã·¯=»\'µ6ljiß£ßý¥Õ©\ê\Zöµ\ìpskn\×\rà®Nx\Ã\ÇUL\Ó3MQ¥¢«\í\ÆÈbD zz]L¸QR>ñ\ìf\ì|möw­º\Zù\î\ÒõûdM¹÷ãtó?£]j=FK¢r­\Ñ9\ËhÍµg%\Ó\ë³d/\ÜCl?Ë§\\+n[\í4Uùb~øË»\Õ|\í\å¨=®»\Z}\á©\Ô,jM\Zy\Ý;\ÄY8=½,\Êú\î^²gv±Üzªý÷=«B\ì\ïW/c³mvZzc\ÆxüXpV\'B% T-­\Ñl«ue[¢r\ÍdöSODlÃ§7t/\'Dñiú§ñY-ÝªM\rnÏµª\ÕÂ®±þqt+©*l»ðv\Ç­Kv\Ô\ÔòÚ¨±\Æc1\Ö?\á°6U\Ï\\l\È.¶d*f/`ò\Ó\r>£ó»Dz=¶X\ë»Må¹¦\Ðj5ü:xuþz9®T\å\Ôõ¡\ÑGzzcpX\Ów\Ê>ñÛ½«­i]¿U|#=f\Ï\Øö´Ø®¾õ]|#\Ò>\íR\ë]\ÚÊ·D\å[¢\Ù.Ê·Pez¥\ÑH\É[\éG#\ßy®x18\ã\nÜ¦.Q4O)|_JQ\Õ6hã\Ù,m½Nù®\ÄNc0ùu\Ësn¹¢®q8ø#P¥E\ì4ó:\á\âÔ_ð³{0oòh$ü\à\Ýq\êo\ëØ©][´Ì¶4¶{k´\Ññôñr\îõ öq%\Ô\'y[¢\Û\Ê\Ý0\åtam\åt	\Þ4a;\Ê\é&\r\æBª§\Õò0ªvþ©^ê§µ\î\él^÷\èúüYrö¹¢\Åñ¿¢mü,¯\ëiÕ±´\Ê&?tÝ\n\ã°\Ä\Þ\"!óº~¢²6.:üX\ÚÜ§­ZJK}VOcl*¹]\\\å¹kA¥µ9¦úýX \å\r\í\åt-¼¨r-%¤¡;\Ê\Ý\ÞVèP«t[.ÉLlMH\êW9L\îo^IÎ¸\íK^i\Ý\èñ^\Ði{;ñv9Uõ\çR\å´\à/aG}óð=¨<\ë/M0û·\í$\é;\Ël\\M(ñ\ÂM\È\Øù:OP\ÙÞ´\ïW½8¥\Ùz^ÎÒ®sôkK¦ ]An\Þ4	\ÞWI¼i&\r\åt	\Þ4`\ß4	\ßWI0õCamõt	Q¢µC\ÅI(Z*WI\ÞT9BwE¢¥n¡m\æ[%ñ·PUGPÛ¶F¯½&ü\Ç\í×¹VZ\í5:«[~R\î\Ñ\Ö2X\Û$n\íc\ÂÓ±u\"bc0ù\ítUESMQlû;\ï{\ÉJ¯rsÇ¦\Ç0\ìs\\\Þñd+²¦×[dp?²Aõþ{0]»\ë\ì\íÜ¹r;¾\×û}\\ýj=P¢ º#%\Ñ\"\n¢E\0U ª\Ñ9T9F¤^+H9F\ÒP¼T¨r¢¤´m\åt	\Þmù\r¾H|bM3\Ýv»Y\äz}\Ã\Ò;w\ß=»\'µ¶w\ê#µ·\ïG\Î?=>ï¶\Ð\Ç\Óv\\kK_\Ío¼\'©\Íù\Ð\Â\r&\'P-fL\ï(q\Ö\î\çi-´â§¬\Ù\×{Kõ\rL¬m\Õ\n!B¥\n\"¢.M$Á¼«nM$VnDsd\ér~²]m¦\Û\Ü91ý\ë*\ÍQUk-SÎ¦R­v\Ñ=\é?^Ò)\Ú6£«\Ð\Ü\ÞV~òñ\Ëü;XGüJ\ßIù~Sÿ\0w5¼¦ürÿ\0\"v°Ä­ô\å	3y^6r÷e·\æ;ZV£kÍ«\É,B+R\Ê\à:c_\ÈJ´WOVjujþf\ZhÃ¢ö¹õ\\\Ò\Ó\ÜU\é®*\ã, H9F\ÒL/¤£\ÅJ\é(\Â\ÛÌNaÆ®®¿k3\Z\î½\Ü{\Z\nµ\ïUÁ©¿\ÙZª¾ú\r X\0\0\è]7\Ì\å$@\ç\'\rU ª·\î6\Ú\è¦8\ÚÁÝa¿Fc.¦\Ë\Ôvww\'ý\\i½2D*Ì¢J9©õ8RnD=~5G \Û7\×w5½ý=8­\Ý]6\Ì/#\â2¹ÒÃ\Ï\Ô÷¬uWÑ¥^¶\å\\¸6\Ü?!h\ãc=Æ\Övg-Yªª¹\ÎV`\ÊjC09\Ú\ääº\ä%\í $\Ù{\ê\Ý}WV5\î\ï+\Æp\ÙÕuÖümD¯ª+t²dt\í\r2\â|G7\ÑÕ®\ÚÍµ¬\ÔX®¨\Ì)5\ÄNY©a©6)\ã{C\\\ÖJ\Ç44\r\î<\ÌK%5Lq¦Z¶1ºIn\è´\é\ì8\ïÅ\äB\ÉM\Ùñm\Û\×]£\ä}]%\ÜY\ËD/\ç\"»\ÜÝ­øqY©®*t,\ëm\×Ãùµû«·2(J ¢bR\ÒL-¼\ëù\É\Ò9LFF\í\Z{î¿x6ü¶lQü\Î\Ø\Õgc\Ö~Î¶¶\\!\ÐA\\b°F\ä<g7#\ÔcC\ä\ÄG\Ù?iøÃ©i]·»>OS³õ½µ{\Ñóói%co\Ê\ÛÜ­ÁUK.@\ÖN \ÒU\â\Z.\á°\àø\Ôù\èg\Õo½¼ðUª®e\ÝMUp¥¸\ÑC³\Ã2×j%ed±·º\ZJ£4\Ïa·QÞª «J¹GGLÌc×²70²\ë\íº\éf8uk\âs-¢\Ò1?]w{Aù®4\Î\'\r·µb®ò3\ÍÃeô¤\êÉ¿\r;7-F\â\î1Ï«.\0{`\0vÙ·¦#\Ê\Zõfg0¿0ö²)\ê`oG;\Ú\ÑøtGb\æ\êc%£lRR+\æ%\ãha¢\åVDE>Á>³¨Z)´¢xÕ\ÛV5u\Û\á<a\Ëja|Otr4±\ì6sN\ÐV\Ç7^±Tfb¤,\Ør\'%\å\Å*D-»bm<½\Çü\Æ\Äú+QFôá­«\ÕS§£3\ÏÁô­\r$pE1428\Ø\Ö1£`hz#Jº¦º¦©\ç+\êUy1\\6\Z¸_O;H\Û9§\âAD\ÄLbW·r«uET\Ï|ûQ8\È\Ð\é¨Ë¹³®;\ìll<vv\æG¤\Òë¨¿4!\ã!T\áò¹\Ç^E¸v÷­W\'\'UTòntp\ì\ËQ²aô\'R\ÃUKD3ô`,S+\Ä<Ywn]oùGø\ìOñ)õE\Ïv\\\Ç%À]\Ì\àºQ\æ\äú\'\n!÷1þ@¸\ÕsOA¥B¸@ ùÂ	«°umX=³=v1\Â=!jy:e_¥8ÿ\0\×\Õþp´µ^ú­ð«/<Ô¡\Êi¹Õ­ \"\ê\ÑS$by9.uh\Z\Ñö³ô\ÌN>³tt~«õ·b|z:\æ*\\ù®Y¦Jjl\ÙX¤0·B&$\Ã\Í\Ç\Ã\Úwà¦sTðRþ²ñ\ç\ÑôFL\äý>i\é\Û`5½\æ\Úr¿¥\î=\'\à·)¦)C\Í_¿]\ê÷ªeD6¹¥®\Íp!\Íp8 ´\"bq\Æ\Ï+³AOQ¥-,\ä\ÄAt<:Y\ÙqÁaª\Ìx:6vQ¹\Æ>m$«0\é$mTZú<Ãø\äµ\ï¢\á\Ö5\äM<\ÍE\Ú.bh{Z×ªX!²Rj²\ÃR\ì¤.TÜ·i~\\Ñ¬9m\Ø\Ý/½)õV¿v\\\Z¢_£-]Xó\Ïuõ5¦0ncsB\á\Ï6|p{\Z\äRaq®E&%ù¸\è\Öb-õq\ZÁþ3b=\Ú}!4ø»6ec¶õ\êjþ1oùV®£{Z\ÙH Y\Å)Ëg?\'*+YT¤5\ÄÖ41À¹\Î$\0.F\Ý\ëoI30Ù·]4U½T¬\äfZ\Â$\Äd¾O	pgñI¨B\Ýk£z¦\îÑb\Ü~\î¯EI¶(XØ£`³XÀ\ZÖ\0,±sjªj\Õ<WÔª          \ÕsI\ÊRµ\àkv¸û¤\rDwr\Énx´(e¡-RUI²1J±¬¿3[+½±\Ìvý\Å#\äql; \ëü²:Yb>LÉ_Q«t-u\î\rö-m·+¥V¢\Í\è=\ZñEY\Ã\è8eñ7\\\Ó\Ò\ÙY¥q²(ViL½J»®,\Ä\'4t\ï\Z×m\äp\íy\'®\æ\æ\Â\Åt\ì_£³ªy1\Í3Á\Ù2G\nò\n*jK:Z×¸lt^G\r\"W>\í{õ\ÍI\Ý\àËº¥E¢&FH¥s\ç:G\î\Ñhø\éh)÷ª`¿<¡]¸\Ï_J&H²F9½W{j§z&Ë\Ë£s£p³\â\× \Ùr¦18\ÜqM\Êõ\ÃQ½Va/[\'UÀô\ÇP¡/Tu*¸N^U(\ÂWR£\ëj`\ÂBp\å\Ñ°¡\Ô&ª®ÁZ l¸U9&´úG\ïx\ë·f\Î\ÅÛ³oruoU­eP@@@@@@@@@@@@Aª\åv\0dúD\"\ï\Î0mx8\Ý+SQfg½K5ºñ\ÂZP+E[ d!\ÆÔJó+nz[\ÅF\êr¾\Ú\Þ*0eqµ¼Ta9LW\r\ê7L«þ\Ð\Ót\Ê\Ûñ1½NélTt)Qg&°·\Ì\æ\ÔLcik\ÏCÑ½oi¬qÞ·<!·­ö¸\r\ä\Ü$»\\R®\Ëk>\ÓvÁr\Å5ñ\å,ÜZ­nI\ÕGrÀÙ\ì~|Zµi«\\Y¢\í2\ÃTSI´\È\Ïyh\ïØ°M3\áxK!\áW)ÂºJL\ZHa]>(`\å8\0e\â\áò1û\rs¾\nb&y\æ\ËQ\ä½\\¶»M\ß!±ü\"\ç\à³Ó§¹>Lsrl\ØVJC	ò\Ï\Zù\Â\Ìz{n¶­é©§ñbª\ì\Ï&Â¶!|*ON\Ä\Æ\Ë÷\ÙRm\Ñ<\âªù3D~Á£\Ý/oÀª~\ßDöuZvIQ³p\êO\ÕWô\Öú\'µ©AT»qþ\Ñÿ\0ª~\ßCµ©u¹/D>Á§­\Ï?§ôöú­]^¨pjVz4ð¿mû\ì¯¨Q\n\ÍuO\ÚÖ,\0p\"ª                                                                     ÿ\Ù','123','Y'),(2,'10.000.000-1','2019-02-08',1,2,'123',6,555,'16','1232','ÿ\Øÿ\à\0JFIF\0\0\0\0\0\0ÿ\Û\0\0	\r( \Z%!1!%)+...383,7(-.+\n\n\n\r\Z-% &----+---------+----------+-+----------------------ÿÀ\0\0\á\0\á\0ÿ\Ä\0\0\0\0\0\0\0\0\0\0\0\0\0\0ÿ\Ä\0J\0	\0\0\0\0\0!1Qa\"Aq¡#2Rbr±Á$BCc²\Ñ3S\Òá¢£\Âð4Tdst³ÿ\Ä\0\0\0\0\0\0\0\0\0\0\0\0\0ÿ\Ä\0:\0\0\0\0\0\0!1Q\"Aaq2¡±Á\Ñ#BR\áðbñ34Cr¢ÿ\Ú\0\0\0?\0\î(-KS=7±¾óß\é·U^\ìL¼oÇ¨Û¶ªk\ê«\ÚQ\Ö\ãE©V\êøH\Üz\êTÿ\0û£ýS´£¬¡\Ô\Çýº¾öCSõ±\ìxö\\\×|¢by0Unº}\èýT¨                     Ö±ü¸¡¢»_/+(¿\àw±½¥a®ýsOI²5Z4Ó\ë<?¼´[:\ÕR\\SE\r\ès¼ì \î+R½]S\î\ÆM\ìÕxÝªj~Z\Ûñ\ÌJµÁ½L\Î;pþ\ëû\Î32\ëÆC¥§zi¦\ë8ú\Ë)A\Êù¹\Òòp´\Êý\'þ\ß\Æ\Ë%:Ks\àÑ½\í\×\n3W¤pø\Î¸sX>½^¿f\Õ\Ë$hz\Õòs\êö®\×Æ¯\ì¹&j\Ûõj\ÝjòrN?«\äS\íe_\Íkÿ\0¯\ì\ÆV\æÒ¶.t2E5¶h¸\ÄþÀ\í^+Z:\ã\'\äß³\í6\ç´\Í?¶c\åøbb¸{´-T¡²9§«J\í#©bß»nq30\èÓ¦\Ù\Ú\Úw©¦½9ü±0\Ï\á9Ó©Â¢(\çn«¹¾iößª\à÷eq\ïF\\\ÍO²\Ö+\ãf©¦|ø\Ç\å½\àYmCYf¶^JSo571\Ä\îc»\nÛ·¨¢¿\Öl]^Tæ±\Çû\ÃdYÜ(òNwó:6\ÆI²ßÔ±Ü¹Mnhô7µUnÛYðÊ\àUÖ\Æ8\ÓS\Ü\Ú8\Épöß´õ¡sQU~Pöz\rcOª\êº\Ï/\Ú\ZZ\î\Ü7\È)*Cf©Ò­¬\Z¥o\×\è7\Öz7­«Zi¯\\!ç¶ß¢\ÄÍ»\êºøG\æ]C\Ã!¦g\'L½:#[¸¹\Û\\z\Öý4SDbx\ÝF¦î¢­ûµLÏ\Ú9C\Ú\Z¬Àj	@ U$s0\Ç+#Ö½¡Ã¸¨ªª1,®\×j¨®\Ü\ÌOXs|¬Í½¦¡¹\ZË©\Ünm÷g§\Ý=ýBöhø~\Ãf{Kz¿ý¿?ø9»\ØA- 	b\ÚZ/aÏYuWDC\ãQ\ÅãZ=mZ\ÂØµ¨®8qv\Â\Ój³TF\í]c\ï\äº\æNe56 \Í(_gÏö3³¤q£jõ7#\Â\ëöeýX¹<&9K2²¹\â\r7.ò\æ<9¦(´e¬su3kb\ë\Éoô¬¯E#¯³6Uzª·ª\áG^¾\Ä+å©\ÓO#¤\Ç[o\Ø7sªªj\Ë\ÜØ±E\"qªØE\Í\æH\ÖÔ¶\í\ÛN\Z÷h\Ü:v­\Í5÷\êý[nmy¦gMfxÿ\04ý£Ï¯NNÐ·=q¡¸	\0@ AT\Z6p²0Tµ\ÕT\í¥\ï`·h½q\ã³r\Ó\Ô\é÷»\Ôóú½6\Â\ÛS§ª,^\äò\é\ÇÓ\Í{õ\ÊZ\Âö\É\Ý7k\ÚHp=j\Ñ3c»j´\Í\Æb|%\×r/\ÛU£OT[F\Æ<sc²\î=FÆ§{»W7\Úû­6n\Ø\ãGx\Ç\æ>=[\â\Ûy¡Lµn#	¬¼Ñ´B\Óö\ã¸,¯nF#¯²öl\ê«Þ«Ü\å\Ã&\Ò=\Ò=\Å\ï{\ç¹\Î&ä¹\Ó9\ã/snh¦)¦1P\ÍþF\à[T\Ø\Ý~E`>÷aÞ²Y·\ÚW?j\ë¿I§£Þ\ë\×ö\æ\î\0\0\0\0\0\0\0,\0\Zr\ê¾s339ö ¸\Ô\Zh$¨*gG\'\Å5@©¶¤\à¦L5¸v\íüKªµ»Vôr«\è>\Í\í¿fl\×=\ê>tø|9|\ZB\ÖzB\è¬Ã¬f\ã-\Ì\Ú4Uo¼»!\Ç\\£\Ôy?[q\é\ë\Û\Ð\Ój3Ü©\áö\îÅY\ÔX\ïtó.½=9teºò\r{-ò¢<2\Èl\évA¬ûzNöGO`\éX\îÜ#-\Ý­U\Ý\Ø\å\ã>_\Ï5O#\æ\ÅòH\â\ç¹\Æ\äòà¹33{\Û6©·LQDb!l(lBABð\ëY²\Ã\ÄT±ú¯m|	kG~\í]\r-£=^\ÚL\Ü\ÕvqÊù\Ïû7V²\á/5Æ ¸\Ô	@@@A\Ël,UP\Ï®ö°\Ëý6k\ë«\rú7\í\Ì:[#U:meºü&q>þeÀW!õ!\08$n\ÔA\Þ©TD\Æ%\Ûóu~_%)úT-\Z}«6	ñ\ë]==\íø\ÄóÎ¶\Þ\Ëý%\Ýú#¹W/)\éøne\ÃFG\âl\0$>ÎL²\ât%f\ìzZZ\×?Qþ/e°÷?Mcg>¿\ì\Ô\ÂÀ\îBaBðª^\ï§\ä©\é\ãõ)\â¯@_\Åu\èSùª\çi~\å}j«\'\Z³]y¥Ö\ZP\\&U\×\ÔvE\áó~+O\ÉTO\î\ç?\Âò>KTbf\\\Ó\\\í,\Ñ_Xø\ÃÊªÎ¢3,Í¯¥\äv·i6x#¤h\Ýdµúp\çmZmÎ\ïi1?\èvº\â\ë°ùr¨09CYw\Zw9ÿ\0&üûr¼\ëR\ÙÔ³µD\ã\î¸9¿\ËOUb^\Ù\ë.[ô·Ù¡¨ôÐP¼*¢VÐkm\ê7òÙËª\ç>¯Thæ ¸\n(.4 ($¨*|ñ¾²\Û<®nðò\ã]÷\êõ}Sf\æ4v³ý1ôb\Â!·f²Ä£wD1K/nñ\Ø\ÒÓ\ä\á{GwsCTT\Ä}þ\Î\Õ´]nñ]G\ÎÞª§±\Ò;cZOôA¥G){÷zNq\'¬ \Õó¦\Û\Ò@\îUnø\Ýü«[U\îÇ«»°\'øõGú~ð\æ!h½t$x.\î7W\Ê\ÒSI{\éS\Æ¼Ñ¢|A][s\"_8\×[\ìõ7)ÿ\0Tüø³,*\íUö A0P\\iA0PLPFIAq\Ø\Ð\\z¹D\Å3T\ÄC\æº\ê,²\Êv\É+\Þ\Äü\×g3Ö¬\Ñ\ÙÛ¦ðXP\Ê èõ.õi\Ú;\ßýÞ;\Ó\èò¾\ÕUüq\çöuI¥\Ñx\è¤\Ðzv´kù]Uf2!µ\î\Òwº\ß\ën\ä(J\rk:\èQ\æ3ÿ\0[U\îG«µ°\êjÿ\0\Æ~°\æ\0­\'¯HÄª\n-é¹¯\Å4áúP»g\ÞuÛ©ßn\éj\á4¼´\Z}Û´ÞUpXü\ÇÑ¾\Æõ´ó\ÏK\è(&HL9J\è5|\äbâP\r¤¨ó<\á\Ï=¿xZú÷h>\Æ\Ã\ÒöúºfySÞÛ\ÍÂ®¹¢\äº\'*\ÝºFe«ÿ\0µ\ær\Ü\Ñû\Õ<§µ_ò\íz\Ï\ÒM\ãR\ßxÅºWYÅ»\ÅûPz\Ðh¹AS\ÊU?s-\ì\Û\âJQ\Z¦s\åú4\r\ßS¥\Ý\æZÚv=]ÍÇª|¾\îl\n\Òz¸E\âRº²\È\à«¨\ê#ºôM\ß]S\Ý\ãej+*¡­¬\ÓS©³U¹ñ\å\å>\í´U7iFö5\ÛÁøp]H\Ì>r\ÝV\ë+Ls{\"È\èz	µ\è&\n\nA\È&\n	i\0	&Àu\07\"3\Â+8I\åõD°ý\Çµ¯\'ñ\0*ý\Íú¼D\Ø\Ú\ÒX\ï{\Õq´~\Íf\ë¯nDN]3SÚ®vt¾\ãø^\ß\Õmi\'¿1\äó^\ÓÑ=t«\ëºWE\âY¢\àwá ¸\ì\0\Ôs.T¹\Å\Çk\\zÉº\\nA¢g:®òS\Â£\ä#\Þu\ä+SS<baQk¯¬\ã\áþ\í(ªô1*¡hE¢Uº\å´dfT7rR\Ý\Ô\ÏuÍµ]\ë´tã·¯=»\'µ6ljiß£ßý¥Õ©\ê\Zöµ\ìpskn\×\rà®Nx\Ã\ÇUL\Ó3MQ¥¢«\í\ÆÈbD zz]L¸QR>ñ\ìf\ì|möw­º\Zù\î\ÒõûdM¹÷ãtó?£]j=FK¢r­\Ñ9\ËhÍµg%\Ó\ë³d/\ÜCl?Ë§\\+n[\í4Uùb~øË»\Õ|\í\å¨=®»\Z}\á©\Ô,jM\Zy\Ý;\ÄY8=½,\Êú\î^²gv±Üzªý÷=«B\ì\ïW/c³mvZzc\ÆxüXpV\'B% T-­\Ñl«ue[¢r\ÍdöSODlÃ§7t/\'Dñiú§ñY-ÝªM\rnÏµª\ÕÂ®±þqt+©*l»ðv\Ç­Kv\Ô\ÔòÚ¨±\Æc1\Ö?\á°6U\Ï\\l\È.¶d*f/`ò\Ó\r>£ó»Dz=¶X\ë»Må¹¦\Ðj5ü:xuþz9®T\å\Ôõ¡\ÑGzzcpX\Ów\Ê>ñÛ½«­i]¿U|#=f\Ï\Øö´Ø®¾õ]|#\Ò>\íR\ë]\ÚÊ·D\å[¢\Ù.Ê·Pez¥\ÑH\É[\éG#\ßy®x18\ã\nÜ¦.Q4O)|_JQ\Õ6hã\Ù,m½Nù®\ÄNc0ùu\Ësn¹¢®q8ø#P¥E\ì4ó:\á\âÔ_ð³{0oòh$ü\à\Ýq\êo\ëØ©][´Ì¶4¶{k´\Ññôñr\îõ öq%\Ô\'y[¢\Û\Ê\Ý0\åtam\åt	\Þ4a;\Ê\é&\r\æBª§\Õò0ªvþ©^ê§µ\î\él^÷\èúüYrö¹¢\Åñ¿¢mü,¯\ëiÕ±´\Ê&?tÝ\n\ã°\Ä\Þ\"!óº~¢²6.:üX\ÚÜ§­ZJK}VOcl*¹]\\\å¹kA¥µ9¦úýX \å\r\í\åt-¼¨r-%¤¡;\Ê\Ý\ÞVèP«t[.ÉLlMH\êW9L\îo^IÎ¸\íK^i\Ý\èñ^\Ði{;ñv9Uõ\çR\å´\à/aG}óð=¨<\ë/M0û·\í$\é;\Ël\\M(ñ\ÂM\È\Øù:OP\ÙÞ´\ïW½8¥\Ùz^ÎÒ®sôkK¦ ]An\Þ4	\ÞWI¼i&\r\åt	\Þ4`\ß4	\ßWI0õCamõt	Q¢µC\ÅI(Z*WI\ÞT9BwE¢¥n¡m\æ[%ñ·PUGPÛ¶F¯½&ü\Ç\í×¹VZ\í5:«[~R\î\Ñ\Ö2X\Û$n\íc\ÂÓ±u\"bc0ù\ítUESMQlû;\ï{\ÉJ¯rsÇ¦\Ç0\ìs\\\Þñd+²¦×[dp?²Aõþ{0]»\ë\ì\íÜ¹r;¾\×û}\\ýj=P¢ º#%\Ñ\"\n¢E\0U ª\Ñ9T9F¤^+H9F\ÒP¼T¨r¢¤´m\åt	\Þmù\r¾H|bM3\Ýv»Y\äz}\Ã\Ò;w\ß=»\'µ¶w\ê#µ·\ïG\Î?=>ï¶\Ð\Ç\Óv\\kK_\Ío¼\'©\Íù\Ð\Â\r&\'P-fL\ï(q\Ö\î\çi-´â§¬\Ù\×{Kõ\rL¬m\Õ\n!B¥\n\"¢.M$Á¼«nM$VnDsd\ér~²]m¦\Û\Ü91ý\ë*\ÍQUk-SÎ¦R­v\Ñ=\é?^Ò)\Ú6£«\Ð\Ü\ÞV~òñ\Ëü;XGüJ\ßIù~Sÿ\0w5¼¦ürÿ\0\"v°Ä­ô\å	3y^6r÷e·\æ;ZV£kÍ«\É,B+R\Ê\à:c_\ÈJ´WOVjujþf\ZhÃ¢ö¹õ\\\Ò\Ó\ÜU\é®*\ã, H9F\ÒL/¤£\ÅJ\é(\Â\ÛÌNaÆ®®¿k3\Z\î½\Ü{\Z\nµ\ïUÁ©¿\ÙZª¾ú\r X\0\0\è]7\Ì\å$@\ç\'\rU ª·\î6\Ú\è¦8\ÚÁÝa¿Fc.¦\Ë\Ôvww\'ý\\i½2D*Ì¢J9©õ8RnD=~5G \Û7\×w5½ý=8­\Ý]6\Ì/#\â2¹ÒÃ\Ï\Ô÷¬uWÑ¥^¶\å\\¸6\Ü?!h\ãc=Æ\Övg-Yªª¹\ÎV`\ÊjC09\Ú\ääº\ä%\í $\Ù{\ê\Ý}WV5\î\ï+\Æp\ÙÕuÖümD¯ª+t²dt\í\r2\â|G7\ÑÕ®\ÚÍµ¬\ÔX®¨\Ì)5\ÄNY©a©6)\ã{C\\\ÖJ\Ç44\r\î<\ÌK%5Lq¦Z¶1ºIn\è´\é\ì8\ïÅ\äB\ÉM\Ùñm\Û\×]£\ä}]%\ÜY\ËD/\ç\"»\ÜÝ­øqY©®*t,\ëm\×Ãùµû«·2(J ¢bR\ÒL-¼\ëù\É\Ò9LFF\í\Z{î¿x6ü¶lQü\Î\Ø\Õgc\Ö~Î¶¶\\!\ÐA\\b°F\ä<g7#\ÔcC\ä\ÄG\Ù?iøÃ©i]·»>OS³õ½µ{\Ñóói%co\Ê\ÛÜ­ÁUK.@\ÖN \ÒU\â\Z.\á°\àø\Ôù\èg\Õo½¼ðUª®e\ÝMUp¥¸\ÑC³\Ã2×j%ed±·º\ZJ£4\Ïa·QÞª «J¹GGLÌc×²70²\ë\íº\éf8uk\âs-¢\Ò1?]w{Aù®4\Î\'\r·µb®ò3\ÍÃeô¤\êÉ¿\r;7-F\â\î1Ï«.\0{`\0vÙ·¦#\Ê\Zõfg0¿0ö²)\ê`oG;\Ú\ÑøtGb\æ\êc%£lRR+\æ%\ãha¢\åVDE>Á>³¨Z)´¢xÕ\ÛV5u\Û\á<a\Ëja|Otr4±\ì6sN\ÐV\Ç7^±Tfb¤,\Ør\'%\å\Å*D-»bm<½\Çü\Æ\Äú+QFôá­«\ÕS§£3\ÏÁô­\r$pE1428\Ø\Ö1£`hz#Jº¦º¦©\ç+\êUy1\\6\Z¸_O;H\Û9§\âAD\ÄLbW·r«uET\Ï|ûQ8\È\Ð\é¨Ë¹³®;\ìll<vv\æG¤\Òë¨¿4!\ã!T\áò¹\Ç^E¸v÷­W\'\'UTòntp\ì\ËQ²aô\'R\ÃUKD3ô`,S+\Ä<Ywn]oùGø\ìOñ)õE\Ïv\\\Ç%À]\Ì\àºQ\æ\äú\'\n!÷1þ@¸\ÕsOA¥B¸@ ùÂ	«°umX=³=v1\Â=!jy:e_¥8ÿ\0\×\Õþp´µ^ú­ð«/<Ô¡\Êi¹Õ­ \"\ê\ÑS$by9.uh\Z\Ñö³ô\ÌN>³tt~«õ·b|z:\æ*\\ù®Y¦Jjl\ÙX¤0·B&$\Ã\Í\Ç\Ã\Úwà¦sTðRþ²ñ\ç\ÑôFL\äý>i\é\Û`5½\æ\Úr¿¥\î=\'\à·)¦)C\Í_¿]\ê÷ªeD6¹¥®\Íp!\Íp8 ´\"bq\Æ\Ï+³AOQ¥-,\ä\ÄAt<:Y\ÙqÁaª\Ìx:6vQ¹\Æ>m$«0\é$mTZú<Ãø\äµ\ï¢\á\Ö5\äM<\ÍE\Ú.bh{Z×ªX!²Rj²\ÃR\ì¤.TÜ·i~\\Ñ¬9m\Ø\Ý/½)õV¿v\\\Z¢_£-]Xó\Ïuõ5¦0ncsB\á\Ï6|p{\Z\äRaq®E&%ù¸\è\Öb-õq\ZÁþ3b=\Ú}!4ø»6ec¶õ\êjþ1oùV®£{Z\ÙH Y\Å)Ëg?\'*+YT¤5\ÄÖ41À¹\Î$\0.F\Ý\ëoI30Ù·]4U½T¬\äfZ\Â$\Äd¾O	pgñI¨B\Ýk£z¦\îÑb\Ü~\î¯EI¶(XØ£`³XÀ\ZÖ\0,±sjªj\Õ<WÔª          \ÕsI\ÊRµ\àkv¸û¤\rDwr\Énx´(e¡-RUI²1J±¬¿3[+½±\Ìvý\Å#\äql; \ëü²:Yb>LÉ_Q«t-u\î\rö-m·+¥V¢\Í\è=\ZñEY\Ã\è8eñ7\\\Ó\Ò\ÙY¥q²(ViL½J»®,\Ä\'4t\ï\Z×m\äp\íy\'®\æ\æ\Â\Åt\ì_£³ªy1\Í3Á\Ù2G\nò\n*jK:Z×¸lt^G\r\"W>\í{õ\ÍI\Ý\àËº¥E¢&FH¥s\ç:G\î\Ñhø\éh)÷ª`¿<¡]¸\Ï_J&H²F9½W{j§z&Ë\Ë£s£p³\â\× \Ùr¦18\ÜqM\Êõ\ÃQ½Va/[\'UÀô\ÇP¡/Tu*¸N^U(\ÂWR£\ëj`\ÂBp\å\Ñ°¡\Ô&ª®ÁZ l¸U9&´úG\ïx\ë·f\Î\ÅÛ³oruoU­eP@@@@@@@@@@@@Aª\åv\0dúD\"\ï\Î0mx8\Ý+SQfg½K5ºñ\ÂZP+E[ d!\ÆÔJó+nz[\ÅF\êr¾\Ú\Þ*0eqµ¼Ta9LW\r\ê7L«þ\Ð\Ót\Ê\Ûñ1½NélTt)Qg&°·\Ì\æ\ÔLcik\ÏCÑ½oi¬qÞ·<!·­ö¸\r\ä\Ü$»\\R®\Ëk>\ÓvÁr\Å5ñ\å,ÜZ­nI\ÕGrÀÙ\ì~|Zµi«\\Y¢\í2\ÃTSI´\È\Ïyh\ïØ°M3\áxK!\áW)ÂºJL\ZHa]>(`\å8\0e\â\áò1û\rs¾\nb&y\æ\ËQ\ä½\\¶»M\ß!±ü\"\ç\à³Ó§¹>Lsrl\ØVJC	ò\Ï\Zù\Â\Ìz{n¶­é©§ñbª\ì\Ï&Â¶!|*ON\Ä\Æ\Ë÷\ÙRm\Ñ<\âªù3D~Á£\Ý/oÀª~\ßDöuZvIQ³p\êO\ÕWô\Öú\'µ©AT»qþ\Ñÿ\0ª~\ßCµ©u¹/D>Á§­\Ï?§ôöú­]^¨pjVz4ð¿mû\ì¯¨Q\n\ÍuO\ÚÖ,\0p\"ª                                                                     ÿ\Ù','123','Y'),(3,'11.111.111-1','2019-02-06',2,3,'123',6,555,'16','1232','ÿ\Øÿ\à\0JFIF\0\0\0\0\0\0ÿ\Û\0\0	\r( \Z%!1!%)+...383,7(-.+\n\n\n\r\Z-% &----+---------+----------+-+----------------------ÿÀ\0\0\á\0\á\0ÿ\Ä\0\0\0\0\0\0\0\0\0\0\0\0\0\0ÿ\Ä\0J\0	\0\0\0\0\0!1Qa\"Aq¡#2Rbr±Á$BCc²\Ñ3S\Òá¢£\Âð4Tdst³ÿ\Ä\0\0\0\0\0\0\0\0\0\0\0\0\0ÿ\Ä\0:\0\0\0\0\0\0!1Q\"Aaq2¡±Á\Ñ#BR\áðbñ34Cr¢ÿ\Ú\0\0\0?\0\î(-KS=7±¾óß\é·U^\ìL¼oÇ¨Û¶ªk\ê«\ÚQ\Ö\ãE©V\êøH\Üz\êTÿ\0û£ýS´£¬¡\Ô\Çýº¾öCSõ±\ìxö\\\×|¢by0Unº}\èýT¨                     Ö±ü¸¡¢»_/+(¿\àw±½¥a®ýsOI²5Z4Ó\ë<?¼´[:\ÕR\\SE\r\ès¼ì \î+R½]S\î\ÆM\ìÕxÝªj~Z\Ûñ\ÌJµÁ½L\Î;pþ\ëû\Î32\ëÆC¥§zi¦\ë8ú\Ë)A\Êù¹\Òòp´\Êý\'þ\ß\Æ\Ë%:Ks\àÑ½\í\×\n3W¤pø\Î¸sX>½^¿f\Õ\Ë$hz\Õòs\êö®\×Æ¯\ì¹&j\Ûõj\ÝjòrN?«\äS\íe_\Íkÿ\0¯\ì\ÆV\æÒ¶.t2E5¶h¸\ÄþÀ\í^+Z:\ã\'\äß³\í6\ç´\Í?¶c\åøbb¸{´-T¡²9§«J\í#©bß»nq30\èÓ¦\Ù\Ú\Úw©¦½9ü±0\Ï\á9Ó©Â¢(\çn«¹¾iößª\à÷eq\ïF\\\ÍO²\Ö+\ãf©¦|ø\Ç\å½\àYmCYf¶^JSo571\Ä\îc»\nÛ·¨¢¿\Öl]^Tæ±\Çû\ÃdYÜ(òNwó:6\ÆI²ßÔ±Ü¹Mnhô7µUnÛYðÊ\àUÖ\Æ8\ÓS\Ü\Ú8\Épöß´õ¡sQU~Pöz\rcOª\êº\Ï/\Ú\ZZ\î\Ü7\È)*Cf©Ò­¬\Z¥o\×\è7\Öz7­«Zi¯\\!ç¶ß¢\ÄÍ»\êºøG\æ]C\Ã!¦g\'L½:#[¸¹\Û\\z\Öý4SDbx\ÝF¦î¢­ûµLÏ\Ú9C\Ú\Z¬Àj	@ U$s0\Ç+#Ö½¡Ã¸¨ªª1,®\×j¨®\Ü\ÌOXs|¬Í½¦¡¹\ZË©\Ünm÷g§\Ý=ýBöhø~\Ãf{Kz¿ý¿?ø9»\ØA- 	b\ÚZ/aÏYuWDC\ãQ\ÅãZ=mZ\ÂØµ¨®8qv\Â\Ój³TF\í]c\ï\äº\æNe56 \Í(_gÏö3³¤q£jõ7#\Â\ëöeýX¹<&9K2²¹\â\r7.ò\æ<9¦(´e¬su3kb\ë\Éoô¬¯E#¯³6Uzª·ª\áG^¾\Ä+å©\ÓO#¤\Ç[o\Ø7sªªj\Ë\ÜØ±E\"qªØE\Í\æH\ÖÔ¶\í\ÛN\Z÷h\Ü:v­\Í5÷\êý[nmy¦gMfxÿ\04ý£Ï¯NNÐ·=q¡¸	\0@ AT\Z6p²0Tµ\ÕT\í¥\ï`·h½q\ã³r\Ó\Ô\é÷»\Ôóú½6\Â\ÛS§ª,^\äò\é\ÇÓ\Í{õ\ÊZ\Âö\É\Ý7k\ÚHp=j\Ñ3c»j´\Í\Æb|%\×r/\ÛU£OT[F\Æ<sc²\î=FÆ§{»W7\Úû­6n\Ø\ãGx\Ç\æ>=[\â\Ûy¡Lµn#	¬¼Ñ´B\Óö\ã¸,¯nF#¯²öl\ê«Þ«Ü\å\Ã&\Ò=\Ò=\Å\ï{\ç¹\Î&ä¹\Ó9\ã/snh¦)¦1P\ÍþF\à[T\Ø\Ý~E`>÷aÞ²Y·\ÚW?j\ë¿I§£Þ\ë\×ö\æ\î\0\0\0\0\0\0\0,\0\Zr\ê¾s339ö ¸\Ô\Zh$¨*gG\'\Å5@©¶¤\à¦L5¸v\íüKªµ»Vôr«\è>\Í\í¿fl\×=\ê>tø|9|\ZB\ÖzB\è¬Ã¬f\ã-\Ì\Ú4Uo¼»!\Ç\\£\Ôy?[q\é\ë\Û\Ð\Ój3Ü©\áö\îÅY\ÔX\ïtó.½=9teºò\r{-ò¢<2\Èl\évA¬ûzNöGO`\éX\îÜ#-\Ý­U\Ý\Ø\å\ã>_\Ï5O#\æ\ÅòH\â\ç¹\Æ\äòà¹33{\Û6©·LQDb!l(lBABð\ëY²\Ã\ÄT±ú¯m|	kG~\í]\r-£=^\ÚL\Ü\ÕvqÊù\Ïû7V²\á/5Æ ¸\Ô	@@@A\Ël,UP\Ï®ö°\Ëý6k\ë«\rú7\í\Ì:[#U:meºü&q>þeÀW!õ!\08$n\ÔA\Þ©TD\Æ%\Ûóu~_%)úT-\Z}«6	ñ\ë]==\íø\ÄóÎ¶\Þ\Ëý%\Ýú#¹W/)\éøne\ÃFG\âl\0$>ÎL²\ât%f\ìzZZ\×?Qþ/e°÷?Mcg>¿\ì\Ô\ÂÀ\îBaBðª^\ï§\ä©\é\ãõ)\â¯@_\Åu\èSùª\çi~\å}j«\'\Z³]y¥Ö\ZP\\&U\×\ÔvE\áó~+O\ÉTO\î\ç?\Âò>KTbf\\\Ó\\\í,\Ñ_Xø\ÃÊªÎ¢3,Í¯¥\äv·i6x#¤h\Ýdµúp\çmZmÎ\ïi1?\èvº\â\ë°ùr¨09CYw\Zw9ÿ\0&üûr¼\ëR\ÙÔ³µD\ã\î¸9¿\ËOUb^\Ù\ë.[ô·Ù¡¨ôÐP¼*¢VÐkm\ê7òÙËª\ç>¯Thæ ¸\n(.4 ($¨*|ñ¾²\Û<®nðò\ã]÷\êõ}Sf\æ4v³ý1ôb\Â!·f²Ä£wD1K/nñ\Ø\ÒÓ\ä\á{GwsCTT\Ä}þ\Î\Õ´]nñ]G\ÎÞª§±\Ò;cZOôA¥G){÷zNq\'¬ \Õó¦\Û\Ò@\îUnø\Ýü«[U\îÇ«»°\'øõGú~ð\æ!h½t$x.\î7W\Ê\ÒSI{\éS\Æ¼Ñ¢|A][s\"_8\×[\ìõ7)ÿ\0Tüø³,*\íUö A0P\\iA0PLPFIAq\Ø\Ð\\z¹D\Å3T\ÄC\æº\ê,²\Êv\É+\Þ\Äü\×g3Ö¬\Ñ\ÙÛ¦ðXP\Ê èõ.õi\Ú;\ßýÞ;\Ó\èò¾\ÕUüq\çöuI¥\Ñx\è¤\Ðzv´kù]Uf2!µ\î\Òwº\ß\ën\ä(J\rk:\èQ\æ3ÿ\0[U\îG«µ°\êjÿ\0\Æ~°\æ\0­\'¯HÄª\n-é¹¯\Å4áúP»g\ÞuÛ©ßn\éj\á4¼´\Z}Û´ÞUpXü\ÇÑ¾\Æõ´ó\ÏK\è(&HL9J\è5|\äbâP\r¤¨ó<\á\Ï=¿xZú÷h>\Æ\Ã\ÒöúºfySÞÛ\ÍÂ®¹¢\äº\'*\ÝºFe«ÿ\0µ\ær\Ü\Ñû\Õ<§µ_ò\íz\Ï\ÒM\ãR\ßxÅºWYÅ»\ÅûPz\Ðh¹AS\ÊU?s-\ì\Û\âJQ\Z¦s\åú4\r\ßS¥\Ý\æZÚv=]ÍÇª|¾\îl\n\Òz¸E\âRº²\È\à«¨\ê#ºôM\ß]S\Ý\ãej+*¡­¬\ÓS©³U¹ñ\å\å>\í´U7iFö5\ÛÁøp]H\Ì>r\ÝV\ë+Ls{\"È\èz	µ\è&\n\nA\È&\n	i\0	&Àu\07\"3\Â+8I\åõD°ý\Çµ¯\'ñ\0*ý\Íú¼D\Ø\Ú\ÒX\ï{\Õq´~\Íf\ë¯nDN]3SÚ®vt¾\ãø^\ß\Õmi\'¿1\äó^\ÓÑ=t«\ëºWE\âY¢\àwá ¸\ì\0\Ôs.T¹\Å\Çk\\zÉº\\nA¢g:®òS\Â£\ä#\Þu\ä+SS<baQk¯¬\ã\áþ\í(ªô1*¡hE¢Uº\å´dfT7rR\Ý\Ô\ÏuÍµ]\ë´tã·¯=»\'µ6ljiß£ßý¥Õ©\ê\Zöµ\ìpskn\×\rà®Nx\Ã\ÇUL\Ó3MQ¥¢«\í\ÆÈbD zz]L¸QR>ñ\ìf\ì|möw­º\Zù\î\ÒõûdM¹÷ãtó?£]j=FK¢r­\Ñ9\ËhÍµg%\Ó\ë³d/\ÜCl?Ë§\\+n[\í4Uùb~øË»\Õ|\í\å¨=®»\Z}\á©\Ô,jM\Zy\Ý;\ÄY8=½,\Êú\î^²gv±Üzªý÷=«B\ì\ïW/c³mvZzc\ÆxüXpV\'B% T-­\Ñl«ue[¢r\ÍdöSODlÃ§7t/\'Dñiú§ñY-ÝªM\rnÏµª\ÕÂ®±þqt+©*l»ðv\Ç­Kv\Ô\ÔòÚ¨±\Æc1\Ö?\á°6U\Ï\\l\È.¶d*f/`ò\Ó\r>£ó»Dz=¶X\ë»Må¹¦\Ðj5ü:xuþz9®T\å\Ôõ¡\ÑGzzcpX\Ów\Ê>ñÛ½«­i]¿U|#=f\Ï\Øö´Ø®¾õ]|#\Ò>\íR\ë]\ÚÊ·D\å[¢\Ù.Ê·Pez¥\ÑH\É[\éG#\ßy®x18\ã\nÜ¦.Q4O)|_JQ\Õ6hã\Ù,m½Nù®\ÄNc0ùu\Ësn¹¢®q8ø#P¥E\ì4ó:\á\âÔ_ð³{0oòh$ü\à\Ýq\êo\ëØ©][´Ì¶4¶{k´\Ññôñr\îõ öq%\Ô\'y[¢\Û\Ê\Ý0\åtam\åt	\Þ4a;\Ê\é&\r\æBª§\Õò0ªvþ©^ê§µ\î\él^÷\èúüYrö¹¢\Åñ¿¢mü,¯\ëiÕ±´\Ê&?tÝ\n\ã°\Ä\Þ\"!óº~¢²6.:üX\ÚÜ§­ZJK}VOcl*¹]\\\å¹kA¥µ9¦úýX \å\r\í\åt-¼¨r-%¤¡;\Ê\Ý\ÞVèP«t[.ÉLlMH\êW9L\îo^IÎ¸\íK^i\Ý\èñ^\Ði{;ñv9Uõ\çR\å´\à/aG}óð=¨<\ë/M0û·\í$\é;\Ël\\M(ñ\ÂM\È\Øù:OP\ÙÞ´\ïW½8¥\Ùz^ÎÒ®sôkK¦ ]An\Þ4	\ÞWI¼i&\r\åt	\Þ4`\ß4	\ßWI0õCamõt	Q¢µC\ÅI(Z*WI\ÞT9BwE¢¥n¡m\æ[%ñ·PUGPÛ¶F¯½&ü\Ç\í×¹VZ\í5:«[~R\î\Ñ\Ö2X\Û$n\íc\ÂÓ±u\"bc0ù\ítUESMQlû;\ï{\ÉJ¯rsÇ¦\Ç0\ìs\\\Þñd+²¦×[dp?²Aõþ{0]»\ë\ì\íÜ¹r;¾\×û}\\ýj=P¢ º#%\Ñ\"\n¢E\0U ª\Ñ9T9F¤^+H9F\ÒP¼T¨r¢¤´m\åt	\Þmù\r¾H|bM3\Ýv»Y\äz}\Ã\Ò;w\ß=»\'µ¶w\ê#µ·\ïG\Î?=>ï¶\Ð\Ç\Óv\\kK_\Ío¼\'©\Íù\Ð\Â\r&\'P-fL\ï(q\Ö\î\çi-´â§¬\Ù\×{Kõ\rL¬m\Õ\n!B¥\n\"¢.M$Á¼«nM$VnDsd\ér~²]m¦\Û\Ü91ý\ë*\ÍQUk-SÎ¦R­v\Ñ=\é?^Ò)\Ú6£«\Ð\Ü\ÞV~òñ\Ëü;XGüJ\ßIù~Sÿ\0w5¼¦ürÿ\0\"v°Ä­ô\å	3y^6r÷e·\æ;ZV£kÍ«\É,B+R\Ê\à:c_\ÈJ´WOVjujþf\ZhÃ¢ö¹õ\\\Ò\Ó\ÜU\é®*\ã, H9F\ÒL/¤£\ÅJ\é(\Â\ÛÌNaÆ®®¿k3\Z\î½\Ü{\Z\nµ\ïUÁ©¿\ÙZª¾ú\r X\0\0\è]7\Ì\å$@\ç\'\rU ª·\î6\Ú\è¦8\ÚÁÝa¿Fc.¦\Ë\Ôvww\'ý\\i½2D*Ì¢J9©õ8RnD=~5G \Û7\×w5½ý=8­\Ý]6\Ì/#\â2¹ÒÃ\Ï\Ô÷¬uWÑ¥^¶\å\\¸6\Ü?!h\ãc=Æ\Övg-Yªª¹\ÎV`\ÊjC09\Ú\ääº\ä%\í $\Ù{\ê\Ý}WV5\î\ï+\Æp\ÙÕuÖümD¯ª+t²dt\í\r2\â|G7\ÑÕ®\ÚÍµ¬\ÔX®¨\Ì)5\ÄNY©a©6)\ã{C\\\ÖJ\Ç44\r\î<\ÌK%5Lq¦Z¶1ºIn\è´\é\ì8\ïÅ\äB\ÉM\Ùñm\Û\×]£\ä}]%\ÜY\ËD/\ç\"»\ÜÝ­øqY©®*t,\ëm\×Ãùµû«·2(J ¢bR\ÒL-¼\ëù\É\Ò9LFF\í\Z{î¿x6ü¶lQü\Î\Ø\Õgc\Ö~Î¶¶\\!\ÐA\\b°F\ä<g7#\ÔcC\ä\ÄG\Ù?iøÃ©i]·»>OS³õ½µ{\Ñóói%co\Ê\ÛÜ­ÁUK.@\ÖN \ÒU\â\Z.\á°\àø\Ôù\èg\Õo½¼ðUª®e\ÝMUp¥¸\ÑC³\Ã2×j%ed±·º\ZJ£4\Ïa·QÞª «J¹GGLÌc×²70²\ë\íº\éf8uk\âs-¢\Ò1?]w{Aù®4\Î\'\r·µb®ò3\ÍÃeô¤\êÉ¿\r;7-F\â\î1Ï«.\0{`\0vÙ·¦#\Ê\Zõfg0¿0ö²)\ê`oG;\Ú\ÑøtGb\æ\êc%£lRR+\æ%\ãha¢\åVDE>Á>³¨Z)´¢xÕ\ÛV5u\Û\á<a\Ëja|Otr4±\ì6sN\ÐV\Ç7^±Tfb¤,\Ør\'%\å\Å*D-»bm<½\Çü\Æ\Äú+QFôá­«\ÕS§£3\ÏÁô­\r$pE1428\Ø\Ö1£`hz#Jº¦º¦©\ç+\êUy1\\6\Z¸_O;H\Û9§\âAD\ÄLbW·r«uET\Ï|ûQ8\È\Ð\é¨Ë¹³®;\ìll<vv\æG¤\Òë¨¿4!\ã!T\áò¹\Ç^E¸v÷­W\'\'UTòntp\ì\ËQ²aô\'R\ÃUKD3ô`,S+\Ä<Ywn]oùGø\ìOñ)õE\Ïv\\\Ç%À]\Ì\àºQ\æ\äú\'\n!÷1þ@¸\ÕsOA¥B¸@ ùÂ	«°umX=³=v1\Â=!jy:e_¥8ÿ\0\×\Õþp´µ^ú­ð«/<Ô¡\Êi¹Õ­ \"\ê\ÑS$by9.uh\Z\Ñö³ô\ÌN>³tt~«õ·b|z:\æ*\\ù®Y¦Jjl\ÙX¤0·B&$\Ã\Í\Ç\Ã\Úwà¦sTðRþ²ñ\ç\ÑôFL\äý>i\é\Û`5½\æ\Úr¿¥\î=\'\à·)¦)C\Í_¿]\ê÷ªeD6¹¥®\Íp!\Íp8 ´\"bq\Æ\Ï+³AOQ¥-,\ä\ÄAt<:Y\ÙqÁaª\Ìx:6vQ¹\Æ>m$«0\é$mTZú<Ãø\äµ\ï¢\á\Ö5\äM<\ÍE\Ú.bh{Z×ªX!²Rj²\ÃR\ì¤.TÜ·i~\\Ñ¬9m\Ø\Ý/½)õV¿v\\\Z¢_£-]Xó\Ïuõ5¦0ncsB\á\Ï6|p{\Z\äRaq®E&%ù¸\è\Öb-õq\ZÁþ3b=\Ú}!4ø»6ec¶õ\êjþ1oùV®£{Z\ÙH Y\Å)Ëg?\'*+YT¤5\ÄÖ41À¹\Î$\0.F\Ý\ëoI30Ù·]4U½T¬\äfZ\Â$\Äd¾O	pgñI¨B\Ýk£z¦\îÑb\Ü~\î¯EI¶(XØ£`³XÀ\ZÖ\0,±sjªj\Õ<WÔª          \ÕsI\ÊRµ\àkv¸û¤\rDwr\Énx´(e¡-RUI²1J±¬¿3[+½±\Ìvý\Å#\äql; \ëü²:Yb>LÉ_Q«t-u\î\rö-m·+¥V¢\Í\è=\ZñEY\Ã\è8eñ7\\\Ó\Ò\ÙY¥q²(ViL½J»®,\Ä\'4t\ï\Z×m\äp\íy\'®\æ\æ\Â\Åt\ì_£³ªy1\Í3Á\Ù2G\nò\n*jK:Z×¸lt^G\r\"W>\í{õ\ÍI\Ý\àËº¥E¢&FH¥s\ç:G\î\Ñhø\éh)÷ª`¿<¡]¸\Ï_J&H²F9½W{j§z&Ë\Ë£s£p³\â\× \Ùr¦18\ÜqM\Êõ\ÃQ½Va/[\'UÀô\ÇP¡/Tu*¸N^U(\ÂWR£\ëj`\ÂBp\å\Ñ°¡\Ô&ª®ÁZ l¸U9&´úG\ïx\ë·f\Î\ÅÛ³oruoU­eP@@@@@@@@@@@@Aª\åv\0dúD\"\ï\Î0mx8\Ý+SQfg½K5ºñ\ÂZP+E[ d!\ÆÔJó+nz[\ÅF\êr¾\Ú\Þ*0eqµ¼Ta9LW\r\ê7L«þ\Ð\Ót\Ê\Ûñ1½NélTt)Qg&°·\Ì\æ\ÔLcik\ÏCÑ½oi¬qÞ·<!·­ö¸\r\ä\Ü$»\\R®\Ëk>\ÓvÁr\Å5ñ\å,ÜZ­nI\ÕGrÀÙ\ì~|Zµi«\\Y¢\í2\ÃTSI´\È\Ïyh\ïØ°M3\áxK!\áW)ÂºJL\ZHa]>(`\å8\0e\â\áò1û\rs¾\nb&y\æ\ËQ\ä½\\¶»M\ß!±ü\"\ç\à³Ó§¹>Lsrl\ØVJC	ò\Ï\Zù\Â\Ìz{n¶­é©§ñbª\ì\Ï&Â¶!|*ON\Ä\Æ\Ë÷\ÙRm\Ñ<\âªù3D~Á£\Ý/oÀª~\ßDöuZvIQ³p\êO\ÕWô\Öú\'µ©AT»qþ\Ñÿ\0ª~\ßCµ©u¹/D>Á§­\Ï?§ôöú­]^¨pjVz4ð¿mû\ì¯¨Q\n\ÍuO\ÚÖ,\0p\"ª                                                                     ÿ\Ù','123','Y'),(4,'10.000.000-1','2019-02-07',2,2,'123',6,555,'16','1232','ÿ\Øÿ\à\0JFIF\0\0\0\0\0\0ÿ\Û\0\0	\r( \Z%!1!%)+...383,7(-.+\n\n\n\r\Z-% &----+---------+----------+-+----------------------ÿÀ\0\0\á\0\á\0ÿ\Ä\0\0\0\0\0\0\0\0\0\0\0\0\0\0ÿ\Ä\0J\0	\0\0\0\0\0!1Qa\"Aq¡#2Rbr±Á$BCc²\Ñ3S\Òá¢£\Âð4Tdst³ÿ\Ä\0\0\0\0\0\0\0\0\0\0\0\0\0ÿ\Ä\0:\0\0\0\0\0\0!1Q\"Aaq2¡±Á\Ñ#BR\áðbñ34Cr¢ÿ\Ú\0\0\0?\0\î(-KS=7±¾óß\é·U^\ìL¼oÇ¨Û¶ªk\ê«\ÚQ\Ö\ãE©V\êøH\Üz\êTÿ\0û£ýS´£¬¡\Ô\Çýº¾öCSõ±\ìxö\\\×|¢by0Unº}\èýT¨                     Ö±ü¸¡¢»_/+(¿\àw±½¥a®ýsOI²5Z4Ó\ë<?¼´[:\ÕR\\SE\r\ès¼ì \î+R½]S\î\ÆM\ìÕxÝªj~Z\Ûñ\ÌJµÁ½L\Î;pþ\ëû\Î32\ëÆC¥§zi¦\ë8ú\Ë)A\Êù¹\Òòp´\Êý\'þ\ß\Æ\Ë%:Ks\àÑ½\í\×\n3W¤pø\Î¸sX>½^¿f\Õ\Ë$hz\Õòs\êö®\×Æ¯\ì¹&j\Ûõj\ÝjòrN?«\äS\íe_\Íkÿ\0¯\ì\ÆV\æÒ¶.t2E5¶h¸\ÄþÀ\í^+Z:\ã\'\äß³\í6\ç´\Í?¶c\åøbb¸{´-T¡²9§«J\í#©bß»nq30\èÓ¦\Ù\Ú\Úw©¦½9ü±0\Ï\á9Ó©Â¢(\çn«¹¾iößª\à÷eq\ïF\\\ÍO²\Ö+\ãf©¦|ø\Ç\å½\àYmCYf¶^JSo571\Ä\îc»\nÛ·¨¢¿\Öl]^Tæ±\Çû\ÃdYÜ(òNwó:6\ÆI²ßÔ±Ü¹Mnhô7µUnÛYðÊ\àUÖ\Æ8\ÓS\Ü\Ú8\Épöß´õ¡sQU~Pöz\rcOª\êº\Ï/\Ú\ZZ\î\Ü7\È)*Cf©Ò­¬\Z¥o\×\è7\Öz7­«Zi¯\\!ç¶ß¢\ÄÍ»\êºøG\æ]C\Ã!¦g\'L½:#[¸¹\Û\\z\Öý4SDbx\ÝF¦î¢­ûµLÏ\Ú9C\Ú\Z¬Àj	@ U$s0\Ç+#Ö½¡Ã¸¨ªª1,®\×j¨®\Ü\ÌOXs|¬Í½¦¡¹\ZË©\Ünm÷g§\Ý=ýBöhø~\Ãf{Kz¿ý¿?ø9»\ØA- 	b\ÚZ/aÏYuWDC\ãQ\ÅãZ=mZ\ÂØµ¨®8qv\Â\Ój³TF\í]c\ï\äº\æNe56 \Í(_gÏö3³¤q£jõ7#\Â\ëöeýX¹<&9K2²¹\â\r7.ò\æ<9¦(´e¬su3kb\ë\Éoô¬¯E#¯³6Uzª·ª\áG^¾\Ä+å©\ÓO#¤\Ç[o\Ø7sªªj\Ë\ÜØ±E\"qªØE\Í\æH\ÖÔ¶\í\ÛN\Z÷h\Ü:v­\Í5÷\êý[nmy¦gMfxÿ\04ý£Ï¯NNÐ·=q¡¸	\0@ AT\Z6p²0Tµ\ÕT\í¥\ï`·h½q\ã³r\Ó\Ô\é÷»\Ôóú½6\Â\ÛS§ª,^\äò\é\ÇÓ\Í{õ\ÊZ\Âö\É\Ý7k\ÚHp=j\Ñ3c»j´\Í\Æb|%\×r/\ÛU£OT[F\Æ<sc²\î=FÆ§{»W7\Úû­6n\Ø\ãGx\Ç\æ>=[\â\Ûy¡Lµn#	¬¼Ñ´B\Óö\ã¸,¯nF#¯²öl\ê«Þ«Ü\å\Ã&\Ò=\Ò=\Å\ï{\ç¹\Î&ä¹\Ó9\ã/snh¦)¦1P\ÍþF\à[T\Ø\Ý~E`>÷aÞ²Y·\ÚW?j\ë¿I§£Þ\ë\×ö\æ\î\0\0\0\0\0\0\0,\0\Zr\ê¾s339ö ¸\Ô\Zh$¨*gG\'\Å5@©¶¤\à¦L5¸v\íüKªµ»Vôr«\è>\Í\í¿fl\×=\ê>tø|9|\ZB\ÖzB\è¬Ã¬f\ã-\Ì\Ú4Uo¼»!\Ç\\£\Ôy?[q\é\ë\Û\Ð\Ój3Ü©\áö\îÅY\ÔX\ïtó.½=9teºò\r{-ò¢<2\Èl\évA¬ûzNöGO`\éX\îÜ#-\Ý­U\Ý\Ø\å\ã>_\Ï5O#\æ\ÅòH\â\ç¹\Æ\äòà¹33{\Û6©·LQDb!l(lBABð\ëY²\Ã\ÄT±ú¯m|	kG~\í]\r-£=^\ÚL\Ü\ÕvqÊù\Ïû7V²\á/5Æ ¸\Ô	@@@A\Ël,UP\Ï®ö°\Ëý6k\ë«\rú7\í\Ì:[#U:meºü&q>þeÀW!õ!\08$n\ÔA\Þ©TD\Æ%\Ûóu~_%)úT-\Z}«6	ñ\ë]==\íø\ÄóÎ¶\Þ\Ëý%\Ýú#¹W/)\éøne\ÃFG\âl\0$>ÎL²\ât%f\ìzZZ\×?Qþ/e°÷?Mcg>¿\ì\Ô\ÂÀ\îBaBðª^\ï§\ä©\é\ãõ)\â¯@_\Åu\èSùª\çi~\å}j«\'\Z³]y¥Ö\ZP\\&U\×\ÔvE\áó~+O\ÉTO\î\ç?\Âò>KTbf\\\Ó\\\í,\Ñ_Xø\ÃÊªÎ¢3,Í¯¥\äv·i6x#¤h\Ýdµúp\çmZmÎ\ïi1?\èvº\â\ë°ùr¨09CYw\Zw9ÿ\0&üûr¼\ëR\ÙÔ³µD\ã\î¸9¿\ËOUb^\Ù\ë.[ô·Ù¡¨ôÐP¼*¢VÐkm\ê7òÙËª\ç>¯Thæ ¸\n(.4 ($¨*|ñ¾²\Û<®nðò\ã]÷\êõ}Sf\æ4v³ý1ôb\Â!·f²Ä£wD1K/nñ\Ø\ÒÓ\ä\á{GwsCTT\Ä}þ\Î\Õ´]nñ]G\ÎÞª§±\Ò;cZOôA¥G){÷zNq\'¬ \Õó¦\Û\Ò@\îUnø\Ýü«[U\îÇ«»°\'øõGú~ð\æ!h½t$x.\î7W\Ê\ÒSI{\éS\Æ¼Ñ¢|A][s\"_8\×[\ìõ7)ÿ\0Tüø³,*\íUö A0P\\iA0PLPFIAq\Ø\Ð\\z¹D\Å3T\ÄC\æº\ê,²\Êv\É+\Þ\Äü\×g3Ö¬\Ñ\ÙÛ¦ðXP\Ê èõ.õi\Ú;\ßýÞ;\Ó\èò¾\ÕUüq\çöuI¥\Ñx\è¤\Ðzv´kù]Uf2!µ\î\Òwº\ß\ën\ä(J\rk:\èQ\æ3ÿ\0[U\îG«µ°\êjÿ\0\Æ~°\æ\0­\'¯HÄª\n-é¹¯\Å4áúP»g\ÞuÛ©ßn\éj\á4¼´\Z}Û´ÞUpXü\ÇÑ¾\Æõ´ó\ÏK\è(&HL9J\è5|\äbâP\r¤¨ó<\á\Ï=¿xZú÷h>\Æ\Ã\ÒöúºfySÞÛ\ÍÂ®¹¢\äº\'*\ÝºFe«ÿ\0µ\ær\Ü\Ñû\Õ<§µ_ò\íz\Ï\ÒM\ãR\ßxÅºWYÅ»\ÅûPz\Ðh¹AS\ÊU?s-\ì\Û\âJQ\Z¦s\åú4\r\ßS¥\Ý\æZÚv=]ÍÇª|¾\îl\n\Òz¸E\âRº²\È\à«¨\ê#ºôM\ß]S\Ý\ãej+*¡­¬\ÓS©³U¹ñ\å\å>\í´U7iFö5\ÛÁøp]H\Ì>r\ÝV\ë+Ls{\"È\èz	µ\è&\n\nA\È&\n	i\0	&Àu\07\"3\Â+8I\åõD°ý\Çµ¯\'ñ\0*ý\Íú¼D\Ø\Ú\ÒX\ï{\Õq´~\Íf\ë¯nDN]3SÚ®vt¾\ãø^\ß\Õmi\'¿1\äó^\ÓÑ=t«\ëºWE\âY¢\àwá ¸\ì\0\Ôs.T¹\Å\Çk\\zÉº\\nA¢g:®òS\Â£\ä#\Þu\ä+SS<baQk¯¬\ã\áþ\í(ªô1*¡hE¢Uº\å´dfT7rR\Ý\Ô\ÏuÍµ]\ë´tã·¯=»\'µ6ljiß£ßý¥Õ©\ê\Zöµ\ìpskn\×\rà®Nx\Ã\ÇUL\Ó3MQ¥¢«\í\ÆÈbD zz]L¸QR>ñ\ìf\ì|möw­º\Zù\î\ÒõûdM¹÷ãtó?£]j=FK¢r­\Ñ9\ËhÍµg%\Ó\ë³d/\ÜCl?Ë§\\+n[\í4Uùb~øË»\Õ|\í\å¨=®»\Z}\á©\Ô,jM\Zy\Ý;\ÄY8=½,\Êú\î^²gv±Üzªý÷=«B\ì\ïW/c³mvZzc\ÆxüXpV\'B% T-­\Ñl«ue[¢r\ÍdöSODlÃ§7t/\'Dñiú§ñY-ÝªM\rnÏµª\ÕÂ®±þqt+©*l»ðv\Ç­Kv\Ô\ÔòÚ¨±\Æc1\Ö?\á°6U\Ï\\l\È.¶d*f/`ò\Ó\r>£ó»Dz=¶X\ë»Må¹¦\Ðj5ü:xuþz9®T\å\Ôõ¡\ÑGzzcpX\Ów\Ê>ñÛ½«­i]¿U|#=f\Ï\Øö´Ø®¾õ]|#\Ò>\íR\ë]\ÚÊ·D\å[¢\Ù.Ê·Pez¥\ÑH\É[\éG#\ßy®x18\ã\nÜ¦.Q4O)|_JQ\Õ6hã\Ù,m½Nù®\ÄNc0ùu\Ësn¹¢®q8ø#P¥E\ì4ó:\á\âÔ_ð³{0oòh$ü\à\Ýq\êo\ëØ©][´Ì¶4¶{k´\Ññôñr\îõ öq%\Ô\'y[¢\Û\Ê\Ý0\åtam\åt	\Þ4a;\Ê\é&\r\æBª§\Õò0ªvþ©^ê§µ\î\él^÷\èúüYrö¹¢\Åñ¿¢mü,¯\ëiÕ±´\Ê&?tÝ\n\ã°\Ä\Þ\"!óº~¢²6.:üX\ÚÜ§­ZJK}VOcl*¹]\\\å¹kA¥µ9¦úýX \å\r\í\åt-¼¨r-%¤¡;\Ê\Ý\ÞVèP«t[.ÉLlMH\êW9L\îo^IÎ¸\íK^i\Ý\èñ^\Ði{;ñv9Uõ\çR\å´\à/aG}óð=¨<\ë/M0û·\í$\é;\Ël\\M(ñ\ÂM\È\Øù:OP\ÙÞ´\ïW½8¥\Ùz^ÎÒ®sôkK¦ ]An\Þ4	\ÞWI¼i&\r\åt	\Þ4`\ß4	\ßWI0õCamõt	Q¢µC\ÅI(Z*WI\ÞT9BwE¢¥n¡m\æ[%ñ·PUGPÛ¶F¯½&ü\Ç\í×¹VZ\í5:«[~R\î\Ñ\Ö2X\Û$n\íc\ÂÓ±u\"bc0ù\ítUESMQlû;\ï{\ÉJ¯rsÇ¦\Ç0\ìs\\\Þñd+²¦×[dp?²Aõþ{0]»\ë\ì\íÜ¹r;¾\×û}\\ýj=P¢ º#%\Ñ\"\n¢E\0U ª\Ñ9T9F¤^+H9F\ÒP¼T¨r¢¤´m\åt	\Þmù\r¾H|bM3\Ýv»Y\äz}\Ã\Ò;w\ß=»\'µ¶w\ê#µ·\ïG\Î?=>ï¶\Ð\Ç\Óv\\kK_\Ío¼\'©\Íù\Ð\Â\r&\'P-fL\ï(q\Ö\î\çi-´â§¬\Ù\×{Kõ\rL¬m\Õ\n!B¥\n\"¢.M$Á¼«nM$VnDsd\ér~²]m¦\Û\Ü91ý\ë*\ÍQUk-SÎ¦R­v\Ñ=\é?^Ò)\Ú6£«\Ð\Ü\ÞV~òñ\Ëü;XGüJ\ßIù~Sÿ\0w5¼¦ürÿ\0\"v°Ä­ô\å	3y^6r÷e·\æ;ZV£kÍ«\É,B+R\Ê\à:c_\ÈJ´WOVjujþf\ZhÃ¢ö¹õ\\\Ò\Ó\ÜU\é®*\ã, H9F\ÒL/¤£\ÅJ\é(\Â\ÛÌNaÆ®®¿k3\Z\î½\Ü{\Z\nµ\ïUÁ©¿\ÙZª¾ú\r X\0\0\è]7\Ì\å$@\ç\'\rU ª·\î6\Ú\è¦8\ÚÁÝa¿Fc.¦\Ë\Ôvww\'ý\\i½2D*Ì¢J9©õ8RnD=~5G \Û7\×w5½ý=8­\Ý]6\Ì/#\â2¹ÒÃ\Ï\Ô÷¬uWÑ¥^¶\å\\¸6\Ü?!h\ãc=Æ\Övg-Yªª¹\ÎV`\ÊjC09\Ú\ääº\ä%\í $\Ù{\ê\Ý}WV5\î\ï+\Æp\ÙÕuÖümD¯ª+t²dt\í\r2\â|G7\ÑÕ®\ÚÍµ¬\ÔX®¨\Ì)5\ÄNY©a©6)\ã{C\\\ÖJ\Ç44\r\î<\ÌK%5Lq¦Z¶1ºIn\è´\é\ì8\ïÅ\äB\ÉM\Ùñm\Û\×]£\ä}]%\ÜY\ËD/\ç\"»\ÜÝ­øqY©®*t,\ëm\×Ãùµû«·2(J ¢bR\ÒL-¼\ëù\É\Ò9LFF\í\Z{î¿x6ü¶lQü\Î\Ø\Õgc\Ö~Î¶¶\\!\ÐA\\b°F\ä<g7#\ÔcC\ä\ÄG\Ù?iøÃ©i]·»>OS³õ½µ{\Ñóói%co\Ê\ÛÜ­ÁUK.@\ÖN \ÒU\â\Z.\á°\àø\Ôù\èg\Õo½¼ðUª®e\ÝMUp¥¸\ÑC³\Ã2×j%ed±·º\ZJ£4\Ïa·QÞª «J¹GGLÌc×²70²\ë\íº\éf8uk\âs-¢\Ò1?]w{Aù®4\Î\'\r·µb®ò3\ÍÃeô¤\êÉ¿\r;7-F\â\î1Ï«.\0{`\0vÙ·¦#\Ê\Zõfg0¿0ö²)\ê`oG;\Ú\ÑøtGb\æ\êc%£lRR+\æ%\ãha¢\åVDE>Á>³¨Z)´¢xÕ\ÛV5u\Û\á<a\Ëja|Otr4±\ì6sN\ÐV\Ç7^±Tfb¤,\Ør\'%\å\Å*D-»bm<½\Çü\Æ\Äú+QFôá­«\ÕS§£3\ÏÁô­\r$pE1428\Ø\Ö1£`hz#Jº¦º¦©\ç+\êUy1\\6\Z¸_O;H\Û9§\âAD\ÄLbW·r«uET\Ï|ûQ8\È\Ð\é¨Ë¹³®;\ìll<vv\æG¤\Òë¨¿4!\ã!T\áò¹\Ç^E¸v÷­W\'\'UTòntp\ì\ËQ²aô\'R\ÃUKD3ô`,S+\Ä<Ywn]oùGø\ìOñ)õE\Ïv\\\Ç%À]\Ì\àºQ\æ\äú\'\n!÷1þ@¸\ÕsOA¥B¸@ ùÂ	«°umX=³=v1\Â=!jy:e_¥8ÿ\0\×\Õþp´µ^ú­ð«/<Ô¡\Êi¹Õ­ \"\ê\ÑS$by9.uh\Z\Ñö³ô\ÌN>³tt~«õ·b|z:\æ*\\ù®Y¦Jjl\ÙX¤0·B&$\Ã\Í\Ç\Ã\Úwà¦sTðRþ²ñ\ç\ÑôFL\äý>i\é\Û`5½\æ\Úr¿¥\î=\'\à·)¦)C\Í_¿]\ê÷ªeD6¹¥®\Íp!\Íp8 ´\"bq\Æ\Ï+³AOQ¥-,\ä\ÄAt<:Y\ÙqÁaª\Ìx:6vQ¹\Æ>m$«0\é$mTZú<Ãø\äµ\ï¢\á\Ö5\äM<\ÍE\Ú.bh{Z×ªX!²Rj²\ÃR\ì¤.TÜ·i~\\Ñ¬9m\Ø\Ý/½)õV¿v\\\Z¢_£-]Xó\Ïuõ5¦0ncsB\á\Ï6|p{\Z\äRaq®E&%ù¸\è\Öb-õq\ZÁþ3b=\Ú}!4ø»6ec¶õ\êjþ1oùV®£{Z\ÙH Y\Å)Ëg?\'*+YT¤5\ÄÖ41À¹\Î$\0.F\Ý\ëoI30Ù·]4U½T¬\äfZ\Â$\Äd¾O	pgñI¨B\Ýk£z¦\îÑb\Ü~\î¯EI¶(XØ£`³XÀ\ZÖ\0,±sjªj\Õ<WÔª          \ÕsI\ÊRµ\àkv¸û¤\rDwr\Énx´(e¡-RUI²1J±¬¿3[+½±\Ìvý\Å#\äql; \ëü²:Yb>LÉ_Q«t-u\î\rö-m·+¥V¢\Í\è=\ZñEY\Ã\è8eñ7\\\Ó\Ò\ÙY¥q²(ViL½J»®,\Ä\'4t\ï\Z×m\äp\íy\'®\æ\æ\Â\Åt\ì_£³ªy1\Í3Á\Ù2G\nò\n*jK:Z×¸lt^G\r\"W>\í{õ\ÍI\Ý\àËº¥E¢&FH¥s\ç:G\î\Ñhø\éh)÷ª`¿<¡]¸\Ï_J&H²F9½W{j§z&Ë\Ë£s£p³\â\× \Ùr¦18\ÜqM\Êõ\ÃQ½Va/[\'UÀô\ÇP¡/Tu*¸N^U(\ÂWR£\ëj`\ÂBp\å\Ñ°¡\Ô&ª®ÁZ l¸U9&´úG\ïx\ë·f\Î\ÅÛ³oruoU­eP@@@@@@@@@@@@Aª\åv\0dúD\"\ï\Î0mx8\Ý+SQfg½K5ºñ\ÂZP+E[ d!\ÆÔJó+nz[\ÅF\êr¾\Ú\Þ*0eqµ¼Ta9LW\r\ê7L«þ\Ð\Ót\Ê\Ûñ1½NélTt)Qg&°·\Ì\æ\ÔLcik\ÏCÑ½oi¬qÞ·<!·­ö¸\r\ä\Ü$»\\R®\Ëk>\ÓvÁr\Å5ñ\å,ÜZ­nI\ÕGrÀÙ\ì~|Zµi«\\Y¢\í2\ÃTSI´\È\Ïyh\ïØ°M3\áxK!\áW)ÂºJL\ZHa]>(`\å8\0e\â\áò1û\rs¾\nb&y\æ\ËQ\ä½\\¶»M\ß!±ü\"\ç\à³Ó§¹>Lsrl\ØVJC	ò\Ï\Zù\Â\Ìz{n¶­é©§ñbª\ì\Ï&Â¶!|*ON\Ä\Æ\Ë÷\ÙRm\Ñ<\âªù3D~Á£\Ý/oÀª~\ßDöuZvIQ³p\êO\ÕWô\Öú\'µ©AT»qþ\Ñÿ\0ª~\ßCµ©u¹/D>Á§­\Ï?§ôöú­]^¨pjVz4ð¿mû\ì¯¨Q\n\ÍuO\ÚÖ,\0p\"ª                                                                     ÿ\Ù','123','Y');
+/*!40000 ALTER TABLE `eppterreno` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `estadosproyecto`
+-- Table structure for table `estadosproyecto`
 --
 
+DROP TABLE IF EXISTS `estadosproyecto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `estadosproyecto` (
-  `idEstadosProyecto` int(11) NOT NULL,
-  `descripcionEstadosProyecto` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `idEstadosProyecto` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcionEstadosProyecto` varchar(10) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idEstadosProyecto`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `estadosproyecto`
+-- Dumping data for table `estadosproyecto`
 --
 
-INSERT INTO `estadosproyecto` (`idEstadosProyecto`, `descripcionEstadosProyecto`) VALUES
-(1, 'Vigente');
-
--- --------------------------------------------------------
+LOCK TABLES `estadosproyecto` WRITE;
+/*!40000 ALTER TABLE `estadosproyecto` DISABLE KEYS */;
+INSERT INTO `estadosproyecto` VALUES (1,'Vigente','Y');
+/*!40000 ALTER TABLE `estadosproyecto` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `menuallsafe`
+-- Table structure for table `menuallsafe`
 --
 
+DROP TABLE IF EXISTS `menuallsafe`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `menuallsafe` (
-  `idMenuAllsafe` int(11) NOT NULL,
+  `idMenuAllsafe` int(11) NOT NULL AUTO_INCREMENT,
   `nombreMenuAllsafe` varchar(100) NOT NULL,
   `padreMenuAllsafe` int(11) NOT NULL,
   `destinoMenuAllsafe` varchar(255) NOT NULL,
-  `PerfilAllSafe_idPerfilAllSafe` int(11) NOT NULL
+  `PerfilAllSafe_idPerfilAllSafe` int(11) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idMenuAllsafe`),
+  KEY `fk_MenuAllsafe_PerfilAllSafe1_idx` (`PerfilAllSafe_idPerfilAllSafe`),
+  CONSTRAINT `fk_MenuAllsafe_PerfilAllSafe1` FOREIGN KEY (`PerfilAllSafe_idPerfilAllSafe`) REFERENCES `perfilallsafe` (`idPerfilAllSafe`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `pais`
+-- Dumping data for table `menuallsafe`
 --
 
+LOCK TABLES `menuallsafe` WRITE;
+/*!40000 ALTER TABLE `menuallsafe` DISABLE KEYS */;
+/*!40000 ALTER TABLE `menuallsafe` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pais`
+--
+
+DROP TABLE IF EXISTS `pais`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pais` (
-  `idPais` int(11) NOT NULL,
+  `idPais` int(11) NOT NULL AUTO_INCREMENT,
   `pais` varchar(100) NOT NULL,
-  `nacionalidadPais` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `nacionalidadPais` varchar(100) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idPais`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `pais`
+-- Dumping data for table `pais`
 --
 
-INSERT INTO `pais` (`idPais`, `pais`, `nacionalidadPais`) VALUES
-(1, 'Chile', 'Chilena');
-
--- --------------------------------------------------------
+LOCK TABLES `pais` WRITE;
+/*!40000 ALTER TABLE `pais` DISABLE KEYS */;
+INSERT INTO `pais` VALUES (1,'Chile','Chilena','Y');
+/*!40000 ALTER TABLE `pais` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `perfilallsafe`
+-- Table structure for table `parametro`
 --
 
+DROP TABLE IF EXISTS `parametro`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `parametro` (
+  `idparametro` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(255) NOT NULL,
+  `llave` int(11) NOT NULL,
+  `valor` varchar(5000) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idparametro`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COMMENT='Parametros de configuracion del sistema';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `parametro`
+--
+
+LOCK TABLES `parametro` WRITE;
+/*!40000 ALTER TABLE `parametro` DISABLE KEYS */;
+INSERT INTO `parametro` VALUES (4,'Correo del remitente del mail de recuperacion de clave de usuario',1,'alvaro.sanmartinh@gmail.com','Y'),(5,'Asunto del mail de recuperacion de clave de usuario',2,'Enlace para cambiar clave AllSafe','Y'),(6,'Cuerpo del mail de recuperacion de clave de usuario',3,'Hola {{3}} <br><br> Te hemos enviado este correo porque has solicitado recuperar tu clave de AllSafe. <br> Si has sido tÃº, debes seguir <a href=\'http://{{0}}/AllSafe/CambiarClave.jsp?codigo={{1}}&id={{2}}\'>este enlace</a> para poder reestablecer tu clave. <br><br> Si el enlace no funciona, copia y pega esto en tu navegador: <br><br>http://{{0}}/AllSafe/CambiarClave.jsp?codigo={{1}}&id={{2}}<br><br>Si no has solicitado el cambio de tu clave, alguien puede estar intentando acceder a tu cuenta, te recomendamos usar una clave segura y no compartirla con nadie.','Y'),(7,'Clave del correo del remitente del mail de recuperacion de clave de usuario',4,'clave','Y'),(8,'Ip y Puerto del servidor de aplicaciones (Puede ser un DNS)',5,'localhost:8080','Y');
+/*!40000 ALTER TABLE `parametro` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `perfilallsafe`
+--
+
+DROP TABLE IF EXISTS `perfilallsafe`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `perfilallsafe` (
-  `idPerfilAllSafe` int(11) NOT NULL,
-  `nombrePerfilAllSafe` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `idPerfilAllSafe` int(11) NOT NULL AUTO_INCREMENT,
+  `nombrePerfilAllSafe` varchar(100) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idPerfilAllSafe`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `perfilallsafe`
+-- Dumping data for table `perfilallsafe`
 --
 
-INSERT INTO `perfilallsafe` (`idPerfilAllSafe`, `nombrePerfilAllSafe`) VALUES
-(1, 'Administrador');
-
--- --------------------------------------------------------
+LOCK TABLES `perfilallsafe` WRITE;
+/*!40000 ALTER TABLE `perfilallsafe` DISABLE KEYS */;
+INSERT INTO `perfilallsafe` VALUES (1,'Administrador','Y');
+/*!40000 ALTER TABLE `perfilallsafe` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `persona`
+-- Table structure for table `persona`
 --
 
+DROP TABLE IF EXISTS `persona`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `persona` (
   `rutPasaportePersona` varchar(45) NOT NULL,
   `EmployeeId` int(11) DEFAULT NULL,
@@ -345,20 +461,291 @@ CREATE TABLE `persona` (
   `tallaPoleraCamisa_idtallaPoleraCamisa` int(11) DEFAULT NULL,
   `TallaPantalon_idTallaPantalon` int(11) DEFAULT NULL,
   `TallaOberol_idTallaOberol` int(11) DEFAULT NULL,
-  `vigentepersona` varchar(2) NOT NULL
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`rutPasaportePersona`),
+  KEY `fk_Persona_Cargo1_idx` (`Cargo_idCargo`),
+  KEY `fk_Persona_TipoPlanta1_idx` (`TipoPlanta_idTipoPlanta`),
+  KEY `fk_Persona_tallaZApato1_idx` (`tallaZApato_idtallaZApato`),
+  KEY `fk_Persona_tallaPoleraCamisa1_idx` (`tallaPoleraCamisa_idtallaPoleraCamisa`),
+  KEY `fk_Persona_TallaPantalon1_idx` (`TallaPantalon_idTallaPantalon`),
+  KEY `fk_Persona_TallaOberol1_idx` (`TallaOberol_idTallaOberol`),
+  CONSTRAINT `FK_persona_Cargo_idCargo` FOREIGN KEY (`Cargo_idCargo`) REFERENCES `cargo` (`idCargo`),
+  CONSTRAINT `FK_persona_TallaOberol_idTallaOberol` FOREIGN KEY (`TallaOberol_idTallaOberol`) REFERENCES `tallaoberol` (`idTallaOberol`),
+  CONSTRAINT `FK_persona_TallaPantalon_idTallaPantalon` FOREIGN KEY (`TallaPantalon_idTallaPantalon`) REFERENCES `tallapantalon` (`idTallaPantalon`),
+  CONSTRAINT `FK_persona_TipoPlanta_idTipoPlanta` FOREIGN KEY (`TipoPlanta_idTipoPlanta`) REFERENCES `tipoplanta` (`idTipoPlanta`),
+  CONSTRAINT `FK_persona_tallaPoleraCamisa_idtallaPoleraCamisa` FOREIGN KEY (`tallaPoleraCamisa_idtallaPoleraCamisa`) REFERENCES `tallapoleracamisa` (`idTallaPoleraCamisa`),
+  CONSTRAINT `FK_persona_tallaZApato_idtallaZApato` FOREIGN KEY (`tallaZApato_idtallaZApato`) REFERENCES `tallazapato` (`idTallaZapato`),
+  CONSTRAINT `fk_Persona_Cargo1` FOREIGN KEY (`Cargo_idCargo`) REFERENCES `cargo` (`idCargo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Persona_TallaOberol1` FOREIGN KEY (`TallaOberol_idTallaOberol`) REFERENCES `tallaoberol` (`idTallaOberol`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Persona_TallaPantalon1` FOREIGN KEY (`TallaPantalon_idTallaPantalon`) REFERENCES `tallapantalon` (`idTallaPantalon`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Persona_TipoPlanta1` FOREIGN KEY (`TipoPlanta_idTipoPlanta`) REFERENCES `tipoplanta` (`idTipoPlanta`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Persona_tallaPoleraCamisa1` FOREIGN KEY (`tallaPoleraCamisa_idtallaPoleraCamisa`) REFERENCES `tallapoleracamisa` (`idTallaPoleraCamisa`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Persona_tallaZApato1` FOREIGN KEY (`tallaZApato_idtallaZApato`) REFERENCES `tallazapato` (`idTallaZapato`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-CREATE TABLE `usuarioclaverecuperar` (
-  `idusuarioclaverecuperar` int(11) NOT NULL AUTO_INCREMENT,
-  `usuario` int(11) NOT NULL,
-  `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `codigo` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`idusuarioclaverecuperar`),
-  UNIQUE KEY `idusuariorecuperarclave_UNIQUE` (`idusuarioclaverecuperar`),
-  KEY `idUsuario_idx` (`usuario`),
-  CONSTRAINT `idUsuarioRecuperar` FOREIGN KEY (`usuario`) REFERENCES `usuarioallsafe` (`idUsuarioAllSafe`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+--
+-- Dumping data for table `persona`
+--
 
+LOCK TABLES `persona` WRITE;
+/*!40000 ALTER TABLE `persona` DISABLE KEYS */;
+INSERT INTO `persona` VALUES ('10.000.000-1',NULL,'Diez','pa','ma','2019-01-01','Paraguayo',1,'correo@correo.cl',1,1,1,1,1,'Y'),('11.111.111-1',123,'Diego','MuÃ±oz','MuÃ±oz2','11-06-1982','Chilena',1,'alvaro.sanmartinh@gmail.com',1,1,1,1,1,'Y'),('12.222.222-2',NULL,'Once','Once','Once','2019-01-01','Argentino',1,'correo@correo.cl',1,1,1,1,1,'Y'),('17.779.184-9',NULL,'Nadia','Aranguiz','Fernandez','1991-01-26','Chilena',1,'correo@correo.cl',1,1,1,1,1,'Y'),('22.222.222-2',NULL,'Elhana','Machado','Ma','2019-01-01','BrazileÃ±a',1,'correo@correo.cl',1,1,1,1,1,'Y'),('33.333.333-3',NULL,'Tres','Tres3','TresIII','2019-01-01','Chilena',1,'correo@correo.cl',1,1,1,1,1,'Y'),('44.444.444-4',NULL,'Cuatro','Cuatro','Cuatro','2019-01-01','Chilena',1,'correo@correo.cl',1,1,1,1,1,'Y'),('55.555.555-5',NULL,'Jose','Beltran','h','2019-01-01','Mexicano',1,'correo@correo.cl',1,1,1,1,1,'Y'),('66.666.666-6',NULL,'Seis','Seis','nuk','2019-01-01','Boliviano',1,'correo@correo.cl',1,1,1,1,1,'Y'),('77.777.777-7',NULL,'Siete','SietePa','SieteMa','2019-01-01','Colombiano',1,'correo@correo.cl',1,1,1,1,1,'Y'),('88.888.888-8',NULL,'Ocho','Pa','Ma','2019-01-01','Argentino',1,'correo@correo.cl',1,1,1,1,1,'Y'),('99.999.999-9',NULL,'Nueve','Pa','Ma','2019-01-01','Norteamericano',1,'correo@correo.cl',1,1,1,1,1,'Y');
+/*!40000 ALTER TABLE `persona` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `proyecto`
+--
+
+DROP TABLE IF EXISTS `proyecto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `proyecto` (
+  `idProyecto` int(11) NOT NULL AUTO_INCREMENT,
+  `numeroProyecto` int(11) NOT NULL,
+  `nombreProyecto` varchar(200) NOT NULL,
+  `ubicacionProyecto` varchar(255) NOT NULL,
+  `fechaInicioProyecto` varchar(45) NOT NULL,
+  `fechaTerminoProyecto` varchar(45) NOT NULL,
+  `Ciudad_idCiudad` int(11) NOT NULL,
+  `Empresa_idEmpresa` int(11) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idProyecto`),
+  KEY `fk_Proyecto_Ciudad1_idx` (`Ciudad_idCiudad`),
+  KEY `fk_Proyecto_Empresa1_idx` (`Empresa_idEmpresa`),
+  CONSTRAINT `fk_Proyecto_Ciudad1` FOREIGN KEY (`Ciudad_idCiudad`) REFERENCES `ciudad` (`idCiudad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Proyecto_Empresa1` FOREIGN KEY (`Empresa_idEmpresa`) REFERENCES `empresa` (`idEmpresa`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `proyecto`
+--
+
+LOCK TABLES `proyecto` WRITE;
+/*!40000 ALTER TABLE `proyecto` DISABLE KEYS */;
+INSERT INTO `proyecto` VALUES (1,125000,'Nueva Aldea','Nueva Aldea','2019-01-01','2019-01-31',1,1,'Y'),(2,126000,'Candelaria','Rancagua','2019-01-01','2019-01-31',1,1,'Y'),(3,127000,'Proyecto 3','Tercer Proyecto','2019-01-01','2019-01-30',1,1,'Y'),(4,128000,'Proy 8 ','Rancagua','2019-01-01','2019-03-31',1,1,'Y');
+/*!40000 ALTER TABLE `proyecto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tallaoberol`
+--
+
+DROP TABLE IF EXISTS `tallaoberol`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tallaoberol` (
+  `idTallaOberol` int(11) NOT NULL AUTO_INCREMENT,
+  `numeroTallaOberol` int(11) NOT NULL,
+  `letraTallaOberol` varchar(3) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idTallaOberol`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tallaoberol`
+--
+
+LOCK TABLES `tallaoberol` WRITE;
+/*!40000 ALTER TABLE `tallaoberol` DISABLE KEYS */;
+INSERT INTO `tallaoberol` VALUES (1,50,'L','Y');
+/*!40000 ALTER TABLE `tallaoberol` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tallapantalon`
+--
+
+DROP TABLE IF EXISTS `tallapantalon`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tallapantalon` (
+  `idTallaPantalon` int(11) NOT NULL AUTO_INCREMENT,
+  `numeroTallaPantalon` int(11) NOT NULL,
+  `letraTallaPantalon` varchar(3) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idTallaPantalon`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tallapantalon`
+--
+
+LOCK TABLES `tallapantalon` WRITE;
+/*!40000 ALTER TABLE `tallapantalon` DISABLE KEYS */;
+INSERT INTO `tallapantalon` VALUES (1,50,'L','Y');
+/*!40000 ALTER TABLE `tallapantalon` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tallapoleracamisa`
+--
+
+DROP TABLE IF EXISTS `tallapoleracamisa`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tallapoleracamisa` (
+  `idTallaPoleraCamisa` int(11) NOT NULL AUTO_INCREMENT,
+  `numeroPoleraCamisa` int(11) NOT NULL,
+  `letraPoleraCamisa` varchar(3) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idTallaPoleraCamisa`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tallapoleracamisa`
+--
+
+LOCK TABLES `tallapoleracamisa` WRITE;
+/*!40000 ALTER TABLE `tallapoleracamisa` DISABLE KEYS */;
+INSERT INTO `tallapoleracamisa` VALUES (1,50,'L','Y');
+/*!40000 ALTER TABLE `tallapoleracamisa` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tallazapato`
+--
+
+DROP TABLE IF EXISTS `tallazapato`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tallazapato` (
+  `idTallaZapato` int(11) NOT NULL AUTO_INCREMENT,
+  `numeroZapato` int(11) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idTallaZapato`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tallazapato`
+--
+
+LOCK TABLES `tallazapato` WRITE;
+/*!40000 ALTER TABLE `tallazapato` DISABLE KEYS */;
+INSERT INTO `tallazapato` VALUES (1,43,'Y');
+/*!40000 ALTER TABLE `tallazapato` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tipodecarga`
+--
+
+DROP TABLE IF EXISTS `tipodecarga`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tipodecarga` (
+  `idtipodecarga` int(11) NOT NULL,
+  `nombretipodecargac` varchar(100) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idtipodecarga`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipodecarga`
+--
+
+LOCK TABLES `tipodecarga` WRITE;
+/*!40000 ALTER TABLE `tipodecarga` DISABLE KEYS */;
+INSERT INTO `tipodecarga` VALUES (1,'Carga Inicial','Y'),(2,'DevoluciÃ³n ToolCenter','Y');
+/*!40000 ALTER TABLE `tipodecarga` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tipoepp`
+--
+
+DROP TABLE IF EXISTS `tipoepp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tipoepp` (
+  `idTipoEPP` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcionTipoEPP` varchar(100) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idTipoEPP`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipoepp`
+--
+
+LOCK TABLES `tipoepp` WRITE;
+/*!40000 ALTER TABLE `tipoepp` DISABLE KEYS */;
+INSERT INTO `tipoepp` VALUES (1,'EstÃ¡ndar','Y'),(2,'No EstÃ¡ndar','Y');
+/*!40000 ALTER TABLE `tipoepp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tipoplanta`
+--
+
+DROP TABLE IF EXISTS `tipoplanta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tipoplanta` (
+  `idTipoPlanta` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcionTipoPlanta` varchar(45) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idTipoPlanta`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipoplanta`
+--
+
+LOCK TABLES `tipoplanta` WRITE;
+/*!40000 ALTER TABLE `tipoplanta` DISABLE KEYS */;
+INSERT INTO `tipoplanta` VALUES (1,'Planta','Y');
+/*!40000 ALTER TABLE `tipoplanta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarioallsafe`
+--
+
+DROP TABLE IF EXISTS `usuarioallsafe`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuarioallsafe` (
+  `idUsuarioAllSafe` int(11) NOT NULL AUTO_INCREMENT,
+  `loginUsuarioAllSafe` varchar(45) NOT NULL,
+  `passUsuarioAllSafe` varchar(45) NOT NULL,
+  `Persona_rutPasaportePersona` varchar(45) NOT NULL,
+  `PerfilAllSafe_idPerfilAllSafe` int(11) NOT NULL,
+  `vigencia` char(1) DEFAULT 'Y',
+  PRIMARY KEY (`idUsuarioAllSafe`),
+  KEY `fk_UsuarioAllSafe_Persona1_rutPasaportePersonax` (`Persona_rutPasaportePersona`),
+  KEY `fk_UsuarioAllSafe_PerfilAllSafe1_idx` (`PerfilAllSafe_idPerfilAllSafe`),
+  CONSTRAINT `fk_UsuarioAllSafe_PerfilAllSafe1` FOREIGN KEY (`PerfilAllSafe_idPerfilAllSafe`) REFERENCES `perfilallsafe` (`idPerfilAllSafe`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_UsuarioAllSafe_Persona1` FOREIGN KEY (`Persona_rutPasaportePersona`) REFERENCES `persona` (`rutPasaportePersona`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarioallsafe`
+--
+
+LOCK TABLES `usuarioallsafe` WRITE;
+/*!40000 ALTER TABLE `usuarioallsafe` DISABLE KEYS */;
+INSERT INTO `usuarioallsafe` VALUES (1,'admin','827ccb0eea8a706c4c34a16891f84e7b','11.111.111-1',1,'Y'),(2,'asd','202cb962ac59075b964b07152d234b70','33.333.333-3',1,'Y');
+/*!40000 ALTER TABLE `usuarioallsafe` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarioclavehistorial`
+--
+
+DROP TABLE IF EXISTS `usuarioclavehistorial`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuarioclavehistorial` (
   `idusuarioclavehistorial` int(11) NOT NULL AUTO_INCREMENT,
   `clave` varchar(200) NOT NULL,
@@ -369,599 +756,55 @@ CREATE TABLE `usuarioclavehistorial` (
   UNIQUE KEY `idusuariohistorialclave_UNIQUE` (`idusuarioclavehistorial`),
   KEY `IDUSUARIO_idx` (`usuario`),
   CONSTRAINT `idUsuario` FOREIGN KEY (`usuario`) REFERENCES `usuarioallsafe` (`idUsuarioAllSafe`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COMMENT='Contiene el historial de las claves que ha usado el usuario';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COMMENT='Contiene el historial de las claves que ha usado el usuario';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `persona`
+-- Dumping data for table `usuarioclavehistorial`
 --
 
-INSERT INTO `persona` (`rutPasaportePersona`, `EmployeeId`, `nombresPersona`, `apePatPersona`, `apeMatPersona`, `fechaNacPersona`, `nacionalidadPersona`, `TipoPlanta_idTipoPlanta`, `correoPersona`, `Cargo_idCargo`, `tallaZApato_idtallaZApato`, `tallaPoleraCamisa_idtallaPoleraCamisa`, `TallaPantalon_idTallaPantalon`, `TallaOberol_idTallaOberol`, `vigentepersona`) VALUES
-('10.000.000-1', NULL, 'Diez', 'pa', 'ma', '2019-01-01', 'Paraguayo', 1, 'correo@correo.cl', 1, 1, 1, 1, 1, 'Si'),
-('11.111.111-1', 123, 'Diego', 'Muñoz', 'Muñoz2', '11-06-1982', 'Chilena', 1, 'correo@correo.cl', 1, 1, 1, 1, 1, 'Si'),
-('12.222.222-2', NULL, 'Once', 'Once', 'Once', '2019-01-01', 'Argentino', 1, 'correo@correo.cl', 1, 1, 1, 1, 1, 'Si'),
-('17.779.184-9', NULL, 'Nadia', 'Aranguiz', 'Fernandez', '1991-01-26', 'Chilena', 1, 'correo@correo.cl', 1, 1, 1, 1, 1, 'Si'),
-('22.222.222-2', NULL, 'Elhana', 'Machado', 'Ma', '2019-01-01', 'Brazileña', 1, 'correo@correo.cl', 1, 1, 1, 1, 1, 'Si'),
-('33.333.333-3', NULL, 'Tres', 'Tres3', 'TresIII', '2019-01-01', 'Chilena', 1, 'correo@correo.cl', 1, 1, 1, 1, 1, 'Si'),
-('44.444.444-4', NULL, 'Cuatro', 'Cuatro', 'Cuatro', '2019-01-01', 'Chilena', 1, 'correo@correo.cl', 1, 1, 1, 1, 1, 'Si'),
-('55.555.555-5', NULL, 'Jose', 'Beltran', 'h', '2019-01-01', 'Mexicano', 1, 'correo@correo.cl', 1, 1, 1, 1, 1, 'Si'),
-('66.666.666-6', NULL, 'Seis', 'Seis', 'nuk', '2019-01-01', 'Boliviano', 1, 'correo@correo.cl', 1, 1, 1, 1, 1, 'Si'),
-('77.777.777-7', NULL, 'Siete', 'SietePa', 'SieteMa', '2019-01-01', 'Colombiano', 1, 'correo@correo.cl', 1, 1, 1, 1, 1, 'Si'),
-('88.888.888-8', NULL, 'Ocho', 'Pa', 'Ma', '2019-01-01', 'Argentino', 1, 'correo@correo.cl', 1, 1, 1, 1, 1, 'Si'),
-('99.999.999-9', NULL, 'Nueve', 'Pa', 'Ma', '2019-01-01', 'Norteamericano', 1, 'correo@correo.cl', 1, 1, 1, 1, 1, 'Si');
+LOCK TABLES `usuarioclavehistorial` WRITE;
+/*!40000 ALTER TABLE `usuarioclavehistorial` DISABLE KEYS */;
+INSERT INTO `usuarioclavehistorial` VALUES (7,'81dc9bdb52d04dc20036dbd8313ed055','2019-04-06 15:29:05',1,'I'),(8,'827ccb0eea8a706c4c34a16891f84e7b','2019-04-06 15:30:07',1,'A');
+/*!40000 ALTER TABLE `usuarioclavehistorial` ENABLE KEYS */;
+UNLOCK TABLES;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `proyecto`
---
-
-CREATE TABLE `proyecto` (
-  `idProyecto` int(11) NOT NULL,
-  `numeroProyecto` int(11) NOT NULL,
-  `nombreProyecto` varchar(200) NOT NULL,
-  `ubicacionProyecto` varchar(255) NOT NULL,
-  `fechaInicioProyecto` varchar(45) NOT NULL,
-  `fechaTerminoProyecto` varchar(45) NOT NULL,
-  `Ciudad_idCiudad` int(11) NOT NULL,
-  `Empresa_idEmpresa` int(11) NOT NULL,
-  `vigenteproyecto` varchar(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `proyecto`
---
-
-INSERT INTO `proyecto` (`idProyecto`, `numeroProyecto`, `nombreProyecto`, `ubicacionProyecto`, `fechaInicioProyecto`, `fechaTerminoProyecto`, `Ciudad_idCiudad`, `Empresa_idEmpresa`, `vigenteproyecto`) VALUES
-(1, 125000, 'Nueva Aldea', 'Nueva Aldea', '2019-01-01', '2019-01-31', 1, 1, 'Si'),
-(2, 126000, 'Candelaria', 'Rancagua', '2019-01-01', '2019-01-31', 1, 1, 'Si'),
-(3, 127000, 'Proyecto 3', 'Tercer Proyecto', '2019-01-01', '2019-01-30', 1, 1, 'Si'),
-(4, 128000, 'Proy 8 ', 'Rancagua', '2019-01-01', '2019-03-31', 1, 1, 'Si');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tallaoberol`
---
-
-CREATE TABLE `tallaoberol` (
-  `idTallaOberol` int(11) NOT NULL,
-  `numeroTallaOberol` int(11) NOT NULL,
-  `letraTallaOberol` varchar(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tallaoberol`
---
-
-INSERT INTO `tallaoberol` (`idTallaOberol`, `numeroTallaOberol`, `letraTallaOberol`) VALUES
-(1, 50, 'L');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tallapantalon`
---
-
-CREATE TABLE `tallapantalon` (
-  `idTallaPantalon` int(11) NOT NULL,
-  `numeroTallaPantalon` int(11) NOT NULL,
-  `letraTallaPantalon` varchar(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tallapantalon`
---
-
-INSERT INTO `tallapantalon` (`idTallaPantalon`, `numeroTallaPantalon`, `letraTallaPantalon`) VALUES
-(1, 50, 'L');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tallapoleracamisa`
---
-
-CREATE TABLE `tallapoleracamisa` (
-  `idTallaPoleraCamisa` int(11) NOT NULL,
-  `numeroPoleraCamisa` int(11) NOT NULL,
-  `letraPoleraCamisa` varchar(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tallapoleracamisa`
---
-
-INSERT INTO `tallapoleracamisa` (`idTallaPoleraCamisa`, `numeroPoleraCamisa`, `letraPoleraCamisa`) VALUES
-(1, 50, 'L');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tallazapato`
---
-
-CREATE TABLE `tallazapato` (
-  `idTallaZapato` int(11) NOT NULL,
-  `numeroZapato` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tallazapato`
---
-
-INSERT INTO `tallazapato` (`idTallaZapato`, `numeroZapato`) VALUES
-(1, 43);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tipodecarga`
---
-
-CREATE TABLE `tipodecarga` (
-  `idtipodecarga` int(11) NOT NULL,
-  `nombretipodecargac` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tipodecarga`
---
-
-INSERT INTO `tipodecarga` (`idtipodecarga`, `nombretipodecargac`) VALUES
-(1, 'Carga Inicial'),
-(2, 'Devolución ToolCenter');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tipoepp`
---
-
-CREATE TABLE `tipoepp` (
-  `idTipoEPP` int(11) NOT NULL,
-  `descripcionTipoEPP` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tipoepp`
---
-
-INSERT INTO `tipoepp` (`idTipoEPP`, `descripcionTipoEPP`) VALUES
-(1, 'Estándar'),
-(2, 'No Estándar');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tipoplanta`
---
-
-CREATE TABLE `tipoplanta` (
-  `idTipoPlanta` int(11) NOT NULL,
-  `descripcionTipoPlanta` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tipoplanta`
---
-
-INSERT INTO `tipoplanta` (`idTipoPlanta`, `descripcionTipoPlanta`) VALUES
-(1, 'Planta');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuarioallsafe`
---
-
-CREATE TABLE `usuarioallsafe` (
-  `idUsuarioAllSafe` int(11) NOT NULL,
-  `loginUsuarioAllSafe` varchar(45) NOT NULL,
-  `passUsuarioAllSafe` varchar(45) NOT NULL,
-  `Persona_rutPasaportePersona` varchar(45) NOT NULL,
-  `PerfilAllSafe_idPerfilAllSafe` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `usuarioallsafe`
---
-
-INSERT INTO `usuarioallsafe` (`idUsuarioAllSafe`, `loginUsuarioAllSafe`, `passUsuarioAllSafe`, `Persona_rutPasaportePersona`, `PerfilAllSafe_idPerfilAllSafe`) VALUES
-(1, 'admin', '202cb962ac59075b964b07152d234b70', '11.111.111-1', 1),
-(2, 'asd', '202cb962ac59075b964b07152d234b70', '33.333.333-3', 1);
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `asignacantidadepp`
---
-ALTER TABLE `asignacantidadepp`
-  ADD PRIMARY KEY (`idEppProceso`),
-  ADD KEY `fk_EppProceso_EstadosProyecto1_idx` (`EstadosProyecto_idEstadosProyecto`),
-  ADD KEY `fk_asignaeppproyecto_tipodecarga1_idx` (`tipodecarga_idtipodecarga`),
-  ADD KEY `fk_asignacantidadepp_asignaeppaproyecto1_idx` (`asignaeppaproyecto_idasignaeppaproyecto`);
-
---
--- Indices de la tabla `asignaeppaproyecto`
---
-ALTER TABLE `asignaeppaproyecto`
-  ADD PRIMARY KEY (`idasignaeppaproyecto`),
-  ADD KEY `fk_asignaeppaproyecto_epp1_idx` (`epp_idEPP`),
-  ADD KEY `fk_asignaeppaproyecto_proyecto1_idx` (`proyecto_idProyecto`);
-
---
--- Indices de la tabla `asignatrabajadorproyecto`
---
-ALTER TABLE `asignatrabajadorproyecto`
-  ADD PRIMARY KEY (`idasignatrabajadorproyecto`),
-  ADD KEY `fk_asignatrabajadorproyecto_persona1_idx` (`persona_rutPasaportePersona`),
-  ADD KEY `fk_asignatrabajadorproyecto_proyecto1_idx` (`proyecto_idProyecto`);
-
---
--- Indices de la tabla `cargo`
---
-ALTER TABLE `cargo`
-  ADD PRIMARY KEY (`idCargo`);
-
---
--- Indices de la tabla `ciudad`
---
-ALTER TABLE `ciudad`
-  ADD PRIMARY KEY (`idCiudad`),
-  ADD KEY `fk_Ciudad_Pais1_idx` (`Pais_idPais`);
-
---
--- Indices de la tabla `empresa`
---
-ALTER TABLE `empresa`
-  ADD PRIMARY KEY (`idEmpresa`);
-
---
--- Indices de la tabla `epp`
---
-ALTER TABLE `epp`
-  ADD PRIMARY KEY (`idEPP`),
-  ADD KEY `fk_EPP_TipoEPP1_idx` (`TipoEPP_idTipoEPP`);
-
---
--- Indices de la tabla `eppsolicitudterreno`
---
-ALTER TABLE `eppsolicitudterreno`
-  ADD PRIMARY KEY (`idEppSolicitudTerreno`),
-  ADD KEY `fk_EppSolicitudTerreno_EPP1_idx` (`EPP_idEPP`),
-  ADD KEY `fk_EppSolicitudTerreno_Proyecto1_idx` (`Proyecto_idProyecto`),
-  ADD KEY `fk_EppSolicitudTerreno_UsuarioAllsafe1_idx` (`idUsuario`);
-
---
--- Indices de la tabla `eppterreno`
---
-ALTER TABLE `eppterreno`
-  ADD PRIMARY KEY (`idEppTerreno`),
-  ADD KEY `fk_EppEntregaTerreno_Persona1_rutPasaportePersonax` (`Persona_rutPasaportePersona`),
-  ADD KEY `fk_EppTerreno_Proyecto1_idx` (`Proyecto_idProyecto`),
-  ADD KEY `fk_EppTerreno_EPP1_idx` (`EPP_idEPP`),
-  ADD KEY `fk_EppTerreno_UsuarioAllsafe1_idx` (`idUsuario`);
-
---
--- Indices de la tabla `estadosproyecto`
---
-ALTER TABLE `estadosproyecto`
-  ADD PRIMARY KEY (`idEstadosProyecto`);
-
---
--- Indices de la tabla `menuallsafe`
---
-ALTER TABLE `menuallsafe`
-  ADD PRIMARY KEY (`idMenuAllsafe`),
-  ADD KEY `fk_MenuAllsafe_PerfilAllSafe1_idx` (`PerfilAllSafe_idPerfilAllSafe`);
-
---
--- Indices de la tabla `pais`
---
-ALTER TABLE `pais`
-  ADD PRIMARY KEY (`idPais`);
-
---
--- Indices de la tabla `perfilallsafe`
---
-ALTER TABLE `perfilallsafe`
-  ADD PRIMARY KEY (`idPerfilAllSafe`);
-
 --
--- Indices de la tabla `persona`
+-- Table structure for table `usuarioclaverecuperar`
 --
-ALTER TABLE `persona`
-  ADD PRIMARY KEY (`rutPasaportePersona`),
-  ADD KEY `fk_Persona_Cargo1_idx` (`Cargo_idCargo`),
-  ADD KEY `fk_Persona_TipoPlanta1_idx` (`TipoPlanta_idTipoPlanta`),
-  ADD KEY `fk_Persona_tallaZApato1_idx` (`tallaZApato_idtallaZApato`),
-  ADD KEY `fk_Persona_tallaPoleraCamisa1_idx` (`tallaPoleraCamisa_idtallaPoleraCamisa`),
-  ADD KEY `fk_Persona_TallaPantalon1_idx` (`TallaPantalon_idTallaPantalon`),
-  ADD KEY `fk_Persona_TallaOberol1_idx` (`TallaOberol_idTallaOberol`);
 
---
--- Indices de la tabla `proyecto`
---
-ALTER TABLE `proyecto`
-  ADD PRIMARY KEY (`idProyecto`),
-  ADD KEY `fk_Proyecto_Ciudad1_idx` (`Ciudad_idCiudad`),
-  ADD KEY `fk_Proyecto_Empresa1_idx` (`Empresa_idEmpresa`);
-
---
--- Indices de la tabla `tallaoberol`
---
-ALTER TABLE `tallaoberol`
-  ADD PRIMARY KEY (`idTallaOberol`);
-
---
--- Indices de la tabla `tallapantalon`
---
-ALTER TABLE `tallapantalon`
-  ADD PRIMARY KEY (`idTallaPantalon`);
-
---
--- Indices de la tabla `tallapoleracamisa`
---
-ALTER TABLE `tallapoleracamisa`
-  ADD PRIMARY KEY (`idTallaPoleraCamisa`);
-
---
--- Indices de la tabla `tallazapato`
---
-ALTER TABLE `tallazapato`
-  ADD PRIMARY KEY (`idTallaZapato`);
-
---
--- Indices de la tabla `tipodecarga`
---
-ALTER TABLE `tipodecarga`
-  ADD PRIMARY KEY (`idtipodecarga`);
-
---
--- Indices de la tabla `tipoepp`
---
-ALTER TABLE `tipoepp`
-  ADD PRIMARY KEY (`idTipoEPP`);
-
---
--- Indices de la tabla `tipoplanta`
---
-ALTER TABLE `tipoplanta`
-  ADD PRIMARY KEY (`idTipoPlanta`);
-
---
--- Indices de la tabla `usuarioallsafe`
---
-ALTER TABLE `usuarioallsafe`
-  ADD PRIMARY KEY (`idUsuarioAllSafe`),
-  ADD KEY `fk_UsuarioAllSafe_Persona1_rutPasaportePersonax` (`Persona_rutPasaportePersona`),
-  ADD KEY `fk_UsuarioAllSafe_PerfilAllSafe1_idx` (`PerfilAllSafe_idPerfilAllSafe`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `asignacantidadepp`
---
-ALTER TABLE `asignacantidadepp`
-  MODIFY `idEppProceso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT de la tabla `asignaeppaproyecto`
---
-ALTER TABLE `asignaeppaproyecto`
-  MODIFY `idasignaeppaproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- AUTO_INCREMENT de la tabla `asignatrabajadorproyecto`
---
-ALTER TABLE `asignatrabajadorproyecto`
-  MODIFY `idasignatrabajadorproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT de la tabla `cargo`
---
-ALTER TABLE `cargo`
-  MODIFY `idCargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `ciudad`
---
-ALTER TABLE `ciudad`
-  MODIFY `idCiudad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `empresa`
---
-ALTER TABLE `empresa`
-  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `epp`
---
-ALTER TABLE `epp`
-  MODIFY `idEPP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT de la tabla `eppsolicitudterreno`
---
-ALTER TABLE `eppsolicitudterreno`
-  MODIFY `idEppSolicitudTerreno` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `eppterreno`
---
-ALTER TABLE `eppterreno`
-  MODIFY `idEppTerreno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `estadosproyecto`
---
-ALTER TABLE `estadosproyecto`
-  MODIFY `idEstadosProyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `menuallsafe`
---
-ALTER TABLE `menuallsafe`
-  MODIFY `idMenuAllsafe` int(11) NOT NULL AUTO_INCREMENT;
+DROP TABLE IF EXISTS `usuarioclaverecuperar`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuarioclaverecuperar` (
+  `idusuarioclaverecuperar` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario` int(11) NOT NULL,
+  `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `codigo` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`idusuarioclaverecuperar`),
+  UNIQUE KEY `idusuariorecuperarclave_UNIQUE` (`idusuarioclaverecuperar`),
+  KEY `idUsuario_idx` (`usuario`),
+  CONSTRAINT `idUsuarioRecuperar` FOREIGN KEY (`usuario`) REFERENCES `usuarioallsafe` (`idUsuarioAllSafe`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- AUTO_INCREMENT de la tabla `pais`
+-- Dumping data for table `usuarioclaverecuperar`
 --
-ALTER TABLE `pais`
-  MODIFY `idPais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT de la tabla `perfilallsafe`
---
-ALTER TABLE `perfilallsafe`
-  MODIFY `idPerfilAllSafe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `proyecto`
---
-ALTER TABLE `proyecto`
-  MODIFY `idProyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `tallaoberol`
---
-ALTER TABLE `tallaoberol`
-  MODIFY `idTallaOberol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `tallapantalon`
---
-ALTER TABLE `tallapantalon`
-  MODIFY `idTallaPantalon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `tallapoleracamisa`
---
-ALTER TABLE `tallapoleracamisa`
-  MODIFY `idTallaPoleraCamisa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `tallazapato`
---
-ALTER TABLE `tallazapato`
-  MODIFY `idTallaZapato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `tipoepp`
---
-ALTER TABLE `tipoepp`
-  MODIFY `idTipoEPP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `tipoplanta`
---
-ALTER TABLE `tipoplanta`
-  MODIFY `idTipoPlanta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `usuarioallsafe`
---
-ALTER TABLE `usuarioallsafe`
-  MODIFY `idUsuarioAllSafe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `asignacantidadepp`
---
-ALTER TABLE `asignacantidadepp`
-  ADD CONSTRAINT `fk_EppProceso_EstadosProyecto1` FOREIGN KEY (`EstadosProyecto_idEstadosProyecto`) REFERENCES `estadosproyecto` (`idEstadosProyecto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_asignacantidadepp_asignaeppaproyecto1` FOREIGN KEY (`asignaeppaproyecto_idasignaeppaproyecto`) REFERENCES `asignaeppaproyecto` (`idasignaeppaproyecto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_asignaeppproyecto_tipodecarga1` FOREIGN KEY (`tipodecarga_idtipodecarga`) REFERENCES `tipodecarga` (`idtipodecarga`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `asignaeppaproyecto`
---
-ALTER TABLE `asignaeppaproyecto`
-  ADD CONSTRAINT `fk_asignaeppaproyecto_epp1` FOREIGN KEY (`epp_idEPP`) REFERENCES `epp` (`idEPP`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_asignaeppaproyecto_proyecto1` FOREIGN KEY (`proyecto_idProyecto`) REFERENCES `proyecto` (`idProyecto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `asignatrabajadorproyecto`
---
-ALTER TABLE `asignatrabajadorproyecto`
-  ADD CONSTRAINT `fk_asignatrabajadorproyecto_persona1` FOREIGN KEY (`persona_rutPasaportePersona`) REFERENCES `persona` (`rutPasaportePersona`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_asignatrabajadorproyecto_proyecto1` FOREIGN KEY (`proyecto_idProyecto`) REFERENCES `proyecto` (`idProyecto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `ciudad`
---
-ALTER TABLE `ciudad`
-  ADD CONSTRAINT `fk_Ciudad_Pais1` FOREIGN KEY (`Pais_idPais`) REFERENCES `pais` (`idPais`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `epp`
---
-ALTER TABLE `epp`
-  ADD CONSTRAINT `fk_EPP_TipoEPP1` FOREIGN KEY (`TipoEPP_idTipoEPP`) REFERENCES `tipoepp` (`idTipoEPP`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `eppsolicitudterreno`
---
-ALTER TABLE `eppsolicitudterreno`
-  ADD CONSTRAINT `fk_EppSolicitudTerreno_EPP1` FOREIGN KEY (`EPP_idEPP`) REFERENCES `epp` (`idEPP`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_EppSolicitudTerreno_Proyecto1` FOREIGN KEY (`Proyecto_idProyecto`) REFERENCES `proyecto` (`idProyecto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_EppSolicitudTerreno_UsuarioAllsafe1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarioallsafe` (`idUsuarioAllSafe`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `eppterreno`
---
-ALTER TABLE `eppterreno`
-  ADD CONSTRAINT `fk_EppEntregaTerreno_Persona1` FOREIGN KEY (`Persona_rutPasaportePersona`) REFERENCES `persona` (`rutPasaportePersona`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_EppTerreno_EPP1` FOREIGN KEY (`EPP_idEPP`) REFERENCES `epp` (`idEPP`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_EppTerreno_Proyecto1` FOREIGN KEY (`Proyecto_idProyecto`) REFERENCES `proyecto` (`idProyecto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_EppTerreno_UsuarioAllsafe1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarioallsafe` (`idUsuarioAllSafe`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `menuallsafe`
---
-ALTER TABLE `menuallsafe`
-  ADD CONSTRAINT `fk_MenuAllsafe_PerfilAllSafe1` FOREIGN KEY (`PerfilAllSafe_idPerfilAllSafe`) REFERENCES `perfilallsafe` (`idPerfilAllSafe`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `persona`
---
-ALTER TABLE `persona`
-  ADD CONSTRAINT `FK_persona_Cargo_idCargo` FOREIGN KEY (`Cargo_idCargo`) REFERENCES `cargo` (`idCargo`),
-  ADD CONSTRAINT `FK_persona_TallaOberol_idTallaOberol` FOREIGN KEY (`TallaOberol_idTallaOberol`) REFERENCES `tallaoberol` (`idTallaOberol`),
-  ADD CONSTRAINT `FK_persona_TallaPantalon_idTallaPantalon` FOREIGN KEY (`TallaPantalon_idTallaPantalon`) REFERENCES `tallapantalon` (`idTallaPantalon`),
-  ADD CONSTRAINT `FK_persona_TipoPlanta_idTipoPlanta` FOREIGN KEY (`TipoPlanta_idTipoPlanta`) REFERENCES `tipoplanta` (`idTipoPlanta`),
-  ADD CONSTRAINT `FK_persona_tallaPoleraCamisa_idtallaPoleraCamisa` FOREIGN KEY (`tallaPoleraCamisa_idtallaPoleraCamisa`) REFERENCES `tallapoleracamisa` (`idTallaPoleraCamisa`),
-  ADD CONSTRAINT `FK_persona_tallaZApato_idtallaZApato` FOREIGN KEY (`tallaZApato_idtallaZApato`) REFERENCES `tallazapato` (`idTallaZapato`),
-  ADD CONSTRAINT `fk_Persona_Cargo1` FOREIGN KEY (`Cargo_idCargo`) REFERENCES `cargo` (`idCargo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Persona_TallaOberol1` FOREIGN KEY (`TallaOberol_idTallaOberol`) REFERENCES `tallaoberol` (`idTallaOberol`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Persona_TallaPantalon1` FOREIGN KEY (`TallaPantalon_idTallaPantalon`) REFERENCES `tallapantalon` (`idTallaPantalon`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Persona_TipoPlanta1` FOREIGN KEY (`TipoPlanta_idTipoPlanta`) REFERENCES `tipoplanta` (`idTipoPlanta`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Persona_tallaPoleraCamisa1` FOREIGN KEY (`tallaPoleraCamisa_idtallaPoleraCamisa`) REFERENCES `tallapoleracamisa` (`idTallaPoleraCamisa`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Persona_tallaZApato1` FOREIGN KEY (`tallaZApato_idtallaZApato`) REFERENCES `tallazapato` (`idTallaZapato`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `proyecto`
---
-ALTER TABLE `proyecto`
-  ADD CONSTRAINT `fk_Proyecto_Ciudad1` FOREIGN KEY (`Ciudad_idCiudad`) REFERENCES `ciudad` (`idCiudad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Proyecto_Empresa1` FOREIGN KEY (`Empresa_idEmpresa`) REFERENCES `empresa` (`idEmpresa`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `usuarioallsafe`
---
-ALTER TABLE `usuarioallsafe`
-  ADD CONSTRAINT `fk_UsuarioAllSafe_PerfilAllSafe1` FOREIGN KEY (`PerfilAllSafe_idPerfilAllSafe`) REFERENCES `perfilallsafe` (`idPerfilAllSafe`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_UsuarioAllSafe_Persona1` FOREIGN KEY (`Persona_rutPasaportePersona`) REFERENCES `persona` (`rutPasaportePersona`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
+LOCK TABLES `usuarioclaverecuperar` WRITE;
+/*!40000 ALTER TABLE `usuarioclaverecuperar` DISABLE KEYS */;
+INSERT INTO `usuarioclaverecuperar` VALUES (27,1,'2019-04-06 15:24:14','m49YHKmLH022nkeCMCAeY4xehgKxGL5lEVzWhLw2HAJaa1jvBk'),(31,1,'2019-04-06 17:58:02','9qdSMWh4q0Und5gR1MnN3jTT75iRZXBhPbQ5L0U7y7xC3kCLxb'),(32,1,'2019-04-06 18:00:00','camg8bo6RbJ1uGqnruqhyWhLbtxnHLnhQH6CJoMkChzBBoJjZP'),(33,1,'2019-04-06 18:01:51','BqqcYsHauW7kkyFeS2HzjfuHGMDbTYxkqAXlCYQ844FCmFx9No'),(34,1,'2019-04-06 18:06:17','SAnqk8GazyoDPng3H4jIsrg2BSfYSqpUj449QPZD7r9M4Lgh5Q');
+/*!40000 ALTER TABLE `usuarioclaverecuperar` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-04-07  9:36:44

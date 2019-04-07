@@ -82,11 +82,6 @@ public class Persona implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "correoPersona")
     private String correoPersona;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2)
-    @Column(name = "vigentepersona")
-    private String vigentepersona;
     @JoinColumn(name = "Cargo_idCargo", referencedColumnName = "idCargo")
     @ManyToOne(optional = false)
     private Cargo cargoidCargo;
@@ -111,6 +106,10 @@ public class Persona implements Serializable {
     private List<Usuarioallsafe> usuarioallsafeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personarutPasaportePersona")
     private List<Asignatrabajadorproyecto> asignatrabajadorproyectoList;
+    @Basic(optional = false)
+    @Size(min = 1, max = 1)
+    @Column(name = "vigencia")
+    private String vigencia;
 
     public Persona() {
     }
@@ -119,7 +118,7 @@ public class Persona implements Serializable {
         this.rutPasaportePersona = rutPasaportePersona;
     }
 
-    public Persona(String rutPasaportePersona, String nombresPersona, String apePatPersona, String apeMatPersona, String fechaNacPersona, String nacionalidadPersona, String correoPersona, String vigentepersona) {
+    public Persona(String rutPasaportePersona, String nombresPersona, String apePatPersona, String apeMatPersona, String fechaNacPersona, String nacionalidadPersona, String correoPersona, String vigencia) {
         this.rutPasaportePersona = rutPasaportePersona;
         this.nombresPersona = nombresPersona;
         this.apePatPersona = apePatPersona;
@@ -127,7 +126,7 @@ public class Persona implements Serializable {
         this.fechaNacPersona = fechaNacPersona;
         this.nacionalidadPersona = nacionalidadPersona;
         this.correoPersona = correoPersona;
-        this.vigentepersona = vigentepersona;
+        this.vigencia = vigencia;
     }
 
     public String getRutPasaportePersona() {
@@ -194,12 +193,12 @@ public class Persona implements Serializable {
         this.correoPersona = correoPersona;
     }
 
-    public String getVigentepersona() {
-        return vigentepersona;
+    public String getVigencia() {
+        return vigencia;
     }
 
-    public void setVigentepersona(String vigentepersona) {
-        this.vigentepersona = vigentepersona;
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
     }
 
     public Cargo getCargoidCargo() {

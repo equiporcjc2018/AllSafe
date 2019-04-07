@@ -57,11 +57,6 @@ public class Epp implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "descripcionEPP")
     private String descripcionEPP;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2)
-    @Column(name = "vigenteepp")
-    private String vigenteepp;
     @JoinColumn(name = "TipoEPP_idTipoEPP", referencedColumnName = "idTipoEPP")
     @ManyToOne(optional = false)
     private Tipoepp tipoEPPidTipoEPP;
@@ -71,6 +66,19 @@ public class Epp implements Serializable {
     private List<Asignaeppaproyecto> asignaeppaproyectoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ePPidEPP")
     private List<Eppsolicitudterreno> eppsolicitudterrenoList;
+    @Basic(optional = false)
+    @Size(min = 1, max = 1)
+    @Column(name = "vigencia")
+    private String vigencia;
+
+    public String getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
+    }
+    
 
     public Epp() {
     }
@@ -79,11 +87,11 @@ public class Epp implements Serializable {
         this.idEPP = idEPP;
     }
 
-    public Epp(Integer idEPP, String nombreEPPcol, String descripcionEPP, String vigenteepp) {
+    public Epp(Integer idEPP, String nombreEPPcol, String descripcionEPP, String vigencia) {
         this.idEPP = idEPP;
         this.nombreEPPcol = nombreEPPcol;
         this.descripcionEPP = descripcionEPP;
-        this.vigenteepp = vigenteepp;
+        this.vigencia = vigencia;
     }
 
     public Integer getIdEPP() {
@@ -108,14 +116,6 @@ public class Epp implements Serializable {
 
     public void setDescripcionEPP(String descripcionEPP) {
         this.descripcionEPP = descripcionEPP;
-    }
-
-    public String getVigenteepp() {
-        return vigenteepp;
-    }
-
-    public void setVigenteepp(String vigenteepp) {
-        this.vigenteepp = vigenteepp;
     }
 
     public Tipoepp getTipoEPPidTipoEPP() {

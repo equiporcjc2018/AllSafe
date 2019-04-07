@@ -50,7 +50,7 @@ public class EppDAOSessionBean {
         objEpp.setNombreEPPcol(eppTipoEppDTO.getObjEpp().getNombreEPPcol());
         objEpp.setDescripcionEPP(eppTipoEppDTO.getObjEpp().getDescripcionEPP());
         objEpp.setTipoEPPidTipoEPP(eppTipoEppDTO.getObjTipoepp());
-        objEpp.setVigenteepp(eppTipoEppDTO.getObjEpp().getVigenteepp());
+        objEpp.setVigencia(eppTipoEppDTO.getObjEpp().getVigencia());
         em.persist(objEpp);
     }
     
@@ -60,7 +60,7 @@ public class EppDAOSessionBean {
         objEpp.setNombreEPPcol(eppTipoEppDTO.getObjEpp().getNombreEPPcol());
         objEpp.setDescripcionEPP(eppTipoEppDTO.getObjEpp().getDescripcionEPP());
         objEpp.setTipoEPPidTipoEPP(eppTipoEppDTO.getObjTipoepp());
-        objEpp.setVigenteepp(eppTipoEppDTO.getObjEpp().getVigenteepp());
+        objEpp.setVigencia(eppTipoEppDTO.getObjEpp().getVigencia());
         em.merge(objEpp);
         
     }
@@ -89,14 +89,14 @@ public class EppDAOSessionBean {
     public void updateVigenteEpp(Epp epp)
     {
         Epp infoEpp = new Epp();
-        String vigente = epp.getVigenteepp();
-        if (vigente.equals("Si")) 
+        String vigente = epp.getVigencia();
+        if (vigente.equals("Y")) 
         {
             infoEpp.setIdEPP(epp.getIdEPP());
             infoEpp.setNombreEPPcol(epp.getNombreEPPcol());
             infoEpp.setDescripcionEPP(epp.getDescripcionEPP());
             infoEpp.setTipoEPPidTipoEPP(epp.getTipoEPPidTipoEPP());
-            infoEpp.setVigenteepp("No");
+            infoEpp.setVigencia("N");
         }
         else
         {
@@ -104,7 +104,7 @@ public class EppDAOSessionBean {
             infoEpp.setNombreEPPcol(epp.getNombreEPPcol());
             infoEpp.setDescripcionEPP(epp.getDescripcionEPP());
             infoEpp.setTipoEPPidTipoEPP(epp.getTipoEPPidTipoEPP());
-            infoEpp.setVigenteepp("Si");
+            infoEpp.setVigencia("Y");
         }
         
         em.merge(infoEpp);
