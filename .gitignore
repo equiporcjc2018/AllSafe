@@ -1,5 +1,6 @@
 /nbproject/private/
 /build/
+<<<<<<< HEAD
 /dist/
 nbproject/genfiles.properties
 Librerias y Dependencias/mysql-connector-java-8.0.11.jar
@@ -15,3 +16,12 @@ nbproject/project.properties
 nbproject/project.xml
 src/conf/persistence.xml
 web/WEB-INF/glassfish-resources.xml
+=======
+/dist/
+>>>>>>> parent of 2f83921... Update .gitignore
+web/WEB-INF/glassfish-resources.xml
+src/conf/persistence.xml
+nbproject/project.xml
+nbproject/project.properties
+nbproject/genfiles.properties
+nbproject/build-impl.xml
