@@ -125,4 +125,7 @@ public class Tipoplanta implements Serializable {
         return "allSafe.Entities.Tipoplanta[ idTipoPlanta=" + idTipoPlanta + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

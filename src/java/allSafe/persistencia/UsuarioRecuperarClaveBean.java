@@ -187,7 +187,7 @@ public class UsuarioRecuperarClaveBean {
         UsuarioClaveRecuperar ucr = null;
         try{
             Usuarioallsafe usuario = this.getValidaUser(username);
-            if(null != usuario){
+            if(null != usuario && usuario.getVigencia().equals("Y")){
                 ucr = new UsuarioClaveRecuperar();
                 ucr.setCodigo(generarCodigoRecuperacionClave());
                 ucr.setUsuario(usuario);

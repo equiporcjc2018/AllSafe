@@ -152,4 +152,7 @@ public class Menuallsafe implements Serializable {
         return "allSafe.Entities.Menuallsafe[ idMenuAllsafe=" + idMenuAllsafe + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

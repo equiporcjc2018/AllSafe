@@ -114,4 +114,7 @@ public class Asignatrabajadorproyecto implements Serializable {
         return "allSafe.Entities.Asignatrabajadorproyecto[ idasignatrabajadorproyecto=" + idasignatrabajadorproyecto + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

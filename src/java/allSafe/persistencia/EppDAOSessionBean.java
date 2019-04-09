@@ -90,20 +90,16 @@ public class EppDAOSessionBean {
     {
         Epp infoEpp = new Epp();
         String vigente = epp.getVigencia();
+        infoEpp.setIdEPP(epp.getIdEPP());
+        infoEpp.setNombreEPPcol(epp.getNombreEPPcol());
+        infoEpp.setDescripcionEPP(epp.getDescripcionEPP());
+        infoEpp.setTipoEPPidTipoEPP(epp.getTipoEPPidTipoEPP());
         if (vigente.equals("Y")) 
         {
-            infoEpp.setIdEPP(epp.getIdEPP());
-            infoEpp.setNombreEPPcol(epp.getNombreEPPcol());
-            infoEpp.setDescripcionEPP(epp.getDescripcionEPP());
-            infoEpp.setTipoEPPidTipoEPP(epp.getTipoEPPidTipoEPP());
             infoEpp.setVigencia("N");
         }
         else
         {
-            infoEpp.setIdEPP(epp.getIdEPP());
-            infoEpp.setNombreEPPcol(epp.getNombreEPPcol());
-            infoEpp.setDescripcionEPP(epp.getDescripcionEPP());
-            infoEpp.setTipoEPPidTipoEPP(epp.getTipoEPPidTipoEPP());
             infoEpp.setVigencia("Y");
         }
         

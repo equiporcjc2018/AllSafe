@@ -125,4 +125,7 @@ public class Tipoepp implements Serializable {
         return "allSafe.Entities.Tipoepp[ idTipoEPP=" + idTipoEPP + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

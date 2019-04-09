@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Proyecto.findByUbicacionProyecto", query = "SELECT p FROM Proyecto p WHERE p.ubicacionProyecto = :ubicacionProyecto")
     , @NamedQuery(name = "Proyecto.findByFechaInicioProyecto", query = "SELECT p FROM Proyecto p WHERE p.fechaInicioProyecto = :fechaInicioProyecto")
     , @NamedQuery(name = "Proyecto.findByFechaTerminoProyecto", query = "SELECT p FROM Proyecto p WHERE p.fechaTerminoProyecto = :fechaTerminoProyecto")
-    , @NamedQuery(name = "Proyecto.findByVigenteproyecto", query = "SELECT p FROM Proyecto p WHERE p.vigenteproyecto = :vigenteproyecto")})
+    , @NamedQuery(name = "Proyecto.findByVigenteproyecto", query = "SELECT p FROM Proyecto p WHERE p.vigencia = :vigenteproyecto")})
 public class Proyecto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -243,4 +243,7 @@ public class Proyecto implements Serializable {
         return "allSafe.Entities.Proyecto[ idProyecto=" + idProyecto + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

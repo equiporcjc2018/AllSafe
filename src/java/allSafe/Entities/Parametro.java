@@ -136,4 +136,7 @@ public class Parametro implements Serializable {
         return "Parametro: "+llave+"\nDescripcion:" + descripcion + "\nValor:" + valor;
     }
 
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

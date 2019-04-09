@@ -136,4 +136,7 @@ public class Perfilallsafe implements Serializable {
         return "allSafe.Entities.Perfilallsafe[ idPerfilAllSafe=" + idPerfilAllSafe + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

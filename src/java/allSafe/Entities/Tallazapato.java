@@ -123,4 +123,7 @@ public class Tallazapato implements Serializable {
         return "allSafe.Entities.Tallazapato[ idTallaZapato=" + idTallaZapato + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

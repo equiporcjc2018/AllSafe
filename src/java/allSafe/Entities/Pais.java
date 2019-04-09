@@ -140,4 +140,7 @@ public class Pais implements Serializable {
         return "allSafe.Entities.Pais[ idPais=" + idPais + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

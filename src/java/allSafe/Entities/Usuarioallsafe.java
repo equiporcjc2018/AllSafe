@@ -176,6 +176,10 @@ public class Usuarioallsafe implements Serializable {
     public String toString() {
         return "Usuarioallsafe{" + "idUsuarioAllSafe=" + idUsuarioAllSafe + ", loginUsuarioAllSafe=" + loginUsuarioAllSafe + ", passUsuarioAllSafe=" + passUsuarioAllSafe + ", eppterrenoList=" + eppterrenoList + ", perfilAllSafeidPerfilAllSafe=" + perfilAllSafeidPerfilAllSafe + ", personarutPasaportePersona=" + personarutPasaportePersona + ", eppsolicitudterrenoList=" + eppsolicitudterrenoList + '}';
     }
+    
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 
     
 }

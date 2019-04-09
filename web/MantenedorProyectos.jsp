@@ -68,6 +68,18 @@
                                     <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
                                         <h3 class="section-title">Gestion Proyectos</h3>
                                         <p>Aqui puedes Registrar, editar, y dar de baja Proyectos</p>
+                                        <c:if test="${error!=null}">
+                                            <div class="alert alert-danger" role="alert">
+                                                <c:out value="${error}"/>
+                                                <c:remove var="error"/>
+                                            </div>
+                                        </c:if>            
+                                        <c:if test="${exito!=null}">
+                                            <div class="alert alert-success" role="alert">
+                                                <c:out value="${exito}"/>
+                                                <c:remove var="exito"/>
+                                            </div>
+                                        </c:if>   
                                         <div class="card">
                                             <h3 class="card-header">Registro de Proyectos</h3>
                                             <div class="card-body">
@@ -166,9 +178,7 @@
                                                                         <th>Razon Social Empresa</th>
                                                                         <th>Fecha inicio</th>
                                                                         <th>Fecha término</th>
-                                                                        <th>Proyecto Vigente</th>
-                                                                        <th>Editar</th>
-                                                                        <th>Eliminar</th>
+                                                                        <th>Acciones</th>
                                                                     </tr> 
                                                                 </thead>
                                                                 <tfoot>
@@ -181,9 +191,7 @@
                                                                         <th>Razon Social Empresa</th>
                                                                         <th>Fecha inicio</th>
                                                                         <th>Fecha término</th>
-                                                                        <th>Proyecto Vigente</th>
-                                                                        <th>Editar</th>
-                                                                        <th>Eliminar</th>
+                                                                        <th>Acciones</th>
                                                                     </tr> 
                                                                 </tfoot>
                                                                 <tbody>
@@ -197,9 +205,22 @@
                                                                             <td><c:out value="${proyecto.empresaidEmpresa.razonSocialEmpresa}"/></td>
                                                                             <td><c:out value="${proyecto.fechaInicioProyecto}"/></td>
                                                                             <td><c:out value="${proyecto.fechaTerminoProyecto}"/></td>
-                                                                            <td><c:if test="${proyecto.vigencia == 'Y'}" >Si</c:if><c:if test="${proyecto.vigencia == 'N'}" >No</c:if></td>
-                                                                            <td><input type="button" class="btn btn-primary btn-space" name="btnEditar" value="Editar"/></td>
-                                                                            <td><input type="button" class="btn btn-secondary btn-space" name="btnEliminar" value="Eliminar"/></td>
+                                                                            <td>
+                                                                                <input type="button" class="btn btn-primary btn-sm btn-space" name="btnEditar" style="font-family: FontAwesome" value="&#xf044" />
+                                                                            
+                                                                                <c:if test="${proyecto.vigencia == 'Y'}">
+                                                                                    <c:url value="./cambiaVigenciaProyecto" var="modificarVigencia">
+                                                                                        <c:param name="id_proyecto" value="${proyecto.idProyecto}"/>
+                                                                                    </c:url>
+                                                                                    <button type="button" class="btn btn-success btn-sm btn-space" onclick="window.location.href = '<c:out value="${modificarVigencia}"/>'"><i class="fas fa-check"></i></button>
+                                                                                </c:if>
+                                                                                <c:if test="${proyecto.vigencia == 'N'}">
+                                                                                    <c:url value="./cambiaVigenciaProyecto" var="modificarVigencia">
+                                                                                        <c:param name="id_proyecto" value="${proyecto.idProyecto}"/>
+                                                                                    </c:url>
+                                                                                    <button type="button" class="btn btn-danger btn-sm btn-space" onclick="window.location.href = '<c:out value="${modificarVigencia}"/>'"><i class="fas fa-times"></i></button>
+                                                                                </c:if>
+                                                                            </td>
                                                                         </tr>
                                                                     </c:forEach>
                                                                 </tbody>

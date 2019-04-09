@@ -138,4 +138,7 @@ public class Tallapantalon implements Serializable {
         return "allSafe.Entities.Tallapantalon[ idTallaPantalon=" + idTallaPantalon + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

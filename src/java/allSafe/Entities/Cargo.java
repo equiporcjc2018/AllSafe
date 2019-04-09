@@ -125,4 +125,7 @@ public class Cargo implements Serializable {
         return "allSafe.Entities.Cargo[ idCargo=" + idCargo + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

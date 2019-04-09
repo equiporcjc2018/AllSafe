@@ -189,4 +189,7 @@ public class Eppsolicitudterreno implements Serializable {
         return "allSafe.Entities.Eppsolicitudterreno[ idEppSolicitudTerreno=" + idEppSolicitudTerreno + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

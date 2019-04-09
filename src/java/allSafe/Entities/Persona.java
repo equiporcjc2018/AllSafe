@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Persona.findByFechaNacPersona", query = "SELECT p FROM Persona p WHERE p.fechaNacPersona = :fechaNacPersona")
     , @NamedQuery(name = "Persona.findByNacionalidadPersona", query = "SELECT p FROM Persona p WHERE p.nacionalidadPersona = :nacionalidadPersona")
     , @NamedQuery(name = "Persona.findByCorreoPersona", query = "SELECT p FROM Persona p WHERE p.correoPersona = :correoPersona")
-    , @NamedQuery(name = "Persona.findByVigentepersona", query = "SELECT p FROM Persona p WHERE p.vigentepersona = :vigentepersona")})
+    , @NamedQuery(name = "Persona.findByVigentepersona", query = "SELECT p FROM Persona p WHERE p.vigencia = :vigentepersona")})
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -301,4 +301,7 @@ public class Persona implements Serializable {
         return "allSafe.Entities.Persona[ rutPasaportePersona=" + rutPasaportePersona + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

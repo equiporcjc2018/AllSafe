@@ -54,4 +54,23 @@ public class ProyectoDAOSessionBean {
         return infoProyectoEntidad;
     }
     
+    
+    
+    
+    public Proyecto cambiarVigencia(int idProyecto)
+    {
+        Proyecto proyecto = buscaProyectoXID(idProyecto);
+        if(null != proyecto){
+            if (proyecto.isVigente())
+            {
+                proyecto.setVigencia("N");
+            }
+            else
+            {
+                proyecto.setVigencia("Y");
+            }
+        }
+        em.merge(proyecto);
+        return proyecto;
+    }
 }

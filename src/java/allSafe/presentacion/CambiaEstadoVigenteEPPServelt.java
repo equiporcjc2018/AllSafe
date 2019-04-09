@@ -41,11 +41,12 @@ public class CambiaEstadoVigenteEPPServelt extends HttpServlet {
             //Epp infoEPP = this.objEppDAOSessionBean.buscaEppXID(eppCambVigEPP);
             infoEPP = this.objEppDAOSessionBean.buscaEppXcodigo(eppCambVigEPP);
             this.objEppDAOSessionBean.updateVigenteEpp(infoEPP);
-            sesion.setAttribute("ExitoCambio", "EPP modificado Correctamente");
+            sesion.setAttribute("exito", "Vigencia del EPP modificada con éxito");
             response.sendRedirect("MantenedorEPP.jsp");
         } 
         catch (Exception ex) 
         {
+            sesion.setAttribute("error", "Ocurrió un error al modificar la vigencia");
             Logger.getLogger(ListarEppsServlet.class.getName()).log(Level.SEVERE, null, ex);
             response.sendRedirect("MantenedorEPP.jsp");
         }
