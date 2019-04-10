@@ -207,7 +207,7 @@
                                             </div>
 
                                             <div class="card">
-                                                <h5 class="card-header">Selección de Proyecto</h5>
+                                                <h2 class="card-header">Selección de Proyecto</h2>
                                                 <div class="card-body">
 
                                                     <div class="table-responsive">
@@ -273,9 +273,6 @@
                                             <div class="card">
                                                 <h2 class="card-header">Selección de EPP Estándar</h2>
                                                 <div class="card-body">
-                                                    <hr>
-                                        
-                                        <hr>
                                                     <div class="table-responsive">
                                                         <c:choose>
                                                             <c:when test="${sessionScope.listadoEpps!=null}">
@@ -419,7 +416,7 @@
                                                 <h2 class="card-header">Asignar</h2>
                                                 <div class="card-body">
 
-                                                    <p><input type="submit" class="btn btn-success btn-space" name="btnGuardar" value="Registrar"></p>
+                                                    <p><input type="submit" class="btn btn-success btn-space  btn-lg btn-block" name="btnGuardar" value="Registrar"></p>
 
                                                 </div>
                                             </div>
