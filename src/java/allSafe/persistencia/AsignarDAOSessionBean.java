@@ -171,6 +171,8 @@ public class AsignarDAOSessionBean {
         return infoAsignaeppaproyecto;
     }
     
+    
+    
     public Estadosproyecto buscaEstadoProy(int id){
         Estadosproyecto infoEstadosproyecto = null;
         try {
@@ -214,6 +216,66 @@ public class AsignarDAOSessionBean {
         
         
         em.persist(objAsignacantidadepp);
+    }
+    
+    
+    public Asignatrabajadorproyecto findAsignatrabajadorproyectoById(int idAsignacion){
+        Asignatrabajadorproyecto asignacion = null;
+        try {
+            asignacion =em.createNamedQuery("Asignatrabajadorproyecto.findByIdasignatrabajadorproyecto",Asignatrabajadorproyecto.class)
+                    .setParameter("idasignatrabajadorproyecto", idAsignacion)
+                    .getSingleResult();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return asignacion;
+    }
+    
+    public Asignaeppaproyecto findAsignaeppaproyectoById(int idAsignacion){
+        Asignaeppaproyecto asignacion = null;
+        try {
+            asignacion =em.createNamedQuery("Asignaeppaproyecto.findById",Asignaeppaproyecto.class)
+                    .setParameter("idasignaeppaproyecto", idAsignacion)
+                    .getSingleResult();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return asignacion;
+    }
+    
+    
+    public Asignatrabajadorproyecto cambiarVigenciaAsigProyTrab(int idAsignacion)
+    {
+        Asignatrabajadorproyecto asignacion = findAsignatrabajadorproyectoById(idAsignacion);
+        if(null != asignacion){
+            if (asignacion.isVigente())
+            {
+                asignacion.setVigencia("N");
+            }
+            else
+            {
+                asignacion.setVigencia("Y");
+            }
+        }
+        em.merge(asignacion);
+        return asignacion;
+    }
+    
+    public Asignaeppaproyecto cambiarVigenciaAsigProyEpp(int idAsignacion)
+    {
+        Asignaeppaproyecto asignacion = findAsignaeppaproyectoById(idAsignacion);
+        if(null != asignacion){
+            if (asignacion.isVigente())
+            {
+                asignacion.setVigencia("N");
+            }
+            else
+            {
+                asignacion.setVigencia("Y");
+            }
+        }
+        em.merge(asignacion);
+        return asignacion;
     }
     
 }

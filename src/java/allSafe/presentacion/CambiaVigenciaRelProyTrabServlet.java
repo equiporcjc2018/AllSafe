@@ -5,12 +5,10 @@
  */
 package allSafe.presentacion;
 
-import allSafe.Entities.Epp;
+import allSafe.Entities.Asignatrabajadorproyecto;
 import allSafe.Entities.Proyecto;
-import allSafe.persistencia.ProyectoDAOSessionBean;
+import allSafe.persistencia.AsignarDAOSessionBean;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,28 +21,28 @@ import javax.servlet.http.HttpSession;
  *
  * @author Ruben
  */
-@WebServlet(name = "CambiaVigenciaProyectoServlet", urlPatterns = {"/cambiaVigenciaProyectoServlet","/cambiaVigenciaProyecto"})
-public class CambiaVigenciaProyectoServlet extends HttpServlet {
+@WebServlet(name = "CambiaVigenciaRelProyTrabServlet", urlPatterns = {"/cambiaVigenciaRelProyTrabServlet","/cambiaVigenciaRelProyTrab"})
+public class CambiaVigenciaRelProyTrabServlet extends HttpServlet {
 
     @EJB
-    ProyectoDAOSessionBean proyectoDAO;
+    AsignarDAOSessionBean asignarDAO;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
-        int idProyecto;
         try 
         {
-            idProyecto = Integer.parseInt(request.getParameter("id_proyecto"));
-            Proyecto proyecto = proyectoDAO.cambiarVigencia(idProyecto);
-            sesion.setAttribute("exito", "El proyecto "+proyecto.getNombreProyecto()+" pasó a estar "+(proyecto.isVigente() ? "vigente" : "no vigente" ) );
-            response.sendRedirect("MantenedorProyectos.jsp");
+            int idAsignacion = Integer.parseInt(request.getParameter("idAsignacion"));
+            Asignatrabajadorproyecto asignacion = asignarDAO.cambiarVigenciaAsigProyTrab(idAsignacion);
+            sesion.setAttribute("exito", "La asignación entre "+asignacion.getPersonarutPasaportePersona().getRutPasaportePersona()+" y el proyecto "+asignacion.getProyectoidProyecto().getNombreProyecto()+" pasó a estar "+(asignacion.isVigente() ? "vigente" : "no vigente" ) );
+            response.sendRedirect("AsignarPersonaAProyecto.jsp");
         } 
         catch (IOException | NumberFormatException ex) 
         {
+            ex.printStackTrace();
             sesion.setAttribute("error", "Ocurrió un error al modificar la vigencia");
-            response.sendRedirect("MantenedorProyectos.jsp");
+            response.sendRedirect("AsignarPersonaAProyecto.jsp");
         }
         
     }
