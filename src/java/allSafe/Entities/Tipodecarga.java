@@ -123,4 +123,7 @@ public class Tipodecarga implements Serializable {
         return "allSafe.Entities.Tipodecarga[ idtipodecarga=" + idtipodecarga + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

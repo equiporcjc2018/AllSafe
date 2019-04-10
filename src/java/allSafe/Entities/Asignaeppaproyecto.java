@@ -130,4 +130,7 @@ public class Asignaeppaproyecto implements Serializable {
         return "allSafe.Entities.Asignaeppaproyecto[ idasignaeppaproyecto=" + idasignaeppaproyecto + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

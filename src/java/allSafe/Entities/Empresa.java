@@ -199,4 +199,7 @@ public class Empresa implements Serializable {
         return "allSafe.Entities.Empresa[ idEmpresa=" + idEmpresa + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

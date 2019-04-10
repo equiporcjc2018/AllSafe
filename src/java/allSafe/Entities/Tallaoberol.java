@@ -138,4 +138,7 @@ public class Tallaoberol implements Serializable {
         return "allSafe.Entities.Tallaoberol[ idTallaOberol=" + idTallaOberol + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

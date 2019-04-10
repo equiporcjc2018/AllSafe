@@ -221,4 +221,7 @@ public class Asignacantidadepp implements Serializable {
         return "allSafe.Entities.Asignacantidadepp[ idEppProceso=" + idEppProceso + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

@@ -248,4 +248,7 @@ public class Eppterreno implements Serializable {
         return "allSafe.Entities.Eppterreno[ idEppTerreno=" + idEppTerreno + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

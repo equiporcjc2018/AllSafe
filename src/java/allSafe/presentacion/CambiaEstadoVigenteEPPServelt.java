@@ -33,19 +33,16 @@ public class CambiaEstadoVigenteEPPServelt extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
-        int eppCambVigEPP = 0;
-        Epp infoEPP=null;
         try 
         {
-            eppCambVigEPP = Integer.parseInt(request.getParameter("id_epp"));
-            //Epp infoEPP = this.objEppDAOSessionBean.buscaEppXID(eppCambVigEPP);
-            infoEPP = this.objEppDAOSessionBean.buscaEppXcodigo(eppCambVigEPP);
-            this.objEppDAOSessionBean.updateVigenteEpp(infoEPP);
-            sesion.setAttribute("ExitoCambio", "EPP modificado Correctamente");
+            int idEpp = Integer.parseInt(request.getParameter("id_epp"));
+            Epp infoEpp = this.objEppDAOSessionBean.cambiarVigenciaEPP(idEpp);
+            sesion.setAttribute("exito", "El EPP "+infoEpp.getNombreEPPcol()+" pasó a estar "+(infoEpp.isVigente() ? "Vigente" : "No vigente" ));
             response.sendRedirect("MantenedorEPP.jsp");
         } 
         catch (Exception ex) 
         {
+            sesion.setAttribute("error", "Ocurrió un error al modificar la vigencia");
             Logger.getLogger(ListarEppsServlet.class.getName()).log(Level.SEVERE, null, ex);
             response.sendRedirect("MantenedorEPP.jsp");
         }

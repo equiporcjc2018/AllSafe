@@ -125,4 +125,7 @@ public class Estadosproyecto implements Serializable {
         return "allSafe.Entities.Estadosproyecto[ idEstadosProyecto=" + idEstadosProyecto + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

@@ -138,4 +138,7 @@ public class Ciudad implements Serializable {
         return "allSafe.Entities.Ciudad[ idCiudad=" + idCiudad + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

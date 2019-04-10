@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Epp.findByNombreEPPcol", query = "SELECT e FROM Epp e WHERE e.nombreEPPcol = :nombreEPPcol")
     , @NamedQuery(name = "Epp.findByDescripcionEPP", query = "SELECT e FROM Epp e WHERE e.descripcionEPP = :descripcionEPP")
     , @NamedQuery(name = "Epp.findByTipoEPP", query = "SELECT e FROM Epp e WHERE e.tipoEPPidTipoEPP.idTipoEPP = :tipoEPPidTipoEPP")
-    , @NamedQuery(name = "Epp.findByVigenteepp", query = "SELECT e FROM Epp e WHERE e.vigenteepp = :vigenteepp")})
+    , @NamedQuery(name = "Epp.findByVigenteepp", query = "SELECT e FROM Epp e WHERE e.vigencia = :vigenteepp")})
 public class Epp implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -178,4 +178,7 @@ public class Epp implements Serializable {
         return "allSafe.Entities.Epp[ idEPP=" + idEPP + " ]";
     }
     
+    public boolean isVigente(){
+        return this.getVigencia().equals("Y");
+    }
 }

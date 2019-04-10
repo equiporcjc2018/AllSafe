@@ -86,27 +86,18 @@ public class EppDAOSessionBean {
     }
     
     
-    public void updateVigenteEpp(Epp epp)
+    public Epp cambiarVigenciaEPP(int idEpp)
     {
-        Epp infoEpp = new Epp();
-        String vigente = epp.getVigencia();
-        if (vigente.equals("Y")) 
+        Epp infoEpp = buscaEppXID(idEpp);
+        if (infoEpp.isVigente()) 
         {
-            infoEpp.setIdEPP(epp.getIdEPP());
-            infoEpp.setNombreEPPcol(epp.getNombreEPPcol());
-            infoEpp.setDescripcionEPP(epp.getDescripcionEPP());
-            infoEpp.setTipoEPPidTipoEPP(epp.getTipoEPPidTipoEPP());
             infoEpp.setVigencia("N");
         }
         else
         {
-            infoEpp.setIdEPP(epp.getIdEPP());
-            infoEpp.setNombreEPPcol(epp.getNombreEPPcol());
-            infoEpp.setDescripcionEPP(epp.getDescripcionEPP());
-            infoEpp.setTipoEPPidTipoEPP(epp.getTipoEPPidTipoEPP());
             infoEpp.setVigencia("Y");
         }
-        
         em.merge(infoEpp);
+        return infoEpp;
     }
 }

@@ -95,6 +95,18 @@
                                             <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
                                                 <h3 class="section-title">Ingreso Epp</h3>
                                                 <p>Aquí puedes ingresar, editar, y activar Epp</p>
+                                                <c:if test="${error!=null}">
+                                                    <div class="alert alert-danger" role="alert">
+                                                        <c:out value="${error}"/>
+                                                        <c:remove var="error"/>
+                                                    </div>
+                                                </c:if>            
+                                                <c:if test="${exito!=null}">
+                                                    <div class="alert alert-success" role="alert">
+                                                        <c:out value="${exito}"/>
+                                                        <c:remove var="exito"/>
+                                                    </div>
+                                                </c:if>  
                                                 <div class="card">
                                                     <h3 class="card-header">Agregar EPP</h3>
                                                     <div class="card-body">
@@ -224,9 +236,7 @@
                                                                             <th>Nombre</th>
                                                                             <th>Descripcion</th>
                                                                             <th>Tipo EPP</th>
-                                                                            <th>Vigente</th>
-                                                                            <th>Editar</th>
-                                                                            <th>Habilitado</th>
+                                                                            <th>Acciones</th>
                                                                         </tr> 
                                                                     </thead>
                                                                     <tfoot>
@@ -235,9 +245,7 @@
                                                                             <th>Nombre</th>
                                                                             <th>Descripcion</th>
                                                                             <th>Tipo EPP</th>
-                                                                            <th>Vigente</th>
-                                                                            <th>Editar</th>
-                                                                            <th>Habilitado</th>
+                                                                            <th>Acciones</th>
                                                                         </tr> 
                                                                     </tfoot>
                                                                     <tbody>
@@ -247,21 +255,25 @@
                                                                                 <td><c:out value="${epp.nombreEPPcol}"/></td>
                                                                                 <td><c:out value="${epp.descripcionEPP}"/></td>
                                                                                 <td><c:out value="${epp.tipoEPPidTipoEPP.descripcionTipoEPP}"/></td>
-                                                                                <td><c:if test="${epp.vigencia == 'Y'}" >Si</c:if><c:if test="${epp.vigencia == 'N'}" >No</c:if></td>
-                                                                                <c:url value="./editarEppServlet" var="edicionDeEPP">
-                                                                                    <c:param name="ideppAEditar" value="${epp.idEPP}"/>
-                                                                                </c:url>
-                                                                                <td><input type="button" class="btn btn-primary btn-space" name="btnEditar" value="Editar" onclick="window.location.href = '<c:out value="${edicionDeEPP}"/>'"/></td>
-
-                                                                                <c:url value="./cambiaEstadoVigenteEpp" var="cambiaEstadoEPP">
-                                                                                    <c:param name="id_epp" value="${epp.idEPP}"/>
-                                                                                </c:url>
                                                                                 <td>
-                                                                                    <input type="button" class="btn btn-secondary btn-space" name="btnHabilitadoEstandar" value="Vigente" onclick="window.location.href = '<c:out value="${cambiaEstadoEPP}"/>'"/>
+                                                                                    <c:url value="./editarEppServlet" var="edicionDeEPP">
+                                                                                        <c:param name="ideppAEditar" value="${epp.idEPP}"/>
+                                                                                    </c:url>
+                                                                                        <input type="button" class="btn btn-primary btn-sm btn-space" style="font-family: FontAwesome" value="&#xf044" name="btnEditar" onclick="window.location.href = '<c:out value="${edicionDeEPP}"/>'"/>
+
+                                                                                    <c:if test="${epp.vigencia == 'Y'}">
+                                                                                        <c:url value="./cambiaEstadoVigenteEpp" var="cambiaEstadoEPP">
+                                                                                            <c:param name="id_epp" value="${epp.idEPP}"/>
+                                                                                        </c:url>
+                                                                                        <input type="button" class="btn btn-success btn-sm btn-space" style="font-family: FontAwesome" value="&#xf00c" name="btnHabilitadoEstandar" onclick="window.location.href = '<c:out value="${cambiaEstadoEPP}"/>'"/>
+                                                                                    </c:if>
+                                                                                    <c:if test="${epp.vigencia == 'N'}">
+                                                                                        <c:url value="./cambiaEstadoVigenteEpp" var="cambiaEstadoEPP">
+                                                                                            <c:param name="id_epp" value="${epp.idEPP}"/>
+                                                                                        </c:url>
+                                                                                        <input type="button" class="btn btn-danger btn-sm btn-space" style="font-family: FontAwesome" value="&#xf00d"  name="btnHabilitadoEstandar" onclick="window.location.href = '<c:out value="${cambiaEstadoEPP}"/>'"/>
+                                                                                    </c:if>
                                                                                 </td>
-
-
-
                                                                             </tr>
                                                                         </c:forEach>
                                                                     </tbody>
@@ -292,9 +304,7 @@
                                                                             <th>Nombre</th>
                                                                             <th>Descripcion</th>
                                                                             <th>Tipo EPP</th>
-                                                                            <th>Vigente</th>
-                                                                            <th>Editar</th>
-                                                                            <th>Eliminar</th>
+                                                                            <th>Acciones</th>
                                                                         </tr> 
                                                                     </thead>
                                                                     <tfoot>
@@ -303,9 +313,7 @@
                                                                             <th>Nombre</th>
                                                                             <th>Descripcion</th>
                                                                             <th>Tipo EPP</th>
-                                                                            <th>Vigente</th>
-                                                                            <th>Editar</th>
-                                                                            <th>Eliminar</th>
+                                                                            <th>Acciones</th>
                                                                         </tr> 
                                                                     </tfoot>
                                                                     <tbody>
@@ -315,20 +323,25 @@
                                                                                 <td><c:out value="${epp.nombreEPPcol}"/></td>
                                                                                 <td><c:out value="${epp.descripcionEPP}"/></td>
                                                                                 <td><c:out value="${epp.tipoEPPidTipoEPP.descripcionTipoEPP}"/></td>
-                                                                                <td><c:if test="${epp.vigencia == 'Y'}" >Si</c:if><c:if test="${epp.vigencia == 'N'}" >No</c:if></td>
-                                                                                <c:url value="./editarEppServlet" var="edicionDeEPP">
-                                                                                    <c:param name="ideppAEditar" value="${epp.idEPP}"/>
-                                                                                </c:url>
-                                                                                <td><input type="button" class="btn btn-primary btn-space" name="btnEditar" value="Editar" onclick="window.location.href = '<c:out value="${edicionDeEPP}"/>'"/></td>
-                                                                                    <c:url value="./cambiaEstadoVigenteEpp" var="cambiaEstadoEPP">
-                                                                                        <c:param name="id_epp" value="${epp.idEPP}"/>
-                                                                                    </c:url>
                                                                                 <td>
-                                                                                    <button type="button" class="btn btn-secondary btn-space" onclick="window.location.href = '<c:out value="${cambiaEstadoEPP}"/>'">Cambia Vigente</button>
+                                                                                    <c:url value="./editarEppServlet" var="edicionDeEPP">
+                                                                                        <c:param name="ideppAEditar" value="${epp.idEPP}"/>
+                                                                                    </c:url>
+                                                                                    <input type="button" class="btn btn-primary btn-sm btn-space" name="btnEditar" style="font-family: FontAwesome" value="&#xf044" onclick="window.location.href = '<c:out value="${edicionDeEPP}"/>'"/>
 
+                                                                                    <c:if test="${epp.vigencia == 'Y'}">
+                                                                                        <c:url value="./cambiaEstadoVigenteEpp" var="cambiaEstadoEPP">
+                                                                                            <c:param name="id_epp" value="${epp.idEPP}"/>
+                                                                                        </c:url>
+                                                                                        <button type="button" class="btn btn-success btn-sm btn-space" onclick="window.location.href = '<c:out value="${cambiaEstadoEPP}"/>'"><i class="fas fa-check"></i></button>
+                                                                                    </c:if>
+                                                                                    <c:if test="${epp.vigencia == 'N'}">
+                                                                                        <c:url value="./cambiaEstadoVigenteEpp" var="cambiaEstadoEPP">
+                                                                                            <c:param name="id_epp" value="${epp.idEPP}"/>
+                                                                                        </c:url>
+                                                                                        <button type="button" class="btn btn-danger btn-sm btn-space" onclick="window.location.href = '<c:out value="${cambiaEstadoEPP}"/>'"><i class="fas fa-times"></i></button>
+                                                                                    </c:if>
                                                                                 </td>
-
-
                                                                             </tr>
                                                                         </c:forEach>
                                                                     </tbody>
