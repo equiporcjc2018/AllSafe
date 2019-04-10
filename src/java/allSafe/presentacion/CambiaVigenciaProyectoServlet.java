@@ -34,12 +34,11 @@ public class CambiaVigenciaProyectoServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
         int idProyecto;
-        Proyecto proyecto;
         try 
         {
             idProyecto = Integer.parseInt(request.getParameter("id_proyecto"));
-            proyecto = proyectoDAO.cambiarVigencia(idProyecto);
-            sesion.setAttribute("exito", "Vigencia del proyecto modificada correctamente");
+            Proyecto proyecto = proyectoDAO.cambiarVigencia(idProyecto);
+            sesion.setAttribute("exito", "El proyecto "+proyecto.getNombreProyecto()+" pasó a estar "+(proyecto.isVigente() ? "vigente" : "no vigente" ) );
             response.sendRedirect("MantenedorProyectos.jsp");
         } 
         catch (Exception ex) 

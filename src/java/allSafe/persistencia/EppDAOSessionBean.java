@@ -86,15 +86,10 @@ public class EppDAOSessionBean {
     }
     
     
-    public void updateVigenteEpp(Epp epp)
+    public Epp cambiarVigenciaEPP(int idEpp)
     {
-        Epp infoEpp = new Epp();
-        String vigente = epp.getVigencia();
-        infoEpp.setIdEPP(epp.getIdEPP());
-        infoEpp.setNombreEPPcol(epp.getNombreEPPcol());
-        infoEpp.setDescripcionEPP(epp.getDescripcionEPP());
-        infoEpp.setTipoEPPidTipoEPP(epp.getTipoEPPidTipoEPP());
-        if (vigente.equals("Y")) 
+        Epp infoEpp = buscaEppXID(idEpp);
+        if (infoEpp.isVigente()) 
         {
             infoEpp.setVigencia("N");
         }
@@ -102,7 +97,7 @@ public class EppDAOSessionBean {
         {
             infoEpp.setVigencia("Y");
         }
-        
         em.merge(infoEpp);
+        return infoEpp;
     }
 }
