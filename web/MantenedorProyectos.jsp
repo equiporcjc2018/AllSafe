@@ -208,13 +208,13 @@
                                                                             <td>
                                                                                 <input type="button" class="btn btn-primary btn-sm btn-space" name="btnEditar" style="font-family: FontAwesome" value="&#xf044" />
                                                                             
-                                                                                <c:if test="${proyecto.vigencia == 'Y'}">
+                                                                                <c:if test="${proyecto.isVigente()}">
                                                                                     <c:url value="./cambiaVigenciaProyecto" var="modificarVigencia">
                                                                                         <c:param name="id_proyecto" value="${proyecto.idProyecto}"/>
                                                                                     </c:url>
                                                                                     <button type="button" class="btn btn-success btn-sm btn-space" onclick="window.location.href = '<c:out value="${modificarVigencia}"/>'"><i class="fas fa-check"></i></button>
                                                                                 </c:if>
-                                                                                <c:if test="${proyecto.vigencia == 'N'}">
+                                                                                <c:if test="${!proyecto.isVigente()}">
                                                                                     <c:url value="./cambiaVigenciaProyecto" var="modificarVigencia">
                                                                                         <c:param name="id_proyecto" value="${proyecto.idProyecto}"/>
                                                                                     </c:url>

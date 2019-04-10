@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Asignaeppaproyecto.findAll", query = "SELECT a FROM Asignaeppaproyecto a")
     ,@NamedQuery(name = "Asignaeppaproyecto.findByEpp", query = "SELECT a FROM Asignaeppaproyecto a WHERE a.eppidEPP.idEPP = :eppidEPP AND a.proyectoidProyecto.idProyecto = :proyectoidProyecto")
+    ,@NamedQuery(name = "Asignaeppaproyecto.findById", query = "SELECT a FROM Asignaeppaproyecto a WHERE a.idasignaeppaproyecto = :idasignaeppaproyecto ")
     , @NamedQuery(name = "Asignaeppaproyecto.findByIdasignaeppaproyecto", query = "SELECT a FROM Asignaeppaproyecto a WHERE a.idasignaeppaproyecto = :idasignaeppaproyecto")})
 public class Asignaeppaproyecto implements Serializable {
 

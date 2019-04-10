@@ -40,7 +40,7 @@ public class CambiaEstadoVigenteEPPServelt extends HttpServlet {
             sesion.setAttribute("exito", "El EPP "+infoEpp.getNombreEPPcol()+" pasó a estar "+(infoEpp.isVigente() ? "Vigente" : "No vigente" ));
             response.sendRedirect("MantenedorEPP.jsp");
         } 
-        catch (Exception ex) 
+        catch (IOException | NumberFormatException ex) 
         {
             sesion.setAttribute("error", "Ocurrió un error al modificar la vigencia");
             Logger.getLogger(ListarEppsServlet.class.getName()).log(Level.SEVERE, null, ex);

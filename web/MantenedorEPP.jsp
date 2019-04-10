@@ -261,13 +261,13 @@
                                                                                     </c:url>
                                                                                         <input type="button" class="btn btn-primary btn-sm btn-space" style="font-family: FontAwesome" value="&#xf044" name="btnEditar" onclick="window.location.href = '<c:out value="${edicionDeEPP}"/>'"/>
 
-                                                                                    <c:if test="${epp.vigencia == 'Y'}">
+                                                                                    <c:if test="${epp.isVigente()}">
                                                                                         <c:url value="./cambiaEstadoVigenteEpp" var="cambiaEstadoEPP">
                                                                                             <c:param name="id_epp" value="${epp.idEPP}"/>
                                                                                         </c:url>
                                                                                         <input type="button" class="btn btn-success btn-sm btn-space" style="font-family: FontAwesome" value="&#xf00c" name="btnHabilitadoEstandar" onclick="window.location.href = '<c:out value="${cambiaEstadoEPP}"/>'"/>
                                                                                     </c:if>
-                                                                                    <c:if test="${epp.vigencia == 'N'}">
+                                                                                    <c:if test="${!epp.isVigente()}">
                                                                                         <c:url value="./cambiaEstadoVigenteEpp" var="cambiaEstadoEPP">
                                                                                             <c:param name="id_epp" value="${epp.idEPP}"/>
                                                                                         </c:url>
@@ -329,13 +329,13 @@
                                                                                     </c:url>
                                                                                     <input type="button" class="btn btn-primary btn-sm btn-space" name="btnEditar" style="font-family: FontAwesome" value="&#xf044" onclick="window.location.href = '<c:out value="${edicionDeEPP}"/>'"/>
 
-                                                                                    <c:if test="${epp.vigencia == 'Y'}">
+                                                                                    <c:if test="${epp.isVigente()}">
                                                                                         <c:url value="./cambiaEstadoVigenteEpp" var="cambiaEstadoEPP">
                                                                                             <c:param name="id_epp" value="${epp.idEPP}"/>
                                                                                         </c:url>
                                                                                         <button type="button" class="btn btn-success btn-sm btn-space" onclick="window.location.href = '<c:out value="${cambiaEstadoEPP}"/>'"><i class="fas fa-check"></i></button>
                                                                                     </c:if>
-                                                                                    <c:if test="${epp.vigencia == 'N'}">
+                                                                                    <c:if test="${!epp.isVigente()}">
                                                                                         <c:url value="./cambiaEstadoVigenteEpp" var="cambiaEstadoEPP">
                                                                                             <c:param name="id_epp" value="${epp.idEPP}"/>
                                                                                         </c:url>

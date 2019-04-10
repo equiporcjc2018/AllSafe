@@ -192,6 +192,18 @@
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="section-block" id="basicform">
                                                 <p>Aquí se asignan EPP a Proyectos</p>
+                                                <c:if test="${error!=null}">
+                                                    <div class="alert alert-danger" role="alert">
+                                                        <c:out value="${error}"/>
+                                                        <c:remove var="error"/>
+                                                    </div>
+                                                </c:if>            
+                                                <c:if test="${exito!=null}">
+                                                    <div class="alert alert-success" role="alert">
+                                                        <c:out value="${exito}"/>
+                                                        <c:remove var="exito"/>
+                                                    </div>
+                                                </c:if>  
                                             </div>
 
                                             <div class="card">
@@ -432,7 +444,7 @@
                                                                         <th>Proyecto Vigente</th>
                                                                         <th>Nombre Epp</th>
                                                                         <th>Descripción Epp</th>
-                                                                        <th>Eliminar</th>      
+                                                                        <th>Vigencia</th>      
                                                                     </tr> 
                                                                 </thead>
                                                                 <tfoot>
@@ -443,7 +455,7 @@
                                                                         <th>Nombre Epp</th>
                                                                         <th>Descripcion Epp</th>
                                                                         
-                                                                        <th>Eliminar</th>      
+                                                                        <th>Vigencia</th>      
                                                                     </tr> 
                                                                 </tfoot>
                                                                 <tbody>
@@ -451,13 +463,26 @@
                                                                         <tr>
                                                                             <td><c:out value="${asignaeppproyecto.proyectoidProyecto.numeroProyecto}"/></td>
                                                                             <td><c:out value="${asignaeppproyecto.proyectoidProyecto.nombreProyecto}"/></td>
-                                                                            <td><c:out value="${asignaeppproyecto.proyectoidProyecto.vigenteproyecto}"/></td>
+                                                                            <td><c:out value="${asignaeppproyecto.proyectoidProyecto.isVigente()?'Si':'No'}"/></td>
                                                                             <td><c:out value="${asignaeppproyecto.eppidEPP.nombreEPPcol}"/></td>
                                                                             <td><c:out value="${asignaeppproyecto.eppidEPP.descripcionEPP}"/></td>
                                                                             
                                                                            
                                                                             
-                                                                            <td><input type="button" class="btn btn-secondary btn-space"  name="btnEliminar" value="Eliminar"/></td>
+                                                                            <td>
+                                                                                <c:if test="${asignaeppproyecto.isVigente()}">
+                                                                                    <c:url value="./cambiaVigenciaRelProyEpp" var="modificarVigencia">
+                                                                                        <c:param name="idAsignacion" value="${asignaeppproyecto.idasignaeppaproyecto}"/>
+                                                                                    </c:url>
+                                                                                    <button type="button" class="btn btn-success btn-sm btn-space" onclick="window.location.href = '<c:out value="${modificarVigencia}"/>'"><i class="fas fa-check"></i></button>
+                                                                                </c:if>
+                                                                                <c:if test="${!asignaeppproyecto.isVigente()}">
+                                                                                    <c:url value="./cambiaVigenciaRelProyEpp" var="modificarVigencia">
+                                                                                        <c:param name="idAsignacion" value="${asignaeppproyecto.idasignaeppaproyecto}"/>
+                                                                                    </c:url>
+                                                                                    <button type="button" class="btn btn-danger btn-sm btn-space" onclick="window.location.href = '<c:out value="${modificarVigencia}"/>'"><i class="fas fa-times"></i></button>
+                                                                                </c:if>
+                                                                            </td>
                                                                         </tr>
                                                                     </c:forEach>
                                                                 </tbody>
