@@ -39,6 +39,20 @@ public class ProyectoDAOSessionBean {
         objProyecto.setVigencia(pceDTO.getObjProyecto().getVigencia());
         em.persist(objProyecto);
     }
+    public void updateProyecto (ProyectoCiudadEmpresaDTO pceDTO) throws ControllerException
+    {
+        Proyecto objProyecto = new Proyecto();
+        objProyecto.setIdProyecto(pceDTO.getObjProyecto().getIdProyecto());
+        objProyecto.setNumeroProyecto(pceDTO.getObjProyecto().getNumeroProyecto());
+        objProyecto.setNombreProyecto(pceDTO.getObjProyecto().getNombreProyecto());
+        objProyecto.setUbicacionProyecto(pceDTO.getObjProyecto().getUbicacionProyecto());
+        objProyecto.setFechaInicioProyecto(pceDTO.getObjProyecto().getFechaInicioProyecto());
+        objProyecto.setFechaTerminoProyecto(pceDTO.getObjProyecto().getFechaTerminoProyecto());
+        objProyecto.setCiudadidCiudad(pceDTO.getObjCiudad());
+        objProyecto.setEmpresaidEmpresa(pceDTO.getObjEmpresa());
+        objProyecto.setVigencia(pceDTO.getObjProyecto().getVigencia());
+        em.merge(objProyecto);
+    }
     
     public Proyecto buscaProyectoXID(int id){
         Proyecto infoProyectoEntidad = null;

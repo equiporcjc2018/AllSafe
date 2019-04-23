@@ -80,7 +80,7 @@ public class EditarEppServlet extends HttpServlet {
                 objEppTipoEppDTO.setObjEpp(objEpp);
                 objEppTipoEppDTO.setObjTipoepp(objTipoepp);
                 objEppDAOSessionBean.UpdateEpp(objEppTipoEppDTO);
-                sesion.setAttribute("Exito", "EPP Editado Correctamente");
+                sesion.setAttribute("exito", "EPP Editado Correctamente");
                 response.sendRedirect("MantenedorEPP.jsp");
                 
             }else{

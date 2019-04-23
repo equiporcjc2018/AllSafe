@@ -93,12 +93,18 @@
                                     <c:choose>
                                         <c:when test="${eppAEditar == null}">
                                             <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
-                                                <h3 class="section-title">Ingreso Epp</h3>
+                                                <h3 class="section-title">Gestion de Epp</h3>
                                                 <p>Aquí puedes ingresar, editar, y activar Epp</p>
                                                 <c:if test="${error!=null}">
                                                     <div class="alert alert-danger" role="alert">
                                                         <c:out value="${error}"/>
                                                         <c:remove var="error"/>
+                                                    </div>
+                                                </c:if>            
+                                                <c:if test="${error1!=null}">
+                                                    <div class="alert alert-danger" role="alert">
+                                                        <c:out value="${error1}"/>
+                                                        <c:remove var="error1"/>
                                                     </div>
                                                 </c:if>            
                                                 <c:if test="${exito!=null}">
@@ -159,7 +165,7 @@
                                         <c:otherwise>
                                             <%-- EDICION DE EPP--%>
                                             <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
-                                                <h3 class="section-title">Editar Epp</h3>
+                                                <h3 class="section-title">Gestion de Epp</h3>
                                                 <p>Aquí puedes ingresar, editar, y activar Epp</p>
                                                 <div class="card">
                                                     <h3 class="card-header">Editar EPP</h3>
@@ -259,19 +265,19 @@
                                                                                     <c:url value="./editarEppServlet" var="edicionDeEPP">
                                                                                         <c:param name="ideppAEditar" value="${epp.idEPP}"/>
                                                                                     </c:url>
-                                                                                        <input type="button" class="btn btn-primary btn-sm btn-space" style="font-family: FontAwesome" value="&#xf044" name="btnEditar" onclick="window.location.href = '<c:out value="${edicionDeEPP}"/>'"/>
+                                                                                    <button type="button" class="btn btn-primary btn-sm btn-space"  name="btnEditar" onclick="window.location.href = '<c:out value="${edicionDeEPP}"/>'"><i class="fas fa-edit"></i></button>
 
                                                                                     <c:if test="${epp.isVigente()}">
                                                                                         <c:url value="./cambiaEstadoVigenteEpp" var="cambiaEstadoEPP">
                                                                                             <c:param name="id_epp" value="${epp.idEPP}"/>
                                                                                         </c:url>
-                                                                                        <input type="button" class="btn btn-success btn-sm btn-space" style="font-family: FontAwesome" value="&#xf00c" name="btnHabilitadoEstandar" onclick="window.location.href = '<c:out value="${cambiaEstadoEPP}"/>'"/>
+                                                                                        <button type="button" class="btn btn-success btn-sm btn-space"  name="btnHabilitadoEstandar" onclick="window.location.href = '<c:out value="${cambiaEstadoEPP}"/>'"><i class="fas fa-check"></i></button>
                                                                                     </c:if>
                                                                                     <c:if test="${!epp.isVigente()}">
                                                                                         <c:url value="./cambiaEstadoVigenteEpp" var="cambiaEstadoEPP">
                                                                                             <c:param name="id_epp" value="${epp.idEPP}"/>
                                                                                         </c:url>
-                                                                                        <input type="button" class="btn btn-danger btn-sm btn-space" style="font-family: FontAwesome" value="&#xf00d"  name="btnHabilitadoEstandar" onclick="window.location.href = '<c:out value="${cambiaEstadoEPP}"/>'"/>
+                                                                                        <button type="button" class="btn btn-danger btn-sm btn-space"   name="btnHabilitadoEstandar" onclick="window.location.href = '<c:out value="${cambiaEstadoEPP}"/>'"><i class="fas fa-times"></i></button>
                                                                                     </c:if>
                                                                                 </td>
                                                                             </tr>
@@ -327,7 +333,7 @@
                                                                                     <c:url value="./editarEppServlet" var="edicionDeEPP">
                                                                                         <c:param name="ideppAEditar" value="${epp.idEPP}"/>
                                                                                     </c:url>
-                                                                                    <input type="button" class="btn btn-primary btn-sm btn-space" name="btnEditar" style="font-family: FontAwesome" value="&#xf044" onclick="window.location.href = '<c:out value="${edicionDeEPP}"/>'"/>
+                                                                                    <button type="button" class="btn btn-primary btn-sm btn-space" name="btnEditar" onclick="window.location.href = '<c:out value="${edicionDeEPP}"/>'"><i class="fas fa-edit"></i></button>
 
                                                                                     <c:if test="${epp.isVigente()}">
                                                                                         <c:url value="./cambiaEstadoVigenteEpp" var="cambiaEstadoEPP">
