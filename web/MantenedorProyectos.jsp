@@ -28,6 +28,35 @@
                 $('#proyecto').DataTable();
             });
         </script> 
+        <script>
+function soloNumeros(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toLowerCase();
+    letras = " 0123456789";
+    especiales = [8, 37, 39, 46];
+
+    tecla_especial = false
+    for(var i in especiales) {
+        if(key == especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
+    }
+
+    if(letras.indexOf(tecla) == -1 && !tecla_especial)
+        return false;
+}
+
+function limpiaNumeroProyecto() {
+    var val = document.getElementById("txtNombre").value;
+    var tam = val.length;
+    for(i = 0; i < tam; i++) {
+        if(!isNaN(val[i]))
+            document.getElementById("txtNombre").value = '';
+    }
+}
+</script>
+        
     </head>
     <body>
         <c:choose>
@@ -91,7 +120,7 @@
                                                             <div class="form-row">
                                                                 <div class="form-group col-md-4">
                                                                     <label for="txtNumProyecto" class="col-form-label">Numero proyecto</label>
-                                                                    <input id="txtNumProyecto" name="txtNumProyecto" type="text" class="form-control" required>
+                                                                    <input id="txtNumProyecto" onkeypress="return soloNumeros(event)" onblur="limpiaNumeroProyecto()" name="txtNumProyecto" type="text" class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group col-md-4">
                                                                     <label for="txtNombreProyecto" class="col-form-label">Nombre proyecto</label>

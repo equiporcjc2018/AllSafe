@@ -17,7 +17,7 @@
         <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
         <link rel="stylesheet" href="assets/libs/css/style.css">
         <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
+        <%-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"> --%>
         
         <script src="datatables/media/js/jquery.js" type="text/javascript"></script>
         <link href="datatables/media/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
@@ -34,11 +34,16 @@
             } );
         } );
         </script> 
-        
-        
-        
-         
+        <script>
+            $(document).ready(function() {
+            var table = $('#listadoEppCantidadProyecto').DataTable();
 
+            $('button').click( function() {
+                var data = table.$('input, select').serialize();
+                
+            } );
+        } );
+        </script> 
 
     </head>
     <body>
@@ -109,8 +114,7 @@
                                                                         <th>Número Proyecto</th>
                                                                         <th>Nombre Proyecto</th>
                                                                         <th>Nombre Epp</th>
-                                                                        <th>Cantidad</th>
-                                                                        
+                                                                        <th>Cantidad</th>                                                                       
                                                                         <th>Eliminar</th>      
                                                                     </tr> 
                                                                 </tfoot>
@@ -118,18 +122,18 @@
                                                                     <c:forEach items="${sessionScope.listadoEppProyecto}" var="asignaeppproyecto">
                                                                         <tr>
                                                                             <td><c:out value="${asignaeppproyecto.proyectoidProyecto.numeroProyecto}"/></td>
-                                                                            <td style="display:none;"><input type="text" id="txtIdProy" name="txtIdProy" value="${asignaeppproyecto.proyectoidProyecto.idProyecto}" readonly="true" /></td>
-                                                                            <td><c:out value="${asignaeppproyecto.proyectoidProyecto.nombreProyecto}"/></td>
-                                                                            <td style="display:none;"><input type="text" id="txtIdEpp" name="txtIdEpp" value="${asignaeppproyecto.eppidEPP.idEPP}" readonly="true" /></td>                                                                                                                                                                                                                                        
-                                                                            <td><c:out value="${asignaeppproyecto.eppidEPP.nombreEPPcol}"/></td>
-                                                                            <td><input type="text" id="row-1-age" name="txtCantidad"></td>
-                                                                            
-                                                                           
-                                                                            
-                                                                            <td><input type="button" class="btn btn-secondary btn-space"  name="btnEliminar" value="Eliminar"/></td>
-                                                                        </tr>
-                                                                    </c:forEach>
-                                                                </tbody>
+                                                                    <input type="hidden" id="txtIdProy" name="txtIdProy" value="${asignaeppproyecto.proyectoidProyecto.idProyecto}"/>
+                                                                    <td><c:out value="${asignaeppproyecto.proyectoidProyecto.nombreProyecto}"/></td>
+                                                                    <input type="hidden" id="txtIdEpp" name="txtIdEpp" value="${asignaeppproyecto.eppidEPP.idEPP}"/>                                                                                                                                                                                                                                      
+                                                                    <td><c:out value="${asignaeppproyecto.eppidEPP.nombreEPPcol}"/></td>
+                                                                    <td><input type="text" id="row-1-age" name="txtCantidad"></td>
+
+
+
+                                                                    <td><input type="button" class="btn btn-secondary btn-space"  name="btnEliminar" value="Eliminar"/></td>
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </tbody>
                                                             </table>
                                                         </c:when>
 

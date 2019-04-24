@@ -12,7 +12,7 @@
         <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
         <link rel="stylesheet" href="assets/libs/css/style.css">
         <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-
+       
         <link href="datatables/media/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
         <script src="datatables/media/js/jquery.js" type="text/javascript"></script>
         <script src="datatables/media/js/jquery.dataTables.js" type="text/javascript"></script>
@@ -22,6 +22,159 @@
                 $('#trabajadores').DataTable();
             });
         </script> 
+        
+        <script>
+            function checkRut(rut) {
+    // Despejar Puntos
+    var valor = rut.value.replace('.','');
+    // Despejar Guión
+    valor = valor.replace('-','');
+    
+    // Aislar Cuerpo y Dígito Verificador
+    cuerpo = valor.slice(0,-1);
+    dv = valor.slice(-1).toUpperCase();
+    
+    // Formatear RUN
+    rut.value = cuerpo + '-'+ dv
+    
+    // Si no cumple con el mínimo ej. (n.nnn.nnn)
+    if(cuerpo.length < 7) { rut.setCustomValidity("RUT Incompleto"); return false;}
+    
+    // Calcular Dígito Verificador
+    suma = 0;
+    multiplo = 2;
+    
+    // Para cada dígito del Cuerpo
+    for(i=1;i<=cuerpo.length;i++) {
+    
+        // Obtener su Producto con el Múltiplo Correspondiente
+        index = multiplo * valor.charAt(cuerpo.length - i);
+        
+        // Sumar al Contador General
+        suma = suma + index;
+        
+        // Consolidar Múltiplo dentro del rango [2,7]
+        if(multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
+  
+    }
+    
+    // Calcular Dígito Verificador en base al Módulo 11
+    dvEsperado = 11 - (suma % 11);
+    
+    // Casos Especiales (0 y K)
+    dv = (dv == 'K')?10:dv;
+    dv = (dv == 0)?11:dv;
+    
+    // Validar que el Cuerpo coincide con su Dígito Verificador
+    if(dvEsperado != dv) { rut.setCustomValidity("RUT Inválido"); return false; }
+    
+    // Si todo sale bien, eliminar errores (decretar que es válido)
+    rut.setCustomValidity('');
+}
+            function checkRut2(rut) {
+    // Despejar Puntos
+    var valor = rut.value.replace('.','');
+    // Despejar Guión
+    valor = valor.replace('-','');
+    
+    // Aislar Cuerpo y Dígito Verificador
+    cuerpo = valor.slice(0,-1);
+    dv = valor.slice(-1).toUpperCase();
+    
+    // Formatear RUN
+    rut.value = cuerpo + '-'+ dv
+    
+    // Si no cumple con el mínimo ej. (n.nnn.nnn)
+    if(cuerpo.length < 7) { rut.setCustomValidity("RUT Incompleto"); return false;}
+    
+    // Calcular Dígito Verificador
+    suma = 0;
+    multiplo = 2;
+    
+    // Para cada dígito del Cuerpo
+    for(i=1;i<=cuerpo.length;i++) {
+    
+        // Obtener su Producto con el Múltiplo Correspondiente
+        index = multiplo * valor.charAt(cuerpo.length - i);
+        
+        // Sumar al Contador General
+        suma = suma + index;
+        
+        // Consolidar Múltiplo dentro del rango [2,7]
+        if(multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
+  
+    }
+    
+    // Calcular Dígito Verificador en base al Módulo 11
+    dvEsperado = 11 - (suma % 11);
+    
+    // Casos Especiales (0 y K)
+    dv = (dv == 'K')?10:dv;
+    dv = (dv == 0)?11:dv;
+    
+    // Validar que el Cuerpo coincide con su Dígito Verificador
+    if(dvEsperado != dv) { rut.setCustomValidity("RUT Inválido"); return false; }
+    
+    // Si todo sale bien, eliminar errores (decretar que es válido)
+    rut.setCustomValidity('');
+}
+        </script>
+            
+        
+        <script>
+function soloLetras(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toLowerCase();
+    letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+    especiales = [8, 37, 39, 46];
+
+    tecla_especial = false
+    for(var i in especiales) {
+        if(key == especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
+    }
+
+    if(letras.indexOf(tecla) == -1 && !tecla_especial)
+        return false;
+}
+
+function limpiaNombre() {
+    var val = document.getElementById("txtNombre").value;
+    var tam = val.length;
+    for(i = 0; i < tam; i++) {
+        if(!isNaN(val[i]))
+            document.getElementById("txtNombre").value = '';
+    }
+}
+function limpiaApePat() {
+    var val = document.getElementById("txtApellidoPaterno").value;
+    var tam = val.length;
+    for(i = 0; i < tam; i++) {
+        if(!isNaN(val[i]))
+            document.getElementById("txtApellidoPaterno").value = '';
+    }
+}
+function limpiaApeMat() {
+    var val = document.getElementById("txtApellidoMaterno").value;
+    var tam = val.length;
+    for(i = 0; i < tam; i++) {
+        if(!isNaN(val[i]))
+            document.getElementById("txtApellidoMaterno").value = '';
+    }
+}
+function limpiaNacionalidad() {
+    var val = document.getElementById("txtNacionalidad").value;
+    var tam = val.length;
+    for(i = 0; i < tam; i++) {
+        if(!isNaN(val[i]))
+            document.getElementById("txtNacionalidad").value = '';
+    }
+}
+        </script>
+        
+
     </head>
 
     <body>
@@ -105,7 +258,7 @@
                                                             <div class="form-row ">
                                                                 <div class="form-group col-md-6">
                                                                     <label for="txtRut" >Rut</label>
-                                                                    <input id="txtRut" name="txtRut" type="text" disabled="false" class="form-control">
+                                                                    <input id="txtRut" name="txtRut" oninput="checkRut(this)" type="text" disabled="false" class="form-control">
                                                                 </div>
 
                                                                 <div class="form-group col-md-6">
@@ -118,30 +271,30 @@
                                                             <div class="form-row">
                                                                 <div class="form-group col-md-4">
                                                                     <label for="txtNombre" class="col-form-label">Nombre </label>
-                                                                    <input id="txtNombre" name="txtNombre" type="text" class="form-control">
+                                                                    <input id="txtNombre" onkeypress="return soloLetras(event)" onblur="limpiaNombre()" name="txtNombre" type="text" class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group col-md-4">
                                                                     <label for="txtApellidoPaterno" class="col-form-label">Apellido Paterno</label>
-                                                                    <input id="txtApellidoPaterno" name="txtApellidoPaterno" type="text"  class="form-control">
+                                                                    <input id="txtApellidoPaterno" onkeypress="return soloLetras(event)" onblur="limpiaApePat()" name="txtApellidoPaterno" type="text"  class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group col-md-4">
                                                                     <label for="txtApellidoMaterno" class="col-form-label">Apellido Materno</label>
-                                                                    <input id="txtApellidoMaterno" name="txtApellidoMaterno" type="text"  class="form-control">
+                                                                    <input id="txtApellidoMaterno" name="txtApellidoMaterno" onkeypress="return soloLetras(event)" onblur="limpiaApeMat()" type="text"  class="form-control" required>
                                                                 </div>
 
                                                             </div>
                                                             <div class="form-row">
                                                                 <div class="form-group col-md-4">
                                                                     <label for="txtFechaNacimiento" class="col-form-label">Fecha Nacimiento</label>
-                                                                    <input id="txtFechaNacimiento" name="txtFechaNacimiento" type="date" class="form-control">  
+                                                                    <input id="txtFechaNacimiento" name="txtFechaNacimiento" type="date" class="form-control" required>  
                                                                 </div>
                                                                 <div class="form-group col-md-4">
                                                                     <label for="txtNacionalidad" class="col-form-label">Nacionalidad</label>
-                                                                    <input id="txtNacionalidad" name="txtNacionalidad" type="text"  class="form-control">
+                                                                    <input id="txtNacionalidad" onkeypress="return soloLetras(event)" onblur="limpiaNacionalidad()" name="txtNacionalidad" type="text"  class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group col-md-4">
                                                                     <label for="txtCorreo" class="col-form-label">Correo</label>
-                                                                    <input id="txtCorreo" name="txtCorreo" type="text"  class="form-control">
+                                                                    <input id="txtCorreo" name="txtCorreo" type="text"  class="form-control" required>
                                                                 </div>
 
                                                             </div>
@@ -261,12 +414,12 @@
                                                             <div class="form-row ">
                                                                 <div class="form-group col-md-6">
                                                                     <label for="txtRut" >Rut</label>
-                                                                    <input id="txtRut" name="txtRut" type="text" value="${personaAEditar.rutPasaportePersona}" disabled="false" class="form-control">
+                                                                    <input id="txtRut" name="txtRut" oninput="checkRut2(this)" type="text" value="${personaAEditar.rutPasaportePersona}" disabled="false" class="form-control" >
                                                                 </div>
 
                                                                 <div class="form-group col-md-6">
                                                                     <label for="txtPasaporte" >Pasaporte</label>
-                                                                    <input id="txtPasaporte" name="txtPasaporte" value="${personaAEditar.rutPasaportePersona}" type="text" disabled="false" class="form-control">
+                                                                    <input id="txtPasaporte" name="txtPasaporte" value="${personaAEditar.rutPasaportePersona}" type="text" disabled="false" class="form-control" required>
 
                                                                 </div>
 
@@ -274,30 +427,30 @@
                                                             <div class="form-row">
                                                                 <div class="form-group col-md-4">
                                                                     <label for="txtNombre" class="col-form-label">Nombre </label>
-                                                                    <input id="txtNombre" name="txtNombre" value="${personaAEditar.nombresPersona}" type="text" class="form-control">
+                                                                    <input id="txtNombre" name="txtNombre" value="${personaAEditar.nombresPersona}" onkeypress="return soloLetras(event)" onblur="limpiaNombre()" type="text" class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group col-md-4">
                                                                     <label for="txtApellidoPaterno" class="col-form-label">Apellido Paterno</label>
-                                                                    <input id="txtApellidoPaterno" name="txtApellidoPaterno" value="${personaAEditar.apePatPersona}" type="text"  class="form-control">
+                                                                    <input id="txtApellidoPaterno" name="txtApellidoPaterno" value="${personaAEditar.apePatPersona}" onkeypress="return soloLetras(event)" onblur="limpiaApePat()" type="text"  class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group col-md-4">
                                                                     <label for="txtApellidoMaterno" class="col-form-label">Apellido Materno</label>
-                                                                    <input id="txtApellidoMaterno" name="txtApellidoMaterno" value="${personaAEditar.apeMatPersona}" type="text"  class="form-control">
+                                                                    <input id="txtApellidoMaterno" name="txtApellidoMaterno" value="${personaAEditar.apeMatPersona}" type="text" onkeypress="return soloLetras(event)" onblur="limpiaApeMat()" class="form-control" required>
                                                                 </div>
 
                                                             </div>
                                                             <div class="form-row">
                                                                 <div class="form-group col-md-4">
                                                                     <label for="txtFechaNacimiento" class="col-form-label">Fecha Nacimiento</label>
-                                                                    <input id="txtFechaNacimiento" name="txtFechaNacimiento" value="${personaAEditar.fechaNacPersona}" type="date" class="form-control">  
+                                                                    <input id="txtFechaNacimiento" name="txtFechaNacimiento" value="${personaAEditar.fechaNacPersona}" type="date" class="form-control" required>  
                                                                 </div>
                                                                 <div class="form-group col-md-4">
                                                                     <label for="txtNacionalidad" class="col-form-label">Nacionalidad</label>
-                                                                    <input id="txtNacionalidad" name="txtNacionalidad" value="${personaAEditar.nacionalidadPersona}" type="text"  class="form-control">
+                                                                    <input id="txtNacionalidad" name="txtNacionalidad" value="${personaAEditar.nacionalidadPersona}" type="text" onkeypress="return soloLetras(event)" onblur="limpiaNacionalidad()" class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group col-md-4">
                                                                     <label for="txtCorreo" class="col-form-label">Correo</label>
-                                                                    <input id="txtCorreo" name="txtCorreo" type="text" value="${personaAEditar.correoPersona}" class="form-control">
+                                                                    <input id="txtCorreo" name="txtCorreo" type="text" value="${personaAEditar.correoPersona}" class="form-control" required>
                                                                 </div>
 
                                                             </div>
