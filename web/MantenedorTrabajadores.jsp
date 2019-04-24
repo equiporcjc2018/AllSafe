@@ -69,147 +69,365 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <h1 class="text-center">Trabajadores</h1>
 
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <div class="section-block" id="basicform">
-                                            <h3 class="section-title">Gestion Trabajadores</h3>
-                                            <p>Aqui puedes Registrar, editar, y dar de baja a trabajadores</p>
-                                        </div>
-                                        <div class="card">
-                                            <h3 class="card-header">Registrar Trabajador</h3>
-                                            <div class="card-body">
-
-                                                <h4>Datos Personales</h4>
-                                                <form name="frmRegistroTrabajador" method="post" action="./registroTrabajadorServlet">
-                                                    <div class="custom-control custom-radio">
-                                                        <input required type="radio" id="customRadio1" name="rdbIdentificacion" class="custom-control-input" onclick="document.getElementById('txtRut').disabled = !this.checked; document.getElementById('txtPasaporte').disabled = this.checked;">
-                                                        <label class="custom-control-label" for="customRadio1">Rut</label>
+                                    <c:choose>
+                                        <c:when test="${personaAEditar == null}">
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="section-block" id="basicform">
+                                                    <h3 class="section-title">Gestion Trabajadores</h3>
+                                                    <p>Aqui puedes Registrar, editar, y dar de baja a trabajadores</p>
+                                                </div>
+                                                <c:if test="${error!=null}">
+                                                    <div class="alert alert-danger" role="alert">
+                                                        <c:out value="${error}"/>
+                                                        <c:remove var="error"/>
                                                     </div>
-                                                    <div class="custom-control custom-radio">
-                                                        <input required type="radio" id="customRadio2" name="rdbIdentificacion" class="custom-control-input" onclick="document.getElementById('txtPasaporte').disabled = !this.checked; document.getElementById('txtRut').disabled = this.checked;">
-                                                        <label class="custom-control-label" for="customRadio2">Pasaporte</label>
+                                                </c:if>            
+                                                <c:if test="${exito!=null}">
+                                                    <div class="alert alert-success" role="alert">
+                                                        <c:out value="${exito}"/>
+                                                        <c:remove var="exito"/>
                                                     </div>
-                                                    <div class="form-row ">
-                                                        <div class="form-group col-md-6">
-                                                            <label for="txtRut" >Rut</label>
-                                                            <input id="txtRut" name="txtRut" type="text" disabled="false" class="form-control">
-                                                        </div>
+                                                </c:if>  
+                                                <div class="card">
+                                                    <h3 class="card-header">Registrar Trabajador</h3>
+                                                    <div class="card-body">
 
-                                                        <div class="form-group col-md-6">
-                                                            <label for="txtPasaporte" >Pasaporte</label>
-                                                            <input id="txtPasaporte" name="txtPasaporte" type="text" disabled="false" class="form-control">
+                                                        <h4>Datos Personales</h4>
+                                                        <form name="frmRegistroTrabajador" method="post" action="./registroTrabajadorServlet">
+                                                            <div class="custom-control custom-radio">
+                                                                <input required type="radio" id="customRadio1" name="rdbIdentificacion" class="custom-control-input" onclick="document.getElementById('txtRut').disabled = !this.checked; document.getElementById('txtPasaporte').disabled = this.checked; document.getElementById('txtPasaporte').value = '';">
+                                                                <label class="custom-control-label" for="customRadio1">Rut</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input required type="radio" id="customRadio2" name="rdbIdentificacion" class="custom-control-input" onclick="document.getElementById('txtPasaporte').disabled = !this.checked; document.getElementById('txtRut').disabled = this.checked; document.getElementById('txtRut').value = '';">
+                                                                <label class="custom-control-label" for="customRadio2">Pasaporte</label>
+                                                            </div>
+                                                            <div class="form-row ">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="txtRut" >Rut</label>
+                                                                    <input id="txtRut" name="txtRut" type="text" disabled="false" class="form-control">
+                                                                </div>
 
-                                                        </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="txtPasaporte" >Pasaporte</label>
+                                                                    <input id="txtPasaporte" name="txtPasaporte" type="text" disabled="false" class="form-control">
+
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="txtNombre" class="col-form-label">Nombre </label>
+                                                                    <input id="txtNombre" name="txtNombre" type="text" class="form-control">
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="txtApellidoPaterno" class="col-form-label">Apellido Paterno</label>
+                                                                    <input id="txtApellidoPaterno" name="txtApellidoPaterno" type="text"  class="form-control">
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="txtApellidoMaterno" class="col-form-label">Apellido Materno</label>
+                                                                    <input id="txtApellidoMaterno" name="txtApellidoMaterno" type="text"  class="form-control">
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="txtFechaNacimiento" class="col-form-label">Fecha Nacimiento</label>
+                                                                    <input id="txtFechaNacimiento" name="txtFechaNacimiento" type="date" class="form-control">  
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="txtNacionalidad" class="col-form-label">Nacionalidad</label>
+                                                                    <input id="txtNacionalidad" name="txtNacionalidad" type="text"  class="form-control">
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="txtCorreo" class="col-form-label">Correo</label>
+                                                                    <input id="txtCorreo" name="txtCorreo" type="text"  class="form-control">
+                                                                </div>
+
+                                                            </div>
+                                                            <hr>
+                                                            <h4>Laboral</h4>
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="ddlCargo-select">Cargo</label>
+                                                                    <select required class="form-control" id="ddlCargo" name="ddlCargo">
+                                                                        <option value="">---Seleccione---</option>
+                                                                        <c:forEach items="${sessionScope.listaCargo}" var="cargo">
+                                                                            <option value="${cargo.idCargo}"><c:out value="${cargo.descripcionCargo}" ></c:out></option>
+                                                                        </c:forEach>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="ddlTipoPlanta-select">Planta</label>
+                                                                    <select required class="form-control" id="ddlTipoPlanta" name="ddlTipoPlanta">
+                                                                        <option value="">---Seleccione---</option>
+                                                                        <c:forEach items="${sessionScope.listaPlanta}" var="tipoPlanta">
+                                                                            <option value="${tipoPlanta.idTipoPlanta}"><c:out value="${tipoPlanta.descripcionTipoPlanta}" ></c:out></option>
+                                                                        </c:forEach>
+                                                                    </select>
+                                                                </div>                                              
+                                                            </div> 
+                                                            <hr>
+                                                            <h4>Vestimenta</h4>
+                                                            <div class="form-row">
+
+                                                                <div class="form-group col-md-3">
+                                                                    <label for="ddlOberol-select">Oberol</label>
+                                                                    <select required class="form-control" id="ddlOberol" name="ddlOberol">
+                                                                        <option value="">---Seleccione---</option>
+                                                                        <c:forEach items="${sessionScope.listaOberol}" var="oberol">
+                                                                            <option value="${oberol.idTallaOberol}"><c:out value="${oberol.letraTallaOberol} - ${oberol.numeroTallaOberol}" ></c:out></option>
+                                                                        </c:forEach>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group col-md-3">
+                                                                    <label for="ddlPantalon-select">Pantalon</label>
+                                                                    <select required class="form-control" id="ddlPantalon" name="ddlPantalon">
+                                                                        <option value="">---Seleccione---</option>
+                                                                        <c:forEach items="${sessionScope.listaPantalon}" var="pantalon">
+                                                                            <option value="${pantalon.idTallaPantalon}"><c:out value="${pantalon.letraTallaPantalon} - ${pantalon.numeroTallaPantalon}" ></c:out></option>
+                                                                        </c:forEach>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group col-md-3">
+                                                                    <label for="ddlPolera-select">Polera</label>
+                                                                    <select required class="form-control" id="ddlPolera" name="ddlPolera">
+                                                                        <option value="">---Seleccione---</option>
+                                                                        <c:forEach items="${sessionScope.listaPolera}" var="polera">
+                                                                            <option value="${polera.idTallaPoleraCamisa}"><c:out value="${polera.letraPoleraCamisa}- ${polera.numeroPoleraCamisa}" ></c:out></option>
+                                                                        </c:forEach>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group col-md-3">
+
+                                                                    <label for="ddlZapato-select">Zapato</label>
+
+                                                                    <select required class="form-control" id="ddlZapato" name="ddlZapato">
+                                                                        <option value="">---Seleccione---</option>
+                                                                        <c:forEach items="${sessionScope.listaZapato}" var="zapato">
+                                                                            <option value="${zapato.idTallaZapato}"><c:out value="${zapato.numeroZapato}" ></c:out></option>
+                                                                        </c:forEach>
+                                                                    </select>
+                                                                </div>  
+                                                            </div> 
+                                                            <input type="submit" class="btn btn-success btn-space" name="btnGuardar" value="Registrar">
+                                                            <hr>
+                                                            <div class="form-group">
+                                                                <label for="exampleFormControlFile1">Llenar tabla Con Arrchivo CVS. o XLS</label>
+                                                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                                            </div>
+                                                        </form>
+
 
                                                     </div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4">
-                                                            <label for="txtNombre" class="col-form-label">Nombre </label>
-                                                            <input id="txtNombre" name="txtNombre" type="text" class="form-control">
-                                                        </div>
-                                                        <div class="form-group col-md-4">
-                                                            <label for="txtApellidoPaterno" class="col-form-label">Apellido Paterno</label>
-                                                            <input id="txtApellidoPaterno" name="txtApellidoPaterno" type="text"  class="form-control">
-                                                        </div>
-                                                        <div class="form-group col-md-4">
-                                                            <label for="txtApellidoMaterno" class="col-form-label">Apellido Materno</label>
-                                                            <input id="txtApellidoMaterno" name="txtApellidoMaterno" type="text"  class="form-control">
-                                                        </div>
+
+                                                </div>
+
+                                            </div> 
+                                        </c:when>
+                                        <c:otherwise>                                           
+                                            <%-- EDICION DE TRABAJADOR--%>
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="section-block" id="basicform">
+                                                    <h3 class="section-title">Gestion Trabajadores</h3>
+                                                    <p>Aqui puedes Registrar, editar, y dar de baja a trabajadores</p>
+                                                </div>
+                                                <c:if test="${error!=null}">
+                                                    <div class="alert alert-danger" role="alert">
+                                                        <c:out value="${error}"/>
+                                                        <c:remove var="error"/>
+                                                    </div>
+                                                </c:if>            
+                                                <c:if test="${exito!=null}">
+                                                    <div class="alert alert-success" role="alert">
+                                                        <c:out value="${exito}"/>
+                                                        <c:remove var="exito"/>
+                                                    </div>
+                                                </c:if>  
+                                                <div class="card">
+                                                    <h3 class="card-header">Editar Trabajador</h3>
+                                                    <div class="card-body">
+
+                                                        <h4>Datos Personales</h4>
+                                                        <form name="frmRegistroTrabajador" method="post" action="./editarPersonaServlet">
+                                                            <div class="custom-control custom-radio">
+                                                                <input required type="radio" id="customRadio1" name="rdbIdentificacion" class="custom-control-input" onclick="document.getElementById('txtRut').disabled = !this.checked; document.getElementById('txtPasaporte').disabled = this.checked; document.getElementById('txtPasaporte').value = '';">
+                                                                <label class="custom-control-label" for="customRadio1">Rut</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input required type="radio" id="customRadio2" name="rdbIdentificacion" class="custom-control-input" onclick="document.getElementById('txtPasaporte').disabled = !this.checked; document.getElementById('txtRut').disabled = this.checked; document.getElementById('txtRut').value = '';">
+                                                                <label class="custom-control-label" for="customRadio2">Pasaporte</label>
+                                                            </div>
+                                                            <div class="form-row ">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="txtRut" >Rut</label>
+                                                                    <input id="txtRut" name="txtRut" type="text" value="${personaAEditar.rutPasaportePersona}" disabled="false" class="form-control">
+                                                                </div>
+
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="txtPasaporte" >Pasaporte</label>
+                                                                    <input id="txtPasaporte" name="txtPasaporte" value="${personaAEditar.rutPasaportePersona}" type="text" disabled="false" class="form-control">
+
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="txtNombre" class="col-form-label">Nombre </label>
+                                                                    <input id="txtNombre" name="txtNombre" value="${personaAEditar.nombresPersona}" type="text" class="form-control">
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="txtApellidoPaterno" class="col-form-label">Apellido Paterno</label>
+                                                                    <input id="txtApellidoPaterno" name="txtApellidoPaterno" value="${personaAEditar.apePatPersona}" type="text"  class="form-control">
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="txtApellidoMaterno" class="col-form-label">Apellido Materno</label>
+                                                                    <input id="txtApellidoMaterno" name="txtApellidoMaterno" value="${personaAEditar.apeMatPersona}" type="text"  class="form-control">
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="txtFechaNacimiento" class="col-form-label">Fecha Nacimiento</label>
+                                                                    <input id="txtFechaNacimiento" name="txtFechaNacimiento" value="${personaAEditar.fechaNacPersona}" type="date" class="form-control">  
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="txtNacionalidad" class="col-form-label">Nacionalidad</label>
+                                                                    <input id="txtNacionalidad" name="txtNacionalidad" value="${personaAEditar.nacionalidadPersona}" type="text"  class="form-control">
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="txtCorreo" class="col-form-label">Correo</label>
+                                                                    <input id="txtCorreo" name="txtCorreo" type="text" value="${personaAEditar.correoPersona}" class="form-control">
+                                                                </div>
+
+                                                            </div>
+                                                            <hr>
+                                                            <h4>Laboral</h4>
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="ddlCargo-select">Cargo</label>
+                                                                    <select required class="form-control" id="ddlCargo" name="ddlCargo">
+                                                                        <option value="">---Seleccione---</option>
+                                                                        <c:forEach items="${sessionScope.listaCargo}" var="cargo">
+                                                                            <c:choose >
+                                                                                <c:when test="${cargo.idCargo == personaAEditar.cargoidCargo.idCargo }">
+                                                                                    <option selected="true" value="${cargo.idCargo}"><c:out value="${cargo.descripcionCargo}" ></c:out></option>
+                                                                                </c:when>
+                                                                                <c:otherwise>
+                                                                                   <option value="${cargo.idCargo}"><c:out value="${cargo.descripcionCargo}" ></c:out></option> 
+                                                                                </c:otherwise>
+                                                                            </c:choose>
+                                                                        </c:forEach>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="ddlTipoPlanta-select">Planta</label>
+                                                                    <select required class="form-control" id="ddlTipoPlanta" name="ddlTipoPlanta">
+                                                                        <option value="">---Seleccione---</option>
+                                                                        <c:forEach items="${sessionScope.listaPlanta}" var="tipoPlanta">
+                                                                            <c:choose >
+                                                                                <c:when test="${tipoPlanta.idTipoPlanta == personaAEditar.tipoPlantaidTipoPlanta.idTipoPlanta }">
+                                                                                    <option selected="true" value="${tipoPlanta.idTipoPlanta}"><c:out value="${tipoPlanta.descripcionTipoPlanta}" ></c:out></option>
+                                                                                </c:when>
+                                                                                <c:otherwise>
+                                                                                   <option value="${tipoPlanta.idTipoPlanta}"><c:out value="${tipoPlanta.descripcionTipoPlanta}" ></c:out></option> 
+                                                                                </c:otherwise>
+                                                                            </c:choose>
+                                                                            
+                                                                        </c:forEach>
+                                                                    </select>
+                                                                </div>                                              
+                                                            </div> 
+                                                            <hr>
+                                                            <h4>Vestimenta</h4>
+                                                            <div class="form-row">
+
+                                                                <div class="form-group col-md-3">
+                                                                    <label for="ddlOberol-select">Oberol</label>
+                                                                    <select required class="form-control" id="ddlOberol" name="ddlOberol">
+                                                                        <option value="">---Seleccione---</option>
+                                                                        <c:forEach items="${sessionScope.listaOberol}" var="oberol">
+                                                                            <c:choose >
+                                                                                <c:when test="${oberol.idTallaOberol == personaAEditar.tallaOberolidTallaOberol.idTallaOberol }">
+                                                                                    <option selected="true" value="${oberol.idTallaOberol}"><c:out value="${oberol.letraTallaOberol} - ${oberol.numeroTallaOberol}" ></c:out></option>
+                                                                                </c:when>
+                                                                                <c:otherwise>
+                                                                                   <option value="${oberol.idTallaOberol}"><c:out value="${oberol.letraTallaOberol} - ${oberol.numeroTallaOberol}" ></c:out></option> 
+                                                                                </c:otherwise>
+                                                                            </c:choose>
+                                                                            
+                                                                        </c:forEach>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group col-md-3">
+                                                                    <label for="ddlPantalon-select">Pantalon</label>
+                                                                    <select required class="form-control" id="ddlPantalon" name="ddlPantalon">
+                                                                        <option value="">---Seleccione---</option>
+                                                                        <c:forEach items="${sessionScope.listaPantalon}" var="pantalon">
+                                                                            <c:choose >
+                                                                                <c:when test="${pantalon.idTallaPantalon == personaAEditar.tallaPantalonidTallaPantalon.idTallaPantalon }">
+                                                                                    <option selected="true" value="${pantalon.idTallaPantalon}"><c:out value="${pantalon.letraTallaPantalon} - ${pantalon.numeroTallaPantalon}" ></c:out></option>
+                                                                                </c:when>
+                                                                                <c:otherwise>
+                                                                                   <option value="${pantalon.idTallaPantalon}"><c:out value="${pantalon.letraTallaPantalon} - ${pantalon.numeroTallaPantalon}" ></c:out></option> 
+                                                                                </c:otherwise>
+                                                                            </c:choose>
+                                                                            
+                                                                        </c:forEach>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group col-md-3">
+                                                                    <label for="ddlPolera-select">Polera</label>
+                                                                    <select required class="form-control" id="ddlPolera" name="ddlPolera">
+                                                                        <option value="">---Seleccione---</option>
+                                                                        <c:forEach items="${sessionScope.listaPolera}" var="polera">
+                                                                            <c:choose >
+                                                                                <c:when test="${polera.idTallaPoleraCamisa == personaAEditar.tallaPoleraCamisaidtallaPoleraCamisa.idTallaPoleraCamisa }">
+                                                                                    <option selected="true" value="${polera.idTallaPoleraCamisa}"><c:out value="${polera.letraPoleraCamisa}- ${polera.numeroPoleraCamisa}" ></c:out></option>
+                                                                                </c:when>
+                                                                                <c:otherwise>
+                                                                                   <option value="${polera.idTallaPoleraCamisa}"><c:out value="${polera.letraPoleraCamisa}- ${polera.numeroPoleraCamisa}" ></c:out></option> 
+                                                                                </c:otherwise>
+                                                                            </c:choose>
+                                                                            
+                                                                        </c:forEach>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group col-md-3">
+
+                                                                    <label for="ddlZapato-select">Zapato</label>
+
+                                                                    <select required class="form-control" id="ddlZapato" name="ddlZapato">
+                                                                        <option value="">---Seleccione---</option>
+                                                                        <c:forEach items="${sessionScope.listaZapato}" var="zapato">
+                                                                            <c:choose >
+                                                                                <c:when test="${zapato.idTallaZapato == personaAEditar.tallaZApatoidtallaZApato.idTallaZapato }">
+                                                                                    <option selected="true" value="${zapato.idTallaZapato}"><c:out value="${zapato.numeroZapato}" ></c:out></option>
+                                                                                </c:when>
+                                                                                <c:otherwise>
+                                                                                   <option value="${zapato.idTallaZapato}"><c:out value="${zapato.numeroZapato}" ></c:out></option>
+                                                                                </c:otherwise>
+                                                                            </c:choose>
+                                                                            
+                                                                        </c:forEach>
+                                                                    </select>
+                                                                </div>  
+                                                            </div> 
+                                                            <input type="submit" class="btn btn-success btn-space" name="btnEditar" value="Editar">
+                                                            <input type="button" class="btn btn-dark btn-space" name="btnVolver" value="Calcelar Edicion" onclick="window.location.href='MantenedorTrabajadores.jsp'">
+                                                            <hr>
+                                                        </form>
+
 
                                                     </div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4">
-                                                            <label for="txtFechaNacimiento" class="col-form-label">Fecha Nacimiento</label>
-                                                            <input id="txtFechaNacimiento" name="txtFechaNacimiento" type="date" class="form-control">  
-                                                        </div>
-                                                        <div class="form-group col-md-4">
-                                                            <label for="txtNacionalidad" class="col-form-label">Nacionalidad</label>
-                                                            <input id="txtNacionalidad" name="txtNacionalidad" type="text"  class="form-control">
-                                                        </div>
-                                                        <div class="form-group col-md-4">
-                                                            <label for="txtCorreo" class="col-form-label">Correo</label>
-                                                            <input id="txtCorreo" name="txtCorreo" type="text"  class="form-control">
-                                                        </div>
 
-                                                    </div>
-                                                    <hr>
-                                                    <h4>Laboral</h4>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-6">
-                                                            <label for="ddlCargo-select">Cargo</label>
-                                                            <select required class="form-control" id="ddlCargo" name="ddlCargo">
-                                                                <option value="">---Seleccione---</option>
-                                                                <c:forEach items="${sessionScope.listaCargo}" var="cargo">
-                                                                    <option value="${cargo.idCargo}"><c:out value="${cargo.descripcionCargo}" ></c:out></option>
-                                                                </c:forEach>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label for="ddlTipoPlanta-select">Planta</label>
-                                                            <select required class="form-control" id="ddlTipoPlanta" name="ddlTipoPlanta">
-                                                                <option value="">---Seleccione---</option>
-                                                                <c:forEach items="${sessionScope.listaPlanta}" var="tipoPlanta">
-                                                                    <option value="${tipoPlanta.idTipoPlanta}"><c:out value="${tipoPlanta.descripcionTipoPlanta}" ></c:out></option>
-                                                                </c:forEach>
-                                                            </select>
-                                                        </div>                                              
-                                                    </div> 
-                                                    <hr>
-                                                    <h4>Vestimenta</h4>
-                                                    <div class="form-row">
+                                                </div>
 
-                                                        <div class="form-group col-md-3">
-                                                            <label for="ddlOberol-select">Oberol</label>
-                                                            <select required class="form-control" id="ddlOberol" name="ddlOberol">
-                                                                <option value="">---Seleccione---</option>
-                                                                <c:forEach items="${sessionScope.listaOberol}" var="oberol">
-                                                                    <option value="${oberol.idTallaOberol}"><c:out value="${oberol.letraTallaOberol} - ${oberol.numeroTallaOberol}" ></c:out></option>
-                                                                </c:forEach>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-md-3">
-                                                            <label for="ddlPantalon-select">Pantalon</label>
-                                                            <select required class="form-control" id="ddlPantalon" name="ddlPantalon">
-                                                                <option value="">---Seleccione---</option>
-                                                                <c:forEach items="${sessionScope.listaPantalon}" var="pantalon">
-                                                                    <option value="${pantalon.idTallaPantalon}"><c:out value="${pantalon.letraTallaPantalon} - ${pantalon.numeroTallaPantalon}" ></c:out></option>
-                                                                </c:forEach>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-md-3">
-                                                            <label for="ddlPolera-select">Polera</label>
-                                                            <select required class="form-control" id="ddlPolera" name="ddlPolera">
-                                                                <option value="">---Seleccione---</option>
-                                                                <c:forEach items="${sessionScope.listaPolera}" var="polera">
-                                                                    <option value="${polera.idTallaPoleraCamisa}"><c:out value="${polera.letraPoleraCamisa}- ${polera.numeroPoleraCamisa}" ></c:out></option>
-                                                                </c:forEach>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-md-3">
+                                            </div> 
 
-                                                            <label for="ddlZapato-select">Zapato</label>
+                                        </c:otherwise>
+                                    </c:choose>
 
-                                                            <select required class="form-control" id="ddlZapato" name="ddlZapato">
-                                                                <option value="">---Seleccione---</option>
-                                                                <c:forEach items="${sessionScope.listaZapato}" var="zapato">
-                                                                    <option value="${zapato.idTallaZapato}"><c:out value="${zapato.numeroZapato}" ></c:out></option>
-                                                                </c:forEach>
-                                                            </select>
-                                                        </div>  
-                                                    </div> 
-                                                    <input type="submit" class="btn btn-success btn-space" name="btnGuardar" value="Registrar">
-                                                    <hr>
-                                                    <div class="form-group">
-                                                        <label for="exampleFormControlFile1">Llenar tabla Con Arrchivo CVS. o XLS</label>
-                                                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                                                    </div>
-                                                </form>
-
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>           
                                     <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
                                         <div class="card">
                                             <h3 class="card-header">Listado Trabajadores</h3>
@@ -233,9 +451,7 @@
                                                                         <th scope="col">Pantalon</th>
                                                                         <th scope="col">Polera</th>
                                                                         <th scope="col">Zapato</th>
-                                                                        <th scope="col">Vigente</th>
-                                                                        <th scope="col">Editar</th>
-                                                                        <th scope="col">Cambiar Estado</th>
+                                                                        <th scope="col">Acciones</th>
                                                                     </tr> 
                                                                 </thead>
                                                                 <tfoot>
@@ -251,9 +467,7 @@
                                                                         <th>Pantalon</th>
                                                                         <th>Polera</th>
                                                                         <th>Zapato</th>
-                                                                        <th>Vigente</th>
-                                                                        <th>Editar</th>
-                                                                        <th>Cambiar Estado</th>
+                                                                        <th>Acciones</th>
                                                                     </tr> 
                                                                 </tfoot>
                                                                 <tbody>
@@ -270,9 +484,25 @@
                                                                             <td><c:out value="${persona.tallaPantalonidTallaPantalon.letraTallaPantalon} - ${persona.tallaPantalonidTallaPantalon.numeroTallaPantalon}"/></td>
                                                                             <td><c:out value="${persona.tallaPoleraCamisaidtallaPoleraCamisa.letraPoleraCamisa} - ${persona.tallaPoleraCamisaidtallaPoleraCamisa.numeroPoleraCamisa}"/></td>
                                                                             <td><c:out value="${persona.tallaZApatoidtallaZApato.numeroZapato}"/></td>
-                                                                            <td><c:if test="${persona.vigencia == 'Y'}" >Si</c:if><c:if test="${persona.vigencia == 'N'}" >No</c:if> </td>
-                                                                            <td><input type="button" class="btn btn-primary btn-space" name="btnEditar" value="Editar"/></td>
-                                                                            <td><input type="button" class="btn btn-secondary btn-space"  name="btnCambiarEstado" value="Cambiar Estado"/></td>
+                                                                            <td>
+                                                                                <c:url value="./editarPersonaServlet" var="edicionDePersona">
+                                                                                    <c:param name="idPersonaAEditar" value="${persona.rutPasaportePersona}"/>
+                                                                                </c:url>
+                                                                                <button type="button" class="btn btn-primary btn-sm btn-space" name="btnEditar" onclick="window.location.href = '<c:out value="${edicionDePersona}"/>'" ><i class="fas fa-edit"></i></button>
+
+                                                                                <c:if test="${persona.isVigente()}">
+                                                                                    <c:url value="./cambiaVigenciaPersona" var="modificarVigencia">
+                                                                                        <c:param name="id_persona" value="${persona.rutPasaportePersona}"/>
+                                                                                    </c:url>
+                                                                                    <button type="button" class="btn btn-success btn-sm btn-space" onclick="window.location.href = '<c:out value="${modificarVigencia}"/>'"><i class="fas fa-check"></i></button>
+                                                                                    </c:if>
+                                                                                    <c:if test="${!persona.isVigente()}">
+                                                                                        <c:url value="./cambiaVigenciaPersona" var="modificarVigencia">
+                                                                                            <c:param name="id_persona" value="${persona.rutPasaportePersona}"/>
+                                                                                        </c:url>
+                                                                                    <button type="button" class="btn btn-danger btn-sm btn-space" onclick="window.location.href = '<c:out value="${modificarVigencia}"/>'"><i class="fas fa-times"></i></button>
+                                                                                    </c:if>
+                                                                            </td>
 
                                                                         </tr>
                                                                     </c:forEach>
@@ -285,17 +515,13 @@
                                                             No existen resultados
                                                         </c:otherwise>
                                                     </c:choose>
+                                                            <c:remove var="personaAEditar" />
                                                 </div>
 
 
                                             </div>
                                         </div>
                                     </div>
-
-
-
-
-
 
                                 </div>
 

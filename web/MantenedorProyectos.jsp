@@ -362,7 +362,7 @@
                                                             No existen resultados
                                                         </c:otherwise>
                                                     </c:choose>
-<c:remove var="proyectoAEditar" />
+                                                        <c:remove var="proyectoAEditar" />
                                                 </div>
                                             </div>
                                         </div>

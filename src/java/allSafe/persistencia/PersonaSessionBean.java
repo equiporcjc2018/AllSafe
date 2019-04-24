@@ -48,6 +48,24 @@ public class PersonaSessionBean {
         objPersona.setVigencia(pctpoppzDTO.getObjPersona().getVigencia());
         em.persist(objPersona);
     }
+    public void updatePerdona(PersonaCargoTipoPlantaOberolPantalonPoleraZapatoDTO pctpoppzDTO) throws ControllerException {
+        Persona objPersona = new Persona();
+        objPersona.setRutPasaportePersona(pctpoppzDTO.getObjPersona().getRutPasaportePersona());
+        objPersona.setNombresPersona(pctpoppzDTO.getObjPersona().getNombresPersona());
+        objPersona.setApePatPersona(pctpoppzDTO.getObjPersona().getApePatPersona());
+        objPersona.setApeMatPersona(pctpoppzDTO.getObjPersona().getApeMatPersona());
+        objPersona.setFechaNacPersona(pctpoppzDTO.getObjPersona().getFechaNacPersona());
+        objPersona.setNacionalidadPersona(pctpoppzDTO.getObjPersona().getNacionalidadPersona());
+        objPersona.setCorreoPersona(pctpoppzDTO.getObjPersona().getCorreoPersona());
+        objPersona.setCargoidCargo(pctpoppzDTO.getObjCargo());
+        objPersona.setTipoPlantaidTipoPlanta(pctpoppzDTO.getObjTipoplanta());
+        objPersona.setTallaOberolidTallaOberol(pctpoppzDTO.getObjTallaoberol());
+        objPersona.setTallaPantalonidTallaPantalon(pctpoppzDTO.getObjTallapantalon());
+        objPersona.setTallaPoleraCamisaidtallaPoleraCamisa(pctpoppzDTO.getObjTallapoleracamisa());
+        objPersona.setTallaZApatoidtallaZApato(pctpoppzDTO.getObjTallazapato());
+        objPersona.setVigencia(pctpoppzDTO.getObjPersona().getVigencia());
+        em.merge(objPersona);
+    }
     
     public Persona buscaPersonaXRut(String rut){
         Persona infoPersonaEntidad = null;
@@ -79,4 +97,20 @@ public class PersonaSessionBean {
         
     }
     
+    public Persona cambiarVigencia(String rut )
+    {
+        Persona persona = buscaPersonaXRut(rut);
+        if(null != persona){
+            if (persona.isVigente())
+            {
+                persona.setVigencia("N");
+            }
+            else
+            {
+                persona.setVigencia("Y");
+            }
+        }
+        em.merge(persona);
+        return persona;
+    }
 }
